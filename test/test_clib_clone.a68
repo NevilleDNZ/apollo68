@@ -1,0 +1,23 @@
+#!/usr/bin/algol68g-full --script #
+# -*- coding: utf-8 -*- #
+PR no-warning PR
+
+PR include "prelude/clib_clone.a68" PR;
+
+DATETIME dt ncd = (1961,12,25,4,4,0),
+         dt unix = (1970,01,01,0,0,0),
+         dt due = (2012,10,31,1,2,3);
+
+DATETIME dt := dt ncd;
+REAL secs := init time(dt);
+printf((datetime repr, dt, $" => "g(0,8)$, secs, secs/60, secs/3600, secs/24/3600, $l$));
+
+dt := dt unix;
+secs := init time(dt);
+printf((datetime repr, dt, $" => "g(0,8)$, secs, secs/60, secs/3600, secs/24/3600, $l$));
+
+dt := dt due;
+secs := init time(dt);
+printf((datetime repr, dt, $" => "g(0,8)$, secs, secs/60, secs/3600, secs/24/3600, $l$));
+
+SKIP

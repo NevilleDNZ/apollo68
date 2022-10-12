@@ -1,0 +1,124 @@
+# -*- coding: utf-8 -*- #
+
+#============================================================================#
+# Given a function & interval generate 'num samples' of f from the interval. #
+#============================================================================#
+PROC gen function curve = (PROC (R)RN f, INTERVAL interval, INT num samples, VECYIELD yield)VOID: (
+    R x := lwb OF interval;
+    R dx = WIDTH interval / num samples;
+    FOR i FROM 0 TO num samples DO
+        yield((x,f(x)[1]));
+        x +:= dx
+    OD
+);
+
+#====================================================#
+# iterate along the curve and get just the tail ty. #
+#====================================================#
+PROC get tail xy  = (XYGEN gen xy)XY: (
+    XY out;
+# FOR XY xy IN # gen xy(#) DO #
+##   (XY xy)VOID:(
+              out := xy
+# OD #));
+    out # EXIT #
+);
+
+PROC get tail ty  = (TYGEN ty gen)TY: (
+    R t;
+    FLEX[0]R y; # Note: FLEX R AbEnds #
+# FOR TY ty IN # ty gen(#) DO #
+##   (TY ty)VOID:(
+              t := t OF ty;
+              y := y OF ty
+# OD #));
+    (t,y) # EXIT #
+);
+
+PROC get tail tyn  = (TYNGEN tyn gen)TYN: (
+    R t;
+    FLEX[0]FLEX[0]REAL y;
+# FOR TYN tyn IN # tyn gen(#) DO #
+##   (TYN tyn)VOID:(
+              t := t OF tyn;
+              y := y OF tyn
+# OD #));
+    (t,y) # EXIT #
+);
+
+PROC get tail vec  = (RNGEN gen vec)RN: (
+    FLEX[0]#R#SCAL out;
+# FOR RN vec IN # gen vec(#) DO #
+##   (RN vec)VOID:(
+              out := vec
+# OD #));
+    out # EXIT #
+);
+
+PROC gen filter xy to 2d = (XYGEN gen xy, XYYIELD yield)VOID: (
+# FOR XY xy IN # gen xy(#) DO #
+##   (XY xy)VOID: (
+                yield((x OF xy, y OF xy)) # rowing ? #
+#OD # ))
+);
+
+PROC gen filter ty to 2d = (TYGEN ty gen, DDYIELD yield)VOID: (
+# FOR TY ty IN # ty gen(#) DO #
+##   (TY ty)VOID: (
+                [UPB y OF ty + 1]#R#REAL out;
+                out[1] := INITREAL t OF ty;
+                out[2:]:= INITREAL y OF ty;
+    (FALSE AND with debug|printf(($"DB - gen filter ty to 2d(t,y): "$,$g"; "$,ty,$l$)));
+                yield(out)
+#OD # ))
+);
+
+PROC gen filter tyn to 2d = (TYNGEN tyn gen, INT n, DDYIELD yield)VOID: (
+# FOR TYN tyn IN # tyn gen(#) DO #
+##   (TYN tyn)VOID: (
+                [UPB (y OF tyn)[n] + 1]#R#REAL out;
+                out[1] := INITREAL t OF tyn;
+                out[2:]:= INITREAL ((y OF tyn)[n]);
+    (FALSE AND with debug|printf(($"DB - gen filter tyn to 2d(t,yn): "$,$g"; "$,tyn,$l$)));
+                yield(out)
+#OD # ))
+);
+
+PROC array ty gen 2d = ([]TY ty, DDYIELD yield)VOID:
+    FOR i FROM LWB ty TO UPB ty DO yield((INITREAL t OF ty[i], INITREAL (y OF ty[i])[1])) OD;
+
+PROC array ty gen ty = ([]TY ty, TYYIELD yield)VOID:
+    FOR i FROM LWB ty TO UPB ty DO yield(ty[i]) OD;
+
+#================================================================#
+# Iterate along the curve and concurrently gather min/max values #
+#================================================================#
+PROC begin analyse curve = VOID: SKIP;
+begin analyse curve;
+
+PROC analyse curve = (VECGEN gen, VECYIELD yield)VOID: (
+    BOOL first := FALSE;
+    [2]INTERVAL range; #DB#
+# FOR RN xy IN # gen(#) DO (#
+##   (RN xy)VOID: (
+        IF first THEN
+            lwb OF range := upb OF range := INITREAL xy;
+            first := FALSE
+        ELSE    
+            FOR dim TO UPB range DO 
+                IF upb OF range[dim]< xy[dim] THEN
+                      upb OF range[dim]:= INITREAL xy[dim] FI;
+                IF lwb OF range[dim]> xy[dim] THEN
+                      lwb OF range[dim]:= INITREAL xy[dim] FI
+          OD
+      FI
+# OD #))
+);
+
+PROC end analyse curve = VOID: SKIP;
+
+PROC print curve = (VECGEN vec gen)VOID: (
+  vec gen((VEC vec)VOID: print((REPR vec, new line)))
+);
+
+SKIP # export names #

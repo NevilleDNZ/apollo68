@@ -1,0 +1,54 @@
+# -*- coding: utf-8 -*- #
+
+#==============================================================================#
+# solver_hints: some solvers require (or do better if) some hints are provided #
+#==============================================================================#
+
+COMMENT
+# limits and bound on a problem: #
+#   These are not required to solve the problem per see, but really help #
+# Note: the following OPerators are required to avoid the Yoneda ambiguity #
+#       c.f. http://jmvdveer.home.xs4all.nl/report.html#331k #
+END COMMENT
+
+MODE YBOUNDOPT = STRUCT(INTERVAL y bound);
+OP YBOUND = (INTERVAL in)YBOUNDOPT:(YBOUNDOPT out; y bound OF out := in; out);
+
+MODE UPBITERATIONOPT = STRUCT(INT upb iteration);
+OP UPBITERATION = (INT in)UPBITERATIONOPT:(UPBITERATIONOPT out; upb iteration OF out := in; out);
+
+COMMENT
+# Various hints are can be given to the solvers #
+END COMMENT
+
+MODE STEPSIZEOPT = STRUCT(R step size);
+OP STEPSIZE = (R in)STEPSIZEOPT:(STEPSIZEOPT out; step size OF out := in; out);
+
+MODE NUMSTEPSOPT = STRUCT(INT num steps);
+OP NUMSTEPS = (INT in)NUMSTEPSOPT:(NUMSTEPSOPT out; num steps OF out := in; out);
+
+MODE INITIALXOPT = STRUCT(R initial x); # For the binary & secant method 2 are required #
+OP INITIALX = (R in)INITIALXOPT:(INITIALXOPT out; initial x OF out := in; out);
+
+MODE INTERVALXOPT = STRUCT(INTERVAL interval x); # For the binary & secant method 2 are required #
+OP INTERVALX = (INTERVAL in)INTERVALXOPT:(INTERVALXOPT out; interval x OF out := in; out);
+
+MODE INITIALTOPT = STRUCT(R initial t); # Boundary ODE may require 2 #
+OP INITIALT = (R in)INITIALTOPT:(INITIALTOPT out; initial t OF out := in; out);
+
+MODE FXYDYNTOLOPT = STRUCT(FXY f xy tol portal);
+OP FXYDYNTOL = (FXY in)FXYDYNTOLOPT:(FXYDYNTOLOPT out; f xy tol portal OF out := in; out);
+
+MODE INITIALXDYBYDXOPT = STRUCT(XY initial x dy by dx); # intitial (x, dy/dx) #
+OP INITIALXDYBYDX = (XY in)INITIALXDYBYDXOPT:(INITIALXDYBYDXOPT out; initial x dy by dx OF out := in; out);
+
+MODE DYBYDXOPT = STRUCT(FR dy by dx); # Fxy(x, dy/dx) #
+OP DYBYDX = (FR in)DYBYDXOPT:(DYBYDXOPT out; dy by dx OF out := in; out);
+
+MODE DXYBYDXOPT = STRUCT(FXY dy by dx); # Fxy(x, dy/dx) #
+OP DXYBYDX = (FXY in)DXYBYDXOPT:(DXYBYDXOPT out; dy by dx OF out := in; out);
+
+MODE MATHHINT = UNION(YBOUNDOPT, UPBITERATIONOPT, STEPSIZEOPT, NUMSTEPSOPT,
+                      INITIALXOPT, INITIALTOPT, FXYDYNTOLOPT, INITIALXDYBYDXOPT, DYBYDXOPT);
+
+SKIP # export names #

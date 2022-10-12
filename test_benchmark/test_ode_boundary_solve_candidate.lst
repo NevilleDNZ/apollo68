@@ -1,0 +1,3 @@
+46    PROC f crude tol portal = (TY ty)Y: ABS y OF ty * 10 + 10; # some big number #
+                                       1                                            
+algol68g-full: syntax error: 1: tag "Y" has not been declared properly.

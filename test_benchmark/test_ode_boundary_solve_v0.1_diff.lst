@@ -1,0 +1,430 @@
+1,418c1,8
+< 
+< --------------------------------------------------------------------
+< Solution of 1a: y''=y + 2e**t over 3, y(0)=0, y(1)=e over 3
+< BVP Order-2: pre plotting:
+<   t interval: [0.00000000 … 1.00000000]
+<   Boundary #1: t₁ = 0.00000000;   y₁ = (.0000000)[@0]
+<   Boundary #2: t₂ = 1.00000000;   y₂ = (.9060939)[@0]
+< 
+< Analytic solution:1a: y(t) = (e^t t)/3
+< 
+< Key: (method vs colour)
+< Note: We have a 'Dirichlet' BVP
+< IVP Order-2: shooting method iteration
+<   t interval: [0.00000000 … 1.00000000]
+<   y₀ = (.0000000)  dy₀/dt = (.1230000)  d²y₀/dt² = (.6666667)
+< 
+< DB - this yn,y value, target: 0.64765061; 1.47479391; 0.00000000; 0.90609394; 
+< Step 6; Colour:purple; Line style:dotdotdotdashed; Value:0.64765061; Value:1.47479391; miss margin:-.25844333; 
+< IVP Order-2: shooting method iteration
+<   t interval: [0.00000000 … 1.00000000]
+<   y₀ = (.0000000)  dy₀/dt = (1.2300000)  d²y₀/dt² = (.6666667)
+< 
+< DB - this yn,y value, target: 1.94216616; 3.17450727; 0.00000000; 0.90609394; 
+< Step 5; Colour:purple; Line style:dotdotdashed; Value:1.94216616; Value:3.17450727; miss margin:1.03607222; 
+< IVP Order-2: shooting method iteration
+<   t interval: [0.00000000 … 1.00000000]
+<   y₀ = (.0000000)  dy₀/dt = (.3440068)  d²y₀/dt² = (.6666667)
+< 
+< DB - this yn,y value, target: 0.90609394; 1.81413289; 0.00000000; 0.90609394; 
+< Step 4; Colour:purple; Line style:dotdashed; Value:0.90609394; Value:1.81413289; miss margin:0.00000000; 
+< IVP Order-2: generate solution
+<   t interval: [0.00000000 … 1.00000000]
+<   y₀ = (.0000000)  dy₀/dt = (.0000000)  d²y₀/dt² = (.6666667)
+< 
+< shooting method is purple
+< 
+< --------------------------------------------------------------------
+< Solution of 1b: y''=(2 + 4x**2)y, y(0)=1, y(1)=e
+< BVP Order-2: pre plotting:
+<   t interval: [0.00000000 … 1.00000000]
+<   Boundary #1: t₁ = 0.00000000;   y₁ = (1.0000000)[@0]
+<   Boundary #2: t₂ = 1.00000000;   y₂ = (2.7182818)[@0]
+< 
+< Analytic solution:1b: y(t) = (2 (e-D_0(2 i)) D_(-1)(2 t)+(2 D_(-1)(2)-e sqrt(2 pi)) D_0(2 i t))/(2 D_(-1)(2)-sqrt(2 pi) D_0(2 i))?
+< 
+< Key: (method vs colour)
+< Note: We have a 'Dirichlet' BVP
+< IVP Order-2: shooting method iteration
+<   t interval: [0.00000000 … 1.00000000]
+<   y₀ = (1.0000000)  dy₀/dt = (.1230000)  d²y₀/dt² = (2.0000000)
+< 
+< DB - this yn,y value, target: 2.44139268; 4.72291651; 0.00000000; 2.71828183; 
+< Step 6; Colour:purple; Line style:dotdotdotdashed; Value:2.44139268; Value:4.72291651; miss margin:-.27688914; 
+< IVP Order-2: shooting method iteration
+<   t interval: [0.00000000 … 1.00000000]
+<   y₀ = (1.0000000)  dy₀/dt = (1.2300000)  d²y₀/dt² = (2.0000000)
+< 
+< DB - this yn,y value, target: 3.96688889; 8.00338705; 0.00000000; 2.71828183; 
+< Step 5; Colour:purple; Line style:dotdotdashed; Value:3.96688889; Value:8.00338705; miss margin:1.24860706; 
+< IVP Order-2: shooting method iteration
+<   t interval: [0.00000000 … 1.00000000]
+<   y₀ = (1.0000000)  dy₀/dt = (.3239289)  d²y₀/dt² = (2.0000000)
+< 
+< DB - this yn,y value, target: 2.71828183; 5.31834682; 0.00000000; 2.71828183; 
+< Step 4; Colour:purple; Line style:dotdashed; Value:2.71828183; Value:5.31834682; miss margin:0.00000000; 
+< IVP Order-2: generate solution
+<   t interval: [0.00000000 … 1.00000000]
+<   y₀ = (1.0000000)  dy₀/dt = (.0000000)  d²y₀/dt² = (2.0000000)
+< 
+< shooting method is purple
+< 
+< --------------------------------------------------------------------
+< Solution of 2a: 9y'' + pi**2*y=0, y(0)=-1, y(1.5)=3
+< BVP Order-2: pre plotting:
+<   t interval: [0.00000000 … 1.50000000]
+<   Boundary #1: t₁ = 0.00000000;   y₁ = (-1.0000000)[@0]
+<   Boundary #2: t₂ = 1.50000000;   y₂ = (3.0000000)[@0]
+< 
+< Analytic solution:2a: y(t) = -(6+sqrt(3)) sin((pi t)/3)-cos((pi t)/3)
+< 
+< Key: (method vs colour)
+< Note: We have a 'Dirichlet' BVP
+< IVP Order-2: shooting method iteration
+<   t interval: [0.00000000 … 1.50000000]
+<   y₀ = (-1.0000000)  dy₀/dt = (.1230000)  d²y₀/dt² = (-1.0966227)
+< 
+< DB - this yn,y value, target: -2.0718805; -1.9470072; 0.00000000; 3.00000000; 
+< Step 6; Colour:purple; Line style:dotdotdotdashed; Value:-2.0718805; Value:-1.9470072; miss margin:-5.0718805; 
+< IVP Order-2: shooting method iteration
+<   t interval: [0.00000000 … 1.50000000]
+<   y₀ = (-1.0000000)  dy₀/dt = (1.2300000)  d²y₀/dt² = (-1.0966227)
+< 
+< DB - this yn,y value, target: 0.18189705; 0.62377919; 0.00000000; 3.00000000; 
+< Step 5; Colour:purple; Line style:dotdotdashed; Value:0.18189705; Value:0.62377919; miss margin:-2.8181030; 
+< IVP Order-2: shooting method iteration
+<   t interval: [0.00000000 … 1.50000000]
+<   y₀ = (-1.0000000)  dy₀/dt = (2.6141827)  d²y₀/dt² = (-1.0966227)
+< 
+< DB - this yn,y value, target: 3.00000000; 3.83826707; 0.00000000; 3.00000000; 
+< Step 4; Colour:purple; Line style:dotdashed; Value:3.00000000; Value:3.83826707; miss margin:0.00000000; 
+< IVP Order-2: generate solution
+<   t interval: [0.00000000 … 1.50000000]
+<   y₀ = (-1.0000000)  dy₀/dt = (.0000000)  d²y₀/dt² = (-1.0966227)
+< 
+< shooting method is purple
+< 
+< --------------------------------------------------------------------
+< Solution of 2b: y''=3y - 2y', y(0)=e**3, y(1)=1
+< BVP Order-2: pre plotting:
+<   t interval: [0.00000000 … 1.00000000]
+<   Boundary #1: t₁ = 0.00000000;   y₁ = (20.0855369)[@0]
+<   Boundary #2: t₂ = 1.00000000;   y₂ = (1.0000000)[@0]
+< 
+< Analytic solution:2b: y(t) = e^(3-3 t)
+< 
+< Key: (method vs colour)
+< Note: We have a 'Dirichlet' BVP
+< IVP Order-2: shooting method iteration
+<   t interval: [0.00000000 … 1.00000000]
+<   y₀ = (20.0855369)  dy₀/dt = (.1230000)  d²y₀/dt² = (60.0106108)
+< 
+< DB - this yn,y value, target: 39.2932631; 38.7293709; 0.00000000; 1.00000000; 
+< Step 6; Colour:purple; Line style:dotdotdotdashed; Value:39.2932631; Value:38.7293709; miss margin:38.2932631; 
+< IVP Order-2: shooting method iteration
+<   t interval: [0.00000000 … 1.00000000]
+<   y₀ = (20.0855369)  dy₀/dt = (1.2300000)  d²y₀/dt² = (57.7966108)
+< 
+< DB - this yn,y value, target: 40.0032638; 39.4706416; 0.00000000; 1.00000000; 
+< Step 5; Colour:purple; Line style:dotdotdashed; Value:40.0032638; Value:39.4706416; miss margin:39.0032638; 
+< IVP Order-2: shooting method iteration
+<   t interval: [0.00000000 … 1.00000000]
+<   y₀ = (20.0855369)  dy₀/dt = (-59.5820691)  d²y₀/dt² = (179.4207490)
+< 
+< DB - this yn,y value, target: 1.00000000; -1.2504127; 0.00000000; 1.00000000; 
+< Step 4; Colour:purple; Line style:dotdashed; Value:1.00000000; Value:-1.2504127; miss margin:-.00000000; 
+< IVP Order-2: shooting method iteration
+<   t interval: [0.00000000 … 1.00000000]
+<   y₀ = (20.0855369)  dy₀/dt = (-59.5820691)  d²y₀/dt² = (179.4207490)
+< 
+< DB - this yn,y value, target: 1.00000000; -1.2504127; 0.00000000; 1.00000000; 
+< Step 3; Colour:purple; Line style:shortdashed; Value:1.00000000; Value:-1.2504127; miss margin:-.00000000; 
+< IVP Order-2: generate solution
+<   t interval: [0.00000000 … 1.00000000]
+<   y₀ = (20.0855369)  dy₀/dt = (-.0000000)  d²y₀/dt² = (60.2566108)
+< 
+< shooting method is purple
+< 
+< --------------------------------------------------------------------
+< Solution of 3a: y''=18y**2, y(1)=1 over 3, y(2)=1 over 12
+< BVP Order-2: pre plotting:
+<   t interval: [1.00000000 … 2.00000000]
+<   Boundary #1: t₁ = 1.00000000;   y₁ = (.3333333)[@0]
+<   Boundary #2: t₂ = 2.00000000;   y₂ = (.0833333)[@0]
+< 
+< Analytic solution:3a: y(x) = ?
+< 
+< Key: (method vs colour)
+< Note: We have a 'Dirichlet' BVP
+< IVP Order-2: shooting method iteration
+<   t interval: [1.00000000 … 2.00000000]
+<   y₀ = (.3333333)  dy₀/dt = (.1230000)  d²y₀/dt² = (2.0000000)
+< 
+< DB - this yn,y value, target: 2.73928492; 14.9480340; 0.00000000; 0.08333333; 
+< Step 6; Colour:purple; Line style:dotdotdotdashed; Value:2.73928492; Value:14.9480340; miss margin:2.65595159; 
+< IVP Order-2: shooting method iteration
+<   t interval: [1.00000000 … 2.00000000]
+<   y₀ = (.3333333)  dy₀/dt = (1.2300000)  d²y₀/dt² = (2.0000000)
+< 
+< DB - this yn,y value, target: 13.7315684; 160.800958; 0.00000000; 0.08333333; 
+< Step 5; Colour:purple; Line style:dotdotdashed; Value:13.7315684; Value:160.800958; miss margin:13.6482351; 
+< IVP Order-2: shooting method iteration
+<   t interval: [1.00000000 … 2.00000000]
+<   y₀ = (.3333333)  dy₀/dt = (-.1444729)  d²y₀/dt² = (2.0000000)
+< 
+< DB - this yn,y value, target: 1.52693229; 6.28396052; 0.00000000; 0.08333333; 
+< Step 4; Colour:purple; Line style:dotdashed; Value:1.52693229; Value:6.28396052; miss margin:1.44359896; 
+< IVP Order-2: shooting method iteration
+<   t interval: [1.00000000 … 2.00000000]
+<   y₀ = (.3333333)  dy₀/dt = (-.3070495)  d²y₀/dt² = (2.0000000)
+< 
+< DB - this yn,y value, target: 0.96588862; 3.17300455; 0.00000000; 0.08333333; 
+< Step 3; Colour:purple; Line style:shortdashed; Value:0.96588862; Value:3.17300455; miss margin:0.88255528; 
+< IVP Order-2: shooting method iteration
+<   t interval: [1.00000000 … 2.00000000]
+<   y₀ = (.3333333)  dy₀/dt = (-.5627922)  d²y₀/dt² = (2.0000000)
+< 
+< DB - this yn,y value, target: 0.30407080; 0.50864915; 0.00000000; 0.08333333; 
+< Step 2; Colour:purple; Line style:longdashed; Value:0.30407080; Value:0.50864915; miss margin:0.22073746; 
+< IVP Order-2: shooting method iteration
+<   t interval: [1.00000000 … 2.00000000]
+<   y₀ = (.3333333)  dy₀/dt = (-.6480905)  d²y₀/dt² = (2.0000000)
+< 
+< DB - this yn,y value, target: 0.13499598; 0.06309608; 0.00000000; 0.08333333; 
+< Step 1; Colour:purple; Line style:solid; Value:0.13499598; Value:0.06309608; miss margin:0.05166264; 
+< IVP Order-2: shooting method iteration
+<   t interval: [1.00000000 … 2.00000000]
+<   y₀ = (.3333333)  dy₀/dt = (-.6741544)  d²y₀/dt² = (2.0000000)
+< 
+< DB - this yn,y value, target: 0.08793865; -.03861532; 0.00000000; 0.08333333; 
+< Step 1; Colour:purple; Line style:solid; Value:0.08793865; Value:-.03861532; miss margin:0.00460531; 
+< IVP Order-2: shooting method iteration
+<   t interval: [1.00000000 … 2.00000000]
+<   y₀ = (.3333333)  dy₀/dt = (-.6767051)  d²y₀/dt² = (2.0000000)
+< 
+< DB - this yn,y value, target: 0.08344515; -.04776985; 0.00000000; 0.08333333; 
+< Step 1; Colour:purple; Line style:solid; Value:0.08344515; Value:-.04776985; miss margin:0.00011182; 
+< IVP Order-2: shooting method iteration
+<   t interval: [1.00000000 … 2.00000000]
+<   y₀ = (.3333333)  dy₀/dt = (-.6767686)  d²y₀/dt² = (2.0000000)
+< 
+< DB - this yn,y value, target: 0.08333359; -.04799588; 0.00000000; 0.08333333; 
+< Step 1; Colour:purple; Line style:solid; Value:0.08333359; Value:-.04799588; miss margin:0.00000025; 
+< IVP Order-2: shooting method iteration
+<   t interval: [1.00000000 … 2.00000000]
+<   y₀ = (.3333333)  dy₀/dt = (-.6767688)  d²y₀/dt² = (2.0000000)
+< 
+< DB - this yn,y value, target: 0.08333333; -.04799639; 0.00000000; 0.08333333; 
+< Step 1; Colour:purple; Line style:solid; Value:0.08333333; Value:-.04799639; miss margin:0.00000000; 
+< IVP Order-2: shooting method iteration
+<   t interval: [1.00000000 … 2.00000000]
+<   y₀ = (.3333333)  dy₀/dt = (-.6767688)  d²y₀/dt² = (2.0000000)
+< 
+< DB - this yn,y value, target: 0.08333333; -.04799639; 0.00000000; 0.08333333; 
+< Step 1; Colour:purple; Line style:solid; Value:0.08333333; Value:-.04799639; miss margin:-.00000000; 
+< IVP Order-2: generate solution
+<   t interval: [1.00000000 … 2.00000000]
+<   y₀ = (.3333333)  dy₀/dt = (-.0000000)  d²y₀/dt² = (2.0000000)
+< 
+< shooting method is purple
+< 
+< --------------------------------------------------------------------
+< Solution of 3b: y''=2e**(-2y)*(1-t**2), y(0)=0, y(1)=ln 2
+< BVP Order-2: pre plotting:
+<   t interval: [0.00000000 … 1.00000000]
+<   Boundary #1: t₁ = 0.00000000;   y₁ = (.0000000)[@0]
+<   Boundary #2: t₂ = 1.00000000;   y₂ = (.6931472)[@0]
+< 
+< Analytic solution:3b: y(x) = ?
+< 
+< Key: (method vs colour)
+< Note: We have a 'Dirichlet' BVP
+< IVP Order-2: shooting method iteration
+<   t interval: [0.00000000 … 1.00000000]
+<   y₀ = (.0000000)  dy₀/dt = (.1230000)  d²y₀/dt² = (2.0000000)
+< 
+< DB - this yn,y value, target: 0.79716490; 1.19226670; 0.00000000; 0.69314718; 
+< Step 6; Colour:purple; Line style:dotdotdotdashed; Value:0.79716490; Value:1.19226670; miss margin:0.10401772; 
+< IVP Order-2: shooting method iteration
+<   t interval: [0.00000000 … 1.00000000]
+<   y₀ = (.0000000)  dy₀/dt = (1.2300000)  d²y₀/dt² = (2.0000000)
+< 
+< DB - this yn,y value, target: 1.70622247; 1.89499150; 0.00000000; 0.69314718; 
+< Step 5; Colour:purple; Line style:dotdotdashed; Value:1.70622247; Value:1.89499150; miss margin:1.01307529; 
+< IVP Order-2: shooting method iteration
+<   t interval: [0.00000000 … 1.00000000]
+<   y₀ = (.0000000)  dy₀/dt = (-.0036670)  d²y₀/dt² = (2.0000000)
+< 
+< DB - this yn,y value, target: 0.70315233; 1.13720465; 0.00000000; 0.69314718; 
+< Step 4; Colour:purple; Line style:dotdashed; Value:0.70315233; Value:1.13720465; miss margin:0.01000515; 
+< IVP Order-2: shooting method iteration
+<   t interval: [0.00000000 … 1.00000000]
+<   y₀ = (.0000000)  dy₀/dt = (-.0159723)  d²y₀/dt² = (2.0000000)
+< 
+< DB - this yn,y value, target: 0.69416405; 1.13223503; 0.00000000; 0.69314718; 
+< Step 3; Colour:purple; Line style:shortdashed; Value:0.69416405; Value:1.13223503; miss margin:0.00101687; 
+< IVP Order-2: shooting method iteration
+<   t interval: [0.00000000 … 1.00000000]
+<   y₀ = (.0000000)  dy₀/dt = (-.0173644)  d²y₀/dt² = (2.0000000)
+< 
+< DB - this yn,y value, target: 0.69314885; 1.13167719; 0.00000000; 0.69314718; 
+< Step 2; Colour:purple; Line style:longdashed; Value:0.69314885; Value:1.13167719; miss margin:0.00000167; 
+< IVP Order-2: shooting method iteration
+<   t interval: [0.00000000 … 1.00000000]
+<   y₀ = (.0000000)  dy₀/dt = (-.0173667)  d²y₀/dt² = (2.0000000)
+< 
+< DB - this yn,y value, target: 0.69314718; 1.13167627; 0.00000000; 0.69314718; 
+< Step 1; Colour:purple; Line style:solid; Value:0.69314718; Value:1.13167627; miss margin:0.00000000; 
+< IVP Order-2: shooting method iteration
+<   t interval: [0.00000000 … 1.00000000]
+<   y₀ = (.0000000)  dy₀/dt = (-.0173667)  d²y₀/dt² = (2.0000000)
+< 
+< DB - this yn,y value, target: 0.69314718; 1.13167627; 0.00000000; 0.69314718; 
+< Step 1; Colour:purple; Line style:solid; Value:0.69314718; Value:1.13167627; miss margin:0.00000000; 
+< IVP Order-2: generate solution
+<   t interval: [0.00000000 … 1.00000000]
+<   y₀ = (.0000000)  dy₀/dt = (.0000000)  d²y₀/dt² = (2.0000000)
+< 
+< shooting method is purple
+< 
+< --------------------------------------------------------------------
+< Solution of 4a: y''=e**y, y(0)=1, y(1)=3
+< BVP Order-2: pre plotting:
+<   t interval: [0.00000000 … 1.00000000]
+<   Boundary #1: t₁ = 0.00000000;   y₁ = (1.0000000)[@0]
+<   Boundary #2: t₂ = 1.00000000;   y₂ = (3.0000000)[@0]
+< 
+< Analytic solution:4a: y(x) = ?
+< 
+< Key: (method vs colour)
+< Note: We have a 'Dirichlet' BVP
+< IVP Order-2: shooting method iteration
+<   t interval: [0.00000000 … 1.00000000]
+<   y₀ = (1.0000000)  dy₀/dt = (.1230000)  d²y₀/dt² = (2.7182818)
+< 
+< DB - this yn,y value, target: 2.60671099; 4.61230393; 0.00000000; 3.00000000; 
+< Step 6; Colour:purple; Line style:dotdotdotdashed; Value:2.60671099; Value:4.61230393; miss margin:-.39328901; 
+< IVP Order-2: shooting method iteration
+<   t interval: [0.00000000 … 1.00000000]
+<   y₀ = (1.0000000)  dy₀/dt = (1.2300000)  d²y₀/dt² = (2.7182818)
+< 
+< DB - this yn,y value, target: 4.54940631; 12.4573676; 0.00000000; 3.00000000; 
+< Step 5; Colour:purple; Line style:dotdotdashed; Value:4.54940631; Value:12.4573676; miss margin:1.54940631; 
+< IVP Order-2: shooting method iteration
+<   t interval: [0.00000000 … 1.00000000]
+<   y₀ = (1.0000000)  dy₀/dt = (.3471066)  d²y₀/dt² = (2.7182818)
+< 
+< DB - this yn,y value, target: 2.95447516; 5.61538452; 0.00000000; 3.00000000; 
+< Step 4; Colour:purple; Line style:dotdashed; Value:2.95447516; Value:5.61538452; miss margin:-.04552484; 
+< IVP Order-2: shooting method iteration
+<   t interval: [0.00000000 … 1.00000000]
+<   y₀ = (1.0000000)  dy₀/dt = (.3723075)  d²y₀/dt² = (2.7182818)
+< 
+< DB - this yn,y value, target: 2.99469031; 5.74001784; 0.00000000; 3.00000000; 
+< Step 3; Colour:purple; Line style:shortdashed; Value:2.99469031; Value:5.74001784; miss margin:-.00530969; 
+< IVP Order-2: shooting method iteration
+<   t interval: [0.00000000 … 1.00000000]
+<   y₀ = (1.0000000)  dy₀/dt = (.3756348)  d²y₀/dt² = (2.7182818)
+< 
+< DB - this yn,y value, target: 3.00001793; 5.75667234; 0.00000000; 3.00000000; 
+< Step 2; Colour:purple; Line style:longdashed; Value:3.00001793; Value:5.75667234; miss margin:0.00001793; 
+< IVP Order-2: shooting method iteration
+<   t interval: [0.00000000 … 1.00000000]
+<   y₀ = (1.0000000)  dy₀/dt = (.3756236)  d²y₀/dt² = (2.7182818)
+< 
+< DB - this yn,y value, target: 2.99999999; 5.75661623; 0.00000000; 3.00000000; 
+< Step 1; Colour:purple; Line style:solid; Value:2.99999999; Value:5.75661623; miss margin:-.00000001; 
+< IVP Order-2: shooting method iteration
+<   t interval: [0.00000000 … 1.00000000]
+<   y₀ = (1.0000000)  dy₀/dt = (.3756236)  d²y₀/dt² = (2.7182818)
+< 
+< DB - this yn,y value, target: 3.00000000; 5.75661625; 0.00000000; 3.00000000; 
+< Step 1; Colour:purple; Line style:solid; Value:3.00000000; Value:5.75661625; miss margin:-.00000000; 
+< IVP Order-2: shooting method iteration
+<   t interval: [0.00000000 … 1.00000000]
+<   y₀ = (1.0000000)  dy₀/dt = (.3756236)  d²y₀/dt² = (2.7182818)
+< 
+< DB - this yn,y value, target: 3.00000000; 5.75661625; 0.00000000; 3.00000000; 
+< Step 1; Colour:purple; Line style:solid; Value:3.00000000; Value:5.75661625; miss margin:0.00000000; 
+< IVP Order-2: generate solution
+<   t interval: [0.00000000 … 1.00000000]
+<   y₀ = (1.0000000)  dy₀/dt = (-.0000000)  d²y₀/dt² = (2.7182818)
+< 
+< shooting method is purple
+< 
+< --------------------------------------------------------------------
+< Solution of 4b: y''=sin y', y(0)=1, y(1)=-1
+< BVP Order-2: pre plotting:
+<   t interval: [0.00000000 … 1.00000000]
+<   Boundary #1: t₁ = 0.00000000;   y₁ = (1.0000000)[@0]
+<   Boundary #2: t₂ = 1.00000000;   y₂ = (-1.0000000)[@0]
+< 
+< Analytic solution:4b: y(x) = ?
+< 
+< Key: (method vs colour)
+< Note: We have a 'Dirichlet' BVP
+< IVP Order-2: shooting method iteration
+<   t interval: [0.00000000 … 1.00000000]
+<   y₀ = (1.0000000)  dy₀/dt = (.1230000)  d²y₀/dt² = (.1226901)
+< 
+< DB - this yn,y value, target: 1.19557985; 0.31705710; 0.00000000; -1.0000000; 
+< Step 6; Colour:purple; Line style:dotdotdotdashed; Value:1.19557985; Value:0.31705710; miss margin:2.19557985; 
+< IVP Order-2: shooting method iteration
+<   t interval: [0.00000000 … 1.00000000]
+<   y₀ = (1.0000000)  dy₀/dt = (1.2300000)  d²y₀/dt² = (.9424888)
+< 
+< DB - this yn,y value, target: 2.66799867; 2.18662511; 0.00000000; -1.0000000; 
+< Step 5; Colour:purple; Line style:dotdotdashed; Value:2.66799867; Value:2.18662511; miss margin:3.66799867; 
+< IVP Order-2: shooting method iteration
+<   t interval: [0.00000000 … 1.00000000]
+<   y₀ = (1.0000000)  dy₀/dt = (-1.5276899)  d²y₀/dt² = (-.9990711)
+< 
+< DB - this yn,y value, target: -.95735844; -2.4216388; 0.00000000; -1.0000000; 
+< Step 4; Colour:purple; Line style:dotdashed; Value:-.95735844; Value:-2.4216388; miss margin:0.04264156; 
+< IVP Order-2: shooting method iteration
+<   t interval: [0.00000000 … 1.00000000]
+<   y₀ = (1.0000000)  dy₀/dt = (-1.5601259)  d²y₀/dt² = (-.9999431)
+< 
+< DB - this yn,y value, target: -.98676687; -2.4436466; 0.00000000; -1.0000000; 
+< Step 3; Colour:purple; Line style:shortdashed; Value:-.98676687; Value:-2.4436466; miss margin:0.01323313; 
+< IVP Order-2: shooting method iteration
+<   t interval: [0.00000000 … 1.00000000]
+<   y₀ = (1.0000000)  dy₀/dt = (-1.5747214)  d²y₀/dt² = (-.9999923)
+< 
+< DB - this yn,y value, target: -.99987720; -2.4533561; 0.00000000; -1.0000000; 
+< Step 2; Colour:purple; Line style:longdashed; Value:-.99987720; Value:-2.4533561; miss margin:0.00012280; 
+< IVP Order-2: shooting method iteration
+<   t interval: [0.00000000 … 1.00000000]
+<   y₀ = (1.0000000)  dy₀/dt = (-1.5748581)  d²y₀/dt² = (-.9999918)
+< 
+< DB - this yn,y value, target: -.99999964; -2.4534465; 0.00000000; -1.0000000; 
+< Step 1; Colour:purple; Line style:solid; Value:-.99999964; Value:-2.4534465; miss margin:0.00000036; 
+< IVP Order-2: shooting method iteration
+<   t interval: [0.00000000 … 1.00000000]
+<   y₀ = (1.0000000)  dy₀/dt = (-1.5748585)  d²y₀/dt² = (-.9999917)
+< 
+< DB - this yn,y value, target: -1.0000000; -2.4534468; 0.00000000; -1.0000000; 
+< Step 1; Colour:purple; Line style:solid; Value:-1.0000000; Value:-2.4534468; miss margin:0.00000000; 
+< IVP Order-2: shooting method iteration
+<   t interval: [0.00000000 … 1.00000000]
+<   y₀ = (1.0000000)  dy₀/dt = (-1.5748585)  d²y₀/dt² = (-.9999917)
+< 
+< DB - this yn,y value, target: -1.0000000; -2.4534468; 0.00000000; -1.0000000; 
+< Step 1; Colour:purple; Line style:solid; Value:-1.0000000; Value:-2.4534468; miss margin:0.00000000; 
+< IVP Order-2: generate solution
+<   t interval: [0.00000000 … 1.00000000]
+<   y₀ = (1.0000000)  dy₀/dt = (.0000000)  d²y₀/dt² = (.0000000)
+< 
+< shooting method is purple
+---
+> 161           ODEBOUNDARYSOLVE x = shooting ty gen(,shooting args,);
+>                                    1                                
+> algol68g-full: error: 1: PROC (BVP, TYNYIELD) VOID cannot be coerced to ODEBOUNDARYSOLVE in a strong-unit (detected in closed-clause starting at 
+> "(" in line 106).
+> 164               ODEBOUNDARYSOLVEPKG(shooting ty gen(,shooting args,),"shooting method")
+>                                      1                                                   
+> algol68g-full: error: 1: PROC (BVP, TYNYIELD) VOID cannot be coerced to ODEBOUNDARYSOLVE in a strong-enclosed-clause (detected in closed-clause 
+> starting at "(" in line 163).
+Hint: try cp ./baseline/test_ode_boundary_solve_v0.1_current.lst ./baseline/test_ode_boundary_solve_v0.1_baseline.lst  OR vim test/test_ode_boundary_solve_v0.1.a68
+

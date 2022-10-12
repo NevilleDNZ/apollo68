@@ -1,0 +1,52 @@
+# -*- coding: utf-8 -*- #
+
+MODE NOARG = SHORT BITS;
+
+COMMENT
+#===========================#
+# A crude CLASS declaration #
+#===========================#
+MODE CLASSEXAMPLE = STRUCT(
+  PROC(NOARG)CLASSEXAMPLEMETHODOF method,
+# Internal parameters #
+  STRING string,
+  REAL real,
+  INT int
+);
+
+MODE CLASSEXAMPLEYIELD = PROC(CLASSEXAMPLE)VOID;
+MODE CLASSEXAMPLEGEN = PROC(CLASSEXAMPLEYIELD)VOID;
+
+MODE CLASSEXAMPLEMETHODOF = STRUCT(
+    PROC (#self,# CLASSEXAMPLE #bbb#, CLASSEXAMPLE #aaa#, GREAL #ccc#)REF CLASSEXAMPLE init,
+    PROC (#self,# CLASSEXAMPLE #aaa#)REF CLASSEXAMPLE set aaa,
+#   PROC ~
+    PROC ~ #
+    PROC (#self,# CLASSEXAMPLEGEN #gen#,DDYIELD #yield zzz#)VOID from example to zzz gen
+);
+
+# Bind the methods to a Class Instance #
+PROC method of example = (REF CLASSEXAMPLE self, NOARG skip)CLASSEXAMPLEMETHODOF:(
+  init of example(self, #bbb#, #aaa#, #ccc#),
+  method a of example(self, #aaa#),
+  ~;
+  ~;
+  method of example(self, #gen example#, #yield zzz#)
+);
+
+OP METHODOF = (CLASSEXAMPLE self)CLASSEXAMPLEMETHODOF: (method OF self)(~);
+
+# define the default values #
+OP INIT = (REF CLASSEXAMPLE object)REF CLASSEXAMPLE: init of example(object);
+
+PROC init of example = (REF CLASSEXAMPLE self)REF CLASSEXAMPLE: (
+  method OF self := method of example(self,#~#);
+  ~;
+  ~;
+  self
+);
+
+CLASSEXAMPLE instance one = INIT LOC CLASSEXAMPLE;
+END COMMENT
+
+SKIP

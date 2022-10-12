@@ -1,0 +1,13 @@
+#!/usr/bin/algol68g-full --script #
+# -*- coding: utf-8 -*- #
+PR no-warning PR
+
+PR include "prelude/scalar_:=_real.a68" PR;
+PR include "prelude/exception.a68" PR;
+PR include "prelude/errata.a68" PR;
+PR include "prelude/math_errata.a68" PR;
+PR include "prelude/count_FPO.a68" PR;
+SKIP;
+PR include "postlude/count_FPO.a68" PR;
+PR include "postlude/exception.a68" PR;
+PR include "postlude/scalar_=:_real.a68" PR

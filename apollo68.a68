@@ -1,0 +1,130 @@
+#!/usr/bin/algol68g-full --script #
+# -*- coding: utf-8 -*- #
+PR no-warning PR
+PR heap 150M PR
+PR handles 150M PR
+
+COMMENT # The following program will run this program #
+Options are two integers: eg: 3 5
+3 indicates the ODE solver,
+5 indicates the report to generate
+END COMMENT
+
+COMMENT Todo:
+  - change name ode_order_n_solve to linear_ode_order_n_solve
+  - change `ref velocity` and `ref accelerate` to actual Sub Vectors
+  - review SKIPped unittests
+  - Add MODE VSQQQ=STRUCT(VOID vs qqq, VEC v); and OPerators etc.
+  - generalise linear_ode_order_n_solve from REAL to VEC (Or arbitrary VectorSpace)
+END COMMENT
+
+
+PR include "prelude/scalar_:=_real.a68" PR;
+PR include "prelude/exception.a68" PR;
+PR include "prelude/errata.a68" PR;
+PR include "prelude/math_errata.a68" PR;
+#========================================================#
+# Note: Algol68 is strong typed hence it in necessary to #
+#       include all the appropriated prelude/header files#
+#========================================================#
+PR include "prelude/SI_system_of_units.a68" PR;
+PR include "prelude/United_States_customary_units.a68" PR;
+PR include "prelude/clib_clone.a68" PR;
+
+#PR include "prelude/count_FPO_disabled.a68" PR;#
+PR include "prelude/with_trace_and_with_debug.a68" PR;
+with trace := TRUE; with debug := TRUE;
+
+PR include "prelude/matrix.a68" PR;
+
+CO REQUIRED BY "prelude/graph_2d.a68" CO
+    PR include "prelude/classes.a68" PR;
+    MODE GREAL = REAL;
+    FORMAT greal repr = $g(-6,3)$;
+PR include "prelude/graph_2d.a68" PR;
+PR include "prelude/curve.a68" PR;
+# PR include "prelude/matrix_sparse.a68" PR; #
+
+CO REQUIRED FOR prelude/ode_boundary_solve  CO
+#    PR include "prelude/root_find.a68" PR;#
+PR include "prelude/ode_order_1_solve.a68" PR;
+
+# set up some globals for managing the graph colours #
+REF GRAPHDD graph = INIT LOC GRAPHDD;
+
+INT graph n line colour := 1;
+COLOUR graph line colour := rainbow[graph n line colour];
+INT graph n line style := 1;
+LINESTYLE graph line style := line styles[graph n line style];
+
+# Note: Currently error/tolerance are manually managed based on output #
+PROC f crude tol portal = (TY ty)VEC: ABS y OF ty * 10 + 10; # some big number #
+
+PR include "prelude/linear_ode_order_n_solve.a68" PR;
+PR include "prelude/velocity_verlet.a68" PR;
+#PR include "prelude/ode_boundary_solve.a68" PR;#
+
+# PR include "prelude/graph_3d.a68" PR; #
+
+INT arg0 = argc-2;
+INT opt n solver, opt n report;
+IF argv(arg0) NE "--" THEN
+     CO ANDF NOT fix value error("Invalid options detected, need 2 INTs: #ode_solver & #report_num") THEN stop FI; CO
+    opt n solver := 2;
+    opt n report := 2
+ELSE
+    FOR i FROM arg0+1 TO argc DO printf(($"OPT"g(0)": "g"; "$, i-arg0, argv(i))) OD; printf($l$);
+    # define some basic reporting options #
+    opt n solver := ABS argv(argc-1)[1] - ABS "0";
+    opt n report := ABS argv(argc-0)[1] - ABS "0"
+FI;
+
+BOOL short = TRUE; # do we want a short listing #
+
+main:(
+    PROC print positions = (STRING msg)VOID: (
+        print((msg,":",new line));
+        print(("  S:",REPR sun, new line));
+        print(("  E:",REPR earth, new line));
+        print(("  M:",REPR moon, new line));
+        print(("  8:",REPR apollo8 cm, new line))
+    );
+
+    INT max exp = 30; # mass of sun = 1.9891 × 10^30 kilograms #
+    INT wid exp = 3; 
+    INT trunc  := 17; # digits to truncate off end #
+    INT strunc := 24; # digits to truncate off end #
+    IF short THEN trunc := 9; strunc := 16 FI;
+    FORMAT astro repr := $g(-max exp-wid exp+trunc,max exp-wid exp-trunc+1,-wid exp+2)$;
+    FORMAT short astro repr := $g(-max exp-wid exp+strunc,max exp-wid exp-strunc+1,-wid exp+2)$;
+PR include "prelude/universe.a68" PR;
+PR include "prelude/apollo_8_mission.a68" PR;
+PR include "prelude/sun_earth_moon.a68" PR;
+PR include "prelude/apollo_flight_charactersitics.a68" PR;
+#PR include "prelude/apollo_8_mission.a68" PR;#
+    IF short THEN 
+        real repr := scal repr := astro repr := short astro repr := $g(-10,5,-1)$
+    ELSE
+        real repr := scal repr := astro repr
+    FI;
+    REF UNIVERSE mission = INIT LOC UNIVERSE;
+    (genesis OF(METHODOF mission))(
+        sun earth moon apollo8cm,
+        apollo 8 mission,
+        init time((1968,12,21,12,51,00))
+    );
+
+    real repr := scal repr := astro repr;
+    print(("System:",SHORTENREPR mission, new line));
+  # print(("System:",REPR mission, new line)); #
+    print positions("Initial position");
+
+    (run OF (METHODOF mission))(#solver# opt n solver,#report# opt n report);
+
+    real repr := scal repr := astro repr;
+    print positions("Final position")
+
+);
+#PR include "postlude/count_FPO.a68" PR;#
+PR include "postlude/exception.a68" PR;
+PR include "postlude/scalar_=:_real.a68" PR

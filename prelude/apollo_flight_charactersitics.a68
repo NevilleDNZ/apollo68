@@ -1,0 +1,108 @@
+# -*- coding: utf-8 -*- #
+
+PROC temparture altitude = (HEIGHT in altitude)TEMPARTURE: (
+CO http://en.wikipedia.org/wiki/Density_altitude#Calculation CO
+# SA_temperature = 15°C - (1.98°C/1000 ft × pressure altitude in feet) #
+    HEIGHT altitude;
+    IF in altitude < 38 000 * feet THEN
+# Adibatic lapse rate stops at 38 000 ft #
+      altitude := in altitude
+    ELSE
+      altitude := 38 000 * feet
+    FI;
+    273.15 + 15 + 1.98*altitude/(1000*feet) # EXIT #
+);
+
+# P = nRt/V #
+
+PROC density altitude = (HEIGHT altitude)REAL: (
+CO http://en.wikipedia.org/wiki/Density_altitude#Calculation CO
+# where: density altitude in feet #
+    PRESSURE p = SKIP # atmospheric (static) pressure #;
+    PRESSURE p sl =  1013.25*h*pa; #standard sea level atmospheric pressure#
+    TEMPARTURE t = temparture altitude(altitude); # true (static) air temperature in (K) #
+    TEMPARTURE t sl = 288.15  * kelvin; # ISA standard sea level air temperature #
+    PHYSICALUNIT b = 0.234969;
+
+    DENSITY da = 145 442.156*(1-((p/p sl)*(t/t sl))**b);
+    da # EXIT #
+);
+
+# http://ntrs.nasa.gov/archive/nasa/casi.ntrs.nasa.gov/19640015998_1964015998.pdf #
+
+COMMENT
+The Saturn V News Reference, August 1967, states "At approximately
+69 seconds into the flight the vehicle experiences a condition of
+maximum dynamic pressure. At this time, the restraining drag force is
+approximately equal to 460,000 pounds."
+# http://www.braeunig.us/apollo/saturnV.htm #
+"From the standard atmosphere, we estimate the density and temperature of
+the atmosphere at 44,512 feet are 0.0004733 slug/ft3 and 390o R. Since
+the acoustic velocity at 390o R is 968 ft/s, the Mach number at maximum
+q is 1,653.4 / 968 = 1.71. We now have enough information to calculate
+the drag coefficient:
+
+CD = 460,000 × 2 / (0.0004733 × 1,653.4**2 × 1,216) = 0.585
+ref: http://www.braeunig.us/apollo/pics/cd2.gif
+END COMMENT
+
+
+CO
+ref: http://en.wikipedia.org/wiki/True_airspeed#Calculating_true_airspeed
+low speed:TAS = EAS * sqrt(rho 0/rho)
+      TAS is true airspeed
+      EAS is equivalent airspeed
+      rho_0 is the air density at standard sea level (1.225 kg/m**3)
+      rho is the density of the air in which the aircraft is flying
+
+high speed: TAS = a0 * M * sqrt(T/T0)
+      a_0 is the speed of sound at standard sea level (661.47 knots)
+      M is Mach number,
+      t is static air temperature in kelvin,
+      t_0 is the temperature at standard sea level (288.15 K)
+END CO
+
+PROC mach speed = (ALTITUDE altitude)REAL: (
+# Assume constant for now #
+# ref: http://www.tscm.com/mach-as.pdf #
+    330 * m per s 
+# maybe linear estimate later #
+);
+
+[]REAL cd per half mach = []REAL
+# ref: http://www.braeunig.us/apollo/saturnV.htm #
+      #Mach 0:# (0.3,
+      #Mach 0.5:# 0.2,
+      #Mach 1.0:# 0.4,
+      #Mach 1.5:# 0.6,
+      #Mach 2.0:# 0.55,
+      #Mach 2.5:# 0.48,
+      #Mach 3.0:# 0.46,
+      #Mach 3.5:# 0.45)[@0]; # etc... #
+
+PROC coefficient of drag = (SPEED actual speed, DENSITY air density, ANGLE angle of attack)REAL: (
+# ignore angle of attack for the moment #
+# TODO: We could implement a parabolic spline here #
+    REAL half mach = actual speed / mach speed(air density) * 2;
+    IF half mach < UPB cd per half mach THEN
+      INT entire half mach := ENTIER half mach;
+      REAL rem half mach = half mach - entire half mach;
+      cd per half mach[ENTIER half mach] * rem half mach +
+      cd per half mach[ENTIER half mach+1]*(1 - rem half mach)
+    ELSE
+      cd per half mach[UPB cd per half mach]
+    FI
+);
+
+PROC module drag = (MODULE module, HEIGHT altitude, SPEED speed)FORCE: (
+    DENSITY rho air = density altitude(altitude);
+    DIMENSIONLESS c d = coefficient of drag(speed, rho air, 0*degrees);
+# Assume this area is proportional to the surface area #
+    AREA area = 2*pi*(diameter OF module/2)**2 * length OF module;
+    1/2 * rho air * area * v ** 2 * c d
+);
+
+# Additional rocketery notes:
+* http://my.execpc.com/~culp/rockets/studies.html
+#
+SKIP # export names #

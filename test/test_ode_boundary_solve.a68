@@ -1,0 +1,204 @@
+#!/usr/bin/algol68g-full --script #
+# -*- coding: utf-8 -*- #
+PR no-warning PR
+
+#========================================================#
+# Note: Algol68 is strong typed hence it in necessary to #
+#       include all the appropriated prelude/header files#
+#========================================================#
+
+PR include "prelude/scalar_:=_real.a68" PR;
+PR include "prelude/exception.a68" PR;
+PR include "prelude/errata.a68" PR;
+PR include "prelude/count_FPO_disabled.a68" PR;
+PR include "prelude/with_trace_and_with_debug.a68" PR;
+with trace := NOT TRUE; with debug := NOT FALSE;
+
+# MODE ANYHINT = MATHHINT; #
+CO REQUIRED BY "prelude/graph_2d.a68" CO
+    MODE GREAL = REAL;
+    FORMAT greal repr = $g(-3,0)$;
+PR include "prelude/classes.a68" PR;
+PR include "prelude/graph_2d.a68" PR;
+PR include "prelude/curve.a68" PR;
+
+# PR include "prelude/math_hints.a68" PR; #
+CO REQUIRED BY "prelude/matrix.a68" CO
+    PR include "prelude/math_errata.a68" PR;
+PR include "prelude/matrix.a68" PR;
+PR include "prelude/matrix_sparse.a68" PR;
+
+#X#
+CO REQUIRED FOR prelude/ode_boundary_solve  CO
+    PR include "prelude/root_find.a68" PR;
+PR include "prelude/ode_order_1_solve.a68" PR;
+PR include "prelude/linear_ode_order_n_solve.a68" PR;
+PR include "prelude/ode_boundary_solve.a68" PR;
+
+# set up some globals for managing the graph colours #
+INT graph n line colour := 1;
+COLOUR graph line colour := rainbow[graph n line colour];
+INT graph n line style := 1;
+LINESTYLE graph line style := line styles[graph n line style];
+
+#================================#
+# Finally: define the test cases #
+#================================#
+PROC f crude tol portal = (TY ty)Y: ABS y OF ty * 10 + 10; # some big number #
+
+INTERVAL y bounds = (-1,3);
+
+CO Note: - a summary of useful modes -
+MODE Y = [~]REAL;
+MODE DYBYDT = Y # also y, dy/dt, d²y/dt², d³y/dt³, d⁴y/dt⁴ ... #;
+MODE DNYBYDTN = DYBYDT # also y, dy/dt, d²y/dt², d³y/dt³, d⁴y/dt⁴ ... #;
+MODE TDNYBYDTN = STRUCT(REAL t, DNYBYDTN dny by dtn);
+
+MODE BVP = STRUCT(
+    INTERVAL t interval, 
+    FLEX[0:-1]BOUNDARYCoNDITION boundary,  
+    FDNYBYDTN f dny by dtn # => F(t, (y, dy/dt, d²y/dt², d³y/dt³, .... dⁿ⁻ⁱy/dtⁿ⁻ⁱ)) #
+);
+END CO
+
+
+[]BVPPKG test case list = (             
+  # (t₀,t₀),   ((t₀, y₀)    (tₙ, yₙ)) #
+# (0) for print testing:
+    (((0.1,1.1), ((0.2,    DIRICHLET Y(2.01,2.11)),   (0.3, NEUMANN Y(3.12,3.22,3.32))),(REAL t,Y y,dy)Y: (1.9,2.9,3.9) ),
+                      "1a: y''=y + ⅔eᵗ, y(0)=0, y(1)=⅓e", y bounds),
+#
+    (((0,1),  ((0,DIRICHLET 0),    (1.0,DIRICHLET(1/3*e))),
+                      # F = # (REAL t,RN y, dy by dt)RN:  y[1]+2/3*e**t),
+                      "1a: y''=y + 2e**t over 3, y(0)=0, y(1)=e over 3", (0,1)),
+    (((0,1),  ((0,DIRICHLET 1),    (1,  DIRICHLET e  )),
+                      # F = # (REAL t,RN y,dy by dt)RN: (2+4*t**2)*y[1]),
+                      "1b: y''=(2 + 4x**2)y, y(0)=1, y(1)=e" , (0,3)),
+    (((0,1.5),((0,DIRICHLET-1),    (1.5,DIRICHLET 3  )),
+                      # F = # (REAL t,RN y,dy by dt)RN:  -pi**2*y[1]/9),
+                      "2a: 9y'' + pi**2*y=0, y(0)=-1, y(1.5)=3" , (-1,3)),
+# Note that F here is a function of dy/dt #
+    (((0,1),  ((0,DIRICHLET(e**3)),(1,  DIRICHLET 1  )),
+                      # F = # (REAL t,RN y,dy by dt)RN:  3*y[1]-2*dy by dt[1]),
+                       "2b: y''=3y - 2y', y(0)=e**3, y(1)=1" , (0,e**3)),
+    (((1,2),  ((1,DIRICHLET(1/3)), (2,  DIRICHLET(1/12))),
+                      # F = # (REAL t,RN y,dy by dt)RN:  18*y[1]**2),
+                       "3a: y''=18y**2, y(1)=1 over 3, y(2)=1 over 12", (0,1)),
+    (((0,1),  ((0,DIRICHLET 0),    (1,  DIRICHLET ln(2))),
+                      # F = # (REAL t,RN y,dy by dt)RN:  2*e**(-2*y[1])*(1-t**2)),
+                       "3b: y''=2e**(-2y)*(1-t**2), y(0)=0, y(1)=ln 2", (0,1)),
+    (((0,1),  ((0,DIRICHLET 1),    (1,  DIRICHLET 3  )),
+                      # F = # (REAL t,RN y,dy by dt)RN:  e**y[1]),
+                       "4a: y''=e**y, y(0)=1, y(1)=3" , (0,3)),
+# Note that F here is a function of dy/dt #
+    (((0,1),  ((0,DIRICHLET 1),    (1,  DIRICHLET -1 )),
+                      # F = # (REAL t,RN y,dy by dt)RN:  sin(dy by dt[1])),
+                      "4b: y''=sin y', y(0)=1, y(1)=-1" , (-1,2))
+);
+
+[]FUNCTIONPKG test case solution = ( # solved with wolfram alpha #
+# (0) for pprint testing
+    ((REAL t)RN: (1,2,3), "0: y(t) = (1,2,3...)"), #
+    ((REAL t)RN: (e**t*t)/3, "1a: y(t) = (e^t*t)/3"),
+  (SKIP, CO analytic solution from wolframalpha.com CO
+"1b: y(t) = (2 (e-D_0(2 i)) D_(-1)(2 t)+(2 D_(-1)(2)-e sqrt(2 pi)) D_0(2 i t))/(2 D_(-1)(2)-sqrt(2 pi) D_0(2 i))?"), 
+    ((REAL t)RN: -(6+sqrt(3))*sin((pi*t)/3)-cos((pi*t)/3),
+     "2a: y(t) = -(6+sqrt(3)) sin((pi t)/3)-cos((pi t)/3)"),
+    ((REAL t)RN: e**(3-3*t), "2b: y(t) = e^(3-3 t)"),
+    (SKIP,"3a: y(x) = ?"),
+    (SKIP,"3b: y(x) = ?"),
+    (SKIP,"4a: y(x) = ?"),
+    (SKIP,"4b: y(x) = ?")
+);
+
+REF GRAPHDD graph = INIT LOC GRAPHDD;
+
+r5_1: (
+    PROC plot solution = (BVPPKG bvp pkg, FUNCTIONPKG test case solution)VOID:(
+        BVP bvp = bvp OF bvp pkg;
+
+        STRING title, sub title;
+        title OF graph := title := "Solution of "+description OF bvp pkg;
+        # sub title OF graph := sub title := "(log error vs log step size)"; #
+        printf(($l68"-"lgl$,title));
+        print ode bvp("pre plotting:", bvp OF bvp pkg);
+
+        type OF window OF graph := "gif"; # or gif, ps, T, pnm etc #
+        #sub title OF graph := "Using: "+description OF solve;#
+
+        interval OF axis OF graph := (t interval OF bvp, y bounds OF bvp pkg);
+
+        label OF axis OF graph := ("t Axis" # vs #, "y Axis");
+
+        (function OF test case solution)(upb OF t interval OF bvp);
+        PROC(REAL)RN actual solution = function OF test case solution;
+
+        (begin curve OF (METHODOF graph))(~);
+
+# plot the actual solution - if known #
+        INT num samples = 20;
+        STRING desc = description OF test case solution;
+        print(("Analytic solution:",desc,newline));
+        IF desc[UPB desc] NE "?" THEN
+          (add curve OF (METHODOF graph))(gen function curve(actual solution, t interval OF bvp, num samples,), black)
+        FI;
+
+        printf($l"Key: (method vs colour)"l$);
+
+CO
+    # secant method #
+        SECANTARGS secant args = (x interval OF test case, default upb iteration, f xy abstol);
+        ROOTFIND secant = root find secant(, secant args#, no hints#);
+END CO
+        SECANTARGS secant args = (#x interval=#(1,10), default upb iteration, f xy abstol#QQQ#);
+        ROOTFIND root find = root find secant(#function#,secant args);
+
+# MODE ODEOISOLVEARGS = STRUCT(REAL step size, FTYDYNTOL f ty tol portal); #
+        EULERARGS euler args = (#step size=#0.1, f crude tol portal#QQQ#);
+
+        ODEONSOLVETYNGEN ode order n solve ty gen = euler tyn gen(#IVP(t interval, y0)#,#euler args QQQ#,#yield#);
+
+        REAL step size = 0.2;
+
+        SHOOTINGARGS shooting args = (
+            #root find = #root find,
+            #ode order n solve ty gen=# ode order n solve ty gen,
+            #feasible boundary =#BOUNDARYCONDITION( #t=#lwb OF t interval OF bvp, #y=#DIRICHLET 1),
+            #step size = #step size,
+            #upb iteration = #default upb iteration,
+            #f ty tol portal = #f crude tol portal
+        );
+
+        FDARGS fd args = (
+            #step size = #step size,
+            #upb iteration = #default upb iteration,
+            #f ty tol portal = #f crude tol portal
+        );
+
+        []ODEBOUNDARYSOLVEPKG ode boundary solve list = (
+            (finite difference ty gen(,fd args,),"finite difference method"),
+            (shooting ty gen(,shooting args,),"shooting method")
+        );
+
+        FOR n solve TO UPB ode boundary solve list DO
+            graph line colour := rainbow[n solve*2];
+            ODEBOUNDARYSOLVEPKG solve := ode boundary solve list[n solve];
+            ODEBOUNDARYSOLVE solution ty gen = method OF solve;
+            RNGEN solution curve ty gen = gen filter ty to 2d(solution ty gen(bvp,),);
+
+            (add curve OF (METHODOF graph))(solution curve ty gen, rainbow[n solve]);
+
+            printf(($g" is "gl$, description OF solve, (name OF rainbow[n solve])))
+        OD;
+
+        (end curve OF (METHODOF graph))(~)
+    );
+
+    FOR n TO UPB test case list DO
+        plot solution(test case list[n], test case solution[n])
+    OD
+
+);
+PR include "postlude/count_FPO.a68" PR;
+PR include "postlude/exception.a68" PR;
+PR include "postlude/scalar_=:_real.a68" PR

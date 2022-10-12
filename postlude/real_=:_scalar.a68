@@ -1,0 +1,3 @@
+# -*- coding: utf-8 -*- #
+
+SKIP END # remove "real & REAL" names from scope #

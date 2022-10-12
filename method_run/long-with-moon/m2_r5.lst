@@ -1,0 +1,975 @@
+OPT1: 2; OPT2: 5; 
+System:((Sun  ,Earth,Moon ,Ap8CM),Apollo 8,-3.23537400000e7,)
+Initial position:
+  S:("Sun  ","☉",( 1.9891000000e30,( 0.00000000000e0, 0.00000000000e0),( 0.00000000000e0, 0.00000000000e0)))
+  E:("Earth","⊕",( 9.7220000000e23,( 1.5000000000e11, 0.00000000000e0),( 0.00000000000e0, 2.97866078294e4)))
+  M:("Moon ","☾",( 7.3476730900e22,( 1.5038500000e11, 0.00000000000e0),( 0.00000000000e0, 3.03571562823e4)))
+  8:("Ap8CM","8",( 5.80900000000e3,( 1.5000656275e11, 0.00000000000e0),( 0.00000000000e0, 3.29307012406e4)))
+Parameter: step size =  8.333e-4; hours
+Parameter: report period =  1.0000e0; hours
+Parameter: mission stop time =  7.2000e1; hours
+IVP Order-2: solar system:
+  t interval: [ 0.0000e0 …  2.5920e5]
+  y₀ = ( 0.0000e0, 0.0000e0, 1.500e11, 0.0000e0, 1.504e11, 0.0000e0, 1.500e11, 0.0000e0)
+  dy₀/dt = ( 0.0000e0, 0.0000e0, 0.0000e0, 2.9787e4, 0.0000e0, 3.0357e4, 0.0000e0, 3.2931e4)
+  d²y₀/dt² = ( 3.100e-9, 0.0000e0,-5.866e-3, 0.0000e0,-6.307e-3, 0.0000e0,-1.5121e0, 0.0000e0)
+
+
+Reference point: Earth
+Initial momentum:( 0.0000e0, 3.119e28), Initial energy: 4.651e32
+Time:    0.00hours, Distance to sun:150000.0Mm, Energy:    0.00YJ, Momentum( 0.0000e0, 0.0000e0)Pgm/s
+Sun  loc:(-1.5000e5, 0.0000e0)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 0.0000e0,-3.8603e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:( 0.0000e0, 1.0723e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.8500e2, 0.0000e0)Mm; 
+        rel vel:( 0.0000e0, 2.0540e3)kph; abs vel:( 0.0000e0, 7.3943e3)kph; 
+        orbit speed: 2.0540e3kph; orbit radius: 3.8500e2Mm; 
+Ap8CMloc:( 6.5627e0, 0.0000e0)Mm; 
+        rel vel:( 0.0000e0, 1.1319e4)kph; abs vel:( 0.0000e0, 4.0747e4)kph; 
+        orbit speed: 1.1319e4kph; orbit radius: 6.5627e0Mm; 
+Time:    1.00hours, Distance to sun:150000.0Mm, Energy:   -1.20YJ, Momentum(-4.243e-2,-8.7961e0)Pgm/s
+Sun  loc:(-1.5000e5,-1.0723e2)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 2.7369e2,-3.8603e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-7.6025e1, 1.0723e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.8500e2, 2.0540e0)Mm; 
+        rel vel:(-5.7100e0, 2.0540e3)kph; abs vel:(-2.0556e1, 7.3942e3)kph; 
+        orbit speed: 2.0540e3kph; orbit radius: 3.8500e2Mm; 
+Ap8CMloc:(-9.995e-1, 6.5049e0)Mm; 
+        rel vel:(-1.1188e4,-1.6908e3)kph; abs vel:(-4.0276e4,-6.0867e3)kph; 
+        orbit speed: 1.1315e4kph; orbit radius: 6.5812e0Mm; 
+Time:    2.00hours, Distance to sun:150000.0Mm, Energy:   -5.20YJ, Momentum(-4.509e-2,-3.5184e1)Pgm/s
+Sun  loc:(-1.5000e5,-2.1446e2)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 5.4738e2,-3.8603e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-1.5205e2, 1.0723e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.8499e2, 4.1079e0)Mm; 
+        rel vel:(-1.1420e1, 2.0539e3)kph; abs vel:(-4.1111e1, 7.3941e3)kph; 
+        orbit speed: 2.0539e3kph; orbit radius: 3.8501e2Mm; 
+Ap8CMloc:(-6.3532e0,-1.9015e0)Mm; 
+        rel vel:( 3.1821e3,-1.0797e4)kph; abs vel:( 1.1456e4,-3.8870e4)kph; 
+        orbit speed: 1.1256e4kph; orbit radius: 6.6316e0Mm; 
+Time:    3.00hours, Distance to sun:150000.0Mm, Energy:  -11.99YJ, Momentum( 6.766e-2,-2.6388e1)Pgm/s
+Sun  loc:(-1.5000e5,-3.2170e2)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 8.2107e2,-3.8603e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-2.2808e2, 1.0723e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.8497e2, 6.1618e0)Mm; 
+        rel vel:(-1.7129e1, 2.0538e3)kph; abs vel:(-6.1663e1, 7.3938e3)kph; 
+        orbit speed: 2.0539e3kph; orbit radius: 3.8502e2Mm; 
+Ap8CMloc:( 2.6445e0,-6.1260e0)Mm; 
+        rel vel:( 1.0301e4, 4.4317e3)kph; abs vel:( 3.7085e4, 1.5954e4)kph; 
+        orbit speed: 1.1214e4kph; orbit radius: 6.6724e0Mm; 
+Time:    4.00hours, Distance to sun:150000.0Mm, Energy:  -21.58YJ, Momentum(-6.336e-2,-4.3980e1)Pgm/s
+Sun  loc:(-1.5000e5,-4.2893e2)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 1.0948e3,-3.8603e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-3.0410e2, 1.0723e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.8495e2, 8.2155e0)Mm; 
+        rel vel:(-2.2837e1, 2.0537e3)kph; abs vel:(-8.2212e1, 7.3934e3)kph; 
+        orbit speed: 2.0538e3kph; orbit radius: 3.8504e2Mm; 
+Ap8CMloc:( 5.8126e0, 3.2983e0)Mm; 
+        rel vel:(-5.5365e3, 9.7615e3)kph; abs vel:(-1.9931e4, 3.5142e4)kph; 
+        orbit speed: 1.1222e4kph; orbit radius: 6.6832e0Mm; 
+Time:    5.00hours, Distance to sun:150000.0Mm, Energy:  -33.97YJ, Momentum(-2.276e-1,-4.3980e1)Pgm/s
+Sun  loc:(-1.5000e5,-5.3616e2)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 1.3685e3,-3.8603e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-3.8013e2, 1.0723e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.8493e2, 1.0269e1)Mm; 
+        rel vel:(-2.8543e1, 2.0536e3)kph; abs vel:(-1.0276e2, 7.3928e3)kph; 
+        orbit speed: 2.0538e3kph; orbit radius: 3.8507e2Mm; 
+Ap8CMloc:(-3.9061e0, 5.4557e0)Mm; 
+        rel vel:(-9.1317e3,-6.4916e3)kph; abs vel:(-3.2874e4,-2.3370e4)kph; 
+        orbit speed: 1.1204e4kph; orbit radius: 6.7098e0Mm; 
+Time:    6.00hours, Distance to sun:150000.0Mm, Energy:  -49.15YJ, Momentum(-3.479e-1, 6.1573e1)Pgm/s
+Sun  loc:(-1.5000e5,-6.4339e2)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 1.6421e3,-3.8603e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-4.5615e2, 1.0723e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.8490e2, 1.2323e1)Mm; 
+        rel vel:(-3.4248e1, 2.0534e3)kph; abs vel:(-1.2329e2, 7.3922e3)kph; 
+        orbit speed: 2.0537e3kph; orbit radius: 3.8509e2Mm; 
+Ap8CMloc:(-5.1309e0,-4.4050e0)Mm; 
+        rel vel:( 7.2265e3,-8.4812e3)kph; abs vel:( 2.6015e4,-3.0532e4)kph; 
+        orbit speed: 1.1142e4kph; orbit radius: 6.7624e0Mm; 
+Time:    7.00hours, Distance to sun:150000.0Mm, Energy:  -67.13YJ, Momentum(-2.276e-1, 5.7175e1)Pgm/s
+Sun  loc:(-1.5000e5,-7.5062e2)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 1.9158e3,-3.8603e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-5.3218e2, 1.0723e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.8486e2, 1.4376e1)Mm; 
+        rel vel:(-3.9951e1, 2.0532e3)kph; abs vel:(-1.4382e2, 7.3914e3)kph; 
+        orbit speed: 2.0536e3kph; orbit radius: 3.8513e2Mm; 
+Ap8CMloc:( 4.7732e0,-4.8344e0)Mm; 
+        rel vel:( 7.9139e3, 7.8060e3)kph; abs vel:( 2.8490e4, 2.8102e4)kph; 
+        orbit speed: 1.1116e4kph; orbit radius: 6.7937e0Mm; 
+Time:    8.00hours, Distance to sun:150000.0Mm, Energy:  -87.90YJ, Momentum(-4.424e-1, 5.2777e1)Pgm/s
+Sun  loc:(-1.5000e5,-8.5785e2)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 2.1895e3,-3.8603e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-6.0820e2, 1.0723e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.8482e2, 1.6429e1)Mm; 
+        rel vel:(-4.5652e1, 2.0529e3)kph; abs vel:(-1.6435e2, 7.3905e3)kph; 
+        orbit speed: 2.0534e3kph; orbit radius: 3.8517e2Mm; 
+Ap8CMloc:( 4.5185e0, 5.0845e0)Mm; 
+        rel vel:(-8.3131e3, 7.3961e3)kph; abs vel:(-2.9927e4, 2.6626e4)kph; 
+        orbit speed: 1.1127e4kph; orbit radius: 6.8021e0Mm; 
+Time:    9.00hours, Distance to sun:150000.0Mm, Energy: -111.47YJ, Momentum(-7.538e-1, 8.7961e0)Pgm/s
+Sun  loc:(-1.5000e5,-9.6508e2)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 2.4632e3,-3.8603e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-6.8423e2, 1.0723e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.8477e2, 1.8482e1)Mm; 
+        rel vel:(-5.1349e1, 2.0526e3)kph; abs vel:(-1.8486e2, 7.3895e3)kph; 
+        orbit speed: 2.0533e3kph; orbit radius: 3.8521e2Mm; 
+Ap8CMloc:(-5.3741e0, 4.2221e0)Mm; 
+        rel vel:(-6.8898e3,-8.7019e3)kph; abs vel:(-2.4803e4,-3.1327e4)kph; 
+        orbit speed: 1.1099e4kph; orbit radius: 6.8343e0Mm; 
+Time:   10.00hours, Distance to sun:150000.0Mm, Energy: -137.84YJ, Momentum(-9.449e-1, 8.7961e0)Pgm/s
+Sun  loc:(-1.5000e5,-1.0723e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 2.7369e3,-3.8603e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-7.6025e2, 1.0723e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.8471e2, 2.0534e1)Mm; 
+        rel vel:(-5.7044e1, 2.0523e3)kph; abs vel:(-2.0536e2, 7.3883e3)kph; 
+        orbit speed: 2.0531e3kph; orbit radius: 3.8526e2Mm; 
+Ap8CMloc:(-4.0196e0,-5.5910e0)Mm; 
+        rel vel:( 8.9424e3,-6.4741e3)kph; abs vel:( 3.2193e4,-2.3307e4)kph; 
+        orbit speed: 1.1040e4kph; orbit radius: 6.8859e0Mm; 
+Time:   11.00hours, Distance to sun:150000.0Mm, Energy: -167.00YJ, Momentum(-1.2241e0,-4.3980e0)Pgm/s
+Sun  loc:(-1.5000e5,-1.1795e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 3.0106e3,-3.8602e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-8.3628e2, 1.0723e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.8465e2, 2.2586e1)Mm; 
+        rel vel:(-6.2736e1, 2.0520e3)kph; abs vel:(-2.2585e2, 7.3871e3)kph; 
+        orbit speed: 2.0529e3kph; orbit radius: 3.8532e2Mm; 
+Ap8CMloc:( 5.7179e0,-3.8825e0)Mm; 
+        rel vel:( 6.1932e3, 9.1182e3)kph; abs vel:( 2.2295e4, 3.2826e4)kph; 
+        orbit speed: 1.1023e4kph; orbit radius: 6.9114e0Mm; 
+Time:   12.00hours, Distance to sun:150000.0Mm, Energy: -198.95YJ, Momentum(-2.0272e0, 2.1990e1)Pgm/s
+Sun  loc:(-1.4999e5,-1.2868e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 3.2843e3,-3.8602e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-9.1230e2, 1.0723e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.8459e2, 2.4638e1)Mm; 
+        rel vel:(-6.8423e1, 2.0516e3)kph; abs vel:(-2.4632e2, 7.3857e3)kph; 
+        orbit speed: 2.0527e3kph; orbit radius: 3.8538e2Mm; 
+Ap8CMloc:( 3.7467e0, 5.8168e0)Mm; 
+        rel vel:(-9.2715e3, 5.9822e3)kph; abs vel:(-3.3377e4, 2.1536e4)kph; 
+        orbit speed: 1.1034e4kph; orbit radius: 6.9190e0Mm; 
+Time:   13.00hours, Distance to sun:150000.1Mm, Energy: -233.70YJ, Momentum(-2.1088e0, 1.0555e2)Pgm/s
+Sun  loc:(-1.4999e5,-1.3940e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 3.5580e3,-3.8602e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-9.8832e2, 1.0723e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.8452e2, 2.6690e1)Mm; 
+        rel vel:(-7.4107e1, 2.0512e3)kph; abs vel:(-2.6679e2, 7.3842e3)kph; 
+        orbit speed: 2.0525e3kph; orbit radius: 3.8544e2Mm; 
+Ap8CMloc:(-5.9164e0, 3.6526e0)Mm; 
+        rel vel:(-5.8165e3,-9.3399e3)kph; abs vel:(-2.0939e4,-3.3624e4)kph; 
+        orbit speed: 1.1003e4kph; orbit radius: 6.9531e0Mm; 
+Time:   14.00hours, Distance to sun:150000.1Mm, Energy: -271.25YJ, Momentum(-2.9120e0, 7.0369e1)Pgm/s
+Sun  loc:(-1.4999e5,-1.5012e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 3.8317e3,-3.8602e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-1.0643e3, 1.0723e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.8444e2, 2.8740e1)Mm; 
+        rel vel:(-7.9787e1, 2.0507e3)kph; abs vel:(-2.8723e2, 7.3826e3)kph; 
+        orbit speed: 2.0523e3kph; orbit radius: 3.8551e2Mm; 
+Ap8CMloc:(-3.6700e0,-5.9650e0)Mm; 
+        rel vel:( 9.3048e3,-5.7653e3)kph; abs vel:( 3.3497e4,-2.0755e4)kph; 
+        orbit speed: 1.0946e4kph; orbit radius: 7.0036e0Mm; 
+Time:   15.00hours, Distance to sun:150000.1Mm, Energy: -311.58YJ, Momentum(-3.8869e0, 5.2777e1)Pgm/s
+Sun  loc:(-1.4999e5,-1.6084e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 4.1053e3,-3.8601e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-1.1404e3, 1.0723e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.8436e2, 3.0791e1)Mm; 
+        rel vel:(-8.5461e1, 2.0503e3)kph; abs vel:(-3.0766e2, 7.3809e3)kph; 
+        orbit speed: 2.0520e3kph; orbit radius: 3.8559e2Mm; 
+Ap8CMloc:( 5.9373e0,-3.7585e0)Mm; 
+        rel vel:( 5.8474e3, 9.2365e3)kph; abs vel:( 2.1051e4, 3.3252e4)kph; 
+        orbit speed: 1.0932e4kph; orbit radius: 7.0269e0Mm; 
+Time:   16.00hours, Distance to sun:150000.1Mm, Energy: -354.71YJ, Momentum(-4.9736e0, 5.7175e1)Pgm/s
+Sun  loc:(-1.4999e5,-1.7157e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 4.3790e3,-3.8601e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-1.2164e3, 1.0723e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.8427e2, 3.2841e1)Mm; 
+        rel vel:(-9.1131e1, 2.0497e3)kph; abs vel:(-3.2807e2, 7.3791e3)kph; 
+        orbit speed: 2.0518e3kph; orbit radius: 3.8567e2Mm; 
+Ap8CMloc:( 3.8487e0, 5.8869e0)Mm; 
+        rel vel:(-9.1558e3, 5.9950e3)kph; abs vel:(-3.2961e4, 2.1582e4)kph; 
+        orbit speed: 1.0944e4kph; orbit radius: 7.0334e0Mm; 
+Time:   17.00hours, Distance to sun:150000.1Mm, Energy: -400.64YJ, Momentum(-5.2270e0, 6.5971e1)Pgm/s
+Sun  loc:(-1.4999e5,-1.8229e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 4.6527e3,-3.8601e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-1.2924e3, 1.0722e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.8418e2, 3.4890e1)Mm; 
+        rel vel:(-9.6795e1, 2.0492e3)kph; abs vel:(-3.4846e2, 7.3771e3)kph; 
+        orbit speed: 2.0515e3kph; orbit radius: 3.8576e2Mm; 
+Ap8CMloc:(-5.8391e0, 3.9792e0)Mm; 
+        rel vel:(-6.1811e3,-8.9964e3)kph; abs vel:(-2.2252e4,-3.2387e4)kph; 
+        orbit speed: 1.0915e4kph; orbit radius: 7.0661e0Mm; 
+Time:   18.00hours, Distance to sun:150000.1Mm, Energy: -449.36YJ, Momentum(-5.0122e0, 1.0555e2)Pgm/s
+Sun  loc:(-1.4999e5,-1.9301e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 4.9264e3,-3.8600e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-1.3684e3, 1.0722e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.8408e2, 3.6939e1)Mm; 
+        rel vel:(-1.0245e2, 2.0486e3)kph; abs vel:(-3.6883e2, 7.3750e3)kph; 
+        orbit speed: 2.0512e3kph; orbit radius: 3.8585e2Mm; 
+Ap8CMloc:(-4.2145e0,-5.7339e0)Mm; 
+        rel vel:( 8.7293e3,-6.4602e3)kph; abs vel:( 3.1425e4,-2.3257e4)kph; 
+        orbit speed: 1.0860e4kph; orbit radius: 7.1161e0Mm; 
+Time:   19.00hours, Distance to sun:150000.1Mm, Energy: -500.86YJ, Momentum(-4.1317e0, 1.4074e2)Pgm/s
+Sun  loc:(-1.4999e5,-2.0373e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 5.2001e3,-3.8600e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-1.4445e3, 1.0722e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.8397e2, 3.8988e1)Mm; 
+        rel vel:(-1.0811e2, 2.0480e3)kph; abs vel:(-3.8918e2, 7.3728e3)kph; 
+        orbit speed: 2.0509e3kph; orbit radius: 3.8595e2Mm; 
+Ap8CMloc:( 5.5361e0,-4.5102e0)Mm; 
+        rel vel:( 6.8496e3, 8.4057e3)kph; abs vel:( 2.4659e4, 3.0261e4)kph; 
+        orbit speed: 1.0843e4kph; orbit radius: 7.1407e0Mm; 
+Time:   20.00hours, Distance to sun:150000.1Mm, Energy: -555.16YJ, Momentum(-4.4926e0, 1.3194e2)Pgm/s
+Sun  loc:(-1.4998e5,-2.1446e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 5.4737e3,-3.8600e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-1.5205e3, 1.0722e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.8386e2, 4.1035e1)Mm; 
+        rel vel:(-1.1375e2, 2.0474e3)kph; abs vel:(-4.0951e2, 7.3705e3)kph; 
+        orbit speed: 2.0505e3kph; orbit radius: 3.8605e2Mm; 
+Ap8CMloc:( 4.7941e0, 5.2988e0)Mm; 
+        rel vel:(-8.0479e3, 7.2866e3)kph; abs vel:(-2.8972e4, 2.6232e4)kph; 
+        orbit speed: 1.0856e4kph; orbit radius: 7.1457e0Mm; 
+Time:   21.00hours, Distance to sun:150000.1Mm, Energy: -612.26YJ, Momentum(-4.0545e0, 4.3980e1)Pgm/s
+Sun  loc:(-1.4998e5,-2.2518e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 5.7474e3,-3.8599e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-1.5965e3, 1.0722e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.8374e2, 4.3082e1)Mm; 
+        rel vel:(-1.1939e2, 2.0467e3)kph; abs vel:(-4.2981e2, 7.3681e3)kph; 
+        orbit speed: 2.0502e3kph; orbit radius: 3.8615e2Mm; 
+Ap8CMloc:(-5.0484e0, 5.0965e0)Mm; 
+        rel vel:(-7.7244e3,-7.5980e3)kph; abs vel:(-2.7808e4,-2.7353e4)kph; 
+        orbit speed: 1.0835e4kph; orbit radius: 7.1736e0Mm; 
+Time:   22.00hours, Distance to sun:150000.2Mm, Energy: -672.14YJ, Momentum(-5.0380e0, 3.0786e1)Pgm/s
+Sun  loc:(-1.4998e5,-2.3590e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 6.0211e3,-3.8599e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-1.6725e3, 1.0722e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.8362e2, 4.5129e1)Mm; 
+        rel vel:(-1.2502e2, 2.0460e3)kph; abs vel:(-4.5009e2, 7.3656e3)kph; 
+        orbit speed: 2.0498e3kph; orbit radius: 3.8627e2Mm; 
+Ap8CMloc:(-5.4718e0,-4.7155e0)Mm; 
+        rel vel:( 7.0081e3,-8.1920e3)kph; abs vel:( 2.5229e4,-2.9491e4)kph; 
+        orbit speed: 1.0781e4kph; orbit radius: 7.2233e0Mm; 
+Time:   23.00hours, Distance to sun:150000.2Mm, Energy: -734.81YJ, Momentum(-5.8669e0, 8.7961e0)Pgm/s
+Sun  loc:(-1.4998e5,-2.4662e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 6.2948e3,-3.8598e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-1.7486e3, 1.0722e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.8349e2, 4.7174e1)Mm; 
+        rel vel:(-1.3065e2, 2.0453e3)kph; abs vel:(-4.7034e2, 7.3629e3)kph; 
+        orbit speed: 2.0494e3kph; orbit radius: 3.8638e2Mm; 
+Ap8CMloc:( 4.2558e0,-5.8727e0)Mm; 
+        rel vel:( 8.7133e3, 6.3078e3)kph; abs vel:( 3.1368e4, 2.2708e4)kph; 
+        orbit speed: 1.0757e4kph; orbit radius: 7.2526e0Mm; 
+Time:   24.00hours, Distance to sun:150000.2Mm, Energy: -800.27YJ, Momentum(-4.2864e0,-2.1990e1)Pgm/s
+Sun  loc:(-1.4998e5,-2.5734e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 6.5685e3,-3.8598e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-1.8246e3, 1.0722e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.8336e2, 4.9219e1)Mm; 
+        rel vel:(-1.3627e2, 2.0445e3)kph; abs vel:(-4.9056e2, 7.3601e3)kph; 
+        orbit speed: 2.0490e3kph; orbit radius: 3.8651e2Mm; 
+Ap8CMloc:( 6.2254e0, 3.7292e0)Mm; 
+        rel vel:(-5.5359e3, 9.2386e3)kph; abs vel:(-1.9929e4, 3.3259e4)kph; 
+        orbit speed: 1.0770e4kph; orbit radius: 7.2569e0Mm; 
+Time:   25.00hours, Distance to sun:150000.2Mm, Energy: -868.52YJ, Momentum(-3.7452e0,-1.3194e1)Pgm/s
+Sun  loc:(-1.4998e5,-2.6807e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 6.8421e3,-3.8598e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-1.9006e3, 1.0722e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.8322e2, 5.1263e1)Mm; 
+        rel vel:(-1.4188e2, 2.0437e3)kph; abs vel:(-5.1076e2, 7.3573e3)kph; 
+        orbit speed: 2.0486e3kph; orbit radius: 3.8663e2Mm; 
+Ap8CMloc:(-3.1746e0, 6.5480e0)Mm; 
+        rel vel:(-9.6956e3,-4.6664e3)kph; abs vel:(-3.4904e4,-1.6799e4)kph; 
+        orbit speed: 1.0760e4kph; orbit radius: 7.2770e0Mm; 
+Time:   26.00hours, Distance to sun:150000.2Mm, Energy: -939.56YJ, Momentum(-3.7194e0, 2.6388e1)Pgm/s
+Sun  loc:(-1.4997e5,-2.7879e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 7.1158e3,-3.8597e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-1.9766e3, 1.0721e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.8308e2, 5.3307e1)Mm; 
+        rel vel:(-1.4748e2, 2.0428e3)kph; abs vel:(-5.3093e2, 7.3543e3)kph; 
+        orbit speed: 2.0482e3kph; orbit radius: 3.8677e2Mm; 
+Ap8CMloc:(-6.8768e0,-2.5215e0)Mm; 
+        rel vel:( 3.6463e3,-1.0070e4)kph; abs vel:( 1.3127e4,-3.6251e4)kph; 
+        orbit speed: 1.0710e4kph; orbit radius: 7.3245e0Mm; 
+Time:   27.00hours, Distance to sun:150000.2Mm, Energy:-1013.39YJ, Momentum(-2.0788e0, 5.2777e1)Pgm/s
+Sun  loc:(-1.4997e5,-2.8951e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 7.3895e3,-3.8597e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-2.0526e3, 1.0721e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.8293e2, 5.5349e1)Mm; 
+        rel vel:(-1.5307e2, 2.0420e3)kph; abs vel:(-5.5106e2, 7.3511e3)kph; 
+        orbit speed: 2.0477e3kph; orbit radius: 3.8691e2Mm; 
+Ap8CMloc:( 1.7195e0,-7.1576e0)Mm; 
+        rel vel:( 1.0383e4, 2.4805e3)kph; abs vel:( 3.7378e4, 8.9297e3)kph; 
+        orbit speed: 1.0675e4kph; orbit radius: 7.3613e0Mm; 
+Time:   28.00hours, Distance to sun:150000.2Mm, Energy:-1090.00YJ, Momentum(-2.4481e0, 7.4767e1)Pgm/s
+Sun  loc:(-1.4997e5,-3.0023e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 7.6631e3,-3.8596e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-2.1287e3, 1.0721e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.8277e2, 5.7391e1)Mm; 
+        rel vel:(-1.5866e2, 2.0411e3)kph; abs vel:(-5.7116e2, 7.3479e3)kph; 
+        orbit speed: 2.0472e3kph; orbit radius: 3.8705e2Mm; 
+Ap8CMloc:( 7.3201e0, 8.409e-1)Mm; 
+        rel vel:(-1.2248e3, 1.0613e4)kph; abs vel:(-4.4094e3, 3.8207e4)kph; 
+        orbit speed: 1.0684e4kph; orbit radius: 7.3683e0Mm; 
+Time:   29.00hours, Distance to sun:150000.3Mm, Energy:-1169.40YJ, Momentum( 1.632e-1, 1.2315e2)Pgm/s
+Sun  loc:(-1.4997e5,-3.1095e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 7.9368e3,-3.8596e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-2.2047e3, 1.0721e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.8261e2, 5.9431e1)Mm; 
+        rel vel:(-1.6423e2, 2.0402e3)kph; abs vel:(-5.9123e2, 7.3446e3)kph; 
+        orbit speed: 2.0468e3kph; orbit radius: 3.8720e2Mm; 
+Ap8CMloc:( 4.738e-2, 7.3786e0)Mm; 
+        rel vel:(-1.0687e4, 8.7809e1)kph; abs vel:(-3.8472e4, 3.1611e2)kph; 
+        orbit speed: 1.0687e4kph; orbit radius: 7.3787e0Mm; 
+Time:   30.00hours, Distance to sun:150000.3Mm, Energy:-1251.59YJ, Momentum(-3.694e-1, 1.4074e2)Pgm/s
+Sun  loc:(-1.4997e5,-3.2167e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 8.2105e3,-3.8595e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-2.2807e3, 1.0721e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.8244e2, 6.1471e1)Mm; 
+        rel vel:(-1.6980e2, 2.0392e3)kph; abs vel:(-6.1127e2, 7.3411e3)kph; 
+        orbit speed: 2.0463e3kph; orbit radius: 3.8735e2Mm; 
+Ap8CMloc:(-7.3522e0, 9.966e-1)Mm; 
+        rel vel:(-1.4737e3,-1.0544e4)kph; abs vel:(-5.3052e3,-3.7960e4)kph; 
+        orbit speed: 1.0647e4kph; orbit radius: 7.4195e0Mm; 
+Time:   31.00hours, Distance to sun:150000.3Mm, Energy:-1336.56YJ, Momentum(-3.2040e0, 1.1875e2)Pgm/s
+Sun  loc:(-1.4996e5,-3.3239e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 8.4841e3,-3.8594e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-2.3567e3, 1.0721e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.8227e2, 6.3510e1)Mm; 
+        rel vel:(-1.7535e2, 2.0382e3)kph; abs vel:(-6.3127e2, 7.3376e3)kph; 
+        orbit speed: 2.0457e3kph; orbit radius: 3.8751e2Mm; 
+Ap8CMloc:(-2.0520e0,-7.1765e0)Mm; 
+        rel vel:( 1.0186e4,-2.9392e3)kph; abs vel:( 3.6668e4,-1.0581e4)kph; 
+        orbit speed: 1.0601e4kph; orbit radius: 7.4641e0Mm; 
+Time:   32.00hours, Distance to sun:150000.3Mm, Energy:-1424.31YJ, Momentum(-2.6113e0, 6.1573e1)Pgm/s
+Sun  loc:(-1.4996e5,-3.4311e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 8.7578e3,-3.8594e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-2.4327e3, 1.0720e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.8209e2, 6.5547e1)Mm; 
+        rel vel:(-1.8090e2, 2.0372e3)kph; abs vel:(-6.5123e2, 7.3339e3)kph; 
+        orbit speed: 2.0452e3kph; orbit radius: 3.8767e2Mm; 
+Ap8CMloc:( 6.7932e0,-3.1296e0)Mm; 
+        rel vel:( 4.4304e3, 9.6266e3)kph; abs vel:( 1.5949e4, 3.4656e4)kph; 
+        orbit speed: 1.0597e4kph; orbit radius: 7.4795e0Mm; 
+Time:   33.00hours, Distance to sun:150000.3Mm, Energy:-1514.85YJ, Momentum(-1.4174e0, 7.4767e1)Pgm/s
+Sun  loc:(-1.4996e5,-3.5383e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 9.0315e3,-3.8593e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-2.5087e3, 1.0720e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.8191e2, 6.7584e1)Mm; 
+        rel vel:(-1.8643e2, 2.0361e3)kph; abs vel:(-6.7116e2, 7.3301e3)kph; 
+        orbit speed: 2.0447e3kph; orbit radius: 3.8784e2Mm; 
+Ap8CMloc:( 4.1299e0, 6.2392e0)Mm; 
+        rel vel:(-8.8455e3, 5.8609e3)kph; abs vel:(-3.1844e4, 2.1099e4)kph; 
+        orbit speed: 1.0611e4kph; orbit radius: 7.4822e0Mm; 
+Time:   34.00hours, Distance to sun:150000.4Mm, Energy:-1608.17YJ, Momentum(-3.1697e0, 8.7961e0)Pgm/s
+Sun  loc:(-1.4996e5,-3.6455e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 9.3051e3,-3.8593e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-2.5848e3, 1.0720e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.8172e2, 6.9620e1)Mm; 
+        rel vel:(-1.9196e2, 2.0351e3)kph; abs vel:(-6.9105e2, 7.3262e3)kph; 
+        orbit speed: 2.0441e3kph; orbit radius: 3.8802e2Mm; 
+Ap8CMloc:(-5.5440e0, 5.0661e0)Mm; 
+        rel vel:(-7.1707e3,-7.7920e3)kph; abs vel:(-2.5815e4,-2.8051e4)kph; 
+        orbit speed: 1.0589e4kph; orbit radius: 7.5101e0Mm; 
+Time:   35.00hours, Distance to sun:150000.4Mm, Energy:-1704.27YJ, Momentum(-3.8912e0, 2.6388e1)Pgm/s
+Sun  loc:(-1.4995e5,-3.7527e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 9.5788e3,-3.8592e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-2.6608e3, 1.0720e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.8152e2, 7.1654e1)Mm; 
+        rel vel:(-1.9747e2, 2.0339e3)kph; abs vel:(-7.1090e2, 7.3222e3)kph; 
+        orbit speed: 2.0435e3kph; orbit radius: 3.8819e2Mm; 
+Ap8CMloc:(-5.9621e0,-4.6451e0)Mm; 
+        rel vel:( 6.4472e3,-8.3375e3)kph; abs vel:( 2.3210e4,-3.0015e4)kph; 
+        orbit speed: 1.0539e4kph; orbit radius: 7.5580e0Mm; 
+Time:   36.00hours, Distance to sun:150000.4Mm, Energy:-1803.15YJ, Momentum(-5.5147e0, 3.5184e1)Pgm/s
+Sun  loc:(-1.4995e5,-3.8599e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 9.8524e3,-3.8591e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-2.7368e3, 1.0720e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.8132e2, 7.3687e1)Mm; 
+        rel vel:(-2.0297e2, 2.0328e3)kph; abs vel:(-7.3071e2, 7.3181e3)kph; 
+        orbit speed: 2.0429e3kph; orbit radius: 3.8838e2Mm; 
+Ap8CMloc:( 3.5054e0,-6.7290e0)Mm; 
+        rel vel:( 9.3290e3, 4.8525e3)kph; abs vel:( 3.3584e4, 1.7469e4)kph; 
+        orbit speed: 1.0516e4kph; orbit radius: 7.5873e0Mm; 
+Time:   37.00hours, Distance to sun:150000.4Mm, Energy:-1904.81YJ, Momentum(-6.5713e0, 5.7175e1)Pgm/s
+Sun  loc:(-1.4995e5,-3.9671e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 1.0126e4,-3.8591e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-2.8128e3, 1.0720e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.8112e2, 7.5720e1)Mm; 
+        rel vel:(-2.0847e2, 2.0316e3)kph; abs vel:(-7.5048e2, 7.3138e3)kph; 
+        orbit speed: 2.0423e3kph; orbit radius: 3.8857e2Mm; 
+Ap8CMloc:( 7.2609e0, 2.2112e0)Mm; 
+        rel vel:(-3.0729e3, 1.0070e4)kph; abs vel:(-1.1063e4, 3.6253e4)kph; 
+        orbit speed: 1.0529e4kph; orbit radius: 7.5901e0Mm; 
+Time:   38.00hours, Distance to sun:150000.5Mm, Energy:-2009.25YJ, Momentum(-7.7911e0, 1.3194e1)Pgm/s
+Sun  loc:(-1.4995e5,-4.0743e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 1.0400e4,-3.8590e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-2.8888e3, 1.0719e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.8091e2, 7.7751e1)Mm; 
+        rel vel:(-2.1394e2, 2.0304e3)kph; abs vel:(-7.7020e2, 7.3095e3)kph; 
+        orbit speed: 2.0417e3kph; orbit radius: 3.8876e2Mm; 
+Ap8CMloc:(-8.482e-1, 7.5542e0)Mm; 
+        rel vel:(-1.0466e4,-1.1539e3)kph; abs vel:(-3.7678e4,-4.1541e3)kph; 
+        orbit speed: 1.0529e4kph; orbit radius: 7.6017e0Mm; 
+Time:   39.00hours, Distance to sun:150000.5Mm, Energy:-2116.47YJ, Momentum(-8.0402e0, 0.0000e0)Pgm/s
+Sun  loc:(-1.4994e5,-4.1815e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 1.0673e4,-3.8589e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-2.9648e3, 1.0719e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.8069e2, 7.9780e1)Mm; 
+        rel vel:(-2.1941e2, 2.0292e3)kph; abs vel:(-7.8988e2, 7.3050e3)kph; 
+        orbit speed: 2.0410e3kph; orbit radius: 3.8896e2Mm; 
+Ap8CMloc:(-7.6185e0, 6.068e-1)Mm; 
+        rel vel:(-8.7592e2,-1.0453e4)kph; abs vel:(-3.1533e3,-3.7631e4)kph; 
+        orbit speed: 1.0490e4kph; orbit radius: 7.6426e0Mm; 
+Time:   40.00hours, Distance to sun:150000.5Mm, Energy:-2226.46YJ, Momentum(-8.6157e0, 3.5184e1)Pgm/s
+Sun  loc:(-1.4994e5,-4.2887e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 1.0947e4,-3.8588e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-3.0408e3, 1.0719e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.8047e2, 8.1809e1)Mm; 
+        rel vel:(-2.2487e2, 2.0279e3)kph; abs vel:(-8.0952e2, 7.3005e3)kph; 
+        orbit speed: 2.0403e3kph; orbit radius: 3.8916e2Mm; 
+Ap8CMloc:(-2.1606e0,-7.3758e0)Mm; 
+        rel vel:( 1.0019e4,-2.9607e3)kph; abs vel:( 3.6067e4,-1.0659e4)kph; 
+        orbit speed: 1.0447e4kph; orbit radius: 7.6857e0Mm; 
+Time:   41.00hours, Distance to sun:150000.5Mm, Energy:-2339.24YJ, Momentum(-6.5541e0, 2.6388e1)Pgm/s
+Sun  loc:(-1.4994e5,-4.3959e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 1.1221e4,-3.8588e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-3.1169e3, 1.0719e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.8024e2, 8.3836e1)Mm; 
+        rel vel:(-2.3031e2, 2.0266e3)kph; abs vel:(-8.2911e2, 7.2958e3)kph; 
+        orbit speed: 2.0397e3kph; orbit radius: 3.8937e2Mm; 
+Ap8CMloc:( 6.7617e0,-3.6844e0)Mm; 
+        rel vel:( 4.9927e3, 9.1724e3)kph; abs vel:( 1.7974e4, 3.3021e4)kph; 
+        orbit speed: 1.0443e4kph; orbit radius: 7.7003e0Mm; 
+Time:   42.00hours, Distance to sun:150000.6Mm, Energy:-2454.78YJ, Momentum(-6.7002e0, 2.1990e1)Pgm/s
+Sun  loc:(-1.4993e5,-4.5031e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 1.1494e4,-3.8587e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-3.1929e3, 1.0719e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.8001e2, 8.5862e1)Mm; 
+        rel vel:(-2.3574e2, 2.0253e3)kph; abs vel:(-8.4865e2, 7.2911e3)kph; 
+        orbit speed: 2.0390e3kph; orbit radius: 3.8959e2Mm; 
+Ap8CMloc:( 5.0336e0, 5.8281e0)Mm; 
+        rel vel:(-7.9143e3, 6.8370e3)kph; abs vel:(-2.8491e4, 2.4613e4)kph; 
+        orbit speed: 1.0459e4kph; orbit radius: 7.7009e0Mm; 
+Time:   43.00hours, Distance to sun:150000.6Mm, Energy:-2573.10YJ, Momentum(-7.0953e0,-5.2777e1)Pgm/s
+Sun  loc:(-1.4993e5,-4.6103e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 1.1768e4,-3.8586e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-3.2689e3, 1.0718e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.7977e2, 8.7887e1)Mm; 
+        rel vel:(-2.4115e2, 2.0239e3)kph; abs vel:(-8.6815e2, 7.2862e3)kph; 
+        orbit speed: 2.0383e3kph; orbit radius: 3.8981e2Mm; 
+Ap8CMloc:(-4.6354e0, 6.1781e0)Mm; 
+        rel vel:(-8.3734e3,-6.2414e3)kph; abs vel:(-3.0144e4,-2.2469e4)kph; 
+        orbit speed: 1.0444e4kph; orbit radius: 7.7237e0Mm; 
+Time:   44.00hours, Distance to sun:150000.6Mm, Energy:-2694.19YJ, Momentum(-7.9886e0,-5.7175e1)Pgm/s
+Sun  loc:(-1.4993e5,-4.7175e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 1.2042e4,-3.8585e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-3.3449e3, 1.0718e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.7952e2, 8.9910e1)Mm; 
+        rel vel:(-2.4655e2, 2.0226e3)kph; abs vel:(-8.8760e2, 7.2812e3)kph; 
+        orbit speed: 2.0375e3kph; orbit radius: 3.9003e2Mm; 
+Ap8CMloc:(-7.1001e0,-3.1558e0)Mm; 
+        rel vel:( 4.1858e3,-9.5175e3)kph; abs vel:( 1.5069e4,-3.4263e4)kph; 
+        orbit speed: 1.0397e4kph; orbit radius: 7.7699e0Mm; 
+Time:   45.00hours, Distance to sun:150000.6Mm, Energy:-2818.06YJ, Momentum(-4.3894e0,-4.8379e1)Pgm/s
+Sun  loc:(-1.4992e5,-4.8246e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 1.2315e4,-3.8584e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-3.4209e3, 1.0718e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.7928e2, 9.1932e1)Mm; 
+        rel vel:(-2.5194e2, 2.0211e3)kph; abs vel:(-9.0700e2, 7.2761e3)kph; 
+        orbit speed: 2.0368e3kph; orbit radius: 3.9026e2Mm; 
+Ap8CMloc:( 1.3965e0,-7.6780e0)Mm; 
+        rel vel:( 1.0202e4, 1.8428e3)kph; abs vel:( 3.6727e4, 6.6340e3)kph; 
+        orbit speed: 1.0367e4kph; orbit radius: 7.8039e0Mm; 
+Time:   46.00hours, Distance to sun:150000.7Mm, Energy:-2944.69YJ, Momentum(-3.2985e0,-8.7961e1)Pgm/s
+Sun  loc:(-1.4992e5,-4.9318e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 1.2589e4,-3.8583e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-3.4969e3, 1.0718e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.7902e2, 9.3952e1)Mm; 
+        rel vel:(-2.5732e2, 2.0197e3)kph; abs vel:(-9.2634e2, 7.2709e3)kph; 
+        orbit speed: 2.0360e3kph; orbit radius: 3.9049e2Mm; 
+Ap8CMloc:( 7.7937e0,-4.913e-1)Mm; 
+        rel vel:( 6.4458e2, 1.0355e4)kph; abs vel:( 2.3205e3, 3.7279e4)kph; 
+        orbit speed: 1.0375e4kph; orbit radius: 7.8092e0Mm; 
+Time:   47.00hours, Distance to sun:150000.7Mm, Energy:-3074.10YJ, Momentum(-6.5456e0,-7.9165e1)Pgm/s
+Sun  loc:(-1.4992e5,-5.0390e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 1.2862e4,-3.8583e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-3.5729e3, 1.0717e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.7876e2, 9.5971e1)Mm; 
+        rel vel:(-2.6268e2, 2.0182e3)kph; abs vel:(-9.4564e2, 7.2656e3)kph; 
+        orbit speed: 2.0353e3kph; orbit radius: 3.9073e2Mm; 
+Ap8CMloc:( 2.3405e0, 7.4539e0)Mm; 
+        rel vel:(-9.9061e3, 3.1205e3)kph; abs vel:(-3.5662e4, 1.1234e4)kph; 
+        orbit speed: 1.0386e4kph; orbit radius: 7.8127e0Mm; 
+Time:   48.00hours, Distance to sun:150000.7Mm, Energy:-3206.27YJ, Momentum(-3.8139e0,-7.0369e1)Pgm/s
+Sun  loc:(-1.4991e5,-5.1462e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 1.3136e4,-3.8582e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-3.6489e3, 1.0717e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.7850e2, 9.7989e1)Mm; 
+        rel vel:(-2.6802e2, 2.0167e3)kph; abs vel:(-9.6489e2, 7.2602e3)kph; 
+        orbit speed: 2.0345e3kph; orbit radius: 3.9097e2Mm; 
+Ap8CMloc:(-6.6907e0, 4.0943e0)Mm; 
+        rel vel:(-5.4406e3,-8.8163e3)kph; abs vel:(-1.9586e4,-3.1739e4)kph; 
+        orbit speed: 1.0360e4kph; orbit radius: 7.8440e0Mm; 
+Time:   49.00hours, Distance to sun:150000.8Mm, Energy:-3341.21YJ, Momentum(-4.8619e0,-4.8379e1)Pgm/s
+Sun  loc:(-1.4991e5,-5.2533e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 1.3410e4,-3.8581e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-3.7249e3, 1.0717e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.7822e2, 1.0000e2)Mm; 
+        rel vel:(-2.7335e2, 2.0152e3)kph; abs vel:(-9.8408e2, 7.2548e3)kph; 
+        orbit speed: 2.0337e3kph; orbit radius: 3.9122e2Mm; 
+Ap8CMloc:(-5.6936e0,-5.4624e0)Mm; 
+        rel vel:( 7.1149e3,-7.4670e3)kph; abs vel:( 2.5614e4,-2.6881e4)kph; 
+        orbit speed: 1.0314e4kph; orbit radius: 7.8902e0Mm; 
+Time:   50.00hours, Distance to sun:150000.8Mm, Energy:-3478.92YJ, Momentum(-3.7108e0,-1.3194e1)Pgm/s
+Sun  loc:(-1.4990e5,-5.3605e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 1.3683e4,-3.8580e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-3.8009e3, 1.0717e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.7795e2, 1.0202e2)Mm; 
+        rel vel:(-2.7867e2, 2.0137e3)kph; abs vel:(-1.0032e3, 7.2492e3)kph; 
+        orbit speed: 2.0328e3kph; orbit radius: 3.9148e2Mm; 
+Ap8CMloc:( 3.7731e0,-6.9592e0)Mm; 
+        rel vel:( 9.0522e3, 4.9027e3)kph; abs vel:( 3.2588e4, 1.7650e4)kph; 
+        orbit speed: 1.0295e4kph; orbit radius: 7.9162e0Mm; 
+Time:   51.00hours, Distance to sun:150000.8Mm, Energy:-3619.40YJ, Momentum(-6.7173e0, 4.3980e0)Pgm/s
+Sun  loc:(-1.4990e5,-5.4677e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 1.3957e4,-3.8579e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-3.8769e3, 1.0716e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.7767e2, 1.0403e2)Mm; 
+        rel vel:(-2.8397e2, 2.0121e3)kph; abs vel:(-1.0223e3, 7.2435e3)kph; 
+        orbit speed: 2.0320e3kph; orbit radius: 3.9173e2Mm; 
+Ap8CMloc:( 7.7139e0, 1.7811e0)Mm; 
+        rel vel:(-2.3270e3, 1.0042e4)kph; abs vel:(-8.3772e3, 3.6152e4)kph; 
+        orbit speed: 1.0308e4kph; orbit radius: 7.9169e0Mm; 
+Time:   52.00hours, Distance to sun:150000.9Mm, Energy:-3762.63YJ, Momentum(-9.8613e0, 0.0000e0)Pgm/s
+Sun  loc:(-1.4990e5,-5.5748e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 1.4231e4,-3.8578e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-3.9529e3, 1.0716e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.7738e2, 1.0604e2)Mm; 
+        rel vel:(-2.8926e2, 2.0105e3)kph; abs vel:(-1.0413e3, 7.2377e3)kph; 
+        orbit speed: 2.0312e3kph; orbit radius: 3.9200e2Mm; 
+Ap8CMloc:( 3.280e-1, 7.9173e0)Mm; 
+        rel vel:(-1.0304e4, 4.4264e2)kph; abs vel:(-3.7094e4, 1.5935e3)kph; 
+        orbit speed: 1.0313e4kph; orbit radius: 7.9241e0Mm; 
+Time:   53.00hours, Distance to sun:150000.9Mm, Energy:-3908.63YJ, Momentum(-1.1974e1, 1.7592e1)Pgm/s
+Sun  loc:(-1.4989e5,-5.6820e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 1.4504e4,-3.8577e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-4.0289e3, 1.0716e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.7709e2, 1.0805e2)Mm; 
+        rel vel:(-2.9453e2, 2.0088e3)kph; abs vel:(-1.0603e3, 7.2318e3)kph; 
+        orbit speed: 2.0303e3kph; orbit radius: 3.9226e2Mm; 
+Ap8CMloc:(-7.5685e0, 2.4655e0)Mm; 
+        rel vel:(-3.2235e3,-9.7631e3)kph; abs vel:(-1.1604e4,-3.5147e4)kph; 
+        orbit speed: 1.0281e4kph; orbit radius: 7.9599e0Mm; 
+Time:   54.00hours, Distance to sun:150000.9Mm, Energy:-4057.40YJ, Momentum(-9.6207e0, 1.3194e1)Pgm/s
+Sun  loc:(-1.4989e5,-5.7891e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 1.4778e4,-3.8576e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-4.1049e3, 1.0716e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.7679e2, 1.1006e2)Mm; 
+        rel vel:(-2.9978e2, 2.0072e3)kph; abs vel:(-1.0792e3, 7.2258e3)kph; 
+        orbit speed: 2.0294e3kph; orbit radius: 3.9254e2Mm; 
+Ap8CMloc:(-4.5241e0,-6.6034e0)Mm; 
+        rel vel:( 8.4287e3,-5.8120e3)kph; abs vel:( 3.0343e4,-2.0923e4)kph; 
+        orbit speed: 1.0238e4kph; orbit radius: 8.0045e0Mm; 
+Time:   55.00hours, Distance to sun:150001.0Mm, Energy:-4208.92YJ, Momentum(-1.1837e1, 7.4767e1)Pgm/s
+Sun  loc:(-1.4989e5,-5.8963e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 1.5051e4,-3.8575e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-4.1809e3, 1.0715e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.7649e2, 1.1207e2)Mm; 
+        rel vel:(-3.0502e2, 2.0055e3)kph; abs vel:(-1.0981e3, 7.2197e3)kph; 
+        orbit speed: 2.0285e3kph; orbit radius: 3.9281e2Mm; 
+Ap8CMloc:( 5.0156e0,-6.2650e0)Mm; 
+        rel vel:( 7.9826e3, 6.3905e3)kph; abs vel:( 2.8737e4, 2.3006e4)kph; 
+        orbit speed: 1.0225e4kph; orbit radius: 8.0254e0Mm; 
+Time:   56.00hours, Distance to sun:150001.0Mm, Energy:-4363.20YJ, Momentum(-1.1854e1, 1.0555e2)Pgm/s
+Sun  loc:(-1.4988e5,-6.0034e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 1.5325e4,-3.8574e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-4.2569e3, 1.0715e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.7618e2, 1.1407e2)Mm; 
+        rel vel:(-3.1024e2, 2.0037e3)kph; abs vel:(-1.1169e3, 7.2135e3)kph; 
+        orbit speed: 2.0276e3kph; orbit radius: 3.9310e2Mm; 
+Ap8CMloc:( 7.4536e0, 2.9712e0)Mm; 
+        rel vel:(-3.7992e3, 9.5104e3)kph; abs vel:(-1.3677e4, 3.4237e4)kph; 
+        orbit speed: 1.0241e4kph; orbit radius: 8.0240e0Mm; 
+Time:   57.00hours, Distance to sun:150001.0Mm, Energy:-4520.24YJ, Momentum(-1.5204e1, 5.7175e1)Pgm/s
+Sun  loc:(-1.4988e5,-6.1106e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 1.5599e4,-3.8573e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-4.3329e3, 1.0715e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.7587e2, 1.1607e2)Mm; 
+        rel vel:(-3.1544e2, 2.0020e3)kph; abs vel:(-1.1356e3, 7.2072e3)kph; 
+        orbit speed: 2.0267e3kph; orbit radius: 3.9338e2Mm; 
+Ap8CMloc:(-6.817e-1, 8.0042e0)Mm; 
+        rel vel:(-1.0208e4,-8.5075e2)kph; abs vel:(-3.6748e4,-3.0627e3)kph; 
+        orbit speed: 1.0243e4kph; orbit radius: 8.0332e0Mm; 
+Time:   58.00hours, Distance to sun:150001.1Mm, Energy:-4680.04YJ, Momentum(-1.3813e1, 5.7175e1)Pgm/s
+Sun  loc:(-1.4987e5,-6.2177e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 1.5872e4,-3.8572e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-4.4089e3, 1.0714e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.7555e2, 1.1808e2)Mm; 
+        rel vel:(-3.2063e2, 2.0002e3)kph; abs vel:(-1.1543e3, 7.2008e3)kph; 
+        orbit speed: 2.0258e3kph; orbit radius: 3.9368e2Mm; 
+Ap8CMloc:(-7.8845e0, 1.7232e0)Mm; 
+        rel vel:(-2.2202e3,-9.9652e3)kph; abs vel:(-7.9926e3,-3.5875e4)kph; 
+        orbit speed: 1.0209e4kph; orbit radius: 8.0707e0Mm; 
+Time:   59.00hours, Distance to sun:150001.1Mm, Energy:-4842.59YJ, Momentum(-1.4878e1, 1.0995e2)Pgm/s
+Sun  loc:(-1.4987e5,-6.3249e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 1.6146e4,-3.8571e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-4.4849e3, 1.0714e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.7523e2, 1.2008e2)Mm; 
+        rel vel:(-3.2580e2, 1.9984e3)kph; abs vel:(-1.1729e3, 7.1943e3)kph; 
+        orbit speed: 2.0248e3kph; orbit radius: 3.9397e2Mm; 
+Ap8CMloc:(-4.0825e0,-7.0122e0)Mm; 
+        rel vel:( 8.7729e3,-5.1410e3)kph; abs vel:( 3.1583e4,-1.8508e4)kph; 
+        orbit speed: 1.0168e4kph; orbit radius: 8.1140e0Mm; 
+Time:   60.00hours, Distance to sun:150001.1Mm, Energy:-5007.90YJ, Momentum(-1.5015e1, 1.4074e2)Pgm/s
+Sun  loc:(-1.4986e5,-6.4320e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 1.6419e4,-3.8569e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-4.5609e3, 1.0714e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.7490e2, 1.2207e2)Mm; 
+        rel vel:(-3.3095e2, 1.9966e3)kph; abs vel:(-1.1914e3, 7.1878e3)kph; 
+        orbit speed: 2.0238e3kph; orbit radius: 3.9427e2Mm; 
+Ap8CMloc:( 5.3814e0,-6.0979e0)Mm; 
+        rel vel:( 7.6155e3, 6.7223e3)kph; abs vel:( 2.7416e4, 2.4200e4)kph; 
+        orbit speed: 1.0158e4kph; orbit radius: 8.1329e0Mm; 
+Time:   61.00hours, Distance to sun:150001.2Mm, Energy:-5175.96YJ, Momentum(-1.2833e1, 1.0995e2)Pgm/s
+Sun  loc:(-1.4986e5,-6.5392e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 1.6693e4,-3.8568e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-4.6369e3, 1.0713e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.7457e2, 1.2407e2)Mm; 
+        rel vel:(-3.3609e2, 1.9948e3)kph; abs vel:(-1.2099e3, 7.1811e3)kph; 
+        orbit speed: 2.0229e3kph; orbit radius: 3.9458e2Mm; 
+Ap8CMloc:( 7.4815e0, 3.1832e0)Mm; 
+        rel vel:(-3.9904e3, 9.3589e3)kph; abs vel:(-1.4366e4, 3.3692e4)kph; 
+        orbit speed: 1.0174e4kph; orbit radius: 8.1305e0Mm; 
+Time:   62.00hours, Distance to sun:150001.2Mm, Energy:-5346.77YJ, Momentum(-1.6888e1, 2.1990e1)Pgm/s
+Sun  loc:(-1.4985e5,-6.6463e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 1.6966e4,-3.8567e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-4.7129e3, 1.0713e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.7423e2, 1.2606e2)Mm; 
+        rel vel:(-3.4120e2, 1.9929e3)kph; abs vel:(-1.2283e3, 7.1744e3)kph; 
+        orbit speed: 2.0219e3kph; orbit radius: 3.9489e2Mm; 
+Ap8CMloc:(-6.746e-1, 8.1113e0)Mm; 
+        rel vel:(-1.0143e4,-8.2539e2)kph; abs vel:(-3.6514e4,-2.9714e3)kph; 
+        orbit speed: 1.0176e4kph; orbit radius: 8.1393e0Mm; 
+Time:   63.00hours, Distance to sun:150001.2Mm, Energy:-5520.33YJ, Momentum(-1.7695e1,-4.3980e1)Pgm/s
+Sun  loc:(-1.4985e5,-6.7534e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 1.7240e4,-3.8566e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-4.7889e3, 1.0713e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.7388e2, 1.2805e2)Mm; 
+        rel vel:(-3.4630e2, 1.9910e3)kph; abs vel:(-1.2467e3, 7.1675e3)kph; 
+        orbit speed: 2.0209e3kph; orbit radius: 3.9520e2Mm; 
+Ap8CMloc:(-7.9383e0, 1.9576e0)Mm; 
+        rel vel:(-2.4682e3,-9.8389e3)kph; abs vel:(-8.8856e3,-3.5420e4)kph; 
+        orbit speed: 1.0144e4kph; orbit radius: 8.1761e0Mm; 
+Time:   64.00hours, Distance to sun:150001.3Mm, Energy:-5696.64YJ, Momentum(-1.6458e1,-2.6388e1)Pgm/s
+Sun  loc:(-1.4984e5,-6.8605e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 1.7514e4,-3.8565e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-4.8649e3, 1.0712e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.7353e2, 1.3004e2)Mm; 
+        rel vel:(-3.5138e2, 1.9890e3)kph; abs vel:(-1.2650e3, 7.1606e3)kph; 
+        orbit speed: 2.0198e3kph; orbit radius: 3.9552e2Mm; 
+Ap8CMloc:(-4.4903e0,-6.8844e0)Mm; 
+        rel vel:( 8.4460e3,-5.5442e3)kph; abs vel:( 3.0406e4,-1.9959e4)kph; 
+        orbit speed: 1.0103e4kph; orbit radius: 8.2194e0Mm; 
+Time:   65.00hours, Distance to sun:150001.3Mm, Energy:-5875.70YJ, Momentum(-1.6098e1,-4.3980e1)Pgm/s
+Sun  loc:(-1.4984e5,-6.9677e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 1.7787e4,-3.8564e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-4.9409e3, 1.0712e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.7318e2, 1.3203e2)Mm; 
+        rel vel:(-3.5645e2, 1.9871e3)kph; abs vel:(-1.2832e3, 7.1535e3)kph; 
+        orbit speed: 2.0188e3kph; orbit radius: 3.9585e2Mm; 
+Ap8CMloc:( 4.9750e0,-6.5676e0)Mm; 
+        rel vel:( 8.0441e3, 6.0936e3)kph; abs vel:( 2.8959e4, 2.1937e4)kph; 
+        orbit speed: 1.0092e4kph; orbit radius: 8.2392e0Mm; 
+Time:   66.00hours, Distance to sun:150001.4Mm, Energy:-6057.51YJ, Momentum(-1.0600e1,-9.6757e1)Pgm/s
+Sun  loc:(-1.4983e5,-7.0748e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 1.8061e4,-3.8562e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-5.0169e3, 1.0712e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0723e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.7282e2, 1.3402e2)Mm; 
+        rel vel:(-3.6149e2, 1.9851e3)kph; abs vel:(-1.3014e3, 7.1464e3)kph; 
+        orbit speed: 2.0178e3kph; orbit radius: 3.9618e2Mm; 
+Ap8CMloc:( 7.8610e0, 2.4594e0)Mm; 
+        rel vel:(-3.0267e3, 9.6434e3)kph; abs vel:(-1.0896e4, 3.4716e4)kph; 
+        orbit speed: 1.0107e4kph; orbit radius: 8.2367e0Mm; 
+Time:   67.00hours, Distance to sun:150001.4Mm, Energy:-6242.06YJ, Momentum(-1.1390e1,-1.8472e2)Pgm/s
+Sun  loc:(-1.4983e5,-7.1819e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 1.8334e4,-3.8561e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-5.0928e3, 1.0711e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0724e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.7246e2, 1.3600e2)Mm; 
+        rel vel:(-3.6652e2, 1.9831e3)kph; abs vel:(-1.3195e3, 7.1392e3)kph; 
+        orbit speed: 2.0167e3kph; orbit radius: 3.9651e2Mm; 
+Ap8CMloc:( 3.296e-1, 8.2361e0)Mm; 
+        rel vel:(-1.0104e4, 4.1891e2)kph; abs vel:(-3.6374e4, 1.5081e3)kph; 
+        orbit speed: 1.0113e4kph; orbit radius: 8.2427e0Mm; 
+Time:   68.00hours, Distance to sun:150001.4Mm, Energy:-6429.35YJ, Momentum(-9.8784e0,-1.9791e2)Pgm/s
+Sun  loc:(-1.4982e5,-7.2890e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 1.8608e4,-3.8560e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-5.1688e3, 1.0711e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0724e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.7209e2, 1.3798e2)Mm; 
+        rel vel:(-3.7152e2, 1.9811e3)kph; abs vel:(-1.3375e3, 7.1319e3)kph; 
+        orbit speed: 2.0156e3kph; orbit radius: 3.9685e2Mm; 
+Ap8CMloc:(-7.6626e0, 3.1279e0)Mm; 
+        rel vel:(-3.8474e3,-9.3212e3)kph; abs vel:(-1.3851e4,-3.3556e4)kph; 
+        orbit speed: 1.0084e4kph; orbit radius: 8.2764e0Mm; 
+Time:   69.00hours, Distance to sun:150001.5Mm, Energy:-6619.39YJ, Momentum(-1.4105e1,-1.6273e2)Pgm/s
+Sun  loc:(-1.4982e5,-7.3961e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 1.8881e4,-3.8558e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-5.2448e3, 1.0711e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0724e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.7171e2, 1.3996e2)Mm; 
+        rel vel:(-3.7651e2, 1.9790e3)kph; abs vel:(-1.3554e3, 7.1245e3)kph; 
+        orbit speed: 2.0145e3kph; orbit radius: 3.9719e2Mm; 
+Ap8CMloc:(-5.6462e0,-6.1115e0)Mm; 
+        rel vel:( 7.3544e3,-6.8389e3)kph; abs vel:( 2.6476e4,-2.4620e4)kph; 
+        orbit speed: 1.0043e4kph; orbit radius: 8.3205e0Mm; 
+Time:   70.00hours, Distance to sun:150001.5Mm, Energy:-6812.17YJ, Momentum(-1.3538e1,-1.4953e2)Pgm/s
+Sun  loc:(-1.4981e5,-7.5032e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 1.9155e4,-3.8557e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-5.3208e3, 1.0710e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0724e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.7134e2, 1.4194e2)Mm; 
+        rel vel:(-3.8148e2, 1.9770e3)kph; abs vel:(-1.3733e3, 7.1171e3)kph; 
+        orbit speed: 2.0134e3kph; orbit radius: 3.9754e2Mm; 
+Ap8CMloc:( 3.6875e0,-7.4850e0)Mm; 
+        rel vel:( 8.9958e3, 4.4278e3)kph; abs vel:( 3.2385e4, 1.5940e4)kph; 
+        orbit speed: 1.0026e4kph; orbit radius: 8.3441e0Mm; 
+Time:   71.00hours, Distance to sun:150001.6Mm, Energy:-7007.68YJ, Momentum(-1.7609e1,-2.1550e2)Pgm/s
+Sun  loc:(-1.4981e5,-7.6103e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 1.9428e4,-3.8556e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-5.3968e3, 1.0710e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0724e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.7095e2, 1.4392e2)Mm; 
+        rel vel:(-3.8643e2, 1.9749e3)kph; abs vel:(-1.3911e3, 7.1095e3)kph; 
+        orbit speed: 2.0123e3kph; orbit radius: 3.9789e2Mm; 
+Ap8CMloc:( 8.3098e0, 7.426e-1)Mm; 
+        rel vel:(-9.0432e2, 9.9992e3)kph; abs vel:(-3.2556e3, 3.5997e4)kph; 
+        orbit speed: 1.0040e4kph; orbit radius: 8.3429e0Mm; 
+Time:   72.00hours, Distance to sun:150001.6Mm, Energy:-7205.94YJ, Momentum(-1.6080e1,-2.1990e2)Pgm/s
+Sun  loc:(-1.4980e5,-7.7174e3)Mm; 
+        rel vel:( 0.0000e0, 0.0000e0)kph; abs vel:( 1.9702e4,-3.8554e5)kph; 
+        orbit speed: 0.0000e0kph; orbit radius: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; 
+        rel vel:(-5.4728e3, 1.0710e5)kph; abs vel:( 0.0000e0, 0.0000e0)kph; 
+        orbit speed: 1.0724e5kph; orbit radius: 1.5000e5Mm; 
+Moon loc:( 3.7056e2, 1.4589e2)Mm; 
+        rel vel:(-3.9136e2, 1.9727e3)kph; abs vel:(-1.4089e3, 7.1019e3)kph; 
+        orbit speed: 2.0112e3kph; orbit radius: 3.9825e2Mm; 
+Ap8CMloc:( 2.2841e0, 8.0256e0)Mm; 
+        rel vel:(-9.6644e3, 2.7588e3)kph; abs vel:(-3.4792e4, 9.9318e3)kph; 
+        orbit speed: 1.0050e4kph; orbit radius: 8.3443e0Mm; 
+Final position:
+  S:("Sun  ","☉",( 1.9891000000e30,( 1.04116070715e2, 1.78850618860e0),( 8.0319428092e-4, 2.0698869625e-5)))
+  E:("Earth","⊕",( 9.7220000000e23,( 1.4980296350e11, 7.71742672291e9),(-1.52020795706e3, 2.97488196651e4)))
+  M:("Moon ","☾",( 7.3476730900e22,( 1.5017352634e11, 7.86331915567e9),(-1.62891798352e3, 3.02968042747e4)))
+  8:("Ap8CM","8",( 5.80900000000e3,( 1.4980524758e11, 7.72545235107e9),(-4.20474984625e3, 3.05151652031e4)))
+13.62user 1.74system 0:15.39elapsed 99%CPU (0avgtext+0avgdata 5279744maxresident)k
+0inputs+0outputs (0major+330388minor)pagefaults 0swaps

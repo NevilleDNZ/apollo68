@@ -1,0 +1,52 @@
+#!/usr/bin/algol68g-full --script #
+# -*- coding: utf-8 -*- #
+PR no-warning PR
+
+PR include "prelude/scalar_:=_real.a68" PR;
+
+PR include "prelude/with_trace_and_with_debug.a68" PR;
+PR include "prelude/errata.a68" PR;
+PR include "prelude/exception.a68" PR;
+CO REQUIRED BY math_errata CO
+PR include "prelude/math_errata.a68" PR;
+PR include "prelude/matrix.a68" PR;
+
+CO REQUIRED BY graph_2d CO
+    MODE GREAL= REAL; # single precision #
+    FORMAT greal repr = real repr;
+    PR include "prelude/classes.a68" PR;
+    PR include "prelude/curve.a68" PR;
+PR include "prelude/graph_2d.a68" PR;
+
+sine test:(
+    REF GRAPHDD test graph = INIT LOC GRAPHDD;
+
+    prefix OF test graph := "test_plot/";
+    title OF test graph := "Title: y = sin x, cos x, cos x² & cos² x";
+    type OF window OF test graph := "gif"; # or gif, ps, X, pnm etc #
+    sub title OF test graph := "In a unit box";
+
+    interval OF (axis OF test graph)[x axis] := (0.0, 6*pi);
+    label OF    (axis OF test graph)[x axis] := "x axis";
+    (pixels OF window OF test graph)[x axis] *:= 2;
+
+    interval OF (axis OF test graph)[y axis] := (-1.1, 1.1);
+    label OF    (axis OF test graph)[y axis] := "sin x, cos x, cos x² & cos² x";
+
+    PROC curve = (DDYIELD yield)VOID: (
+        INT steps := 360;
+        FOR i FROM 0 TO 3*steps DO
+            GREAL x=GREAL(2)*pi*i/steps;
+            []REAL out =(x,sin(x),cos(x),sin(x*x), sin(x)**2);
+            yield(out)
+        OD
+    );
+
+    (begin curve OF (METHODOF test graph))(~);
+    print curve(curve);
+    (add curve OF   (METHODOF test graph))(curve, (red,yellow,blue));
+    (end curve OF   (METHODOF test graph))(~)
+);
+
+PR include "postlude/exception.a68" PR;
+PR include "postlude/scalar_=:_real.a68" PR

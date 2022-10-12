@@ -1,0 +1,423 @@
+# -*- coding: utf-8 -*- #
+
+REAL est = 1; # used to indicate an estimate in place #
+
+MODE MOTIONYIELD = PROC(MOTION)VOID;
+MODE MOTIONGEN = PROC(MOTIONYIELD)VOID;
+
+MODE MOTION = STRUCT( 
+# These values are by reference as they are gathered from else where #
+    REF STRING name,
+    REF MASS mass,
+    REF VECDISTANCE distance,
+    REF VECVELOCITY velocity
+);
+
+OP REPR = (MOTION self)STRING:
+      JOINREPR []STRING (
+        REPR mass OF self,
+        REPR (distance OF self),
+        REPR (velocity OF self)
+      );
+
+MODE CELESTIALBODYSTAT = STRUCT (
+      REAL rotational speed,
+      REAL equatorial radius,
+      REAL polar radius,
+      REAL mass,
+      REAL orbit radius,
+      REAL orbit period
+    );
+#===========================#
+# A crude CLASS declaration #
+#===========================#
+MODE CELESTIALBODY = STRUCT(
+    PROC(NOARG)CELESTIALBODYMETHODOF method, # class OF CELESTIALBODY #
+# Internal "constant" parameters #
+    STRING name, symbol,
+    #REF# CELESTIALBODYSTAT mean # value #,
+    VECDISTANCE axis,
+    REF CELESTIALBODY # typical # parent,
+# External/variable parameters #
+    ORBITALELEMENTS orbital elements,
+    MOTION motion
+);
+
+OP LENGREPR = (CELESTIALBODY self)STRING: (
+    JOINREPR []STRING( 
+      "name:"+REPR name OF self,
+      "symbol:"+REPR symbol OF self,
+      "motion:"+REPR motion OF self
+    )
+);
+
+OP REPR = (CELESTIALBODY self)STRING: (
+    JOINREPR []STRING( 
+      REPR name OF self,
+      REPR symbol OF self,
+      REPR motion OF self
+    )
+);
+
+OP REPR = ([]CELESTIALBODY self)STRING: (
+    STRING out := string sub, sep := "";
+    FOR i TO UPB self DO
+      out +:= sep+REPR self[i];
+      sep := string sep
+    OD;
+    out + string bus
+);
+    
+OP SHORTENREPR = (CELESTIALBODY self)STRING: name OF self;
+
+OP SHORTENREPR = ([]CELESTIALBODY self)STRING: (
+    STRING out := string sub, sep := "";
+    FOR i TO UPB self DO
+      out +:= sep+SHORTENREPR self[i];
+      sep := string sep
+    OD;
+    out + string bus
+);
+    
+MODE CELESTIALBODYMETHODOF = STRUCT(
+      PROC (#self, # NOARG #skip#)REF CELESTIALBODY init,
+      PROC (#self, # NOARG #skip#)SPEED speed of orbit,
+      PROC (#self, # NOARG #skip#)DISTANCE radius of orbit,
+      PROC (#self, # NOARG #skip#)REF CELESTIALBODY genesis,
+      PROC (#self, # NOARG #skip#)VECDISTANCE get rel distance,
+      PROC (#self, # NOARG #skip#)VECVELOCITY get rel velocity,
+      PROC (#self, # VECDISTANCE # rel distance #, VECVELOCITY # rel velocity #)REF CELESTIALBODY set rel distance and velocity
+);
+
+# Bind the methods to a Class Instance #
+PROC method of celestial body = (REF CELESTIALBODY self, NOARG skip)CELESTIALBODYMETHODOF:(
+    init of celestial body(self, #~#),
+    speed of orbit of celestial body(self, #~#),
+    radius of orbit of celestial body(self, #~#),
+    genesis of celestial body(self, #~#),
+    get rel distance of celestial body(self, #~#),
+    get rel velocity of celestial body(self, #~#),
+    set rel distance and velocity of celestial body(self, #VECDISTANCE rel distance#, #VECVELOCITY rel velocity#)
+);
+
+OP METHODOF = (CELESTIALBODY self)CELESTIALBODYMETHODOF: (method OF self)(~);
+
+# define the default values #
+OP INIT = (REF CELESTIALBODY self)REF CELESTIALBODY: init of celestial body(self,~);
+
+PROC init of celestial body = (REF CELESTIALBODY self, NOARG skip)REF CELESTIALBODY: (
+    method OF self := method of celestial body(self,#~#);
+    flex upb master +:= 1;
+    name OF motion OF self := name OF self;
+    mass OF motion OF self := (mass OF master)[flex upb master];
+    distance OF motion OF self := ref distance(flex upb master);
+    velocity OF motion OF self := ref velocity(flex upb master);
+    self
+);
+
+PROC radius of orbit of celestial body = (REF CELESTIALBODY self, NOARG skip)DISTANCE:
+      NORM(distance OF motion OF self - distance OF motion OF parent OF self);
+
+PROC speed of orbit of celestial body = (REF CELESTIALBODY self, NOARG skip)SPEED:
+      NORM(velocity OF motion OF self - velocity OF motion OF parent OF self);
+
+PROC genesis of celestial body = (REF CELESTIALBODY self, NOARG skip)REF CELESTIALBODY: (
+    REF REAL(mass OF motion OF self) := mass OF mean OF self;
+CO
+      (TRUE OR with debug|printf(($"DB - name OF self: "$,$g"; "$,name OF self)));
+      (TRUE OR with debug|printf(($"DB - GENESIS mass OF mean OF self: "$,$f(real repr)"; "$,mass OF mean OF self,$l$)));
+END CO
+# Genesis radius perpendicular to velocity, and at x=1, y=0 #
+      DISTANCE injection radius;
+      SPEED injection speed := 2*pi*orbit radius OF mean OF self/orbit period OF mean OF self;
+CO
+      (TRUE OR with debug|printf(($"DB - mean angular speed: "$,$g"; "$,speed,$l$)));
+     # DB speed = sqrt(mksa gravitational constant * mass OF mean OF self / orbit radius OF mean OF self); force circular orbit #
+# r3=G*m_s*o_p**2/(4*pi**2) #
+END CO
+CO
+      (TRUE OR with debug|printf(($"DB - desired orbital radius: "$,$g"; "$,injection radius,$l$)));
+      (TRUE OR with debug|printf(($"DB - desired orbital speed: "$,$g"; "$,speed,$l$)));
+      (TRUE OR with debug|printf(($"DB - orbit radius OF mean OF self: "$,$g"; "$,orbit radius OF mean OF self,$l$)));
+      (TRUE OR with debug|printf(($"DB - orbit period OF mean OF self: "$,$g"; "$,orbit period OF mean OF self,$l$)));
+      (TRUE OR with debug|printf(($"DB - speed: "$,$g"; "$,speed,$l$)));
+END CO
+    (FALSE AND with debug|printf(($"DB - name OF self: "$,$g"; "$,name OF self)));
+    IF name OF self = name OF sun THEN  # the sun is at the "centre" #
+        REF VEC(distance OF motion OF self) := UVEC VEC(0,0,0);
+        REF VEC(velocity OF motion OF self) := UVEC VEC(0,0,0)
+    ELSE
+        injection radius := (mksa gravitational constant * 
+            (mass OF mean OF parent OF self + mass OF mean OF self)* 
+            (orbit period OF mean OF self/2/pi)**2) ** (1/3);
+        injection speed := 2 * pi * injection radius / orbit period OF mean OF self;
+        (FALSE AND with debug|printf(($"DB - 1: "$,$g"; "$,666,$l$)));
+        REF VEC(distance OF motion OF self) := distance OF motion OF parent OF self;
+        (FALSE AND with debug|printf(($"DB - 2: "$,$g"; "$,666,$l$)));
+        REF VEC(velocity OF motion OF self) := velocity OF motion OF parent OF self;
+        (FALSE AND with debug|printf(($"DB - 3: "$,$g"; "$,666,$l$)));
+        REF VEC(distance OF motion OF self) +:= UVEC VEC(injection radius,0,0);
+        (FALSE AND with debug|printf(($"DB - 4: "$,$g"; "$,666,$l$)));
+        REF VEC(velocity OF motion OF self) +:= UVEC VEC(0,injection speed,0)
+    ;(FALSE AND with debug|printf(($"DB - injection speed: "$,$g"; "$,injection speed)))
+    ;(FALSE AND with debug|printf(($"DB - injection radius: "$,$g"; "$,injection radius,$l$)))
+    FI;
+    # Now set the velocity relative to the parent celestial body #
+CO
+    set rel distance and velocity of celestial body(self, 
+        UVEC VEC(orbit radius OF mean OF self,0,0), UVEC VEC(0,injection speed,0));
+END CO
+    (FALSE AND with debug|printf(($"DB - distance OF motion OF self: "$,$g"; "$,distance OF motion OF self,$l$)));
+    (FALSE AND with debug|printf(($"DB - velocity OF motion OF self: "$,$g"; "$,velocity OF motion OF self,$l$)));
+
+    self
+);
+
+PROC get rel distance of celestial body = (REF CELESTIALBODY self, NOARG skip)VECDISTANCE:
+    distance OF motion OF self - distance OF motion OF parent OF self;
+    
+PROC get rel velocity of celestial body = (REF CELESTIALBODY self, NOARG skip)VECDISTANCE:
+    velocity OF motion OF self - velocity OF motion OF parent OF self;
+    
+PROC set rel distance and velocity of celestial body = (
+    REF CELESTIALBODY self,  
+    VECDISTANCE rel distance, 
+    VECVELOCITY rel velocity )REF CELESTIALBODY: (
+    REF VEC(distance OF motion OF self) := distance OF motion OF parent OF self + rel distance;
+    REF VEC(velocity OF motion OF self) := velocity OF motion OF parent OF self + rel velocity;
+    self
+);
+
+INT upb bodies = 4; # Sun, Earth, Moon and Apollo 8 CM #
+INT count bodies := 0;
+IF upb bodies NE UPB mass OF master ANDF NOT fix value error("upb bodies NE upb master") THEN stop FI;
+[upb bodies]CELESTIALBODY sun earth moon apollo8cm;
+
+PROC gravitational potential energy = (REF[]CELESTIALBODY system)ENERGY: (
+# Maybe this is relative to a point in space, subject to all bodies #
+CO
+The gravitational energy density is:
+:<math> u = \frac{ -|\mathbf{g}|^2}{8 \pi G} \, ,</math>
+Ref: [http://www.grc.nasa.gov/WWW/k-12/Numbers/Math/Mathematical_Thinking/possible_scalar_terms.htm NASA site] 
+Gravitational energy density by analogy with EM
+The potential V at a distance x from a point mass of mass M can be defined
+as the work done by the gravitational field bringing a unit mass in from
+infinity to that point: Eg = -GM/x
+END CO
+
+# estimate the center of mass #
+    DISTANCE equipotential point = au * mass OF mean OF earth / mass OF mean OF sun;
+    []REAL reference point = UVEC VEC(equipotential point,0,0);
+    ENERGY out := 0;
+    FOR i TO UPB system DO
+      out -:= mksa gravitational constant * mass OF mean OF system[i] * NORM(distance OF  motion OF system[i] - reference point)
+    OD;
+    out
+);
+
+PROC kinetic energy = (REF[]CELESTIALBODY system)ENERGY: (
+    ENERGY out := 0;
+    FOR i TO UPB system DO
+      out +:= 1/2 * mass OF mean OF system[i] * NORM (velocity OF motion OF system[i])**2
+    OD;
+    out
+);
+
+PROC total energy = (REF[]CELESTIALBODY system)ENERGY: (
+    kinetic energy(system) + gravitational potential energy(system)
+);
+
+# NB: Momentum should be conserved! #
+PROC momentum = (REF[]CELESTIALBODY system)VECMOMENTUM: (
+    VECMOMENTUM out := UVEC VEC(0,0,0);
+    FOR i TO UPB system DO
+      out +:= mass OF mean OF system[i] * velocity OF motion OF system[i]
+    OD;
+    out
+);
+
+# NB: Angular Momentum should be conserved! #
+PROC angular momentum = (REF[]CELESTIALBODY system)VECANGULARMOMENTUM: (
+    VECANGULARMOMENTUM out := UVEC VEC(0,0,0);
+    FOR i TO UPB system DO # mass * length**2 / time #
+      out +:= mass OF mean OF system[i] * 
+          (get rel distance OF(METHODOF system[i]))(~) ><
+          (get rel velocity OF(METHODOF system[i]))(~)
+    OD;
+    out
+);
+
+REF CELESTIALBODY sun = INIT sun earth moon apollo8cm[count bodies+:=1]; # sun #
+    name OF sun := "Sun  ";
+    symbol OF sun := "☉";
+    mass OF mean OF sun := 1.9891 e 30 * kg;
+    equatorial radius OF mean OF sun := 6.96342 e 5*km;
+    polar radius OF mean OF sun := equatorial radius OF mean OF sun - 10 * km;
+# of 7.5–8.5 kpc (25,000–28,000 lightyears) from the Galactic Center, #
+    parent OF sun := sun; # actually sgr-a* #
+    orbit radius OF mean OF sun := 0 # 8 *k*pc #;
+    orbit period OF mean OF sun := 25.38 * days; # revolution, not in orbit #
+
+REF CELESTIALBODY earth = INIT sun earth moon apollo8cm[count bodies+:=1]; # earth #
+    name OF earth := "Earth";
+    symbol OF earth := "⊕";
+    mass OF mean OF earth := 0.9722 e 24 * kg;
+    equatorial radius OF mean OF earth := 6 378.1 * km;
+    polar radius OF mean OF earth := 6 356.8 * km;
+    parent OF earth := sun;
+    orbit radius OF mean OF earth := 150 e 6 * km;
+    orbit period OF mean OF earth := 365.2421897 * days;
+
+COMMENT
+
+The mean tropical year, as of January 1, 2000 was 365.2421897 or 365 days,
+5 hours, 48 minutes, 45.19 seconds. This changes slowly; an expression
+suitable for calculating the length in days for the distant past is
+
+365.2421896698 - 6.15359e-6T - 7.29e-10T2 + 2.64e-10T3
+
+where T is in Julian centuries of 36,525 days measured from noon January
+1, 2000 TT (in negative numbers for dates in the past). (McCarthy &
+Seidelmann, 2009, p. 18.; Laskar, 1986)
+END COMMENT
+
+CO todo:
+REF CELESTIALBODY mars = INIT sun earth moon apollo8cm[count bodies+:=1]; # mars #
+    name OF mars := "Mars";
+    symbol OF mars := "♂";
+    mass OF mean OF mars := 6.4171 e 23 * kg;
+    equatorial radius OF mean OF mars := 3 396.2 * km;
+    polar radius OF mean OF mars := 3 376.2 * km;
+    parent OF mars := sun;
+    orbit radius OF mean OF mars := 230 * M km ;
+    orbit period OF mean OF mars := 320 * days + 18.2 * hours;
+CO
+
+plot name +:= "with_moon:";
+REF CELESTIALBODY moon = INIT sun earth moon apollo8cm[count bodies+:=1]; # moon #
+    name OF moon := "Moon ";
+    symbol OF moon := "☾";
+    mass OF mean OF moon := 7.34767309 e 22 * kg;
+    equatorial radius OF mean OF moon := 1 738.14 * km;
+    polar radius OF mean OF moon := 1 735.97 * km;
+    orbit radius OF mean OF moon := 385000 * km; # distance to is 402598*km #
+# sidereal month = 27.321661 days, 1 revolution of earth wrt background stars #
+# while a synodic month lasts 29.531 days. #
+    orbit period OF mean OF moon := 27.321661 * days;
+    parent OF moon := earth;
+
+REF CELESTIALBODY apollo8cm = INIT sun earth moon apollo8cm[count bodies+:=1]; # apollo8cm #
+    name OF apollo8cm := "Ap8CM";
+    symbol OF apollo8cm := "8";
+    mass OF mean OF apollo8cm := mass OF cm 103 command module;
+CO
+    polar radius OF mean OF apollo8cm := 1 735.97 * km;
+    orbit radius OF mean OF apollo8cm := 385000 * km; # distance to is 402598*km #
+# sidereal month = 27.321661 days, 1 revolution of earth wrt background stars #
+# while a synodic month lasts 29.531 days. #
+CO
+CO
+http://history.nasa.gov/ap08fj/02earth_orbit_tli.htm
+He's shows an apogee of 102.6 [nautical miles, 190 km], a perigee of 96.8
+[nautical miles, 179.3 km]
+equatorial radius OF mean OF earth := 1 738.14 * km;
+CO
+    parent OF apollo8cm := earth;
+    orbit radius OF mean OF apollo8cm := 
+      equatorial radius OF mean OF parent OF apollo8cm + (190*km + 179.3*km)/2*est;
+# QQQ: Assume A8 is travelling with the moon, least it gets sling shot into space #
+# Manually inject Apollo 8's CM into earth orbit #
+    orbit period OF mean OF apollo8cm := 2*pi* sqrt(orbit radius OF mean OF apollo8cm**3/
+      mksa gravitational constant/mass OF mean OF parent OF apollo8cm);
+    printf(($"Parameter orbit period OF mean OF apollo8cm: "$,$g" "$, orbit period OF mean OF apollo8cm/hours,"hours",$l$));
+    IF orbit period OF mean OF apollo8cm > 7*days ANDF
+       NOT fix value error("orbit period OF mean OF apollo8cm is wrong") THEN stop FI;
+
+MODE SATELLITEORBITALELEMENTS = STRUCT(
+    STRING name,
+    DISTANCE a, #(km)#
+    PHYSICALUNIT e,
+    ANGLE w, m, i, node, #(deg)#
+    PHYSICALUNIT n, #(deg/day)#
+    TIME p #(days)#, pw #(yr)#,  pnode, #(yr)#
+    ANGLE ra, dec, tilt,
+    INT ref
+);
+
+CO
+# Source: http://ssd.jpl.nasa.gov/?sat_elem #
+# Mean ecliptic orbital elements#
+# Epoch 2000 Jan. 1.50 TT#
+# Solution: DE405/LE405#
+#        a,      e,      w,      M,    i,   node,         n,      P,    Pw,  Pnode,  R.A.,	 Dec.,	Tilt, Ref.#
+END CO
+SATELLITEORBITALELEMENTS oe moon := ("Moon",
+     384400.0, 0.0554, 318.15, 135.27, 5.16, 125.08, 13.176358, 27.322, 5.997, 18.600,     ~,     ~,     ~,     1);
+#      (km),       ,  (deg),  (deg),(deg),  (deg), (deg/day), (days),  (yr),   (yr), (deg), (deg), (deg)      #
+# largest distance from orbit center | 405700 km nearest distance from orbit center | 363100 km #
+
+COMMENT
+      α (or \varphi) is the angle between the x-axis and the line of nodes.
+      β (or \theta) is the angle between the z-axis and the Z-axis.
+      γ (or \psi) is the angle between the line of nodes and the X-axis.
+
+
+Hence if at any instant t_0 the orbital parameters are
+[e_0,a_0,i_0,\Omega_0,\omega_0,M_0], then the elements at time t_0+\delta
+t is given by [e_0,a_0,i_0,\Omega_0,\omega_0,M_0+n\delta t]
+source: http://en.wikipedia.org/wiki/Orbital_elements#Orbit_prediction
+
+    Property = Value
+    Semi-major axis = 384748 km
+    mean distance = 385000 km
+    a. inverse sine parallax = 384400 km
+    Distance at perigee = ~362600 km (356400-370400 km)
+    Distance at apogee = ~405400 km (404000-406700 km)
+    Mean eccentricity = 0.0549006 (0.026 – 0.077)
+    i. Mean inclination of orbit to ecliptic = 5.14° (4.99 – 5.30)
+    Mean obliquity = 6.58°
+    Mean inclination of lunar equator to ecliptic = 1.543°
+    Pnode. Period of precession of nodes = 18.5996 years
+    Period of recession of line of apsides = 8.8504 years
+END COMMENT
+
+
+SATELLITEORBITALELEMENTS oe phobos = ("Phobos",
+    9376.0,0.0151,150.057,91.059,1.075,207.784,1128.8447569,0.3189,1.1316,2.2617,317.671,52.893,0.009,5);
+
+SATELLITEORBITALELEMENTS oe deimos = ("Deimos",
+    23458.0,0.0002,260.729,325.329,1.788,24.525,285.1618790,1.2624,27.3703,54.5367,316.657,53.529,0.889,5);
+
+COMMENT
+Legend: # http://www.met.rdg.ac.uk/~ross/Astronomy/Planets.html #
+  "     arcseconds
+  Cy    Julian century
+  a     semi-major axis
+  e     eccentricity
+  i     inclination
+ Omega  longitude of the ascending node
+~omega  longitude of perihelion
+  L     mean longitude
+END COMMENT
+
+MODE ORBITALELEMENTS = STRUCT(STRING name,
+               REAL a #AU#,          e ,i #deg#,omega #deg#,tomega#deg#,     l #deg#);
+[]ORBITALELEMENTS oe solar system =
+#  Planet,          a AU,          e ,  i deg,   Omega deg,~omega deg,     L deg #
+(
+    ("Mercury", 0.38709893,  0.20563069,  7.00487,  48.33167,  77.45645, 252.25084),
+    ("Venus",   0.72333199,  0.00677323,  3.39471,  76.68069, 131.53298, 181.97973),
+    ("Earth",   1.00000011,  0.01671022,  0.00005, -11.26064, 102.94719, 100.46435),
+    ("Mars",    1.52366231,  0.09341233,  1.85061,  49.57854, 336.04084, 355.45332),
+    ("Jupiter", 5.20336301,  0.04839266,  1.30530, 100.55615,  14.75385,  34.40438),
+    ("Saturn",  9.53707032,  0.05415060,  2.48446, 113.71504,  92.43194,  49.94432),
+    ("Uranus",  19.19126393, 0.04716771,  0.76986,  74.22988, 170.96424, 313.23218),
+    ("Neptune", 30.06896348, 0.00858587,  1.76917, 131.72169,  44.97135, 304.88003),
+    ("Pluto",   39.48168677, 0.24880766, 17.14175, 110.30347, 224.06676, 238.92881)
+);
+# http://nssdc.gsfc.nasa.gov/planetary/factsheet/marsfact.html #
+INT pos mercury=1, pos venus=2, pos earth=3, pos mars=4, pos jupiter=5,
+    pos saturn=6, pos uranus=7, pos neptune=8, pos pluto=9;
+
+orbital elements OF earth := oe solar system[pos earth];
+SKIP

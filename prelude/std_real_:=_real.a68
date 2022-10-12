@@ -1,0 +1,16 @@
+# -*- coding: utf-8 -*- #
+
+BEGIN # create a new scope for std & STDREAL #
+
+MODE STDREAL = #L# REAL;
+STDREAL small std = #l# small real, std width = #l# real width, max std = #l# max real;
+
+PROC (STDREAL)STDREAL 
+    std sin = #l# sin, std cos = #l# cos, std tan = #l# tan,
+    std arc sin = #l# arc sin, std arc cos = #l# arc cos, std arc tan = #l# arc tan,
+    std sinh = #l# sinh, std cosh = #l# cosh, std tanh = #l# tanh,
+    std arc sinh = #l# arc sinh, std arc cosh = #l# arc cosh, std arc tanh = #l# arc tanh,
+    std exp = #l# exp, std ln = #l# ln, std log = #l# log,
+    std sqrt = #l# sqrt;
+
+SKIP # export names #

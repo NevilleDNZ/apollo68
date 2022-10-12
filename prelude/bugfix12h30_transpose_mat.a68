@@ -1,0 +1,7 @@
+# -*- coding: utf-8 -*- #
+
+# workarounds: fix bugs in Transpose and VEC * MAT for non-square matrices => re-implement/twig #
+OP T = (MAT in)MAT:TRNSP in;
+OP * = (VEC v, MAT m)VEC: (MAT(v)*m)[1,];
+
+SKIP # export names #

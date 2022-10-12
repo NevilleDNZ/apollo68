@@ -1,0 +1,3 @@
+# -*- coding: utf-8 -*- #
+
+SKIP END # remove std & STD from the name space #

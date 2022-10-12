@@ -1,0 +1,332 @@
+# -*- coding: utf-8 -*- #
+
+#===========================#
+# A crude CLASS declaration #
+#===========================#
+MODE UNIVERSE = STRUCT(
+    PROC(NOARG)UNIVERSEMETHODOF method,
+    REF[]CELESTIALBODY celestial body, 
+    REF MISSION mission,
+    TIME time
+);
+
+MODE UNIVERSEMETHODOF = STRUCT(
+    PROC (#self,# NOARG #~#)REF UNIVERSE init,
+    PROC (#self,# NOARG #~#)STRING repr,
+    PROC (#self,# NOARG #~#)STRING shorten repr,
+    PROC (#self,# REF[]CELESTIALBODY #cb#, REF MISSION #mission#, TIME #start time#)REF UNIVERSE genesis,
+    PROC (#self,# INT #n solver#, INT #n report#)VOID run
+CO    PROC (#self,# UNIVERSE #aaa#)REF UNIVERSE set aaa CO
+);
+
+# Bind the methods to a Class Instance #
+PROC method of universe = (REF UNIVERSE self, NOARG skip)UNIVERSEMETHODOF:(
+    init of universe(self, #~#),
+    repr of universe(self, #~#),
+    shorten repr of universe(self, #~#),
+    genesis of universe(self, #universe#, #mission#, #time#),
+    run of universe(self, #n solver#, #n report#)
+);
+
+OP METHODOF = (UNIVERSE self)UNIVERSEMETHODOF: (method OF self)(~);
+
+PROC init of universe = (REF UNIVERSE self, NOARG skip)REF UNIVERSE: (
+    method OF self := method of universe(self,#~#);
+    self
+);
+
+OP INIT = (REF UNIVERSE self)REF UNIVERSE: init of universe(self, ~);
+
+PROC repr of universe = (REF UNIVERSE self, NOARG skip)STRING:
+    JOINREPR []STRING(
+      REPR celestial body OF self,
+      REPR mission OF self
+   #   REPR time OF self #
+    );
+
+OP REPR = (UNIVERSE universe)STRING: (repr OF (METHODOF universe))(~);
+
+OP SHORTENREPR = (UNIVERSE universe)STRING: (shorten repr OF (METHODOF universe))(~);
+
+PROC shorten repr of universe = (REF UNIVERSE self, NOARG skip)STRING:
+  (sprintf(sub)+sprintf(($gf(sep)$, SHORTENREPR celestial body OF self, SHORTENREPR mission OF self, REPR time OF self))+sprintf(bus));
+
+PROC genesis of universe = (REF UNIVERSE self, REF[]CELESTIALBODY celestial body, REF MISSION mission, TIME start time)REF UNIVERSE: (
+    celestial body OF self := celestial body;
+    mission OF self := mission;
+    time OF self := start time;
+# put planets into orbit #
+    FOR i TO UPB celestial body OF self DO
+      CELESTIALBODY body = (celestial body OF self)[i];
+      (genesis OF (METHODOF body))(~)
+    OD;
+
+# launch rocket #
+    self
+);
+
+PROC gravitational force = (MASS mass of a, mass of b, VECDISTANCE separation)VECFORCE:(
+     AREA r squared = separation*separation;
+     VEC unit vector = separation / sqrt(r squared);
+     mksa gravitational constant * mass of a * mass of b / r squared * unit vector
+);
+
+INT upb objects := 4 #UPB sun earth moon apollo8cm# + 0; # sun, earth & moon + space modules #
+INT flex upb master := 0;
+
+MODE MASTER = STRUCT(
+    [upb objects]MASS mass,
+    [0:2][upb universe * upb objects]PHYSICALUNIT dva # distance, velocity, acceleration#
+); MASTER  master;
+
+INT dis=0, vel=1, acc=2;
+
+PROC ref distance = (INT object)REF VECDISTANCE: (
+    INT offset = object*upb universe-upb universe+1;
+    (dva OF master)[dis][offset:offset+upb universe-1]
+);
+
+PROC ref velocity = (INT object)REF VECVELOCITY: (
+    INT offset = (object-1)*upb universe+1;
+    (FALSE AND with debug|printf(($"DB - object: "$,$f(int repr)"; "$,object)));
+    (FALSE AND with debug|printf(($"DB - offset: "$,$f(int repr)"; "$,offset,$l$)));
+    (dva OF master)[vel][offset:offset+upb universe-1]
+);
+
+PROC ref acceleration = (INT object)REF VECACCELERATION: (
+    INT offset = object*upb universe-upb universe+1;
+    (dva OF master)[acc][offset:offset+upb universe-1]
+);
+
+PROC f acceleration of master = (TIME t, VEC in distance, velocity)VECACCELERATION: (
+# arguments are actually currently being ignored... should be passed by reference
+  TIME t ... ignored, seems the universe is a context(time) free gramma
+#
+    [UPB in distance]SCAL distance := in distance;
+    PROC get distance = (INT object)REF VECDISTANCE: (
+        INT offset = object*upb universe-upb universe+1;
+        distance[offset:offset+upb universe-1]
+    );
+
+    VECDISTANCE distance i, separation;
+    REF VECACCELERATION ref acceleration i;
+    VECMASS mass of master = mass OF master;
+    vec init scal((dva OF master)(acc),0);
+    FOR i TO upb objects DO
+      #VECDISTANCE# distance i := get distance(i);
+      MASS mass of master i = mass of master[i];
+      #REF VECACCELERATION# ref acceleration i := ref acceleration(i);
+      FOR j FROM i + 1 TO upb objects DO
+        #VECDISTANCE# separation := distance i - ref distance(j);
+        DISTANCE radius = NORM separation;
+        DISTANCE radius squared = radius*radius #separation * separation#;
+        VECDISTANCE unit vector from i to j = separation / radius;
+# gf = G x mi x mj / r**2;  
+    Fi = mi x ai => 
+    ai = G x mi x mj / r**2 / mi = G x mj / r**2 #
+        REAL g over radius squared = mksa gravitational constant / radius squared;
+CO
+      (TRUE OR with debug|printf(($"DB - i,j: "$,$g"; "$,i,j,$l$)));
+      (TRUE OR with debug|printf(($"DB -  ref acceleration(i): "$,$f(real repr)"; "$, ref acceleration(i),$l$)));
+END CO
+CO QQQ: is acc i +:= acc[j] OK? CO
+        ref acceleration i -:= mass of master[j] * g over radius squared * unit vector from i to j;
+CO
+      (TRUE OR with debug|printf(($"DB -  ref acceleration(j): "$,$f(real repr)"; "$, ref acceleration(j),$l$)));
+END CO
+        ref acceleration(j) +:= mass of master i * g over radius squared * unit vector from i to j
+      OD
+    OD;
+    (dva OF master)[acc]
+);
+
+FORMAT uni repr;
+STRING rel vel:= "rel vel", abs vel:= "abs vel", orbit speed:= "orbit speed", orbit radius:= "orbit radius";
+FORMAT short line := $l8x$;
+IF short THEN
+       short line := $x$;
+       rel vel:= "rv"; abs vel:= "av"; orbit speed:= "os"; orbit radius:= "or"# short prefixes #
+FI;
+
+REAL time unit size; STRING time unit desc;
+REAL dis unit size:=Mmeters; STRING dis unit desc := "Mm";
+REAL vel unit size:=kph; STRING vel unit desc := "kph";
+REAL energy unit size:=YTj; STRING energy unit desc = "YJ";
+REAL momentum unit size:=Pgram*meters/second; STRING momentum unit desc = "Pgm/s";
+
+ENERGY energy0;
+VECMOMENTUM momentum0;
+
+    INT flex upb plot := 0;
+    [10000]TIME plot time;
+    [10000]DISTANCE plot se distance;
+    [10000]DISTANCE plot me distance;
+    [10000]DISTANCE plot ae distance;
+    [10000]DISTANCE plot am distance;
+    
+STRING plot name := "plot:";
+
+PROC print position report = (REF UNIVERSE self, TIME time, REF MOTION ref pnt)VOID:(
+    flex upb plot +:= 1;
+    plot time[flex upb plot] := time;
+    plot se distance[flex upb plot] := NORM(distance OF motion OF earth-distance OF motion OF sun)/dis unit size;
+    plot me distance[flex upb plot] := NORM(distance OF motion OF earth-distance OF motion OF moon)/dis unit size;
+# Warning: NORM will not spot that the satellite has Crashed !!! #
+    plot ae distance[flex upb plot] := (NORM(distance OF motion OF earth-distance OF motion OF apollo8cm)-equatorial radius OF mean OF earth)/dis unit size;
+    plot am distance[flex upb plot] := (NORM(distance OF motion OF moon-distance OF motion OF apollo8cm)-equatorial radius OF mean OF moon)/dis unit size;
+    VECDISTANCE ref dis = distance OF ref pnt;
+    VECVELOCITY ref vel = velocity OF ref pnt;
+    printf(($g":"g(-8,2)g$, "Time",time/time unit size, time unit desc,
+            ", Distance to sun",NORM(distance OF motion OF earth-distance OF motion OF sun)/dis unit size, dis unit desc,
+            ", Energy",(total energy(celestial body OF self)-energy0)/energy unit size, energy unit desc,
+   
+        $g$,", Momentum",REPR((momentum(celestial body OF self)-momentum0)/momentum unit size), momentum unit desc,
+    $l$));
+    preemptive sweep heap;
+    (FALSE|printf(($g": "g(-0)"; "$,
+      "cpu time",cpu time,
+      "system stack size",system stack size,
+      "garbage",garbage,
+      "collections",collections,
+    $l$)));
+    FOR i TO UPB celestial body OF self DO
+        CELESTIALBODY body = (celestial body OF self)[i];
+        printf(($g$,
+            name OF body, 
+            $g":"gg"; "$,
+            "loc",REPR ((distance OF motion OF body-ref dis)/dis unit size), dis unit desc,
+            short line,
+            $g":"gg"; "$,
+            rel vel, REPR((get rel velocity OF(METHODOF body))(~)/vel unit size), vel unit desc,
+            #$g":"gg"; "$,#
+            abs vel, REPR ((velocity OF motion OF body-ref vel)/kph/vel unit size), vel unit desc,
+            short line,
+            $g":"f(uni repr)g"; "$,
+            orbit speed, (speed of orbit OF(METHODOF body))(~)/vel unit size, vel unit desc,
+            orbit radius, (radius of orbit OF(METHODOF body))(~)/dis unit size, dis unit desc,
+            $l$
+        ))
+    OD
+);
+
+PROC run of universe = (REF UNIVERSE self, INT n solver, n report)VOID: (
+
+    REAL topical year =  365.242190419*days;
+    REAL sidereal month = 27.321661*days # orbit period OF mean OF moon#;
+
+    REAL step size;
+    REAL report period; 
+
+
+    REAL stop time := 
+      CASE n report IN
+        #1# 19 * topical year, # Metonic cycle #
+        #2# topical year,
+        #3# sidereal month,
+        #4# sidereal month / 4,
+        #5# 3 * days,
+        #6# 24 * hours,
+        #7# 4*3.64307227890746 * hours # orbit time prior to Lunar injection #
+      OUT
+        IF NOT fix value error(sprintf(($"Invalid report option: "g$,n report))) THEN stop FI
+      ESAC;
+
+    REAL x = 1; # eXtra precision #
+    IF stop time > 366*days THEN # years #
+#1#
+      step size := day/12/x; # QQQ - issue with memory, need to reduce #
+      time unit size := sidereal month; time unit desc := "~months";
+      report period := 3*sidereal month
+
+    ELIF stop time > 3 * 31 * days/1.0001 THEN # months #
+#2#
+      step size := hour/8/x; # NORMAL #
+      step size := hour/x; 
+      time unit size := 7 * day; time unit desc := "week";
+      report period := sidereal month
+
+    ELIF stop time > 7*days/1.0001 THEN # weeks #
+#3# #4#
+      step size := hour/30/x; 
+      time unit size := day; time unit desc := "days";
+      report period := day 
+
+    ELIF stop time > 1*days/1.0001 THEN # weeks #
+#5#
+      step size := hour/60/6/x;  # 1 min #
+      step size := hour/60/60/x;  # 1 min #
+      time unit size := hour; time unit desc := "hours";
+      report period := hour
+
+    ELSE # day #
+#6#
+      step size := hour/60/x;  # 1 minute #
+      step size := hour/60/60/x;  # 1 seconds #
+     # dis unit size:=km; dis unit desc := "km";#
+      time unit size := seconds; time unit desc := "seconds";
+      report period := hour
+    FI;
+
+#  IF n solver = 4 THEN step size *:=2 FI; #
+
+    REF[]VEC dis vel = (dva OF master)[dis:vel][@dis];
+    uni repr := IF short THEN short astro repr ELSE astro repr FI;
+      
+    scal repr := real repr := uni repr;
+
+CO
+    MODE IVPON = STRUCT(INTERVAL t interval, FLEX[1]Y y0 dy0 ddy0 etc, FDNYBYDTN f dny by dtn);
+    MODE ODEONSOLVETYNGEN = PROC (IVPON #ivp on#, ODEONSOLVEARGS #args#, TYYIELD #yield#)VOID;
+END CO
+
+    EULERARGS args = (#step size: # step size, #f ty tol portal: #f crude tol portal);
+    printf(($"Parameter: step size = "$,$g(-0,4)"; "$,step size OF args/hours,$g$,"hours", $l$));
+    printf(($"Parameter: report period = "$,$f(uni repr)"; "$,report period/time unit size,$g$,time unit desc, $l$));
+    printf(($"Parameter: stop time = "$,$f(uni repr)"; "$,stop time/time unit size,$g$,time unit desc, $l$));
+
+    IVPON solar system ivp = ((0,stop time),dis vel, #d2y/dt2:#f acceleration of master);
+
+    print ode ivp order n("solar system ivp:",solar system ivp);
+    []ODEONSOLVETYNGEN  solver = ( euler tyn gen, adams bashforth tyn gen, 
+                       runga kutta 4th order tyn gen, velocity verlet tyn gen);
+
+    ODEONSOLVETYNGEN solver tyn gen = solver [n solver]; # arg1 of input #
+
+    plot name+:=[]STRING("Euler","Adams_Bashforth","Runga_Kutta_4th_order","Velocity_Verlet")[n solver]+":";
+    plot name +:= sprintf(($g(-0,1)$,step size))+"s:";
+    print((plot name,"plot:stop time:",stop time/time unit size," in ",time unit desc,newline));
+
+    INT report period number := 0;
+    REF MOTION ref pnt = motion OF earth; printf(($g$,"Reference point: ","Earth",$l$));
+
+    momentum0 := momentum(celestial body OF self);
+    energy0 := total energy(celestial body OF self);
+
+    print(("Initial momentum:", REPR momentum0, ", Initial energy:", REPR energy0, new line));
+
+    TIME last time, last report;
+  # FOR (TYN tyn) IN # solver tyn gen(solar system ivp, args # ) DO (#,
+  ##    (TYN tyn)VOID: (
+        # update master & update celestial bodies OF self #
+        (dva OF master)[dis] := (y OF tyn)[dis]; (dva OF master)[vel] := (y OF tyn)[vel];
+
+        last time := t OF tyn;
+        IF t OF tyn >= report period number * report period * (0.99999) THEN
+            last report := t OF tyn;
+            report period number +:= 1;
+            print position report(self, t OF tyn, ref pnt)
+        FI
+  # OD #));
+    IF last report NE last time THEN
+      print(("Final position:", new line));
+      print position report(self, last time, ref pnt)
+    FI;
+    print(("plot:time:", REPR plot time[:flex upb plot], new line));
+    print(("plot:SEdist:", REPR plot se distance[:flex upb plot], new line));
+    print(("plot:EMdist:", REPR plot me distance[:flex upb plot], new line));
+    print(("plot:AEdist:", REPR plot ae distance[:flex upb plot], new line));
+    print(("plot:AMdist:", REPR plot am distance[:flex upb plot], new line))
+
+);
+
+SKIP

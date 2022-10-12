@@ -1,0 +1,54 @@
+===Find roots of: sin:===
+bisection: require an initial lower AND upper bound
+method: bisection, function: sin, on interval: [2.64159265 … 4.44159265]
+result: (x=3.14159265, y=-.00000000), approximate root was found
+FP instruction count: +:0, -:0, *:0, /:0, I*R:0, R**I:0, iterations:0, f() calls:0, f'() calls:0
+
+newton raphson: requires an initial x AND 1st derivative
+method: newton raphson, function: sin, on interval: [2.64159265 … 4.44159265]
+result: (x=3.14159265, y=0.00000000), approximate root was found
+FP instruction count: +:0, -:0, *:0, /:0, I*R:0, R**I:0, iterations:0, f() calls:0, f'() calls:0
+
+secant: methods that require 2 initial xes
+method: secant, function: sin, on interval: [2.64159265 … 4.44159265]
+result: (x=3.14159265, y=0.00000000), approximate root was found
+FP instruction count: +:0, -:0, *:0, /:0, I*R:0, R**I:0, iterations:0, f() calls:0, f'() calls:0
+
+===Find roots of: (x-1)**3*(x+2):===
+bisection: require an initial lower AND upper bound
+method: bisection, function: (x-1)**3*(x+2), on interval: [0.50000000 … 2.30000000]
+result: (x=0.99998779, y=-.00000000), approximate root was found
+FP instruction count: +:0, -:0, *:0, /:0, I*R:0, R**I:0, iterations:0, f() calls:0, f'() calls:0
+
+newton raphson: requires an initial x AND 1st derivative
+method: newton raphson, function: (x-1)**3*(x+2), on interval: [0.50000000 … 2.30000000]
+result: (x=0.99998798, y=-.00000000), approximate root was found
+FP instruction count: +:0, -:0, *:0, /:0, I*R:0, R**I:0, iterations:0, f() calls:0, f'() calls:0
+
+secant: methods that require 2 initial xes
+method: secant, function: (x-1)**3*(x+2), on interval: [0.50000000 … 2.30000000]
+result: (x=0.99998934, y=-.00000000), approximate root was found
+FP instruction count: +:0, -:0, *:0, /:0, I*R:0, R**I:0, iterations:0, f() calls:0, f'() calls:0
+
+===Find minima of: sin:===
+golden section: requires an initial lower AND upper bound
+method: golden section, function: sin, on interval: [4.51238898 … 5.01238898]
+result: (x=5.01238898, y=-.95533649)
+FP instruction count: +:0, -:0, *:0, /:0, I*R:0, R**I:0, iterations:0, f() calls:0, f'() calls:0
+
+successive parabolic interpolation: requires an initial lower AND upper bound
+method: successive parabolic interpolation, function: sin, on interval: [4.51238898 … 5.01238898]
+result: (x=4.74186450, y=-.99956563)
+FP instruction count: +:0, -:0, *:0, /:0, I*R:0, R**I:0, iterations:0, f() calls:0, f'() calls:0
+
+===Find minima of: (x-1)**3*(x+2):===
+golden section: requires an initial lower AND upper bound
+method: golden section, function: (x-1)**3*(x+2), on interval: [0.80000000 … 1.30000000]
+result: (x=1.30000000, y=0.08910000)
+FP instruction count: +:0, -:0, *:0, /:0, I*R:0, R**I:0, iterations:0, f() calls:0, f'() calls:0
+
+successive parabolic interpolation: requires an initial lower AND upper bound
+method: successive parabolic interpolation, function: (x-1)**3*(x+2), on interval: [0.80000000 … 1.30000000]
+result: (x=0.96096874, y=-.00017606)
+FP instruction count: +:0, -:0, *:0, /:0, I*R:0, R**I:0, iterations:0, f() calls:0, f'() calls:0
+

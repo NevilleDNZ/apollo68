@@ -1,0 +1,291 @@
+# -*- coding: utf-8 -*- #
+
+# define the dynamic tolerance based on (t,y) #
+MODE FTYDYNTOL = PROC(TY)DNYBYDTNO;
+
+MODE
+    FDY       #dy/dt#   = PROC(REAL #t#, DNYBYDTNO#y#)DNYBYDTNO,
+    FTDYBYDT   #(t,dy/dt)#  = PROC(REAL #t#, DNYBYDTNO#y#)TY;
+
+MODE DYBYDT = DNYBYDTNO # also y, dy/dt, d²y/dt², d³y/dt³, d⁴y/dt⁴ ... #;
+
+OP ABS = (DNYBYDTNO error)DNYBYDTNO: (
+    [UPB error]SCAL out;
+    FOR i TO UPB error DO
+        out[i] := ABS error[i]
+    OD;
+    out
+);
+
+OP < = (DNYBYDTNO error, tol)BOOL: (
+    FOR i TO UPB error DO
+        IF error[i] < tol[i] THEN failed FI
+    OD;
+        TRUE EXIT
+    failed: 
+        FALSE # EXIT #
+);
+
+PROC f ty abstol = (TY ty)DNYBYDTNO:(
+    [UPB y OF ty]SCAL out;
+    FOR i TO UPB out DO out[i] := partial precision OD;
+    out
+);
+
+PROC putf yj dyj ddyj etc sub sup = (REF FILE file, DNYBYDTNO yi dyi ddyi etc, INT sub, sup, FORMAT sep)VOID: (
+    upb vec := UPB yi dyi ddyi etc - LWB yi dyi ddyi etc + 1;
+    STRING c sub = REPRSUB sub;
+    STRING c sup = ( sup = 1 | "" | REPRSUP sup);
+    STRING prefix = "  "+IF sup = 0 THEN "y"+c sub
+                         ELSE  "d"+c sup+"y"+c sub+"/dt"+c sup FI+" = ";
+    (FALSE AND with debug|printf(($"DB - yi dyi ddyi etc: "$,$g"; "$,yi dyi ddyi etc,$l$)));
+    putf(file, ($g$, prefix, $f(vec repr)$, yi dyi ddyi etc, $l$ #QQQ#));
+    IF LWB yi dyi ddyi etc NE 1 
+        THEN putf(file, ($"[@"g(0)"]"f(sep)$, LWB yi dyi ddyi etc)) FI
+);
+
+PROC putf ode ivp order 1 = (REF FILE file, STRING description, IVPOI ivp)VOID: (
+    FORMAT sep = $l$;
+    putf(file, ($"IVP order-"f(int repr)": "g$, ORDER ivp, description, $l$));
+    putf(file, ($"  t interval: "$, interval repr, t interval OF ivp, $l$));
+    #[]#DNYBYDTNO y0 = y0 OF ivp;
+CO  FOR j FROM LWB y0 TO UPB y0 DO CO
+        putf yj dyj ddyj etc sub sup(file, y0#[j]#, 0, #j=#0, sep);
+CO  OD; CO
+# Finally evaluate F(t,y,dy/dt ... ) at t₀ #
+    REAL t0 = lwb OF t interval OF ivp;
+    DNYBYDTNO dny0 by dtn = (f dy by dt OF ivp)(t0,  y0 OF ivp);
+    putf yj dyj ddyj etc sub sup(file, dny0 by dtn, 0, ORDER ivp, sep);
+    putf(file, $ll$)
+);
+
+PROC print ode ivp order 1 = (STRING description, IVPOI ivp)VOID: 
+    putf ode ivp order 1(stand out, description, ivp);
+
+PROC f ty reltol = (TY ty)DNYBYDTNO:(
+    partial precision * y OF ty # VECtor algebra #
+);
+
+PROC print ty gen table = (STRING description, TYGEN ty gen)VOID: (
+    print((description,"(t,y) table: BEGIN", new line));
+    # FOR # ty gen( #)DO #
+        (TY ty)VOID: printf(($"* "$, $f(real repr)";"$, t OF ty, y OF ty, $l$))
+    # OD #);
+    print(("(t,y) END", new line))
+);
+
+PROC print gen vec table = (STRING description, TYGEN ty gen)VOID: (
+    print((description,"(t,y) table: BEGIN", new line));
+    # FOR # ty gen( #)DO #
+        (TY ty)VOID: printf(($"* "$, $f(real repr)";"$, t OF ty, y OF ty, $l$))
+    # OD #);
+    print(("(t,y) END", new line))
+);
+
+# Initial Value Problem #
+MODE IVPOI = STRUCT(INTERVAL t interval, DNYBYDTNO y0, FDY f dy by dt);
+OP ORDER = (IVPOI ivp)INT: 1;
+MODE IVPOIPKG = STRUCT(IVPOI ivp, INTERVAL y axis, STRING description);
+
+# MODE ODEOISOLVEHINT = UNION(STEPSIZEOPT, YBOUNDOPT, VOID); #
+
+MODE ODEOISOLVETYGEN = PROC (IVPOI #ivp#, ODEOISOLVEARGS #args#, TYYIELD #yield#)VOID;
+MODE FUNCTIONPKG = STRUCT(PROC(R)RN function, STRING description);
+
+CO
+    One-step Euler method:
+        y_{n+1} = y_n + hf(t_n, y_n).
+END CO
+
+MODE ODEOISOLVEARGS = STRUCT(REAL step size, FTYDYNTOL f ty tol portal);
+# Note: upb iteration currently being ignored #
+MODE EULERARGS = ODEOISOLVEARGS;
+
+PROC euler ty gen = (IVPOI ivp, EULERARGS args, TYYIELD yield)VOID: (
+    (FALSE AND with debug|print ode ivp order 1("euler",ivp));
+    R t interval width = WIDTH t interval OF ivp;
+    INT order = 1;
+    INT num steps = ROUND (t interval width / step size OF args / order);
+
+    MODE  DNYBYDTNO = [  UPB y0 OF ivp]R;
+    MODE TY = [0:UPB y0 OF ivp]R;
+    TY ty; REF R t = ty[0]; REF RN y = ty[1:]; # Align t before y #
+
+# Global truncation error #
+    DNYBYDTNO gte; vec init scal(gte, 0);
+
+    t := lwb OF t interval OF ivp;
+    y := y0 OF ivp;
+
+    R dt = WIDTH t interval OF ivp / num steps;
+
+    yield((t,y)); #yield(ty[@1])#
+    (FALSE AND with debug|printf(($"ODE DB - euler yield((t,y)): "$,$f(real repr)"; "$,t,y,$l$)));
+    DNYBYDTNO previous dy by dt;
+    DNYBYDTNO dy by dt;
+
+    FOR n TO num steps DO
+    (FALSE AND with debug|printf(($"ODE DB - dt: "$,$g"; "$,dt,$l$)));
+        dy by dt := (f dy by dt OF ivp)(t,y);
+CO
+        IF n = 1 THEN # gather information for an error estimate #
+            previous dy by dt := dy by dt
+        ELSE
+            DNYBYDTNO ddy by dtt = (dy by dt - previous dy by dt)/dt;
+    # add local truncation error as per Dahlquist - page 228 #
+            DNYBYDTNO lte = 1/2 * dt*dt * ddy by dtt;
+            gte +:= lte; 
+            IF FALSE #(f ty tol portal OF args)(ty) < gte QQQ ignore FTM # ANDF 
+                NOT fix value error("euler method is outside of tolerances") THEN stop FI
+        FI; 
+    (TRUE AND with debug|printf(($"ODE DB -    dt: "$,$g"; "$,dt,$l$)));
+    (TRUE AND with debug|printf(($"ODE DB -    org y: "$,$g"; "$,REPR y,$l$)));
+    (TRUE AND with debug|printf(($"ODE DB - dy by dt: "$,$g"; "$,REPR dy by dt,$l$)));
+    (TRUE AND with debug|printf(($"ODE DB - dy/dy*dt: "$,$g"; "$,REPR(dy by dt*dt),$l$)));
+END CO
+        FOR j FROM LWB y TO UPB y DO y[j]+:= dy by dt[j]*dt OD;
+        # y +:= dy by dt * dt; #
+CO
+    (TRUE AND with debug|printf(($"ODE DB -    new y: "$,$g"; "$,REPR y,$l$)));
+END CO
+        t +:= dt;
+CO
+    (FALSE AND with debug|printf(($"ODE DB - euler yield((t,y)): "$,$f(real repr)"; "$,t,$g$, REPR y,$l$)));
+END CO
+        yield((t,y)) #yield(ty[@1])#
+    OD
+
+);
+
+# Dahlquist - page 338 - Richardson extrapolation is a linear sequence transformation. #
+MODE RREARGS=STRUCT(INT estrapolcations);
+PROC richardson extrapolation ty gen = (TYGEN ty gen, RREARGS args, TYYIELD yield)VOID: (
+    [0:1]TY previous ty;
+    INT n := 0;
+# FOR TY ty IN # ty gen(#) DO #
+##   (TY ty)VOID: (
+              IF n <= UPB previous ty THEN
+                  previous ty[n] := ty;
+                  yield(ty)
+              ELSE
+                  previous ty[n MOD 2] := ty;
+                  # fix unimplemented("gen richardsons extrapolation") #
+                  yield(ty)
+              FI 
+# OD #))
+);
+
+# Add some refinement TRANSformations ... later #
+MODE EULERRREARGS = EULERARGS;
+PROC euler solution with repeated richardsons extrapolation ty gen = (IVPOI ivp, EULERRREARGS args, TYYIELD yield)VOID: (
+    fix unimplemented("gen euler solution with repeated richardsons extrapolation")
+);
+
+MODE VWARGS = EULERARGS;
+PROC van wijngaarden transformation ty gen = (TYGEN ty gen, VWARGS args, TYYIELD yield)VOID: (
+    fix unimplemented("van wijngaarden transformation")
+);
+
+CO
+    Two-step Adams–Bashforth method:
+    y_{n+2} = y_{n+1} + \tfrac32 hf(t_{n+1},y_{n+1}) - \tfrac12 hf(t_n,y_n)
+END CO
+
+PROC adams bashforth ty gen = (IVPOI ivp, ODEOISOLVEARGS args, TYYIELD yield)VOID: (
+    (with debug|print ode ivp order 1("adams bashforth", ivp));
+    R t interval width = WIDTH t interval OF ivp;
+    INT order = 2;
+    R step size = step size OF args;
+    INT num steps = ROUND (t interval width / step size);
+
+# Create a window of width "0:order-1" of previous values that autowraps #
+    MODE  DNYBYDTNO = [  UPB y0 OF ivp]R;
+    [0:order-1,0:UPB y0 OF ivp]R ty; 
+    [0:order-1]DNYBYDTNO dy by dt;
+
+    REF VEC t = ty[,0];  # Align t before y #
+    []REF RN y = REFVECS ty[,1:]; # create a list of REF VECs #
+
+    R dt = WIDTH t interval OF ivp / num steps;
+
+    t[0] := lwb OF t interval OF ivp;
+    y[0] := y0 OF ivp;
+    yield((t[0],y[0])); # yield(ty[0,@1]); #
+
+# Use Euler method to determine the step #
+# nb: A better choice can be made using Newton Raphsons method #
+    dy by dt[0] := (f dy by dt OF ivp)(t[0],y[0]);
+    y[1] := y[0] + dy by dt[0]*dt;
+    t[1] := t[0] + dt;
+    yield((t[1],y[1])); # yield(ty[1,@1]); #
+
+    FOR num step FROM order TO num steps DO
+# Create a window of width "0:order-1" of previous values that autowraps #
+        INT n  = num step MOD order;
+        INT n1 = (n + 1)  MOD order;
+        INT n2 =  n#+ 2)  MOD order#;
+
+    #y_{n+2} = y_{n+1} + \tfrac32 hf(t_{n+1},y_{n+1}) - \tfrac12 hf(t_n,y_n)#
+
+        dy by dt[n1] := (f dy by dt OF ivp)(t[n1], y[n1]);
+        y[n2] := y[n1] + (3/2*dy by dt[n1] - 1/2*dy by dt[n])*dt;
+        t[n2] := t[n1] + dt;
+        yield((t[n2],y[n2])) # yield(ty[n2,@1]) #
+    OD
+
+);
+
+CO
+    y_{n+1} &= y_n + \tfrac{1}{6} \left(k_1 + 2k_2 + 2k_3 + k_4 \right)
+    t_{n+1} &= t_n + h
+
+where y_{n+1} is the RK4 approximation of y(t_{n+1}), and
+
+    k_1 &= hf(t_n, y_n), 
+    k_2 &= hf(t_n + \tfrac{1}{2}h , y_n + \tfrac{1}{2} k_1),
+    k_3 &= hf(t_n + \tfrac{1}{2}h , y_n + \tfrac{1}{2} k_2),
+    k_4 &= hf(t_n + h , y_n + k_3).
+END CO
+
+PROC runga kutta 4th order ty gen = (IVPOI ivp, ODEOISOLVEARGS args, TYYIELD yield)VOID: (
+    (with debug|print ode ivp order 1("runga kutta 4th order",ivp));
+    R t interval width = WIDTH t interval OF ivp;
+    INT order = 4;
+    R step size = step size OF args;
+    INT num steps = ROUND (t interval width / step size / order);
+
+    R dt = WIDTH t interval OF ivp / num steps;
+    R half dt = dt / 2;
+
+    MODE  DNYBYDTNO = [  UPB y0 OF ivp]R;
+    MODE TY = [0:UPB y0 OF ivp]R;
+    TY ty; REF R t = ty[0]; REF RN y = ty[1:]; # Align t before y #
+
+    t := lwb OF t interval OF ivp;
+    y := y0 OF ivp;
+
+    yield((t,y)); #yield(ty[@1])#
+
+    [order]DNYBYDTNO k;
+    
+    PROC (R,RN)RN dy by dt = f dy by dt OF ivp;
+
+    FOR num step FROM order TO num steps DO
+        k[1] := dt * dy by dt(t, y);
+        k[2] := dt * dy by dt(t + half dt, y + 1/2*k[1]);
+        k[3] := dt * dy by dt(t + half dt, y + 1/2*k[2]);
+        k[4] := dt * dy by dt(t + dt,      y +     k[3]);
+        y +:= 1/6*(k[1] + 2*k[2] + 2*k[3] + k[4]);
+        t +:= dt;
+        yield((t,y)) #yield(ty[@1])#
+    OD
+);
+
+MODE ODEOISOLVEPKG = STRUCT(ODEOISOLVETYGEN method, STRING short, description);
+[]ODEOISOLVEPKG ode order 1 solve list = (
+    (euler ty gen, "EM", "Euler method"),
+    (adams bashforth ty gen, "ABM", "Adams Bashforth method"),
+    (runga kutta 4th order ty gen, "RK4", "4th-order Runga Kutta method")
+);
+
+SKIP # export names #

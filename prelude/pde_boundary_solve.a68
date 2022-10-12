@@ -1,0 +1,294 @@
+# -*- coding: utf-8 -*- #
+
+# Defined separate modes so the double precision can be tried #
+MODE XREAL = REAL, YREAL = REAL, TREAL = REAL, UREAL = REAL;
+
+#-------------------------------------#
+# define how it is going to be solved #
+#-------------------------------------#
+PROC pde forward difference solve = (
+        INTERVAL t interval, x interval,
+        PROC (XREAL #x#, TREAL #t#)UREAL f u x t,
+        PROC (UREAL #d2u by dt2#)UREAL f du by dt
+    ) MAT: (
+# What happens if you use k > 0.003? Compare with the exact
+solutions if possible. #
+    XREAL h =0.1, k=0.002;
+
+    INT lwb xi = 0, upb xi = ROUND(WIDTH x interval/h);
+    INT lwb tj = 0, upb tj = ROUND(WIDTH t interval/k);
+        (TRUE OR with debug|printf(($"DB - upb tj: "$,$g"; "$,upb tj,$l$)));
+
+    INT dim xi = 1, dim tj = 2;
+    [lwb xi:upb xi, lwb tj:upb tj] UREAL u x t;
+    REF[]UREAL t0 = u x t[,dim tj LWB u x t];
+
+    XREAL t := lwb OF t interval;
+    XREAL x := lwb OF x interval;
+    XREAL dx = WIDTH x interval / (WIDTH t0-1);
+
+    FOR xj FROM LWB t0 TO UPB t0 DO
+        t0[xj] := f u x t(x, t);
+        x +:= dx
+    OD;
+
+    XREAL dt = WIDTH t interval / (dim tj WIDTH u x t-1),
+             dt2 = dt * dt,
+             dx2 = dx * dx;
+
+    PROC estimate du = ([]UREAL ut)UREAL: ut[1]-ut[2];
+    PROC estimate d2u = ([]UREAL ut)UREAL: ut[3]-2*ut[2]+ut[1];
+
+    lwb vec := lwb xi; upb vec := upb xi; scal repr := $g(-6,4)$;
+
+    # Solved this PDE using an explicit method therefore no need for 'a matrix' #
+    FOR tj FROM lwb tj+1 TO upb tj DO
+        t +:= dt; # step past t0 #
+        u x t[lwb xi, tj] := f u x t(lwb OF x interval, t);
+        u x t[upb xi, tj] := f u x t(upb OF x interval, t);
+        XREAL x := lwb OF x interval;
+        UREAL d2u by dx2;
+        FOR xi FROM lwb xi+1 TO upb xi-1 DO
+            x +:= dx;
+            d2u by dx2 := estimate d2u(u x t[xi-1:xi+1, tj-1]) / dx2;
+            u x t[xi,tj] := u x t[xi, tj-1] + f du by dt(d2u by dx2) * dt
+        OD;
+        printf(($g(-4)" u:"$, tj, vec repr, u x t[,tj], $l$))
+    OD;
+
+    (with trace|printf(($g$,"uxt=",vec repr, u x t, $l$)));
+   
+    u x t # EXIT # 
+);
+
+COMMENT
+PROC pde forward difference solve with d2u by dt2 = (
+        INTERVAL t interval, x interval,
+        PROC (XREAL #x#, TREAL #t#)UREAL f u x t,
+        PROC (UREAL #d2u by dt2#)UREAL f d2u by dt2
+    ) MAT: (
+# What happens if you use k > 0.003? Compare with the exact
+solutions if possible. #
+    XREAL h =0.1, k=0.002;
+
+    INT lwb xi = 0, upb xi = ROUND(WIDTH x interval/h);
+    INT lwb tj = 0, upb tj = ROUND(WIDTH t interval/k);
+        (TRUE OR with debug|printf(($"DB - upb tj: "$,$g"; "$,upb tj,$l$)));
+
+    INT dim xi = 1, dim tj = 2;
+    [lwb xi:upb xi, lwb tj:upb tj] UREAL u x t;
+    REF[]UREAL t0 = u x t[,dim tj LWB u x t];
+
+    XREAL t := lwb OF t interval;
+    XREAL x := lwb OF x interval;
+    XREAL dx = WIDTH x interval / (WIDTH t0-1);
+
+    FOR xj FROM LWB t0 TO UPB t0 DO
+        t0[xj] := f u x t(x, t);
+        x +:= dx
+    OD;
+
+    XREAL dt = WIDTH t interval / (dim tj WIDTH u x t-1),
+             dt2 = dt * dt,
+             dx2 = dx * dx;
+
+    PROC estimate du = ([]UREAL ut)UREAL: ut[1]-ut[2];
+    PROC estimate d2u = ([]UREAL ut)UREAL: ut[3]-2*ut[2]+ut[1];
+
+    lwb vec := lwb xi; upb vec := upb xi; scal repr := $g(-6,4)$;
+
+    # Solved this PDE using an explicit method therefore no need for 'a matrix' #
+    FOR tj FROM lwb tj+1 TO upb tj DO
+        t +:= dt; # step past t0 #
+        u x t[lwb xi, tj] := f u x t(lwb OF x interval, t);
+        u x t[upb xi, tj] := f u x t(upb OF x interval, t);
+        XREAL x := lwb OF x interval;
+        UREAL d2u by dx2;
+        FOR xi FROM lwb xi+1 TO upb xi-1 DO
+            x +:= dx;
+            d2u by dx2 := estimate d2u(u x t[xi-1:xi+1, tj-1]) / dx2;
+            u x t[xi,tj] := u x t[xi, tj-1] + f du by dt(d2u by dx2) * dt
+        OD;
+        printf(($g(-4)" u:"$, tj, vec repr, u x t[,tj], $l$))
+    OD;
+
+    (with trace|printf(($g$,"uxt=",vec repr, u x t, $l$)));
+   
+    u x t # EXIT # 
+);
+END COMMENT
+
+OP + = ([]INT a,b)[]INT: (
+    [LWB a:UPB a]INT out;
+    FOR i FROM LWB out TO UPB out DO
+        out[i]:=a[i]+b[i]
+    OD;
+    out
+);
+
+INT dim pde = 2; # some minor changes to make it general 3D #
+MODE XYZ = [dim pde]XREAL;
+MODE PDEBVPSOLVEARGS = STRUCT(XYZ dxyz, INT etc);
+MODE UVALUE = UNION(UREAL, VOID);
+# Laplaces Equations Δu = ∂²u/∂x² + ∂²u/∂y² = 0 #
+MODE DDUBYDXX = [dim pde]XREAL;
+
+# F(t, (y, dy/dt, d²y/dt², d³y/dt³, .... dⁿ⁻ⁱy/dtⁿ⁻ⁱ)) #
+
+MODE PDEBVP = STRUCT(
+    [0]INTERVAL xyz interval,
+    PROC (XYZ #xyz#)UVALUE f boundary u xyz,
+    PROC (XYZ)UREAL laplacian
+);
+
+PROC pde finite difference solve = (
+    PDEBVP bvp,
+    PDEBVPSOLVEARGS args
+)MAT:(
+ 
+    REAL w = WIDTH (xyz interval OF bvp)[1];
+    INT lwb xi = 0, upb xi = ROUND( WIDTH (xyz interval OF bvp)[1]/(dxyz OF args)[1] );
+    INT lwb yj = 0, upb yj = ROUND( WIDTH (xyz interval OF bvp)[2]/(dxyz OF args)[2] );
+
+    REAL dx = WIDTH x interval / (upb xi - lwb xi);
+    REAL dy = WIDTH y interval / (upb yj - lwb yj);
+
+    MODE IJK = [dim pde]INT;
+    MODE IJKYIELD = PROC(IJK)VOID;
+    MODE IJKGEN = PROC(IJKYIELD)VOID;
+
+    MODE NODE = STRUCT(XYZ xyz, IJK ijk, INT row num);
+    FORMAT node repr = $"(x:"f(scal repr)", y:",f(scal repr)"), (i:"g(-0)", j:"g(-0)") row num:"g(-0)$;
+    MODE NODEWEIGHTYIELD = PROC(NODE, INT #weight# )VOID;
+    MODE NODEWEIGHTGEN = PROC(NODEWEIGHTYIELD)VOID;
+
+    [lwb xi:upb xi, lwb yj:upb yj] REAL out solution; mat init scal(out solution,666.666);
+    PROC ref out solution = (IJK ijk)REF UREAL: out solution[ijk[1], ijk[2]];
+
+    # we have a square grid with known boundaries... 
+       ... hence we "luckily" know the number of unknowns. #
+    INT upb unknowns = (lwb xi-upb xi+1)*(lwb yj-upb yj+1);
+
+    INT not installed = 0, boundary = -1;
+    [lwb xi:upb xi, lwb yj:upb yj] INT node row num;
+    PROC ref node row num = (IJK ijk)REF INT: node row num[ijk[1], ijk[2]];
+
+  # additional FOR loops can be added to handle 3 Dimensional PDEs #
+    PROC ijk gen = (IJKYIELD yield)VOID:
+        FOR xi FROM lwb xi TO upb xi DO
+            FOR yj FROM lwb yj TO upb yj DO yield((xi,yj)) OD
+        OD;
+
+    PROC ijk to xyz = (IJK ijk)XYZ: (
+        lwb xi + ijk[1] * dx,
+        lwb yj + ijk[2] * dy
+      # lwb zk + ijk[3] * dz etc ... #
+    );
+
+  # FOR IJK ijk IN # ijk gen(#) DO (#
+  ##   (IJK ijk)VOID:
+          ref node row num(ijk) := not installed
+  # OD#);
+
+    INT flex upb rows := 0;
+    [upb unknowns,upb unknowns] UREAL a matrix; mat init scal(a matrix, 0);
+    [upb unknowns             ] UREAL alfa to beta; vec init scal(alfa to beta, 0);
+
+    scal repr := $g(-5,2)$;
+    MODE NODEBRANCH = STRUCT(XYZ dxyz, IJK dijk, INT weight);
+# the order of the node cluster MAY be able to be changed to force bandedness #
+    []NODEBRANCH branch grid = ( 
+        ((  0, 0),( 0, 0),-4),  # (0,0) IS self #
+        ((+dx, 0),(+1, 0), 1), (( 0,+dy),( 0,+1), 1), 
+        ((-dx, 0),(-1, 0), 1), (( 0,-dy),( 0,-1), 1)
+    );
+
+    PROC gen node cluster weight = (NODE this, NODEWEIGHTYIELD yield)VOID: (
+# recursively examine each node cluster and update the 'a matrix' and 'alfa to beta' vec #
+# We have entered gen neightbour because this neightbour is un installed #
+# So the first thing we need to do is install it... #
+        FOR i FROM LWB branch grid TO UPB branch grid DO
+            NODEBRANCH direction = branch grid[i];
+            IJK next ijk = ijk OF this + dijk OF direction;
+            NODE next = (
+                xyz OF this + dxyz OF direction, 
+                next ijk,
+                ref node row num(next ijk)
+            );
+            yield(next, weight OF direction)
+        OD
+    );
+
+    INT depth := 0;
+    PROC install node = (NODE this)VOID: (
+        depth +:= 1;
+        PROC in = STRING: " |"*depth;
+# Key point here: the rows of the "a matrix" are generated one row num at a time
+  so it MAY be possible to invert the 'a matrix' "on the fly!" as a series of
+  elementary matricies (similar to the revised simplex method) #
+        INT new row num of this := row num OF this; # Warning: a cached copy #
+        IF new row num of this = not installed THEN
+            new row num of this := ref node row num(ijk OF this) := flex upb rows +:= 1
+        FI;
+        (FALSE AND with debug|printf(($gf(node repr)$, in+"this:", this, $", actual row:"$, int repr, new row num of this, $l$)));
+      # FOR NODE next, INT weight IN # gen node cluster weight(this#) DO (#,
+      ##   (NODE next, INT weight)VOID:(
+        (FALSE AND with debug|printf(($gf(node repr)$, in+"next:", next, $", weight:"$, scal repr, weight, $l$)));
+        CASE (f boundary u xyz OF bvp)(xyz OF next) IN
+            (UREAL u xyz): ( # we have a boundary #
+                ref node row num(ijk OF next) := boundary; # Note: perimeters need not be installed #
+                ref out solution(ijk OF next) := u xyz; # store the boundary value #
+                alfa to beta[new row num of this] -:= u xyz # substract from the laplacian #
+;(FALSE AND with debug|print((in+"alfa to beta",new row num of this," -> ",REPR alfa to beta, new line)))
+            ),
+            (VOID): ( # we have an unknown to be determined #
+                (FALSE AND with debug|printf(($gf(node repr)$, "next:", next, $l$)));
+                IF row num OF next = not installed THEN install node(next) FI;
+                INT new row num of next :=  ref node row num(ijk OF next);
+                a matrix[new row num of this, new row num of next] := weight;
+                alfa to beta[new row num of this] := (laplacian OF bvp)(xyz OF this) # init laplacian #
+;(FALSE AND with debug|print((in+"a matrix row",new row num of this," => ",REPR a matrix[new row num of this,], new line)))
+            )
+        ESAC
+      # OD #))
+        ;depth -:= 1
+    );
+
+# Now build the grid ... #
+    XYZ xyz = (lwb OF x interval + dx, lwb OF y interval + dy);
+    IJK ijk = (lwb xi + 1, lwb yj + 1);
+    NODE first node = (xyz, ijk, not installed);
+
+    install node(first node); # the rest is done recursively #
+
+(FALSE AND with debug|print mat list(("a:",a matrix, new line)));
+(FALSE AND with debug|print mat list(("a:",alfa to beta, new line)));
+
+# Solve the grid... #
+    VEC solved = a matrix[:flex upb rows,:flex upb rows] UNDER alfa to beta[:flex upb rows];
+
+# FINALLY: add missing boundary conditions, then output the result as a matrix #
+  # FOR IJK ijk IN # ijk gen(#) DO (#
+  ##   (IJK ijk)VOID:(
+            INT row num = ref node row num(ijk);
+            IF row num = not installed THEN 
+            # take this chance to add uncalculated boundary conditions #
+                XYZ xyz = ijk to xyz(ijk);
+                ref out solution(ijk) := 
+                    CASE (f boundary u xyz OF bvp)(xyz) IN
+                        (UREAL u xyz): u xyz,
+# NB: The solution may contain "undefined" blind spots if the boundary
+      has holes! for example the 4 courners of a square boundary QQQ #
+                        (VOID #empty#): UREAL(666.666) # This is an unconnected region # 
+                    ESAC
+            ELIF row num = boundary THEN 
+                SKIP # A known and calculated boundary #
+            ELSE 
+                ref out solution(ijk) := solved[row num] 
+            FI
+  # OD#));
+
+  out solution # EXIT with the result #
+);
+
+SKIP # export names #

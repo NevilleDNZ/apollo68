@@ -1,0 +1,8 @@
+#!/usr/bin/algol68g-full --script #
+# -*- coding: utf-8 -*- #
+PR no-warning PR
+
+MODE SCAL = REAL, COSCAL = COMPL;
+PR include "prelude/torrix.a68" PR;
+
+SKIP

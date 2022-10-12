@@ -1,0 +1,24 @@
+# -*- coding: utf-8 -*- #
+
+OP +:= = (REF VEC lhs, VEC rhs)REF VEC: (
+    FOR i TO UPB lhs DO lhs[i] +:= rhs[i] OD;
+    lhs
+);
+
+OP -:= = (REF VEC lhs, VEC rhs)REF VEC: (
+    FOR i TO UPB lhs DO lhs[i] -:= rhs[i] OD;
+    lhs
+);
+
+OP *:= = (REF VEC lhs, SCAL rhs)REF VEC: (
+    FOR i TO UPB lhs DO lhs[i] *:= rhs OD;
+    lhs
+);
+
+OP /:= = (REF VEC lhs, SCAL rhs)REF VEC: (
+    SCAL inv = 1 / rhs;
+    FOR i TO UPB lhs DO lhs[i] *:= inv OD;
+    lhs
+);
+
+SKIP # export names #

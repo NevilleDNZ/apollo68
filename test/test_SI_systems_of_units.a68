@@ -1,0 +1,9 @@
+#!/usr/bin/algol68g-full --script #
+# -*- coding: utf-8 -*- #
+PR no-warning PR
+
+MODE VEC = [8]REAL;
+
+PR include "prelude/SI_system_of_units.a68" PR;
+
+SKIP

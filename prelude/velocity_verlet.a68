@@ -1,0 +1,53 @@
+# -*- coding: utf-8 -*- #
+
+COMMENT
+:<math>\vec{x}(t + \Delta t) = \vec{x}(t) + \vec{v}(t)\, \Delta t + \frac{1}{2} \,\vec{a}(t) \Delta t^2  \,</math>
+:<math>\vec{v}(t + \Delta t) = \vec{v}(t) + \frac{\vec{a}(t) + \vec{a}(t + \Delta t)}{2} \Delta t  \,</math>
+
+MODE # Note: FDY are FUNCTIONS of (t, y, dy/dt ... ) #
+    FDDY      #d²y/dt²# = PROC(REAL #t#, Y#y#, DY #dy/dt#)Y,
+    FDDDY     #d³y/dt³# = PROC(REAL #t#, Y#y#, DY #dy/dt#, DY #d²y/dt²#)Y,
+    FDDDDY    #d⁴y/dt⁴# = PROC(REAL #t#, Y#y#, DY #dy/dt#, DDY #d²y/dt²#, DDDY #d³y/dt³#)Y,
+    FDNYBYDTN #dⁿy/dtⁿ# = UNION(FY, FDY, FDDY, FDDDY, FDDDDY # ... #);
+END COMMENT
+
+CO MODE IVPON = STRUCT(INTERVAL t interval, FLEX[1]Y y0 dy0 ddy0 etc, FDNYBYDTN f dny by dtn); CO
+CO MODE ODEONSOLVETYNGEN = PROC (IVPON #ivp on#, ODEONSOLVEARGS #args#, TYNYIELD #yield#)VOID; CO
+CO MODE ODEONSOLVEARGS = STRUCT(REAL step size, FTYDYNTOL f ty tol portal); CO
+# PROC call dny by dtn = (FDNYBYDTN f dny by dtn, REAL t, FLEX[]DY dny by dtn)Y: ~ #
+
+ODEONSOLVETYNGEN velocity verlet tyn gen = (IVPON ivp, ODEONSOLVEARGS args, TYNYIELD yield)VOID: (
+#    (with debug|print ode ivp order n("velocity verlet", ivp));#
+    INT nx=0, nv=1, na=2;
+    INT method order = 2;
+    INT num steps = ROUND(WIDTH t interval OF ivp / step size OF args / method order);
+
+    PROC f a = (REAL t, VEC x,v)VEC: 
+       call f dny by dtn(f dny by dtn OF ivp, t, []Y(x,v)[@0]);
+
+    REAL dt = WIDTH t interval OF ivp / num steps;
+    MODE Y = [UPB (y0 dy0 ddy0 etc OF ivp)[1]]REAL;
+
+    STRUCT(REAL t, [nx:nv]Y y) this;
+    REF REAL t := t OF this; REF Y x := (y OF this)[nx], v := (y OF this)[nv] #, a := (y OF this)[na]#;
+    Y this a, next x, next v, next a;
+
+  # setup ine initial conditions...#
+    t OF this := lwb OF t interval OF ivp;
+    (y OF this)[nx] := (y0 dy0 ddy0 etc OF ivp)[nx];
+    (y OF this)[nv] := (y0 dy0 ddy0 etc OF ivp)[nv];
+
+  # now generate the results... #
+    FOR i TO num steps DO
+        this a := f a(t,x,v);
+        next x := x + v*dt + 1/2*dt**2*this a;
+        next a := f a(t+dt,x,v);
+        next v := v + (this a + next a)/2*dt;
+        t +:= dt;
+     CO this := (t+:=dt, []Y(next x, next v#, next a#)[@0]); CO
+        t OF this := t; (y OF this)[nx] := next x; (y OF this)[nv] := next v;
+        yield(this)
+    OD
+);
+
+SKIP # export names #

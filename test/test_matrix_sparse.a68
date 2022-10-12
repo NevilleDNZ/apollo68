@@ -1,0 +1,39 @@
+#!/usr/bin/algol68g-full --script #
+# -*- coding: utf-8 -*- #
+PR no-warning PR
+
+PR include "prelude/scalar_:=_real.a68" PR;
+PR include "prelude/exception.a68" PR;
+PR include "prelude/errata.a68" PR;
+PR include "prelude/math_errata.a68" PR;
+PR include "prelude/matrix.a68" PR;
+PR include "prelude/matrix_sparse.a68" PR;
+
+test 1:(
+    [5,5]REAL m;
+
+    mat init scal(m,0);
+    mat init band(m, []REAL(1,2,3)[@0]);
+
+    print mat list(("M : ",m))
+
+);
+
+test 2:(
+  SPVEC a := SPVEC(1,2,3)[@0];
+  SPVEC b := SPVEC(1,2,3)[@2];
+  printf(($f(real repr)","$, a+b, $l$))
+);
+
+test 3:(
+  [5]SCAL vec := (0,2,4,2,0);
+  [5,5]SCAL mat; mat init scal(mat, 0.001);
+  mat init band(mat, SPVEC(1,-2,1)[@0]);
+  print mat list(("band:",mat[@2,@3]));
+  SPMAT spmat;
+  print(lwb OF (LUB mat));
+  spmat INIT mat
+);
+
+PR include "postlude/scalar_=:_real.a68" PR;
+PR include "postlude/exception.a68" PR

@@ -1,0 +1,168 @@
+#!/usr/bin/algol68g-full --script #
+# -*- coding: utf-8 -*- #
+PR no-warning PR
+
+PR include "prelude/scalar_:=_real.a68" PR;
+PR include "prelude/with_trace_and_with_debug.a68" PR;
+PR include "prelude/errata.a68" PR;
+
+CO REQUIRED by "prelude/math_errata.a68" CO
+PR include "prelude/math_errata.a68" PR;
+
+PR include "prelude/exception.a68" PR;
+PR include "prelude/count_FPO_disabled.a68" PR;
+
+CO REQUIRED by "prelude/root_find.a68" CO
+    # PR include "prelude/math_hints.a68" PR; #
+PR include "prelude/root_find.a68" PR;
+
+CO
+MODE ANYHINT = MATHHINT;
+[0]ANYHINT no hints;
+CO
+
+INT do test = 1;
+
+PROC (REAL)REAL
+    trig function = sin, 
+    diff of trig function = cos, 
+    double diff of trig function = (REAL x)REAL: -sin(x), 
+
+    sqrt 3 = (REAL x)REAL: x*x/3-1, 
+    diff of sqrt 3 = (REAL x)REAL: 2*x/3, 
+
+    cubert 3 = (REAL x)REAL: x*x*x/3-1, 
+    diff of cubert 3 = (REAL x)REAL: x*x, 
+
+    quartic polynomial = (REAL x)REAL: (x-1)**3*(x+2), 
+    diff of quartic polynomial = (REAL x)REAL: (-1+x)**2*(5+4*x), 
+    double diff of polynomial = (REAL x)REAL: -6-6*x+12*x**2, # used in newton's solver #
+
+    expanded quartic polynomial = (REAL x)REAL: -2+5*x-3*x**2-x**3+x**4, 
+    expanded diff of quartic polynomial = (REAL x)REAL: 5-6*x-3*x**2+4*x**3, 
+
+    quick quartic polynomial = (REAL x)REAL: -2+x*(5+x*(-3+(-1+x)*x)), 
+    quick diff of quartic polynomial = (REAL x)REAL: 5+x*(-6+x*(-3+4*x));
+
+MODE TESTCASEROOT = STRUCT(STRING name, FR function, diff, INTERVAL x interval);
+
+REAL dl = 0.5, dr=1.3; # delta x: provide the initial x ±delta left/right #
+
+(enable|
+    []TESTCASEROOT root test case list = (
+        ("sin", trig function, diff of trig function, INTERVAL(pi-dl, pi+dr)), 
+        ("(x-1)**3*(x+2)", quartic polynomial, diff of quartic polynomial, (+1-dl, +1+dr)), # root at +1 #
+        ("(x-1)**3*(x+2)", quartic polynomial, diff of quartic polynomial, (-2-dl, -2+dr)), # root/extrema at -2 #
+        ("x**2/3-1", sqrt 3, diff of sqrt 3, INTERVAL(1.7-dl, 1.7+dr)), 
+        ("x**3/3-1", cubert 3, diff of cubert 3, INTERVAL(1.4-dl, 1.4+dr)), 
+        ("(x-1)**3*(x+2)", quartic polynomial, diff of quartic polynomial, (1.2-dl, 1.2+dr)) # extrema at -1.25 #
+    );
+
+    []TESTCASEROOT root test case sample = root test case list[:2];
+
+    MODE ROOTFINDDETAILS = STRUCT(ROOTFIND solver, STRING name, description);
+    FOR i TO UPB root test case sample DO
+        TESTCASEROOT test case = root test case sample[i];
+        # [0]ANYHINT no hints; #
+        printf(($"===Find roots of: "g$,name OF test case,$":==="l$));
+
+    # count function & differentiation calls #
+        FR function = count function calls(function OF test case, );
+        FR diff = count differential calls(diff OF test case, );
+
+    # bisection #
+        BISECTIONARGS bisection args = (x interval OF test case, ENTIER(default upb iteration*1.2), f xy abstol);
+        ROOTFIND bisection = root find bisection(, bisection args#, no hints#);
+
+    # newton raphson #
+        NEWTONRAPHSONARGS newton raphson args = (diff, lwb OF x interval OF test case, default upb iteration, f xy abstol);
+        ROOTFIND newton raphson = root find newton raphson(, newton raphson args#, no hints#);
+
+    # secant method #
+        SECANTARGS secant args = (x interval OF test case, default upb iteration, f xy abstol);
+        ROOTFIND secant = root find secant(, secant args#, no hints#);
+
+    # all methods #
+        []ROOTFINDDETAILS methods = (
+            (bisection, "bisection", "require an initial lower AND upper bound"), 
+            (newton raphson, "newton raphson", "requires an initial x AND 1st derivative"), 
+            (secant, "secant", "methods that require 2 initial xes")
+CO
+            (fixed point, "fixed point", "desc"), 
+            (double false position, "double false position", "desc"), 
+END CO
+        );
+
+    # test #
+        FOR m TO UPB methods DO
+            ROOTFINDDETAILS method = methods[m];
+            printf(($g": "gl$, name OF method, description OF method));
+            init count;
+                ROOTFIND solver = solver OF method;
+                printf(($"method: "g$, name OF method, fs, 
+                                $"function: "g$, name OF test case, fs, 
+                                $"on interval: "$, interval repr, x interval OF test case, nl));
+                XY root = solver (function);
+                printf(( $"result: "$, xy repr, root, fs, 
+                                $"approximate root was "b("", "NOT ")"found"$, ABS (y OF root) < partial precision, 
+                nl));
+            print count summary
+        OD
+    OD
+);
+
+(enable|
+    MODE TESTCASEMINIMA = STRUCT(STRING name, FR function, diff, double diff, INTERVAL x interval);
+    REAL el = 0.2, er=0.3; # delta x: provide the initial x ±delta left/right #
+    []TESTCASEMINIMA minima test case list = (
+        ("sin", trig function, diff of trig function, double diff of trig function, INTERVAL(pi*3/2-el, pi*3/2+er)), 
+        ("(x-1)**3*(x+2)", quartic polynomial, diff of quartic polynomial, double diff of polynomial, (+1-el, +1+er)), # root at +1 #
+        ("(x-1)**3*(x+2)", quartic polynomial, diff of quartic polynomial, double diff of polynomial, (-2-el, -2+er)), # root/extrema at -2 #
+        ("(x-1)**3*(x+2)", quartic polynomial, diff of quartic polynomial, double diff of polynomial, (1.2-el, 1.2+er)), # extrema at -1.25 #
+        SKIP
+    );
+    []TESTCASEMINIMA minima test case sample = minima test case list[:2];
+
+    MODE MINIMAFINDDETAILS = STRUCT(MINIMAFIND solver, STRING name, description);
+    FOR i TO UPB minima test case sample DO
+        TESTCASEMINIMA test case = minima test case sample[i];
+        printf(($"===Find minima of: "g$,name OF test case,$":==="l$));
+        # [0]ANYHINT no hints; #
+
+    # count function & differentiation calls with a curry #
+        FR function = count function calls(function OF test case, );
+        FR diff = count differential calls(diff OF test case, );
+
+    # golden section search #
+        GOLDENSECTIONARGS golden section args = (x interval OF test case, default upb iteration, f xy abstol);
+        MINIMAFIND golden section = minima find golden section(, golden section args#, no hints#);
+
+    # golden section search #
+        SPIARGS successive parabolic interpolation args = (x interval OF test case, default upb iteration, f xy abstol);
+        MINIMAFIND successive parabolic interpolation = minima find successive parabolic interpolation(, successive parabolic interpolation args#, no hints#);
+
+    # all methods #
+        []MINIMAFINDDETAILS methods = (
+            (golden section, "golden section", "requires an initial lower AND upper bound"), 
+            (successive parabolic interpolation, "successive parabolic interpolation", "requires an initial lower AND upper bound")
+        );
+
+    # test #
+        FOR m TO UPB methods DO
+            MINIMAFINDDETAILS method = methods[m];
+            printf(($g": "gl$, name OF method, description OF method));
+            init count;
+                MINIMAFIND solver = solver OF method;
+                printf(($"method: "g$, name OF method, fs, 
+                        $"function: "g$, name OF test case, fs, 
+                        $"on interval: "$, interval repr, x interval OF test case, nl));
+                XY minima = solver (function);
+                printf(( $"result: "$, xy repr, minima, $l$));
+            print count summary
+        OD
+    OD
+);
+
+PR include "postlude/count_FPO.a68" PR;
+PR include "postlude/exception.a68" PR;
+PR include "postlude/scalar_=:_real.a68" PR

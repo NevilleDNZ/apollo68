@@ -1,0 +1,120 @@
+#!/usr/bin/algol68g-full --script #
+# -*- coding: utf-8 -*- #
+PR no-warning PR
+
+PR include "prelude/scalar_:=_real.a68" PR;
+PR include "prelude/with_trace_and_with_debug.a68" PR;
+PR include "prelude/errata.a68" PR;
+PR include "prelude/exception.a68" PR;
+PR include "prelude/math_errata.a68" PR;
+PR include "prelude/matrix.a68" PR;
+
+CO REQUIRED BY graph_2d CO
+    MODE GREAL= REAL; # single precision #
+    FORMAT greal repr := $g(-0,4)$;
+    PR include "prelude/classes.a68" PR;
+PR include "prelude/graph_2d.a68" PR;
+PR include "prelude/graph_3d.a68" PR;
+
+COMMENT
+sine test:(disabled|
+    REF GRAPHDD test graph 2d = INIT LOC GRAPHDD;
+    REF GRAPHDDD test graph 3d = INIT LOC GRAPHDDD;
+
+    title OF test graph 2d := "Title: Earth vs Moon";
+    type OF window OF test graph 2d := "X"; # or gif, ps, X, pnm etc #
+    sub title OF test graph 2d := "In a unit grid";
+
+    interval OF (axis OF test graph 2d)[x axis] := (0.0, 2*pi);
+    label OF    (axis OF test graph 2d)[x axis] := "x axis";
+    (pixels OF window OF test graph 2d)[x axis] *:= 1; # Zoom #
+    interval OF (axis OF test graph 2d)[y axis] := (0, pi*2);
+
+    interval OF (axis OF test graph 2d)[y axis] := (-1.1, 1.1);
+    label OF    (axis OF test graph 2d)[y axis] := "sin x, cos x, cos x² & cos² x";
+
+    PROC curve 3d = (DDDYIELD yield)VOID: (
+        INT steps := 360;
+        FOR i FROM 0 TO steps DO
+            GREAL x=GREAL(2)*pi*i/steps;
+            []REAL out =(x,sin(x),cos(x));
+            yield(out)
+        OD
+    );
+
+    PROC (DDYIELD #yield#)VOID curve 2d = (from 3d to 2d gen OF (METHODOF test graph 3d))(curve 3d,);
+
+    (begin curve OF (METHODOF test graph 2d))(~);
+    (add curve OF   (METHODOF test graph 2d))(curve 2d, (red,yellow,blue));
+    (end curve OF   (METHODOF test graph 2d))(~)
+);
+END COMMENT
+grid test:(
+
+    REF GRAPHDD test graph 2d = INIT LOC GRAPHDD;
+    REF GRAPHDDD test graph 3d = INIT LOC GRAPHDDD;
+    zoom OF test graph 3d := 2; # Ignored #
+    look to OF test graph 3d := (0.5,0.5,0.5);
+
+    title OF test graph 2d := "Title: A unit grid";
+    type OF window OF test graph 2d := "X"; # or gif, ps, X, pnm etc #
+    sub title OF test graph 2d := "From ~ units (default)";
+
+    interval OF (axis OF test graph 2d)[x axis] := (-1.7,1.7);
+    #label OF    (axis OF test graph 2d)[x axis] := "x axis";#
+    (pixels OF window OF test graph 2d)[x axis] *:= 1; # Zoom #
+
+    interval OF (axis OF test graph 2d)[y axis] := (-1.1, 1.1);
+    #label OF    (axis OF test graph 2d)[y axis] := "Y";#
+
+    PROC globe 3d = (DDDYIELD yield)VOID: (
+      REAL r = 1;
+      REAL h = 0;
+      INT step = 5;
+      FOR i FROM 0 BY step TO 360 DO
+        REAL theta = i*2*pi/360;
+        yield((h+r*sin(theta), h+r*cos(theta),h))
+      OD;
+      FOR i FROM 0 BY step TO 360 DO
+        REAL theta = i*2*pi/360;
+        yield((h,h+r*cos(theta), h+r*sin(theta)))
+      OD;
+
+      []REAL lat list = (66.5622, 0, -23.5, -66.5622);
+      FOR i lat TO UPB lat list DO
+        REAL x lat = sin(lat list[i lat]/360*2*pi);
+        REAL y lat = cos(lat list[i lat]/360*2*pi);
+        FOR i FROM 0 BY step TO 180 DO
+          REAL theta = i*2*pi/360;
+          yield((h+y lat*cos(theta), x lat, h+y lat*sin(theta)))
+        OD;
+        REAL theta = 0*2*pi/360;
+        yield((h+y lat*cos(theta), x lat, h+y lat*sin(theta)))
+      OD
+    );
+
+    PROC grid 3d = (DDDYIELD yield)VOID: (
+      REAL i := 1, h := 0.9;
+      yield((0,0,0)); #yield((h,0,0));# yield((i,0,0)); #yield((h,h,0));# 
+      yield((i,i,0)); #yield((h,h,h));# yield((i,i,i)); #yield((h,0,h));# 
+      yield((i,0,i)); #yield((0,0,h));# yield((0,0,i)); #yield((0,h,h));#
+      yield((0,i,i)); #yield((0,h,0));# yield((0,i,0)); #yield((0,h,0));#
+      yield((0,0,0))
+    );
+
+    PROC (DDYIELD #yield#)VOID grid 2d = (from 3d to 2d gen OF (METHODOF test graph 3d))(grid 3d,);
+    PROC (DDYIELD #yield#)VOID globe 2d = (from 3d to 2d gen OF (METHODOF test graph 3d))(globe 3d,);
+
+
+    look to OF test graph 3d := (0,0,0);
+    zoom OF test graph 3d := 30; # Ignored #
+    (set look from OF (METHODOF test graph 3d))((10,40,-30));
+
+    (begin curve OF (METHODOF test graph 2d))(~);
+    (add curve OF   (METHODOF test graph 2d))(grid 2d, red);
+    (add curve OF   (METHODOF test graph 2d))(globe 2d, blue); 
+    (end curve OF   (METHODOF test graph 2d))(~)
+);
+
+PR include "postlude/exception.a68" PR;
+PR include "postlude/scalar_=:_real.a68" PR

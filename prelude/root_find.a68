@@ -1,0 +1,278 @@
+# -*- coding: utf-8 -*- #
+
+# methods that require an feasible lower AND upper bound #
+MODE FXYY = PROC(XY)REAL;
+
+PROC differentiate = ( FXYY f, XY a, FXY tol)REAL: (
+    XY delta = tol(a); XY b;
+    x OF b := x OF a + x OF delta;
+    y OF b := f(b);
+# BTW: as we have "y OF tol" we could check dy/dx is accurate enough #
+    (y OF b - y OF a) / (x OF b - x OF a)
+);
+
+# A double differential using "currying" #
+PROC curry double differentiate = ( FXYY f, XY a, FXY tol)REAL:
+    differentiate(differentiate(f, ,tol), a, tol);
+
+PROC double differentiate = ( FXYY f, XY a, FXY tol)REAL: (
+    XY delta = tol(a);
+    XY b;
+# Note: a minus is used next, this reduces the error in the double diff
+          by evaluating f at x-delta, x, x+delta.  Hence a better spanning of x.
+#
+    x OF b := x OF a - x OF delta;
+    y OF b := differentiate(f, b, tol);
+    (y OF b - y OF a) / (x OF b - x OF a)
+);
+
+#============================#
+# Methods for finding roots  #
+#============================#
+MODE BISECTIONARGS = STRUCT(INTERVAL x, INT upb iteration, FXY f xy tol portal);
+PROC root find bisection = (FR y, BISECTIONARGS args#, []ANYHINT hints#)XY: (
+    XY middle, xy tol, 
+                lwb := (lwb OF x OF args, y(lwb OF x OF args)),
+                upb := (upb OF x OF args, y(upb OF x OF args));
+    TO upb iteration OF args DO
+        CO iterations OF count +:= 1; CO
+        x OF middle := (x OF lwb + x OF upb) / 2; y OF middle := y(x OF middle);
+        xy tol := (f xy tol portal OF args)(middle); # weighted or dynamic tol #
+    (with debug|printf(($"DB - lwb: "$,$f(real repr)"; "$,lwb)));
+    (with debug|printf(($"DB - upb: "$,$f(real repr)"; "$,upb)));
+    (with debug|printf(($"DB - upb-lwb: "$,$f(real repr)"; "$,upb-lwb)));
+    (with debug|printf(($"DB - xy tol: "$,$g"; "$,xy tol,$l$)));
+        IF ABS(y OF middle) < y OF xy tol THEN found FI;
+        IF SIGN y OF lwb = SIGN y OF middle THEN lwb ELSE upb FI := middle;
+        IF ABS (lwb - upb) < xy tol THEN found FI
+    OD;
+else:
+    fix index error("root find bisection: too many iterations");
+found:
+    middle
+);
+
+MODE FPIARGS = STRUCT(REAL feasible x, INT upb iteration, FXY f xy tol portal);
+PROC root find fixed point = (FR y, FPIARGS args#, []ANYHINT hints#)XY: (
+# same as Newtons Raphsons method, but dy/dx is estimated as ±1 #
+    PROC dy by dx = (REAL x)REAL: 1;  # FPI assumes dy by dx = 1, yuk #
+    root find newton raphson(y, (dy by dx, feasible x OF args, upb iteration OF args, f xy abstol)#, hints#)
+);
+
+PROC depr root find fixed point iteration = (FR y, FPIARGS args#, []ANYHINT hints#)XY: (
+    XY current, next, xy tol;
+    current := (feasible x OF args, y(feasible x OF args));
+    xy tol := (f xy tol portal OF args)(current); # weighted or dynamic tol portal #
+    TO upb iteration OF args DO
+        IF ABS(y OF current) < y OF xy tol THEN found FI;
+        CO iterations OF count +:= 1; CO
+        x OF next := x OF current - y OF current;
+        y OF next := y(x OF next);
+        xy tol := (f xy tol portal OF args)(next); # weighted or dynamic tol portal #
+        IF ABS (current - next) < xy tol THEN found FI;
+        current := next
+    OD;
+else:
+      SKIP;
+      # fix index error("root find fixed point iteration: too many iterations"); #
+found:
+      current
+);
+
+MODE NEWTONRAPHSONARGS = STRUCT(FR dy by dx, R feasible x, INT upb iteration, FXY f xy tol portal);
+PROC root find newton raphson = (FR y, NEWTONRAPHSONARGS args#, []ANYHINT hints#)XY: (
+
+    XY current, next, tol portal;
+
+    x OF current := feasible x OF args;
+    y OF current := y(x OF current);
+
+    TO upb iteration OF args DO
+# redo tol portal to be a call back! #
+        tol portal := (f xy tol portal OF args)(current); # weighted or dynamic tol portal #
+        IF ABS(y OF current) < y OF tol portal THEN found FI;
+        CO iterations OF count +:= 1; CO
+        SCAL dy by dx = (dy by dx OF args)(x OF current);
+        (FALSE AND with debug|printf(($" DB - dy by dx OF args: "$,$f(real repr)"; "$,dy by dx)));
+        x OF next := x OF current - y OF current / dy by dx;
+        y OF next := y(x OF next);
+      # estimate the error assuming related to convergence #
+    (FALSE AND with debug|printf(($"DB - current: "$,$f(real repr)"; "$,current)));
+    (FALSE AND with debug|printf(($"DB - next: "$,$f(real repr)"; "$,next,$l$)));
+    #printf(($"DB - tol portal: "$,$g$,tol portal,$l$)); #
+        IF ABS (current - next) < tol portal THEN found FI;
+        current := next
+    OD;
+else:
+      fix index error("root find newton raphson/secant: too many iterations: "+sprintf(($g(0)$,upb iteration OF args)));
+found:
+      current
+);
+
+MODE SECANTARGS = STRUCT(INTERVAL x, INT upbiteration, FXY f xy tol portal);
+PROC root find secant = (FR y, SECANTARGS args#, []ANYHINT hints#)XY: (
+# same as Newtons Raphsons method, but dy/dx is estimated from y(n-1) #
+# Generalizations:  Broyden's method #
+    XY previous, current := SKIP;
+    PROC y with cache = (REAL x)REAL: ( previous := current; current := (x, y(x)); y OF current );
+
+    current := (lwb OF x OF args, y with cache(lwb OF x OF args));
+
+    (FALSE AND with debug|printf(($"DB - previous: "$,$f(real repr)";"$,previous)));
+    (FALSE AND with debug|printf(($"DB - current: "$,$f(real repr)";"$,current,$l$)));
+
+    PROC dy by dx = (REAL x)REAL: (XY d = previous - current; y OF d / x OF d);
+
+#MODE NEWTONRAPHSONARGS = STRUCT(FR dy by dx, INT upb iteration, R feasible x, FXY f xy tol); #
+
+    root find newton raphson(y with cache, (dy by dx,upb OF x OF args, upb iteration OF args, f xy abstol)#, hints#)
+);
+
+MODE DFPARGS = SECANTARGS;
+PROC root find double false position = (FR y, DFPARGS args#, []ANYHINT hints#)XY: (
+# Hybrid of secant method and bisection to enfore convergence #
+    fix unimplemented("double false position method");SKIP
+);
+
+#============================#
+# Methods for finding minima #
+#============================#
+
+# methods that require an feasible lower AND upper bound #
+REAL phi = (1 + sqrt(5))/2, # φ is about 1.618034, note: 1.618034*0.618034 = 1.00000002... #
+          phim1 = phi - 1;
+
+MODE GOLDENSECTIONARGS = STRUCT(INTERVAL x interval, INT upb iteration, FXY tol);
+PROC minima find golden section = (FR y, GOLDENSECTIONARGS args#, []ANYHINT hints#)XY: (
+
+    PROC get next = (FR f, XY lwb, upb)XY: (
+    # calculate the distance of the middle point using the golden rule #
+        XY out;
+        x OF out := (x OF lwb * phim1 + x OF upb) * phim1;
+        y OF out := y(x OF out);
+        out
+    );
+
+    XY xy tol,  bc,
+        a := (lwb OF x interval OF args, y(lwb OF x interval OF args)),
+        b,
+        c := (upb OF x interval OF args, y(upb OF x interval OF args));
+    (with debug|printf(($"DB - a: "$,$f(real repr)"; "$,a)));
+    (with debug|printf(($"DB - c: "$,$f(real repr)"; "$,c)));
+
+    b := get next(y,a,c);
+    (with debug|printf(($"DB - b: "$,$f(real repr)"; "$,b,$l$)));
+
+    TO upb iteration OF args DO
+        CO iterations OF count +:= 1; CO
+    CO (with debug|printf(($"DB - iterations OF count: "$,$g"; "$,iterations OF count))); CO
+        bc := get next(y,b,c);
+        xy tol := (tol OF args)(bc); # weighted or dynamic tolerance #
+        IF y OF bc > y OF b THEN
+    (with debug|printf(($"DB - b: "$,$f(real repr)"; "$,b)));
+    (with debug|printf(($"DB - bc: "$,$f(real repr)"; "$,bc,$l$)));
+            a:=b; b:=bc # retreat to a,b,bc #
+        ELSE
+    (with debug|printf(($"DB - a: "$,$f(real repr)"; "$,a)));
+    (with debug|printf(($"DB - bc: "$,$f(real repr)"; "$,bc,$l$)));
+            c:=a; a:=bc # advance to b,bc,c #
+        FI;
+        IF ABS(c-a) < xy tol THEN found FI
+    OD;
+else:
+      SKIP;
+      # fix index error("minima find golden section search: too many iterations"); #
+found:
+    bc
+);
+
+MODE SPIARGS =  STRUCT(INTERVAL x interval, INT upb iteration, FXY f xy tol portal);
+PROC minima find successive parabolic interpolation = (FR f, SPIARGS args#, []ANYHINT hints#)XY: (
+
+    PROC get next = (FR f, XY a, b, c)XY: (
+    # calculate the distance of the boundary point using the parabolic interpolation #
+        XY out;
+        XY ab, bc; # the values of the function at the midpoint #
+        x OF ab := (x OF a + x OF b)/2; y OF ab := f(x OF ab);
+        x OF bc := (x OF b + x OF c)/2; y OF bc := f(x OF bc);
+        REAL dy by dx = (y OF ab - y OF bc) / x OF ab * x OF bc; # n.b. R divisions are slow! #
+        x OF out := x OF a - x OF a * dy by dx;
+        y OF out := f(x OF out);
+        out
+    );
+
+    XY xy tol,  bc,
+        a := (lwb OF x interval OF args, f(lwb OF x interval OF args)),
+        b, # nitially make this the mid point #
+        c := (upb OF x interval OF args, f(upb OF x interval OF args));
+
+    x OF b := (x OF a + x OF c) / 2;
+    y OF b := f(x OF b);
+
+    TO upb iteration OF args DO
+        CO iterations OF count +:= 1; CO
+        bc := get next(f,a,b,c);
+        xy tol := (f xy tol portal OF args)(bc); # weighted or dynamic tolerance #
+# The minimum of quadratic replaces the oldest etc... #
+        a:=b; b:=c; c:=bc;
+
+        IF   ABS(c-a) < xy tol THEN found FI
+    OD;
+else:
+      SKIP;
+      # fix index error("minima find successive parabolic interpolation: too many iterations"); #
+found:
+    bc
+);
+
+MODE NEWTONSARGS = STRUCT(FR dy by dx, ddy by dxx, REAL feasible x, INT upb iteration, FXY f xy tol portal);
+
+PROC minima find newtons = (FR f, NEWTONSARGS args#, []ANYHINT hints#)XY: (
+
+# x(n+1) = x(n) - f'(x(n))/f''(x(n)), Note f(x) is not directly used, only f' and f'' #
+
+    XY xy tol, current := (feasible x OF args, ~), next := (~, ~);
+
+    TO upb iteration OF args DO
+        CO iterations OF count +:= 1; CO
+        # x(n+1) = x(n) - f'(x(n))/f''(x(n)) #
+        x OF next := x OF current - (dy by dx OF args)(x OF current) / (ddy by dxx OF args)(x OF current);
+        y OF next := f(x OF next);
+        xy tol := (f xy tol portal OF args)(next); # weighted or dynamic tolerance #
+
+        IF   ABS(x OF next - x OF current) < x OF xy tol ANDF # tol check #
+                  ABS(y OF next - y OF current) < y OF xy tol THEN found FI;
+        current := next
+    OD;
+else:
+      SKIP;
+      # fix index error("minima find newtons method: too many iterations"); #
+found:
+    y OF current := f(x OF current);
+    current
+);
+
+MODE ROOTFIND = PROC(FR #y#)XY;
+MODE ROOTFINDDETAILS = STRUCT(ROOTFIND method, STRING short, description);
+
+[]ROOTFINDDETAILS root finder list = (
+CO
+    (root find fixed point iteration(,SKIP),"fixed point iteration","fixed point iteration desc"),
+END CO
+    (root find newton raphson(,SKIP),"newton raphson","newton raphson desc"),
+    (root find secant(,SKIP),"secant","secant desc")
+CO
+#  (root find double false position(,SKIP),"double false position","double false position desc"),#
+END CO
+);
+
+MODE MINIMAFIND = PROC(FR #y#)XY;
+MODE MINIMAFINDDETAILS = STRUCT(MINIMAFIND method, STRING short, description);
+
+[]MINIMAFINDDETAILS minima finder list = (
+    (minima find golden section(,(SKIP)),"golden section","golden section desc"),
+    (minima find successive parabolic interpolation(,SKIP),"successive parabolic interpolation","successive parabolic interpolation desc"),
+    (minima find newtons(,SKIP),"newtons","newtons desc")
+);
+
+SKIP # export names #

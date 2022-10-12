@@ -1,0 +1,8 @@
+7     TAG html = ("html",
+                 1       
+algol68g-full: error: 1: ([] CHAR, [] CHAR, [] CHAR) cannot be coerced to FLEX [] BOOL in a strong-unit (detected in 
+particular-program).
+12    TAG table = (("html","blocked",SKIP),
+                  1                        
+algol68g-full: error: 1: ([] CHAR, [] CHAR, HIP) cannot be coerced to STRING and ([] CHAR, [] CHAR, [] CHAR) cannot be coerced to 
+FLEX [] BOOL in a strong-unit (detected in particular-program).

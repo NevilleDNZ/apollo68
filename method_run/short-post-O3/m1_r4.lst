@@ -1,0 +1,445 @@
+OPT1: 1; OPT2: 4; 
+System:((Sun  ,Earth,Moon ,Ap8CM),Apollo 8,-3.23537400000e7,)
+Initial position:
+  S:("Sun  ","☉",( 1.9891000000e30,( 0.00000000000e0, 0.00000000000e0),( 0.00000000000e0, 0.00000000000e0)))
+  E:("Earth","⊕",( 9.7220000000e23,( 1.5000000000e11, 0.00000000000e0),( 0.00000000000e0, 2.97866078294e4)))
+  M:("Moon ","☾",( 7.3476730900e22,( 1.5038500000e11, 0.00000000000e0),( 0.00000000000e0, 3.03571562823e4)))
+  8:("Ap8CM","8",( 5.80900000000e3,( 1.5000656275e11, 0.00000000000e0),( 0.00000000000e0, 3.29307012406e4)))
+Parameter: step size =  8.333e-4; hours
+Parameter: report period =  1.0000e0; hours
+Parameter: mission stop time =  1.6393e2; hours
+IVP Order-2: solar system:
+  t interval: [ 0.0000e0 …  5.9015e5]
+  y₀ = ( 0.0000e0, 0.0000e0, 1.500e11, 0.0000e0, 1.504e11, 0.0000e0, 1.500e11, 0.0000e0)
+  dy₀/dt = ( 0.0000e0, 0.0000e0, 0.0000e0, 2.9787e4, 0.0000e0, 3.0357e4, 0.0000e0, 3.2931e4)
+  d²y₀/dt² = ( 3.100e-9, 0.0000e0,-5.866e-3, 0.0000e0,-6.307e-3, 0.0000e0,-1.5121e0, 0.0000e0)
+
+
+Reference point: Earth
+Initial momentum:( 0.0000e0, 3.119e28), Initial energy: 4.651e32
+IVP order-1: runga kutta 4th order
+  t interval: [ 0.0000e0 …  5.9015e5]
+  y₀ = ( 0.0000e0, 0.0000e0, 1.500e11, 0.0000e0, 1.504e11, 0.0000e0, 1.500e11, 0.0000e0, 0.0000e0, 0.0000e0, 0.0000e0, 2.9787e4, 0.0000e0, 3.0357e4, 0.0000e0, 3.2931e4)
+  dy₀/dt = ( 0.0000e0, 0.0000e0, 0.0000e0, 2.9787e4, 0.0000e0, 3.0357e4, 0.0000e0, 3.2931e4, 3.100e-9, 0.0000e0,-5.866e-3, 0.0000e0,-6.307e-3, 0.0000e0,-1.5121e0, 0.0000e0)
+
+
+Time:    0.00hours, Distance to sun:150000.0Mm, Energy:    0.00YJ, Momentum( 0.0000e0, 0.0000e0)Pgm/s
+Sun  loc:(-1.5000e5, 0.0000e0)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 0.0000e0,-3.8603e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:( 0.0000e0, 1.0723e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.8500e2, 0.0000e0)Mm; rv:( 0.0000e0, 2.0540e3)kph; av:( 0.0000e0, 7.3943e3)kph; os: 2.0540e3kph; or: 3.8500e2Mm; 
+Ap8CMloc:( 6.5627e0, 0.0000e0)Mm; rv:( 0.0000e0, 1.1319e4)kph; av:( 0.0000e0, 4.0747e4)kph; os: 1.1319e4kph; or: 6.5627e0Mm; 
+Time:    1.00hours, Distance to sun:150000.0Mm, Energy:   -0.58YJ, Momentum(-3.240e-3,-8.7961e0)Pgm/s
+Sun  loc:(-1.5000e5,-1.0723e2)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 2.7369e2,-3.8603e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-7.6025e1, 1.0723e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.8500e2, 2.0540e0)Mm; rv:(-5.7100e0, 2.0540e3)kph; av:(-2.0556e1, 7.3943e3)kph; os: 2.0540e3kph; or: 3.8500e2Mm; 
+Ap8CMloc:(-1.2128e0, 6.4883e0)Mm; rv:(-1.1445e4,-2.0528e3)kph; av:(-4.1202e4,-7.3902e3)kph; os: 1.1628e4kph; or: 6.6006e0Mm; 
+Time:    2.00hours, Distance to sun:150000.0Mm, Energy:   -3.95YJ, Momentum( 1.826e-2,-8.7961e0)Pgm/s
+Sun  loc:(-1.5000e5,-2.1446e2)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 5.4738e2,-3.8603e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-1.5205e2, 1.0723e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.8499e2, 4.1079e0)Mm; rv:(-1.1420e1, 2.0539e3)kph; av:(-4.1111e1, 7.3941e3)kph; os: 2.0539e3kph; or: 3.8501e2Mm; 
+Ap8CMloc:(-6.3720e0,-2.1446e0)Mm; rv:( 3.4024e3,-1.0538e4)kph; av:( 1.2249e4,-3.7937e4)kph; os: 1.1074e4kph; or: 6.7232e0Mm; 
+Time:    3.00hours, Distance to sun:150000.0Mm, Energy:  -10.12YJ, Momentum( 2.149e-2,-1.7592e1)Pgm/s
+Sun  loc:(-1.5000e5,-3.2170e2)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 8.2107e2,-3.8603e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-2.2808e2, 1.0723e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.8497e2, 6.1618e0)Mm; rv:(-1.7129e1, 2.0538e3)kph; av:(-6.1664e1, 7.3938e3)kph; os: 2.0539e3kph; or: 3.8502e2Mm; 
+Ap8CMloc:( 2.3859e0,-6.3774e0)Mm; rv:( 1.0126e4, 3.7689e3)kph; av:( 3.6455e4, 1.3568e4)kph; os: 1.0805e4kph; or: 6.8091e0Mm; 
+Time:    4.00hours, Distance to sun:150000.0Mm, Energy:  -19.09YJ, Momentum(-1.611e-2, 0.0000e0)Pgm/s
+Sun  loc:(-1.5000e5,-4.2893e2)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 1.0948e3,-3.8603e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-3.0410e2, 1.0723e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.8495e2, 8.2156e0)Mm; rv:(-2.2837e1, 2.0537e3)kph; av:(-8.2213e1, 7.3934e3)kph; os: 2.0538e3kph; or: 3.8504e2Mm; 
+Ap8CMloc:( 6.2462e0, 2.6697e0)Mm; rv:(-4.4357e3, 1.0348e4)kph; av:(-1.5969e4, 3.7253e4)kph; os: 1.1259e4kph; or: 6.7928e0Mm; 
+Time:    5.00hours, Distance to sun:150000.0Mm, Energy:  -30.85YJ, Momentum(-6.444e-2, 4.3980e0)Pgm/s
+Sun  loc:(-1.5000e5,-5.3616e2)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 1.3685e3,-3.8603e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-3.8013e2, 1.0723e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.8493e2, 1.0269e1)Mm; rv:(-2.8544e1, 2.0536e3)kph; av:(-1.0276e2, 7.3929e3)kph; os: 2.0538e3kph; or: 3.8507e2Mm; 
+Ap8CMloc:(-3.3298e0, 5.9739e0)Mm; rv:(-9.9975e3,-5.4475e3)kph; av:(-3.5991e4,-1.9611e4)kph; os: 1.1385e4kph; or: 6.8392e0Mm; 
+Time:    6.00hours, Distance to sun:150000.0Mm, Energy:  -45.41YJ, Momentum( 2.363e-2, 0.0000e0)Pgm/s
+Sun  loc:(-1.5000e5,-6.4339e2)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 1.6421e3,-3.8603e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-4.5615e2, 1.0723e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.8490e2, 1.2323e1)Mm; rv:(-3.4249e1, 2.0534e3)kph; av:(-1.2330e2, 7.3922e3)kph; os: 2.0537e3kph; or: 3.8509e2Mm; 
+Ap8CMloc:(-5.9691e0,-3.6234e0)Mm; rv:( 5.4824e3,-9.3067e3)kph; av:( 1.9737e4,-3.3504e4)kph; os: 1.0801e4kph; or: 6.9828e0Mm; 
+Time:    7.00hours, Distance to sun:150000.0Mm, Energy:  -62.76YJ, Momentum( 2.556e-1,-8.7961e0)Pgm/s
+Sun  loc:(-1.5000e5,-7.5062e2)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 1.9158e3,-3.8603e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-5.3218e2, 1.0723e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.8486e2, 1.4376e1)Mm; rv:(-3.9952e1, 2.0532e3)kph; av:(-1.4383e2, 7.3915e3)kph; os: 2.0536e3kph; or: 3.8513e2Mm; 
+Ap8CMloc:( 3.3153e0,-6.2287e0)Mm; rv:( 9.3808e3, 4.9998e3)kph; av:( 3.3771e4, 1.7999e4)kph; os: 1.0630e4kph; or: 7.0560e0Mm; 
+Time:    8.00hours, Distance to sun:150000.0Mm, Energy:  -82.91YJ, Momentum(-2.156e-3, 4.3980e0)Pgm/s
+Sun  loc:(-1.5000e5,-8.5785e2)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 2.1895e3,-3.8603e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-6.0820e2, 1.0723e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.8482e2, 1.6429e1)Mm; rv:(-4.5653e1, 2.0529e3)kph; av:(-1.6435e2, 7.3906e3)kph; os: 2.0534e3kph; or: 3.8517e2Mm; 
+Ap8CMloc:( 6.2925e0, 3.1038e0)Mm; rv:(-4.9355e3, 9.9367e3)kph; av:(-1.7768e4, 3.5772e4)kph; os: 1.1095e4kph; or: 7.0164e0Mm; 
+Time:    9.00hours, Distance to sun:150000.0Mm, Energy: -105.86YJ, Momentum( 1.847e-1,-8.7961e0)Pgm/s
+Sun  loc:(-1.5000e5,-9.6508e2)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 2.4632e3,-3.8603e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-6.8423e2, 1.0723e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.8477e2, 1.8482e1)Mm; rv:(-5.1351e1, 2.0527e3)kph; av:(-1.8486e2, 7.3896e3)kph; os: 2.0533e3kph; or: 3.8521e2Mm; 
+Ap8CMloc:(-3.2976e0, 6.2366e0)Mm; rv:(-9.9669e3,-5.1418e3)kph; av:(-3.5881e4,-1.8511e4)kph; os: 1.1215e4kph; or: 7.0547e0Mm; 
+Time:   10.00hours, Distance to sun:150000.0Mm, Energy: -131.60YJ, Momentum( 6.636e-1,-3.5184e1)Pgm/s
+Sun  loc:(-1.5000e5,-1.0723e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 2.7369e3,-3.8603e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-7.6025e2, 1.0723e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.8471e2, 2.0534e1)Mm; rv:(-5.7046e1, 2.0523e3)kph; av:(-2.0537e2, 7.3884e3)kph; os: 2.0531e3kph; or: 3.8526e2Mm; 
+Ap8CMloc:(-6.4864e0,-3.1493e0)Mm; rv:( 4.5094e3,-9.6547e3)kph; av:( 1.6234e4,-3.4757e4)kph; os: 1.0656e4kph; or: 7.2106e0Mm; 
+Time:   11.00hours, Distance to sun:150000.0Mm, Energy: -160.14YJ, Momentum( 3.436e-1,-6.1573e1)Pgm/s
+Sun  loc:(-1.5000e5,-1.1795e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 3.0106e3,-3.8602e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-8.3627e2, 1.0723e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.8465e2, 2.2587e1)Mm; rv:(-6.2738e1, 2.0520e3)kph; av:(-2.2586e2, 7.3872e3)kph; os: 2.0530e3kph; or: 3.8532e2Mm; 
+Ap8CMloc:( 2.3200e0,-6.9209e0)Mm; rv:( 9.8888e3, 3.3138e3)kph; av:( 3.5600e4, 1.1930e4)kph; os: 1.0429e4kph; or: 7.2994e0Mm; 
+Time:   12.00hours, Distance to sun:150000.0Mm, Energy: -191.47YJ, Momentum( 2.190e-1,-7.4767e1)Pgm/s
+Sun  loc:(-1.4999e5,-1.2868e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 3.2843e3,-3.8602e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-9.1230e2, 1.0723e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.8459e2, 2.4638e1)Mm; rv:(-6.8426e1, 2.0516e3)kph; av:(-2.4634e2, 7.3858e3)kph; os: 2.0528e3kph; or: 3.8538e2Mm; 
+Ap8CMloc:( 7.0882e0, 1.5045e0)Mm; rv:(-2.3143e3, 1.0591e4)kph; av:(-8.3315e3, 3.8126e4)kph; os: 1.0840e4kph; or: 7.2461e0Mm; 
+Time:   13.00hours, Distance to sun:150000.1Mm, Energy: -225.60YJ, Momentum( 7.129e-1,-7.4767e1)Pgm/s
+Sun  loc:(-1.4999e5,-1.3940e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 3.5580e3,-3.8602e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-9.8832e2, 1.0723e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.8452e2, 2.6690e1)Mm; rv:(-7.4111e1, 2.0512e3)kph; av:(-2.6680e2, 7.3844e3)kph; os: 2.0526e3kph; or: 3.8544e2Mm; 
+Ap8CMloc:(-1.1778e0, 7.1500e0)Mm; rv:(-1.0968e4,-1.7225e3)kph; av:(-3.9484e4,-6.2012e3)kph; os: 1.1102e4kph; or: 7.2464e0Mm; 
+Time:   14.00hours, Distance to sun:150000.1Mm, Energy: -262.52YJ, Momentum( 7.001e-1,-1.0995e2)Pgm/s
+Sun  loc:(-1.4999e5,-1.5012e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 3.8316e3,-3.8602e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-1.0643e3, 1.0723e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.8444e2, 2.8741e1)Mm; rv:(-7.9791e1, 2.0508e3)kph; av:(-2.8725e2, 7.3828e3)kph; os: 2.0523e3kph; or: 3.8551e2Mm; 
+Ap8CMloc:(-7.3709e0,-6.202e-1)Mm; rv:( 7.0692e2,-1.0611e4)kph; av:( 2.5449e3,-3.8199e4)kph; os: 1.0634e4kph; or: 7.3969e0Mm; 
+Time:   15.00hours, Distance to sun:150000.1Mm, Energy: -302.23YJ, Momentum( 4.037e-1,-1.0555e2)Pgm/s
+Sun  loc:(-1.4999e5,-1.6084e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 4.1053e3,-3.8601e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-1.1404e3, 1.0723e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.8436e2, 3.0791e1)Mm; rv:(-8.5466e1, 2.0503e3)kph; av:(-3.0768e2, 7.3811e3)kph; os: 2.0521e3kph; or: 3.8559e2Mm; 
+Ap8CMloc:(-7.228e-1,-7.4979e0)Mm; rv:( 1.0198e4,-1.0369e3)kph; av:( 3.6711e4,-3.7327e3)kph; os: 1.0250e4kph; or: 7.5326e0Mm; 
+Time:   16.00hours, Distance to sun:150000.1Mm, Energy: -344.74YJ, Momentum( 3.522e-1,-1.0555e2)Pgm/s
+Sun  loc:(-1.4999e5,-1.7157e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 4.3790e3,-3.8601e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-1.2164e3, 1.0723e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.8427e2, 3.2841e1)Mm; rv:(-9.1136e1, 2.0498e3)kph; av:(-3.2809e2, 7.3792e3)kph; os: 2.0518e3kph; or: 3.8567e2Mm; 
+Ap8CMloc:( 7.1737e0,-2.1838e0)Mm; rv:( 2.9692e3, 1.0067e4)kph; av:( 1.0689e4, 3.6241e4)kph; os: 1.0496e4kph; or: 7.4988e0Mm; 
+Time:   17.00hours, Distance to sun:150000.1Mm, Energy: -390.04YJ, Momentum( 2.792e-1,-1.2315e2)Pgm/s
+Sun  loc:(-1.4999e5,-1.8229e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 4.6527e3,-3.8601e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-1.2924e3, 1.0722e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.8418e2, 3.4891e1)Mm; rv:(-9.6801e1, 2.0492e3)kph; av:(-3.4848e2, 7.3773e3)kph; os: 2.0515e3kph; or: 3.8576e2Mm; 
+Ap8CMloc:( 3.0770e0, 6.7704e0)Mm; rv:(-9.9524e3, 4.5287e3)kph; av:(-3.5828e4, 1.6303e4)kph; os: 1.0934e4kph; or: 7.4368e0Mm; 
+Time:   18.00hours, Distance to sun:150000.1Mm, Energy: -438.14YJ, Momentum( 9.707e-1,-1.2754e2)Pgm/s
+Sun  loc:(-1.4999e5,-1.9301e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 4.9264e3,-3.8600e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-1.3684e3, 1.0722e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.8408e2, 3.6940e1)Mm; rv:(-1.0246e2, 2.0487e3)kph; av:(-3.6886e2, 7.3752e3)kph; os: 2.0512e3kph; or: 3.8585e2Mm; 
+Ap8CMloc:(-6.4673e0, 3.8675e0)Mm; rv:(-5.6594e3,-9.1180e3)kph; av:(-2.0374e4,-3.2825e4)kph; os: 1.0732e4kph; or: 7.5355e0Mm; 
+Time:   19.00hours, Distance to sun:150000.1Mm, Energy: -489.02YJ, Momentum( 1.1897e0,-1.0116e2)Pgm/s
+Sun  loc:(-1.4999e5,-2.0373e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 5.2001e3,-3.8600e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-1.4445e3, 1.0722e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.8397e2, 3.8988e1)Mm; rv:(-1.0811e2, 2.0481e3)kph; av:(-3.8921e2, 7.3730e3)kph; os: 2.0509e3kph; or: 3.8595e2Mm; 
+Ap8CMloc:(-5.2047e0,-5.7026e0)Mm; rv:( 7.4360e3,-6.9864e3)kph; av:( 2.6769e4,-2.5151e4)kph; os: 1.0203e4kph; or: 7.7207e0Mm; 
+Time:   20.00hours, Distance to sun:150000.1Mm, Energy: -542.70YJ, Momentum( 1.4603e0,-9.6757e1)Pgm/s
+Sun  loc:(-1.4998e5,-2.1446e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 5.4737e3,-3.8600e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-1.5205e3, 1.0722e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.8386e2, 4.1036e1)Mm; rv:(-1.1376e2, 2.0474e3)kph; av:(-4.0954e2, 7.3707e3)kph; os: 2.0506e3kph; or: 3.8605e2Mm; 
+Ap8CMloc:( 4.1503e0,-6.5689e0)Mm; rv:( 8.5430e3, 5.4567e3)kph; av:( 3.0755e4, 1.9644e4)kph; os: 1.0137e4kph; or: 7.7701e0Mm; 
+Time:   21.00hours, Distance to sun:150000.1Mm, Energy: -599.17YJ, Momentum( 1.7867e0,-1.0995e2)Pgm/s
+Sun  loc:(-1.4998e5,-2.2518e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 5.7474e3,-3.8599e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-1.5965e3, 1.0722e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.8374e2, 4.3083e1)Mm; rv:(-1.1940e2, 2.0468e3)kph; av:(-4.2984e2, 7.3683e3)kph; os: 2.0502e3kph; or: 3.8615e2Mm; 
+Ap8CMloc:( 7.2600e0, 2.4880e0)Mm; rv:(-3.5171e3, 9.9698e3)kph; av:(-1.2662e4, 3.5891e4)kph; os: 1.0572e4kph; or: 7.6745e0Mm; 
+Time:   22.00hours, Distance to sun:150000.2Mm, Energy: -658.43YJ, Momentum( 2.2377e0,-1.2754e2)Pgm/s
+Sun  loc:(-1.4998e5,-2.3590e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 6.0211e3,-3.8599e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-1.6725e3, 1.0722e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.8362e2, 4.5129e1)Mm; rv:(-1.2503e2, 2.0461e3)kph; av:(-4.5013e2, 7.3658e3)kph; os: 2.0499e3kph; or: 3.8627e2Mm; 
+Ap8CMloc:(-1.2432e0, 7.5579e0)Mm; rv:(-1.0672e4,-1.6713e3)kph; av:(-3.8418e4,-6.0166e3)kph; os: 1.0802e4kph; or: 7.6594e0Mm; 
+Time:   23.00hours, Distance to sun:150000.2Mm, Energy: -720.48YJ, Momentum( 2.3107e0,-1.4074e2)Pgm/s
+Sun  loc:(-1.4998e5,-2.4662e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 6.2948e3,-3.8598e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-1.7485e3, 1.0722e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.8349e2, 4.7175e1)Mm; rv:(-1.3066e2, 2.0453e3)kph; av:(-4.7038e2, 7.3631e3)kph; os: 2.0495e3kph; or: 3.8638e2Mm; 
+Ap8CMloc:(-7.8192e0, 2.586e-1)Mm; rv:(-5.5361e2,-1.0365e4)kph; av:(-1.9930e3,-3.7312e4)kph; os: 1.0379e4kph; or: 7.8235e0Mm; 
+Time:   24.00hours, Distance to sun:150000.2Mm, Energy: -785.32YJ, Momentum( 2.9378e0,-1.3634e2)Pgm/s
+Sun  loc:(-1.4998e5,-2.5734e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 6.5685e3,-3.8598e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-1.8246e3, 1.0722e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.8336e2, 4.9220e1)Mm; rv:(-1.3628e2, 2.0446e3)kph; av:(-4.9061e2, 7.3604e3)kph; os: 2.0491e3kph; or: 3.8651e2Mm; 
+Ap8CMloc:(-2.5421e0,-7.5780e0)Mm; rv:( 9.4154e3,-3.2539e3)kph; av:( 3.3895e4,-1.1714e4)kph; os: 9.9618e3kph; or: 7.9930e0Mm; 
+Time:   25.00hours, Distance to sun:150000.2Mm, Energy: -852.95YJ, Momentum( 3.9084e0,-1.2315e2)Pgm/s
+Sun  loc:(-1.4998e5,-2.6807e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 6.8421e3,-3.8598e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-1.9006e3, 1.0722e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.8322e2, 5.1264e1)Mm; rv:(-1.4189e2, 2.0438e3)kph; av:(-5.1081e2, 7.3575e3)kph; os: 2.0487e3kph; or: 3.8663e2Mm; 
+Ap8CMloc:( 6.3594e0,-4.8175e0)Mm; rv:( 6.0024e3, 8.0945e3)kph; av:( 2.1609e4, 2.9140e4)kph; os: 1.0077e4kph; or: 7.9781e0Mm; 
+Time:   26.00hours, Distance to sun:150000.2Mm, Energy: -923.37YJ, Momentum( 3.6078e0,-1.4074e2)Pgm/s
+Sun  loc:(-1.4997e5,-2.7879e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 7.1158e3,-3.8597e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-1.9766e3, 1.0721e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.8308e2, 5.3308e1)Mm; rv:(-1.4749e2, 2.0429e3)kph; av:(-5.3098e2, 7.3545e3)kph; os: 2.0482e3kph; or: 3.8677e2Mm; 
+Ap8CMloc:( 6.2452e0, 4.7775e0)Mm; rv:(-6.4655e3, 8.3200e3)kph; av:(-2.3276e4, 2.9952e4)kph; os: 1.0537e4kph; or: 7.8630e0Mm; 
+Time:   27.00hours, Distance to sun:150000.2Mm, Energy: -996.57YJ, Momentum( 4.3808e0,-1.5833e2)Pgm/s
+Sun  loc:(-1.4997e5,-2.8951e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 7.3895e3,-3.8597e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-2.0526e3, 1.0721e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.8293e2, 5.5350e1)Mm; rv:(-1.5309e2, 2.0421e3)kph; av:(-5.5111e2, 7.3514e3)kph; os: 2.0478e3kph; or: 3.8691e2Mm; 
+Ap8CMloc:(-3.3325e0, 7.1433e0)Mm; rv:(-9.6797e3,-4.3773e3)kph; av:(-3.4847e4,-1.5758e4)kph; os: 1.0623e4kph; or: 7.8824e0Mm; 
+Time:   28.00hours, Distance to sun:150000.2Mm, Energy:-1072.56YJ, Momentum( 4.3036e0,-1.3634e2)Pgm/s
+Sun  loc:(-1.4997e5,-3.0023e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 7.6631e3,-3.8596e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-2.1286e3, 1.0721e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.8277e2, 5.7392e1)Mm; rv:(-1.5867e2, 2.0412e3)kph; av:(-5.7122e2, 7.3482e3)kph; os: 2.0473e3kph; or: 3.8705e2Mm; 
+Ap8CMloc:(-7.9568e0,-1.3794e0)Mm; rv:( 1.5175e3,-1.0039e4)kph; av:( 5.4629e3,-3.6139e4)kph; os: 1.0153e4kph; or: 8.0755e0Mm; 
+Time:   29.00hours, Distance to sun:150000.3Mm, Energy:-1151.34YJ, Momentum( 4.1318e0,-1.2754e2)Pgm/s
+Sun  loc:(-1.4997e5,-3.1095e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 7.9368e3,-3.8596e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-2.2047e3, 1.0721e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.8261e2, 5.9432e1)Mm; rv:(-1.6425e2, 2.0402e3)kph; av:(-5.9130e2, 7.3449e3)kph; os: 2.0468e3kph; or: 3.8720e2Mm; 
+Ap8CMloc:(-1.4908e0,-8.0979e0)Mm; rv:( 9.6282e3,-1.8392e3)kph; av:( 3.4661e4,-6.6212e3)kph; os: 9.8023e3kph; or: 8.2340e0Mm; 
+Time:   30.00hours, Distance to sun:150000.3Mm, Energy:-1232.90YJ, Momentum( 4.4324e0,-1.4953e2)Pgm/s
+Sun  loc:(-1.4997e5,-3.2167e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 8.2105e3,-3.8595e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-2.2807e3, 1.0721e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.8244e2, 6.1472e1)Mm; rv:(-1.6982e2, 2.0393e3)kph; av:(-6.1134e2, 7.3414e3)kph; os: 2.0463e3kph; or: 3.8735e2Mm; 
+Ap8CMloc:( 6.9547e0,-4.3321e0)Mm; rv:( 5.1628e3, 8.5244e3)kph; av:( 1.8586e4, 3.0688e4)kph; os: 9.9660e3kph; or: 8.1936e0Mm; 
+Time:   31.00hours, Distance to sun:150000.3Mm, Energy:-1317.25YJ, Momentum( 3.4531e0,-1.4074e2)Pgm/s
+Sun  loc:(-1.4996e5,-3.3239e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 8.4841e3,-3.8594e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-2.3567e3, 1.0721e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.8227e2, 6.3511e1)Mm; rv:(-1.7537e2, 2.0383e3)kph; av:(-6.3134e2, 7.3379e3)kph; os: 2.0458e3kph; or: 3.8751e2Mm; 
+Ap8CMloc:( 6.1822e0, 5.1782e0)Mm; rv:(-6.7553e3, 7.9292e3)kph; av:(-2.4319e4, 2.8545e4)kph; os: 1.0417e4kph; or: 8.0643e0Mm; 
+Time:   32.00hours, Distance to sun:150000.3Mm, Energy:-1404.39YJ, Momentum( 3.2212e0,-1.3194e2)Pgm/s
+Sun  loc:(-1.4996e5,-3.4311e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 8.7578e3,-3.8594e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-2.4327e3, 1.0720e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.8209e2, 6.5549e1)Mm; rv:(-1.8092e2, 2.0373e3)kph; av:(-6.5131e2, 7.3342e3)kph; os: 2.0453e3kph; or: 3.8767e2Mm; 
+Ap8CMloc:(-3.3784e0, 7.3418e0)Mm; rv:(-9.5860e3,-4.2699e3)kph; av:(-3.4510e4,-1.5372e4)kph; os: 1.0494e4kph; or: 8.0818e0Mm; 
+Time:   33.00hours, Distance to sun:150000.3Mm, Energy:-1494.30YJ, Momentum( 4.4925e0,-1.0555e2)Pgm/s
+Sun  loc:(-1.4996e5,-3.5383e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 9.0315e3,-3.8593e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-2.5087e3, 1.0720e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.8191e2, 6.7585e1)Mm; rv:(-1.8646e2, 2.0362e3)kph; av:(-6.7124e2, 7.3304e3)kph; os: 2.0447e3kph; or: 3.8784e2Mm; 
+Ap8CMloc:(-8.2231e0,-9.867e-1)Mm; rv:( 9.6621e2,-9.9955e3)kph; av:( 3.4783e3,-3.5984e4)kph; os: 1.0042e4kph; or: 8.2821e0Mm; 
+Time:   34.00hours, Distance to sun:150000.4Mm, Energy:-1587.00YJ, Momentum( 3.7710e0,-1.2754e2)Pgm/s
+Sun  loc:(-1.4996e5,-3.6455e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 9.3051e3,-3.8593e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-2.5848e3, 1.0720e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.8172e2, 6.9621e1)Mm; rv:(-1.9198e2, 2.0351e3)kph; av:(-6.9114e2, 7.3265e3)kph; os: 2.0442e3kph; or: 3.8802e2Mm; 
+Ap8CMloc:(-2.3287e0,-8.1302e0)Mm; rv:( 9.2793e3,-2.7462e3)kph; av:( 3.3406e4,-9.8863e3)kph; os: 9.6772e3kph; or: 8.4571e0Mm; 
+Time:   35.00hours, Distance to sun:150000.4Mm, Energy:-1682.48YJ, Momentum( 3.2900e0,-1.2315e2)Pgm/s
+Sun  loc:(-1.4995e5,-3.7527e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 9.5788e3,-3.8592e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-2.6608e3, 1.0720e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.8152e2, 7.1656e1)Mm; rv:(-1.9750e2, 2.0340e3)kph; av:(-7.1099e2, 7.3225e3)kph; os: 2.0436e3kph; or: 3.8819e2Mm; 
+Ap8CMloc:( 6.4236e0,-5.4600e0)Mm; rv:( 6.2451e3, 7.5360e3)kph; av:( 2.2483e4, 2.7130e4)kph; os: 9.7874e3kph; or: 8.4305e0Mm; 
+Time:   36.00hours, Distance to sun:150000.4Mm, Energy:-1780.74YJ, Momentum( 2.9635e0,-1.3194e2)Pgm/s
+Sun  loc:(-1.4995e5,-3.8599e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 9.8524e3,-3.8591e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-2.7368e3, 1.0720e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.8132e2, 7.3689e1)Mm; rv:(-2.0300e2, 2.0329e3)kph; av:(-7.3080e2, 7.3184e3)kph; os: 2.0430e3kph; or: 3.8838e2Mm; 
+Ap8CMloc:( 7.3019e0, 3.9122e0)Mm; rv:(-4.9380e3, 8.9530e3)kph; av:(-1.7777e4, 3.2231e4)kph; os: 1.0224e4kph; or: 8.2839e0Mm; 
+Time:   37.00hours, Distance to sun:150000.4Mm, Energy:-1881.78YJ, Momentum( 2.1561e0,-1.1875e2)Pgm/s
+Sun  loc:(-1.4995e5,-3.9671e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 1.0126e4,-3.8591e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-2.8128e3, 1.0720e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.8112e2, 7.5722e1)Mm; rv:(-2.0849e2, 2.0317e3)kph; av:(-7.5058e2, 7.3142e3)kph; os: 2.0424e3kph; or: 3.8857e2Mm; 
+Ap8CMloc:(-1.4524e0, 8.1279e0)Mm; rv:(-1.0260e4,-1.7459e3)kph; av:(-3.6938e4,-6.2854e3)kph; os: 1.0408e4kph; or: 8.2567e0Mm; 
+Time:   38.00hours, Distance to sun:150000.5Mm, Energy:-1985.60YJ, Momentum( 2.5942e0,-9.6757e1)Pgm/s
+Sun  loc:(-1.4995e5,-4.0743e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 1.0400e4,-3.8590e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-2.8888e3, 1.0719e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.8091e2, 7.7753e1)Mm; rv:(-2.1397e2, 2.0305e3)kph; av:(-7.7031e2, 7.3099e3)kph; os: 2.0418e3kph; or: 3.8876e2Mm; 
+Ap8CMloc:(-8.3247e0, 1.3720e0)Mm; rv:(-1.8692e3,-9.8627e3)kph; av:(-6.7292e3,-3.5506e4)kph; os: 1.0038e4kph; or: 8.4370e0Mm; 
+Time:   39.00hours, Distance to sun:150000.5Mm, Energy:-2092.20YJ, Momentum( 2.6629e0,-1.0116e2)Pgm/s
+Sun  loc:(-1.4994e5,-4.1815e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 1.0673e4,-3.8589e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-2.9648e3, 1.0719e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.8069e2, 7.9783e1)Mm; rv:(-2.1944e2, 2.0293e3)kph; av:(-7.8999e2, 7.3054e3)kph; os: 2.0411e3kph; or: 3.8896e2Mm; 
+Ap8CMloc:(-4.7993e0,-7.1976e0)Mm; rv:( 7.9101e3,-5.4511e3)kph; av:( 2.8476e4,-1.9624e4)kph; os: 9.6065e3kph; or: 8.6510e0Mm; 
+Time:   40.00hours, Distance to sun:150000.5Mm, Energy:-2201.57YJ, Momentum( 1.7867e0,-1.0995e2)Pgm/s
+Sun  loc:(-1.4994e5,-4.2887e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 1.0947e4,-3.8588e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-3.0408e3, 1.0719e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.8047e2, 8.1811e1)Mm; rv:(-2.2490e2, 2.0280e3)kph; av:(-8.0963e2, 7.3009e3)kph; os: 2.0405e3kph; or: 3.8916e2Mm; 
+Ap8CMloc:( 4.2485e0,-7.5749e0)Mm; rv:( 8.3113e3, 4.7513e3)kph; av:( 2.9921e4, 1.7105e4)kph; os: 9.5736e3kph; or: 8.6850e0Mm; 
+Time:   41.00hours, Distance to sun:150000.5Mm, Energy:-2313.72YJ, Momentum( 2.3966e0,-8.3563e1)Pgm/s
+Sun  loc:(-1.4994e5,-4.3959e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 1.1221e4,-3.8588e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-3.1168e3, 1.0719e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.8024e2, 8.3839e1)Mm; rv:(-2.3034e2, 2.0267e3)kph; av:(-8.2923e2, 7.2962e3)kph; os: 2.0398e3kph; or: 3.8937e2Mm; 
+Ap8CMloc:( 8.5198e0, 5.960e-1)Mm; rv:(-8.6250e2, 9.9070e3)kph; av:(-3.1050e3, 3.5665e4)kph; os: 9.9445e3kph; or: 8.5407e0Mm; 
+Time:   42.00hours, Distance to sun:150000.6Mm, Energy:-2428.65YJ, Momentum( 2.0014e0,-5.7175e1)Pgm/s
+Sun  loc:(-1.4993e5,-4.5031e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 1.1494e4,-3.8587e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-3.1929e3, 1.0719e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.8001e2, 8.5865e1)Mm; rv:(-2.3577e2, 2.0254e3)kph; av:(-8.4878e2, 7.2915e3)kph; os: 2.0391e3kph; or: 3.8959e2Mm; 
+Ap8CMloc:( 2.5234e0, 8.0483e0)Mm; rv:(-9.8199e3, 3.0689e3)kph; av:(-3.5352e4, 1.1048e4)kph; os: 1.0288e4kph; or: 8.4346e0Mm; 
+Time:   43.00hours, Distance to sun:150000.6Mm, Energy:-2546.35YJ, Momentum( 1.7266e0,-5.7175e1)Pgm/s
+Sun  loc:(-1.4993e5,-4.6103e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 1.1768e4,-3.8586e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-3.2689e3, 1.0718e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.7977e2, 8.7889e1)Mm; rv:(-2.4119e2, 2.0241e3)kph; av:(-8.6828e2, 7.2866e3)kph; os: 2.0384e3kph; or: 3.8981e2Mm; 
+Ap8CMloc:(-6.7251e0, 5.2676e0)Mm; rv:(-6.4034e3,-7.8358e3)kph; av:(-2.3052e4,-2.8209e4)kph; os: 1.0119e4kph; or: 8.5425e0Mm; 
+Time:   44.00hours, Distance to sun:150000.6Mm, Energy:-2666.82YJ, Momentum( 8.762e-1,-1.1435e2)Pgm/s
+Sun  loc:(-1.4993e5,-4.7175e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 1.2042e4,-3.8585e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-3.3449e3, 1.0718e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.7952e2, 8.9913e1)Mm; rv:(-2.4659e2, 2.0227e3)kph; av:(-8.8774e2, 7.2816e3)kph; os: 2.0377e3kph; or: 3.9003e2Mm; 
+Ap8CMloc:(-7.8043e0,-4.0293e0)Mm; rv:( 4.2230e3,-8.6746e3)kph; av:( 1.5203e4,-3.1229e4)kph; os: 9.6480e3kph; or: 8.7831e0Mm; 
+Time:   45.00hours, Distance to sun:150000.6Mm, Energy:-2790.07YJ, Momentum( 1.8640e0,-1.2754e2)Pgm/s
+Sun  loc:(-1.4992e5,-4.8246e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 1.2315e4,-3.8584e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-3.4209e3, 1.0718e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.7927e2, 9.1935e1)Mm; rv:(-2.5198e2, 2.0213e3)kph; av:(-9.0714e2, 7.2766e3)kph; os: 2.0369e3kph; or: 3.9026e2Mm; 
+Ap8CMloc:(-2.136e-1,-8.9193e0)Mm; rv:( 9.4025e3,-2.5466e2)kph; av:( 3.3849e4,-9.1677e2)kph; os: 9.4060e3kph; or: 8.9219e0Mm; 
+Time:   46.00hours, Distance to sun:150000.7Mm, Energy:-2916.08YJ, Momentum( 3.2212e0,-1.0116e2)Pgm/s
+Sun  loc:(-1.4992e5,-4.9318e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 1.2589e4,-3.8583e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-3.4969e3, 1.0718e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.7902e2, 9.3955e1)Mm; rv:(-2.5736e2, 2.0198e3)kph; av:(-9.2650e2, 7.2714e3)kph; os: 2.0362e3kph; or: 3.9049e2Mm; 
+Ap8CMloc:( 7.6261e0,-4.4773e0)Mm; rv:( 4.7171e3, 8.3574e3)kph; av:( 1.6982e4, 3.0087e4)kph; os: 9.5967e3kph; or: 8.8432e0Mm; 
+Time:   47.00hours, Distance to sun:150000.7Mm, Energy:-3044.87YJ, Momentum( 2.0272e0,-1.0116e2)Pgm/s
+Sun  loc:(-1.4992e5,-5.0390e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 1.2862e4,-3.8583e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-3.5729e3, 1.0717e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.7876e2, 9.5974e1)Mm; rv:(-2.6272e2, 2.0184e3)kph; av:(-9.4580e2, 7.2661e3)kph; os: 2.0354e3kph; or: 3.9073e2Mm; 
+Ap8CMloc:( 7.2085e0, 4.8197e0)Mm; rv:(-5.6821e3, 8.2548e3)kph; av:(-2.0456e4, 2.9717e4)kph; os: 1.0021e4kph; or: 8.6713e0Mm; 
+Time:   48.00hours, Distance to sun:150000.7Mm, Energy:-3176.43YJ, Momentum( 2.4739e0,-1.0555e2)Pgm/s
+Sun  loc:(-1.4991e5,-5.1462e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 1.3136e4,-3.8582e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-3.6489e3, 1.0717e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.7849e2, 9.7992e1)Mm; rv:(-2.6807e2, 2.0169e3)kph; av:(-9.6505e2, 7.2607e3)kph; os: 2.0346e3kph; or: 3.9097e2Mm; 
+Ap8CMloc:(-1.6550e0, 8.4818e0)Mm; rv:(-1.0005e4,-1.8601e3)kph; av:(-3.6017e4,-6.6963e3)kph; os: 1.0176e4kph; or: 8.6418e0Mm; 
+Time:   49.00hours, Distance to sun:150000.8Mm, Energy:-3310.75YJ, Momentum( 4.982e-1,-1.3194e2)Pgm/s
+Sun  loc:(-1.4991e5,-5.2533e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 1.3410e4,-3.8581e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-3.7249e3, 1.0717e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.7822e2, 1.0001e2)Mm; rv:(-2.7340e2, 2.0153e3)kph; av:(-9.8425e2, 7.2552e3)kph; os: 2.0338e3kph; or: 3.9122e2Mm; 
+Ap8CMloc:(-8.6035e0, 1.9936e0)Mm; rv:(-2.4685e3,-9.5184e3)kph; av:(-8.8867e3,-3.4266e4)kph; os: 9.8333e3kph; or: 8.8315e0Mm; 
+Time:   50.00hours, Distance to sun:150000.8Mm, Energy:-3447.84YJ, Momentum( 2.8003e0,-1.5833e2)Pgm/s
+Sun  loc:(-1.4990e5,-5.3605e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 1.3683e4,-3.8580e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-3.8009e3, 1.0717e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.7795e2, 1.0202e2)Mm; rv:(-2.7872e2, 2.0138e3)kph; av:(-1.0034e3, 7.2496e3)kph; os: 2.0330e3kph; or: 3.9148e2Mm; 
+Ap8CMloc:(-6.0245e0,-6.7806e0)Mm; rv:( 6.9092e3,-6.3811e3)kph; av:( 2.4873e4,-2.2972e4)kph; os: 9.4051e3kph; or: 9.0704e0Mm; 
+Time:   51.00hours, Distance to sun:150000.8Mm, Energy:-3587.69YJ, Momentum( 1.4603e0,-1.5833e2)Pgm/s
+Sun  loc:(-1.4990e5,-5.4677e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 1.3957e4,-3.8579e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-3.8769e3, 1.0716e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.7767e2, 1.0404e2)Mm; rv:(-2.8402e2, 2.0122e3)kph; av:(-1.0225e3, 7.2439e3)kph; os: 2.0322e3kph; or: 3.9173e2Mm; 
+Ap8CMloc:( 2.6556e0,-8.7468e0)Mm; rv:( 8.8879e3, 2.7470e3)kph; av:( 3.1996e4, 9.8894e3)kph; os: 9.3028e3kph; or: 9.1411e0Mm; 
+Time:   52.00hours, Distance to sun:150000.8Mm, Energy:-3730.31YJ, Momentum( 4.467e-1,-1.7152e2)Pgm/s
+Sun  loc:(-1.4990e5,-5.5748e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 1.4231e4,-3.8578e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-3.9529e3, 1.0716e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.7738e2, 1.0605e2)Mm; rv:(-2.8931e2, 2.0106e3)kph; av:(-1.0415e3, 7.2382e3)kph; os: 2.0313e3kph; or: 3.9200e2Mm; 
+Ap8CMloc:( 8.7482e0,-2.1329e0)Mm; rv:( 2.0828e3, 9.3627e3)kph; av:( 7.4981e3, 3.3706e4)kph; os: 9.5915e3kph; or: 9.0044e0Mm; 
+Time:   53.00hours, Distance to sun:150000.9Mm, Energy:-3875.70YJ, Momentum( 6.185e-1,-1.7152e2)Pgm/s
+Sun  loc:(-1.4989e5,-5.6820e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 1.4504e4,-3.8577e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-4.0289e3, 1.0716e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.7709e2, 1.0806e2)Mm; rv:(-2.9458e2, 2.0090e3)kph; av:(-1.0605e3, 7.2323e3)kph; os: 2.0304e3kph; or: 3.9226e2Mm; 
+Ap8CMloc:( 5.7604e0, 6.7002e0)Mm; rv:(-7.6426e3, 6.4372e3)kph; av:(-2.7513e4, 2.3174e4)kph; os: 9.9923e3kph; or: 8.8360e0Mm; 
+Time:   54.00hours, Distance to sun:150000.9Mm, Energy:-4023.84YJ, Momentum( 1.4603e0,-1.8912e2)Pgm/s
+Sun  loc:(-1.4989e5,-5.7891e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 1.4778e4,-3.8576e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-4.1049e3, 1.0716e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.7679e2, 1.1006e2)Mm; rv:(-2.9984e2, 2.0073e3)kph; av:(-1.0794e3, 7.2263e3)kph; os: 2.0296e3kph; or: 3.9254e2Mm; 
+Ap8CMloc:(-3.6871e0, 8.0501e0)Mm; rv:(-9.1798e3,-4.0497e3)kph; av:(-3.3047e4,-1.4579e4)kph; os: 1.0033e4kph; or: 8.8543e0Mm; 
+Time:   55.00hours, Distance to sun:150000.9Mm, Energy:-4174.75YJ, Momentum( 4.2434e0,-1.8472e2)Pgm/s
+Sun  loc:(-1.4989e5,-5.8963e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 1.5051e4,-3.8575e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-4.1809e3, 1.0715e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.7649e2, 1.1207e2)Mm; rv:(-3.0508e2, 2.0056e3)kph; av:(-1.0983e3, 7.2202e3)kph; os: 2.0287e3kph; or: 3.9281e2Mm; 
+Ap8CMloc:(-9.0710e0, 3.681e-1)Mm; rv:(-6.6038e2,-9.6204e3)kph; av:(-2.3774e3,-3.4633e4)kph; os: 9.6430e3kph; or: 9.0785e0Mm; 
+Time:   56.00hours, Distance to sun:150001.0Mm, Energy:-4328.41YJ, Momentum( 3.5734e0,-1.8472e2)Pgm/s
+Sun  loc:(-1.4988e5,-6.0034e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 1.5325e4,-3.8574e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-4.2569e3, 1.0715e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.7618e2, 1.1408e2)Mm; rv:(-3.1030e2, 2.0039e3)kph; av:(-1.1171e3, 7.2140e3)kph; os: 2.0278e3kph; or: 3.9310e2Mm; 
+Ap8CMloc:(-5.1561e0,-7.7525e0)Mm; rv:( 7.6180e3,-5.2569e3)kph; av:( 2.7425e4,-1.8925e4)kph; os: 9.2557e3kph; or: 9.3106e0Mm; 
+Time:   57.00hours, Distance to sun:150001.0Mm, Energy:-4484.84YJ, Momentum( 4.4324e0,-2.2430e2)Pgm/s
+Sun  loc:(-1.4988e5,-6.1106e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 1.5599e4,-3.8573e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-4.3329e3, 1.0715e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.7587e2, 1.1608e2)Mm; rv:(-3.1550e2, 2.0021e3)kph; av:(-1.1358e3, 7.2077e3)kph; os: 2.0269e3kph; or: 3.9338e2Mm; 
+Ap8CMloc:( 3.6120e0,-8.6280e0)Mm; rv:( 8.4617e3, 3.6228e3)kph; av:( 3.0462e4, 1.3042e4)kph; os: 9.2046e3kph; or: 9.3536e0Mm; 
+Time:   58.00hours, Distance to sun:150001.1Mm, Energy:-4644.02YJ, Momentum( 3.6249e0,-2.3749e2)Pgm/s
+Sun  loc:(-1.4987e5,-6.2177e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 1.5872e4,-3.8572e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-4.4089e3, 1.0714e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.7555e2, 1.1808e2)Mm; rv:(-3.2069e2, 2.0004e3)kph; av:(-1.1545e3, 7.2014e3)kph; os: 2.0259e3kph; or: 3.9368e2Mm; 
+Ap8CMloc:( 9.0647e0,-1.5477e0)Mm; rv:( 1.3961e3, 9.4086e3)kph; av:( 5.0259e3, 3.3871e4)kph; os: 9.5116e3kph; or: 9.1959e0Mm; 
+Time:   59.00hours, Distance to sun:150001.1Mm, Energy:-4805.95YJ, Momentum( 6.0645e0,-2.5069e2)Pgm/s
+Sun  loc:(-1.4987e5,-6.3249e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 1.6146e4,-3.8571e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-4.4849e3, 1.0714e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.7523e2, 1.2008e2)Mm; rv:(-3.2587e2, 1.9986e3)kph; av:(-1.1731e3, 7.1949e3)kph; os: 2.0250e3kph; or: 3.9397e2Mm; 
+Ap8CMloc:( 5.6175e0, 7.0592e0)Mm; rv:(-7.8078e3, 6.0834e3)kph; av:(-2.8108e4, 2.1900e4)kph; os: 9.8980e3kph; or: 9.0215e0Mm; 
+Time:   60.00hours, Distance to sun:150001.1Mm, Energy:-4970.64YJ, Momentum( 4.9993e0,-2.4629e2)Pgm/s
+Sun  loc:(-1.4986e5,-6.4320e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 1.6419e4,-3.8569e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-4.5609e3, 1.0714e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.7490e2, 1.2208e2)Mm; rv:(-3.3102e2, 1.9968e3)kph; av:(-1.1917e3, 7.1883e3)kph; os: 2.0240e3kph; or: 3.9427e2Mm; 
+Ap8CMloc:(-3.7916e0, 8.2084e0)Mm; rv:(-9.0746e3,-4.0328e3)kph; av:(-3.2668e4,-1.4518e4)kph; os: 9.9303e3kph; or: 9.0418e0Mm; 
+Time:   61.00hours, Distance to sun:150001.2Mm, Energy:-5138.09YJ, Momentum( 5.8583e0,-2.5509e2)Pgm/s
+Sun  loc:(-1.4986e5,-6.5392e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 1.6693e4,-3.8568e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-4.6369e3, 1.0713e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.7456e2, 1.2407e2)Mm; rv:(-3.3616e2, 1.9949e3)kph; av:(-1.2102e3, 7.1817e3)kph; os: 2.0230e3kph; or: 3.9458e2Mm; 
+Ap8CMloc:(-9.2479e0, 6.562e-1)Mm; rv:(-9.5264e2,-9.5048e3)kph; av:(-3.4295e3,-3.4217e4)kph; os: 9.5524e3kph; or: 9.2711e0Mm; 
+Time:   62.00hours, Distance to sun:150001.2Mm, Energy:-5308.28YJ, Momentum( 7.0438e0,-2.5509e2)Pgm/s
+Sun  loc:(-1.4985e5,-6.6463e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 1.6966e4,-3.8567e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-4.7129e3, 1.0713e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.7423e2, 1.2607e2)Mm; rv:(-3.4128e2, 1.9930e3)kph; av:(-1.2286e3, 7.1749e3)kph; os: 2.0220e3kph; or: 3.9489e2Mm; 
+Ap8CMloc:(-5.7448e0,-7.5855e0)Mm; rv:( 7.1994e3,-5.6717e3)kph; av:( 2.5918e4,-2.0418e4)kph; os: 9.1651e3kph; or: 9.5153e0Mm; 
+Time:   63.00hours, Distance to sun:150001.2Mm, Energy:-5481.23YJ, Momentum( 9.0023e0,-2.4189e2)Pgm/s
+Sun  loc:(-1.4985e5,-6.7534e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 1.7240e4,-3.8566e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-4.7889e3, 1.0713e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.7388e2, 1.2806e2)Mm; rv:(-3.4638e2, 1.9911e3)kph; av:(-1.2470e3, 7.1681e3)kph; os: 2.0210e3kph; or: 3.9520e2Mm; 
+Ap8CMloc:( 2.8526e0,-9.1418e0)Mm; rv:( 8.6558e3, 2.7609e3)kph; av:( 3.1161e4, 9.9392e3)kph; os: 9.0854e3kph; or: 9.5765e0Mm; 
+Time:   64.00hours, Distance to sun:150001.3Mm, Energy:-5656.93YJ, Momentum( 8.0745e0,-2.6388e2)Pgm/s
+Sun  loc:(-1.4984e5,-6.8605e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 1.7514e4,-3.8565e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-4.8649e3, 1.0712e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.7353e2, 1.3005e2)Mm; rv:(-3.5146e2, 1.9892e3)kph; av:(-1.2653e3, 7.1611e3)kph; os: 2.0200e3kph; or: 3.9552e2Mm; 
+Ap8CMloc:( 9.0004e0,-2.8027e0)Mm; rv:( 2.5775e3, 8.9930e3)kph; av:( 9.2790e3, 3.2375e4)kph; os: 9.3551e3kph; or: 9.4267e0Mm; 
+Time:   65.00hours, Distance to sun:150001.3Mm, Energy:-5835.37YJ, Momentum( 9.3458e0,-2.6388e2)Pgm/s
+Sun  loc:(-1.4984e5,-6.9677e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 1.7787e4,-3.8564e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-4.9409e3, 1.0712e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.7318e2, 1.3204e2)Mm; rv:(-3.5653e2, 1.9873e3)kph; av:(-1.2835e3, 7.1541e3)kph; os: 2.0190e3kph; or: 3.9585e2Mm; 
+Ap8CMloc:( 6.9176e0, 6.1087e0)Mm; rv:(-6.5594e3, 7.2136e3)kph; av:(-2.3614e4, 2.5969e4)kph; os: 9.7499e3kph; or: 9.2288e0Mm; 
+Time:   66.00hours, Distance to sun:150001.4Mm, Energy:-6016.56YJ, Momentum( 9.1053e0,-2.3310e2)Pgm/s
+Sun  loc:(-1.4983e5,-7.0748e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 1.8061e4,-3.8562e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-5.0168e3, 1.0712e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0723e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.7282e2, 1.3402e2)Mm; rv:(-3.6157e2, 1.9853e3)kph; av:(-1.3017e3, 7.1470e3)kph; os: 2.0179e3kph; or: 3.9618e2Mm; 
+Ap8CMloc:(-2.0376e0, 8.9739e0)Mm; rv:(-9.6418e3,-2.0872e3)kph; av:(-3.4711e4,-7.5138e3)kph; os: 9.8652e3kph; or: 9.2024e0Mm; 
+Time:   67.00hours, Distance to sun:150001.4Mm, Energy:-6200.50YJ, Momentum( 8.7102e0,-2.3749e2)Pgm/s
+Sun  loc:(-1.4983e5,-7.1819e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 1.8334e4,-3.8561e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-5.0928e3, 1.0711e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0724e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.7246e2, 1.3601e2)Mm; rv:(-3.6660e2, 1.9833e3)kph; av:(-1.3198e3, 7.1398e3)kph; os: 2.0169e3kph; or: 3.9651e2Mm; 
+Ap8CMloc:(-8.9866e0, 2.7754e0)Mm; rv:(-3.0812e3,-9.0428e3)kph; av:(-1.1092e4,-3.2554e4)kph; os: 9.5534e3kph; or: 9.4054e0Mm; 
+Time:   68.00hours, Distance to sun:150001.4Mm, Energy:-6387.18YJ, Momentum( 9.0538e0,-2.4189e2)Pgm/s
+Sun  loc:(-1.4982e5,-7.2890e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 1.8608e4,-3.8560e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-5.1688e3, 1.0711e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0724e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.7209e2, 1.3799e2)Mm; rv:(-3.7161e2, 1.9813e3)kph; av:(-1.3378e3, 7.1325e3)kph; os: 2.0158e3kph; or: 3.9685e2Mm; 
+Ap8CMloc:(-7.5322e0,-6.0727e0)Mm; rv:( 5.5592e3,-7.2548e3)kph; av:( 2.0013e4,-2.6117e4)kph; os: 9.1398e3kph; or: 9.6753e0Mm; 
+Time:   69.00hours, Distance to sun:150001.5Mm, Energy:-6576.60YJ, Momentum( 1.1029e1,-2.1111e2)Pgm/s
+Sun  loc:(-1.4982e5,-7.3961e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 1.8881e4,-3.8558e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-5.2448e3, 1.0711e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0724e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.7171e2, 1.3997e2)Mm; rv:(-3.7660e2, 1.9792e3)kph; av:(-1.3558e3, 7.1251e3)kph; os: 2.0147e3kph; or: 3.9719e2Mm; 
+Ap8CMloc:( 3.212e-1,-9.7940e0)Mm; rv:( 8.9623e3, 2.8539e2)kph; av:( 3.2264e4, 1.0274e3)kph; os: 8.9668e3kph; or: 9.7993e0Mm; 
+Time:   70.00hours, Distance to sun:150001.5Mm, Energy:-6768.76YJ, Momentum( 9.3115e0,-1.9791e2)Pgm/s
+Sun  loc:(-1.4981e5,-7.5032e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 1.9155e4,-3.8557e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-5.3208e3, 1.0710e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0724e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.7133e2, 1.4195e2)Mm; rv:(-3.8157e2, 1.9771e3)kph; av:(-1.3737e3, 7.1177e3)kph; os: 2.0136e3kph; or: 3.9754e2Mm; 
+Ap8CMloc:( 7.9276e0,-5.5854e0)Mm; rv:( 5.1056e3, 7.5804e3)kph; av:( 1.8380e4, 2.7289e4)kph; os: 9.1394e3kph; or: 9.6976e0Mm; 
+Time:   71.00hours, Distance to sun:150001.6Mm, Energy:-6963.67YJ, Momentum( 8.3838e0,-2.0231e2)Pgm/s
+Sun  loc:(-1.4981e5,-7.6103e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 1.9428e4,-3.8556e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-5.3968e3, 1.0710e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0724e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.7095e2, 1.4393e2)Mm; rv:(-3.8652e2, 1.9750e3)kph; av:(-1.3915e3, 7.1101e3)kph; os: 2.0125e3kph; or: 3.9789e2Mm; 
+Ap8CMloc:( 8.8760e0, 3.3275e0)Mm; rv:(-3.5340e3, 8.8461e3)kph; av:(-1.2722e4, 3.1846e4)kph; os: 9.5259e3kph; or: 9.4793e0Mm; 
+Time:   72.00hours, Distance to sun:150001.6Mm, Energy:-7161.31YJ, Momentum( 9.8784e0,-1.9351e2)Pgm/s
+Sun  loc:(-1.4980e5,-7.7174e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 1.9702e4,-3.8554e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-5.4727e3, 1.0710e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0724e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.7056e2, 1.4590e2)Mm; rv:(-3.9145e2, 1.9729e3)kph; av:(-1.4092e3, 7.1025e3)kph; os: 2.0114e3kph; or: 3.9825e2Mm; 
+Ap8CMloc:( 1.7018e0, 9.2085e0)Mm; rv:(-9.6190e3, 1.7770e3)kph; av:(-3.4628e4, 6.3971e3)kph; os: 9.7818e3kph; or: 9.3644e0Mm; 
+Time:   73.00hours, Distance to sun:150001.7Mm, Energy:-7361.69YJ, Momentum( 9.0710e0,-1.8912e2)Pgm/s
+Sun  loc:(-1.4980e5,-7.8245e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 1.9975e4,-3.8553e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-5.5487e3, 1.0709e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0724e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.7017e2, 1.4787e2)Mm; rv:(-3.9636e2, 1.9708e3)kph; av:(-1.4269e3, 7.0948e3)kph; os: 2.0102e3kph; or: 3.9861e2Mm; 
+Ap8CMloc:(-7.1432e0, 6.2456e0)Mm; rv:(-6.5071e3,-7.0893e3)kph; av:(-2.3425e4,-2.5521e4)kph; os: 9.6229e3kph; or: 9.4886e0Mm; 
+Time:   74.00hours, Distance to sun:150001.7Mm, Energy:-7564.80YJ, Momentum( 1.0463e1,-1.9351e2)Pgm/s
+Sun  loc:(-1.4979e5,-7.9316e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 2.0249e4,-3.8552e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-5.6247e3, 1.0709e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0724e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.6977e2, 1.4984e2)Mm; rv:(-4.0126e2, 1.9686e3)kph; av:(-1.4445e3, 7.0870e3)kph; os: 2.0091e3kph; or: 3.9897e2Mm; 
+Ap8CMloc:(-9.4370e0,-2.5138e0)Mm; rv:( 2.0961e3,-8.9680e3)kph; av:( 7.5461e3,-3.2285e4)kph; os: 9.2097e3kph; or: 9.7661e0Mm; 
+Time:   75.00hours, Distance to sun:150001.8Mm, Energy:-7770.65YJ, Momentum( 9.5692e0,-2.1111e2)Pgm/s
+Sun  loc:(-1.4979e5,-8.0387e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 2.0522e4,-3.8550e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-5.7007e3, 1.0708e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0724e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.6936e2, 1.5181e2)Mm; rv:(-4.0613e2, 1.9664e3)kph; av:(-1.4621e3, 7.0791e3)kph; os: 2.0079e3kph; or: 3.9934e2Mm; 
+Ap8CMloc:(-3.8560e0,-9.2070e0)Mm; rv:( 8.1678e3,-3.5532e3)kph; av:( 2.9404e4,-1.2792e4)kph; os: 8.9072e3kph; or: 9.9819e0Mm; 
+Time:   76.00hours, Distance to sun:150001.8Mm, Energy:-7979.23YJ, Momentum( 8.3838e0,-2.5069e2)Pgm/s
+Sun  loc:(-1.4978e5,-8.1458e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 2.0796e4,-3.8549e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-5.7766e3, 1.0708e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0724e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.6896e2, 1.5377e2)Mm; rv:(-4.1098e2, 1.9642e3)kph; av:(-1.4795e3, 7.0712e3)kph; os: 2.0067e3kph; or: 3.9972e2Mm; 
+Ap8CMloc:( 4.7111e0,-8.8042e0)Mm; rv:( 7.8069e3, 4.3041e3)kph; av:( 2.8105e4, 1.5495e4)kph; os: 8.9148e3kph; or: 9.9854e0Mm; 
+Time:   77.00hours, Distance to sun:150001.8Mm, Energy:-8190.54YJ, Momentum( 8.7102e0,-2.7708e2)Pgm/s
+Sun  loc:(-1.4977e5,-8.2529e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 2.1069e4,-3.8547e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-5.8526e3, 1.0708e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0724e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.6854e2, 1.5574e2)Mm; rv:(-4.1581e2, 1.9620e3)kph; av:(-1.4969e3, 7.0631e3)kph; os: 2.0056e3kph; or: 4.0010e2Mm; 
+Ap8CMloc:( 9.6606e0,-1.6168e0)Mm; rv:( 1.2866e3, 9.1259e3)kph; av:( 4.6318e3, 3.2853e4)kph; os: 9.2162e3kph; or: 9.7949e0Mm; 
+Time:   78.00hours, Distance to sun:150001.9Mm, Energy:-8404.58YJ, Momentum( 7.1640e0,-2.8147e2)Pgm/s
+Sun  loc:(-1.4977e5,-8.3599e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 2.1343e4,-3.8546e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-5.9286e3, 1.0707e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0724e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.6812e2, 1.5770e2)Mm; rv:(-4.2062e2, 1.9597e3)kph; av:(-1.5142e3, 7.0550e3)kph; os: 2.0044e3kph; or: 4.0048e2Mm; 
+Ap8CMloc:( 6.6385e0, 6.9164e0)Mm; rv:(-7.0132e3, 6.5362e3)kph; av:(-2.5248e4, 2.3530e4)kph; os: 9.5868e3kph; or: 9.5868e0Mm; 
+Time:   79.00hours, Distance to sun:150001.9Mm, Energy:-8621.35YJ, Momentum( 8.1089e0,-3.1226e2)Pgm/s
+Sun  loc:(-1.4976e5,-8.4670e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 2.1616e4,-3.8544e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-6.0046e3, 1.0707e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0724e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.6770e2, 1.5966e2)Mm; rv:(-4.2541e2, 1.9574e3)kph; av:(-1.5315e3, 7.0468e3)kph; os: 2.0031e3kph; or: 4.0087e2Mm; 
+Ap8CMloc:(-2.3369e0, 9.2762e0)Mm; rv:(-9.4106e3,-2.2600e3)kph; av:(-3.3878e4,-8.1361e3)kph; os: 9.6781e3kph; or: 9.5660e0Mm; 
+Time:   80.00hours, Distance to sun:150002.0Mm, Energy:-8840.85YJ, Momentum( 1.0205e1,-3.3865e2)Pgm/s
+Sun  loc:(-1.4976e5,-8.5741e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 2.1890e4,-3.8543e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-6.0805e3, 1.0706e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0724e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.6727e2, 1.6161e2)Mm; rv:(-4.3018e2, 1.9551e3)kph; av:(-1.5486e3, 7.0385e3)kph; os: 2.0019e3kph; or: 4.0126e2Mm; 
+Ap8CMloc:(-9.2350e0, 3.2124e0)Mm; rv:(-3.3516e3,-8.7633e3)kph; av:(-1.2066e4,-3.1548e4)kph; os: 9.3824e3kph; or: 9.7778e0Mm; 
+Time:   81.00hours, Distance to sun:150002.0Mm, Energy:-9063.07YJ, Momentum( 8.2807e0,-3.2985e2)Pgm/s
+Sun  loc:(-1.4975e5,-8.6811e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 2.2163e4,-3.8541e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-6.1565e3, 1.0706e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0724e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.6684e2, 1.6357e2)Mm; rv:(-4.3493e2, 1.9528e3)kph; av:(-1.5657e3, 7.0302e3)kph; os: 2.0007e3kph; or: 4.0165e2Mm; 
+Ap8CMloc:(-8.3661e0,-5.5957e0)Mm; rv:( 4.7831e3,-7.6020e3)kph; av:( 1.7219e4,-2.7367e4)kph; os: 8.9816e3kph; or: 1.0065e1Mm; 
+Time:   82.00hours, Distance to sun:150002.1Mm, Energy:-9288.02YJ, Momentum( 9.2600e0,-3.1666e2)Pgm/s
+Sun  loc:(-1.4974e5,-8.7882e3)Mm; rv:( 0.0000e0, 0.0000e0)kph; av:( 2.2437e4,-3.8540e5)kph; os: 0.0000e0kph; or: 0.0000e0Mm; 
+Earthloc:( 0.0000e0, 0.0000e0)Mm; rv:(-6.2324e3, 1.0706e5)kph; av:( 0.0000e0, 0.0000e0)kph; os: 1.0724e5kph; or: 1.5000e5Mm; 
+Moon loc:( 3.6640e2, 1.6552e2)Mm; rv:(-4.3965e2, 1.9505e3)kph; av:(-1.5827e3, 7.0217e3)kph; os: 1.9994e3kph; or: 4.0205e2Mm; 
+Ap8CMloc:(-1.1203e0,-1.0160e1)Mm; rv:( 8.7199e3,-1.0071e3)kph; av:( 3.1392e4,-3.6257e3)kph; os: 8.7778e3kph; or: 1.0221e1Mm; 
+142         ref acceleration(j) +:= (mass OF master)[i] * g over radius squared * +unit vector from i to j
+            1                                                                                             
+a68g: prelude/universe.a68: runtime error: 1: insufficient memory (detected in VOID loop-clause starting at "FOR" in line 125).
+14.89user 1.85system 0:16.78elapsed 99%CPU (0avgtext+0avgdata 5611520maxresident)k
+0inputs+0outputs (0major+351289minor)pagefaults 0swaps

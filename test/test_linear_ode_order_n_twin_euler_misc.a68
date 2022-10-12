@@ -1,0 +1,145 @@
+#!/usr/bin/algol68g-full --script #
+# -*- coding: utf-8 -*- #
+PR no-warning PR
+
+PR include "prelude/scalar_:=_real.a68" PR;
+PR include "prelude/with_trace_and_with_debug.a68" PR;
+PR include "prelude/errata.a68" PR;
+PR include "prelude/exception.a68" PR;
+
+CO REQUIRED BY matrix CO
+    PR include "prelude/math_errata.a68" PR;
+PR include "prelude/matrix.a68" PR;
+
+CO REQUIRED BY graph_2d CO
+    FORMAT greal repr = $g(-0,2)$;
+    MODE GREAL= REAL; # single precisiorder_n #
+    PR include "prelude/classes.a68" PR;
+PR include "prelude/graph_2d.a68" PR;
+
+CO REQUIRED BY ode_solve CO
+    FORMAT r repr = real repr;
+    FORMAT rn repr = vec repr;
+    #FORMAT ty repr = $"t="f(r repr)" y="f(rn repr)$;#
+    # PR include "prelude/math_hints.a68" PR; #
+PR include "prelude/ode_order_1_solve.a68" PR;
+PR include "prelude/linear_ode_order_n_solve.a68" PR;
+
+# Note: [1]DNYBYDTN is dⁱy/dtⁱ or simply dy/dt, whereas 
+                [0]DNYBYDTN is d⁰y/dt⁰ or simply y -- no differentiatiorder_n...
+                [-1]DNYBYDTN is d⁻ⁱy/dt⁻ⁱ so... -1 would be integratiorder_n! #
+
+CO
+MODE IVPON = STRUCT(INTERVAL t interval, FLEX[1]Y y0 dy0 ddy0 etc, FDNYBYDTN f dny by dtn);
+MODE IVPONPKG = STRUCT(IVPON ivp, INTERVAL y axis, STRING descriptiorder_n);
+CO
+# IMPORTANT NOTE: the "Order" of dⁿy/dtⁿ is IMPLIED by the number of boundary corder_nditiorder_ns!!! #
+[]IVPONPKG test case list = (
+#   t0,tn,y0,DNYBYDTN(t,y)                                             ⌊,⌈y, "Descriptiorder_n" #
+    (((0,1),(e**3,-54.6771157582462),  #d²y/dt²=#(REAL t, Y y, DY dy by dt)Y: 3*y-2*dy by dt),
+        #y=#(0,25), "y''=3y-2y', y(0)=e**3, y'(1)=1 => (e**(3-3*t)*(4*e**(4*t)+3-3*e**4)) over (3+e**4)"),
+    (((0,1),1, #dy/dt=#(REAL t, Y y)Y:t           ), (1,2), "dy by dt = t"),
+    (((0,1),1, #dy/dt=#(REAL t, Y y)Y:2*(t+1)*y[1]), (0,10),"dy by dt = 2(t+1)y"),
+    (((0,1),1, #dy/dt=#(REAL t, Y y)Y:1 / y[1]**2 ), (0,2), "dy by dt = y**-2"),
+    (((0,1),1, #dy/dt=#(REAL t, Y y)Y:t + y       ), (0,3), "dy by dt = t+y")
+);
+
+# Actual solutiorder_ns #
+[]FUNCTIONPKG test case solutiorder_n list =(
+    ((REAL t)Y: (e**(3-3*t)*(4*e**(4*t)-1+e**4))/(3+e**4),   "y(t) = (e**(3-3*t)*(4*e**(4*t)-1+e**4))/(3+e**4)"),
+    ((REAL t)Y: 1/2*(t**2+2),   "y(t) = 1 over 2(t^2+2)"),
+    ((REAL t)Y: e**(t*(t+2)),   "y(t) = e^(t(t+2))"),
+    ((REAL t)Y: (3*t+1)**(1/3), "y(t) = (3x+1)^(1 by 3)"),
+    ((REAL t)Y: -t+2*e**t-1,    "y(t) = -t+2 e^t-1")
+);
+
+PR include "prelude/curve.a68" PR;
+
+PROC f crude tol portal = (TY ty)Y: ABS y OF ty * 10 + 10; # some big number #
+
+TYGEN test gen = (TYYIELD yield)VOID: (
+    yield((1,1.1));
+    yield((1,1.2));
+    yield((1,1.3));
+    yield((1,1.4));
+    yield((1,1.5))
+);
+
+PROC print ty table = (TYGEN ty gen)VOID: (
+    print(("DB - TY table: BEGIN", new line));
+    # FOR # ty gen( #)DO #
+        (TY ty)VOID: printf(($"* DB >>>>>>>>>>>>>>> TY:"$, $f(real repr)";"$, t OF ty, y OF ty, $l$))
+    # OD #);
+    print(("DB - END", new line))
+);
+
+            printf($8"-","8>< ",8" -"l$);
+PROC(REAL)DY actual = functiorder_n OF test case solutiorder_n list[1];
+INT steps = 20;
+r5_0a: (
+    IVPON ivp order_n = ivp OF test case list[1];
+    IVPOI ivp order_1 = TRANIVPOI ivp order_n;
+    (FALSE|printf(($"DB - t interval OF ivp order_1: "$,$f(interval repr)"; "$,t interval OF ivp order_1,$l$)));
+    (FALSE|printf(($"DB - y0 OF ivp order_1: "$,$f(real repr)"; "$,y0 OF ivp order_1,$l$)));
+    (FALSE|printf(($"DB - dy0 ddy0 etc y0 OF ivp order_n: "$,$f(real repr)"; "$,y0 dy0 ddy0 etc OF ivp order_n,$l$)));
+    
+    (with trace|printf(($"DB - f(0,y0 OF ivp order_1): "$,$f(real repr)"; "$,(f dy by dt OF ivp order_1)(t0,y0 OF ivp order_1),$l$)));
+    R t0 = 0;
+    printf($"OK so far..."l$);
+
+    REAL dt := 1/steps;
+    REAL t := 0; 
+    FDY f dy by dt = f dy by dt OF ivp order_1;
+    [UPB y0 OF ivp order_1]REAL y := y0 OF ivp order_1;
+
+          (with trace|print mat list(("DBQQQ t:", t, "y:", y)));
+    FOR i TO steps DO
+        t +:= dt;
+        y +:= f dy by dt(t, y) * dt
+        ; (with trace|print mat list(("DBQQQ t:", t, "; i:",i,"; steps:", steps,"; y:", y,"; actual:",actual(t))))
+    OD
+);
+            printf($8"-","8>< ",8" -"l$);
+(
+    IVPONPKG ivp order_n pkg = test case list[1];
+    IVPON ivp order_n = ivp OF ivp order_n pkg;
+    (with trace|printf(($"DB - t interval OF ivp order_n: "$,$f(interval repr)"; "$,t interval OF ivp order_n,$l$)));
+    (FALSE|printf(($"DB - dy0 ddy0 etc y0 OF ivp order_n: "$,$f(real repr)"; "$,y0 dy0 ddy0 etc OF ivp order_n,$l$)));
+    
+    R t0 = 0;
+    FDNYBYDTN f dny by dtn = f dny by dtn OF ivp order_n;
+    []Y dny0 = (y0 dy0 ddy0 etc OF ivp order_n)[@0];
+#QQQ# (with trace|print(("DB: test_linear_ode_order_n_twin_euler_misc.a68",new line)));
+    Y y0 = call dny by dtn(f dny by dtn OF ivp order_n, t0, dny0);
+
+    printf($"OK so far..."l$);
+
+    REAL dt := 1 / steps;
+    REAL t := lwb OF t interval OF ivp order_n; 
+
+    [LWB dny0:UPB dny0][UPB dny0[0]]REAL y := dny0;
+    [UPB dny0[0]]REAL dny by dtn;
+    
+                (with trace|printf(($"DB - LWB y-UPB y: "$,$f(int repr)"; "$,LWB y, UPB y,$l$)));
+                (with trace|printf(($"DB - f(0,y0 dy0 ddy0 etc) OF ivp order_n: "$,$f(real repr)"; "$,y,$l$)));
+
+    print((descriptiorder_n OF ivp order_n pkg, new line));
+    (with trace|printf(($"DB - t: "$,$f(real repr)"; "$,t)));
+            print((0,":", REPR y[0],";"));
+            print((1,":", REPR y[1],";", new line));
+    FOR i TO steps DO
+        t +:= dt;
+    (with trace|printf(($"DB - t: "$,$f(real repr)"; "$,t)));
+#QQQ# (with trace|print(("DB: test_ode_order_n_twin_euler_misc.a68",new line)));
+        dny by dtn := call dny by dtn(f dny by dtn, t, y);
+        FOR j FROM LWB y TO UPB y-1 DO
+            y[j] +:= y[j+1] * dt;
+            print((j,":", REPR y[j],";"))
+        OD;
+        y[UPB y]+:=dny by dtn*dt;
+        print((UPB y,":", REPR y[UPB y],";"));
+        print(("actual:", actual(t), new line))
+    OD
+);
+PR include "postlude/exception.a68" PR;
+PR include "postlude/scalar_=:_real.a68" PR

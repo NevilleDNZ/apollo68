@@ -1,0 +1,76 @@
+#!/usr/bin/algol68g-full --script #
+# -*- coding: utf-8 -*- #
+
+MODE STRINGYIELD = PROC(STRING)VOID;
+MODE STRINGGEN = PROC(STRINGYIELD)VOID;
+
+PROC open gen line = (UNION(STRING,REF FILE) in file, STRINGYIELD yield)VOID: (
+    FILE file;
+    CASE in file IN
+        (STRING file name): open(file, file name, stand in channel),
+        (REF FILE in file): file := in file
+    ESAC;
+    on logical file end(file, (REF FILE file)BOOL: (finally; FALSE));
+    on physical file end(file, (REF FILE file)BOOL: (finally; FALSE));
+    DO
+        STRING line;
+        get(file, line);
+        yield(line);
+        get(file, new line)
+    OD;
+finally:
+    close(file)
+);
+
+PROC join gen string = (STRING in sep, STRINGGEN gen string)STRING:(
+    STRING out := "", sep := "";
+# FOR STRING string IN # gen string(#) DO #
+##    (STRING string)VOID: (
+            out +:= sep + string;
+            sep := in sep
+# OD #));
+    out
+);
+
+[]STRING modes = ("SHORT SHORT","SHORT","LONG","LONG LONG");
+[]STRING names = ("short short","short","long","long long");
+[]STRING casts = ("SHORTEN SHORTEN","SHORTEN","LENG","LENG LENG");
+
+[]STRUCT(STRING from, []STRING to) sub list = (
+    ("#L#", modes), # Monadic OPerators #
+    ("#l#", names),
+    ("#LENG#", casts),
+    ("#S#", modes), # Diadic OPerators #
+    ("#s#", names),
+    ("#SHORTEN#", casts)
+);
+
+PROC gen parse long line = (STRING in string, STRINGYIELD yield)VOID: (
+    INT lwb := 1, width;
+    DO
+        IF char in string("#", width, in string[pos:]) THEN
+            yield("{"+in string[pos:width]+"}");
+            pos +:= width
+        FI
+    OD;
+finally:
+    yield("<<"+in string[pos:]+">>")
+);
+
+PROC gen long line = (STRINGGEN gen string, STRINGYIELD yield)VOID: (
+# FOR STRING string IN # gen string(#) DO #
+##   (STRING line)VOID:(
+          yield(join gen string("",gen parse long line(line,)))
+# OD #))
+);
+
+PROC print gen = (STRINGGEN gen string)VOID:
+# FOR STRING string IN # gen string(#) DO #
+##   (STRING string)VOID:
+              print((">"+string, new line))
+# OD #);
+
+FOR arg FROM 4 TO argc DO
+    STRING filename = argv(arg);
+    print gen(gen long line(open gen line(file name,),))
+OD

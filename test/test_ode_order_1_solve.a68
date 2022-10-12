@@ -1,0 +1,159 @@
+#!/usr/bin/algol68g-full --script #
+# -*- coding: utf-8 -*- #
+PR no-warning PR
+
+PR include "prelude/scalar_:=_real.a68" PR;
+PR include "prelude/with_trace_and_with_debug.a68" PR;
+with trace := with debug := TRUE;
+PR include "prelude/errata.a68" PR;
+PR include "prelude/exception.a68" PR;
+
+CO REQUIRED BY matrix CO
+    PR include "prelude/math_errata.a68" PR;
+PR include "prelude/matrix.a68" PR;
+
+CO REQUIRED BY ode_solve CO
+    FORMAT r repr = real repr;
+    FORMAT rn repr = vec repr;
+    #FORMAT ty repr = $"t="f(r repr)" y="f(rn repr)$;#
+    # PR include "prelude/math_hints.a68" PR; #
+PR include "prelude/ode_order_1_solve.a68" PR;
+
+CO REQUIRED BY graph_2d CO
+    FORMAT greal repr = $g(-0,2)$;
+    MODE GREAL= REAL; # single precision #
+    PR include "prelude/classes.a68" PR;
+PR include "prelude/graph_2d.a68" PR;
+
+# Pendulum initial conditions #
+REAL m=1, s=1, g = 9.81 * m /s/s, l = 1*m, y0=0.1 * m;
+
+[]IVPOIPKG test case list = (
+#   t0,tn y0, FR'(t,y)                           ⌊,⌈y, "Description" #
+    (((0,1), 1, (REAL t, RN y)RN: t           ), (1,2), "dy by dt = t"),
+    (((0,1), 1, (REAL t, RN y)RN: 2*(t+1)*y   ), (0,10),"dy by dt = 2(t+1)y"),
+    (((0,1), 1, (REAL t, RN y)RN: 1 / y[1]**2 ), (0,2), "dy by dt = y**-2"),
+    (((0,1), 1, (REAL t, RN y)RN: t + y       ), (0,3), "dy by dt = t+y"),
+CO cf. https://en.wikipedia.org/wiki/Pendulum_(mathematics)#Simple_gravity_pendulum CO
+    (((0,3), (y0,0), (REAL t, RN y)RN: (y[2],-g/l*sin(y[1]))), 
+                (-0.2,+0.2), "d²y by dt² = - g div l*sin(y) ... Pendulum - order_1")
+);
+
+# Actual solutions #
+[]FUNCTIONPKG test case solution list =(
+    ((REAL t)RN: 1/2*(t**2+2),   "y(t) = 1 over 2(t^2+2)"),
+    ((REAL t)RN: e**(t*(t+2)),   "y(t) = e^(t(t+2))"),
+    ((REAL t)RN: (3*t+1)**(1/3), "y(t) = (3x+1)^(1 by 3)"),
+    ((REAL t)RN: -t+2*e**t-1,    "y(t) = -t+2 e^t-1"),
+    ((REAL t)RN: (y0*cos(sqrt(g/l)*t), y0*sin(sqrt(g/l)*t)) ,
+        "y(t) = y0 * cos(sqrt(g/l)*t) ... Simplified Pendulum")
+);
+
+PR include "prelude/curve.a68" PR;
+
+PROC f crude tol portal = (TY ty)RN: ABS y OF ty * 10 + 10; # some big number #
+
+r4_1: (
+
+    PROC plot solutions = (ODEOISOLVEPKG solve, IVPOIPKG ivp pkg, FUNCTIONPKG test case solution)VOID: (
+        REF GRAPHDD graph := INIT LOC GRAPHDD;
+
+        IVPOI ivp = ivp OF ivp pkg;
+
+        prefix OF graph := "test_plot/";
+        title OF graph := "Solution of "+description OF ivp pkg+" (Actual(dashed) vs Calculated)";
+        type OF window OF graph := "gif"; # or gif, ps, T, pnm etc #
+        sub title OF graph := "Using: "+description OF solve;
+
+        interval OF axis OF graph := (t interval OF ivp, y axis OF ivp pkg);
+
+        ODEOISOLVETYGEN solution ty gen = method OF solve;
+
+        printf($l"Key: (step size vs colour)"l$);
+        (begin curve OF (METHODOF graph))(~);
+        FOR k FROM 0 TO 5 DO
+            REAL step size = 0.2 / 2 ** k;
+            ODEOISOLVEARGS args = (step size, f crude tol portal);
+            (with debug|print ty gen table("solution ty gen:",solution ty gen(ivp, args,)));
+            DDGEN curve = gen filter ty to 2d(solution ty gen(ivp, args,),);
+            (with debug|print gen vec table("curve:", solution ty gen(ivp, args,)));
+            (add curve OF (METHODOF graph))(curve, rainbow[k+1]);
+            printf(($g(-8,6)": "gl$, step size, (name OF rainbow[k + 1])))
+        OD;
+        INT num samples = 100;
+        DDGEN actual solution = gen function curve(function OF test case solution, t interval OF ivp, num samples, );
+        (add curve OF (METHODOF graph))(actual solution, (black, dotted));
+        (end curve OF (METHODOF graph))(~)
+    );
+
+    FOR test TO UPB test case list[:] DO
+        IVPOIPKG test case = test case list[test];
+        FOR n solve TO UPB ode order 1 solve list DO
+            ODEOISOLVEPKG solve := ode order 1 solve list[n solve];
+            plot solutions(solve, test case, test case solution list[test])
+        OD
+    OD
+
+);
+
+r4_1 analyse errors: (
+
+# define the bounds of the 'log error' vs 'log step size' graph #
+    INTERVAL log step sizes = (ENTIER(log(0.2 / 2**5)), 1 + ENTIER(log(0.2 / 2**0)));
+    INTERVAL log error = (-real width OVER 2, 1);
+
+    PROC gen step size = (REALYIELD yield)VOID:
+        FOR k FROM 0 TO 5 DO
+            yield(0.2 / 2**k)
+        OD;
+
+    PROC gen error vs stepsize = (ODEOISOLVEPKG solve, IVPOI ivp, RN actual solution, RNYIELD yield)VOID: (
+
+        ODEOISOLVETYGEN solution ty gen = method OF solve;
+        # FOR INT step size IN # gen step size(#DO)#
+        ##   (REAL step size)VOID:(
+                      ODEOISOLVEARGS args = (step size, f crude tol portal);
+                      RN yn = y OF get tail ty(solution ty gen(ivp, args,));
+                      yield((log(step size), log(ABS(yn - actual solution)[1])))
+        # OD #))
+
+    );
+
+    PROC plot error vs step size = (IVPOIPKG ivp pkg, FUNCTIONPKG test case solution)VOID:(
+        IVPOI ivp = ivp OF ivp pkg;
+        REF GRAPHDD graph := INIT LOC GRAPHDD;
+
+        prefix OF graph := "test_plot/";
+        title OF graph := "Solution of "+description OF ivp pkg;
+        sub title OF graph := "(log error vs log step size)";
+
+        type OF window OF graph := "gif"; # or gif, ps, T, pnm etc #
+        #sub title OF graph := "Using: "+description OF solve;#
+
+        interval OF axis OF graph := (log step sizes # vs #, log error);
+        label OF axis OF graph := ("log step sizes" # vs #, "log error");
+
+        RN actual solution = (function OF test case solution)(upb OF t interval OF ivp);
+
+        (begin curve OF (METHODOF graph))(~);
+
+        printf($l"Key: (method vs colour)"l$);
+        FOR n solve TO UPB ode order 1 solve list DO
+            ODEOISOLVEPKG solve := ode order 1 solve list[n solve];
+            RNGEN gen error curve = gen error vs stepsize(solve, ivp, actual solution,);
+            (add curve OF (METHODOF graph))(gen error curve, rainbow[n solve]);
+            printf(($g": "gl$, description OF solve, (name OF rainbow[n solve])))
+        OD;
+
+        (end curve OF (METHODOF graph))(~)
+    );
+
+# first compare 'error' to 'step size' of individual methods #
+    FOR n test TO UPB test case list[:] DO
+        IVPOIPKG test case = test case list[n test];
+            plot error vs step size(test case, test case solution list[n test])
+    OD
+
+);
+PR include "postlude/exception.a68" PR;
+PR include "postlude/scalar_=:_real.a68" PR

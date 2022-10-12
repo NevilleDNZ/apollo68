@@ -1,0 +1,95 @@
+# -*- coding: utf-8 -*- #
+
+MODE DDD = [3]GREAL;
+MODE DDDYIELD = PROC(DDD)VOID;
+MODE DDDGEN = PROC(DDDYIELD)VOID;
+
+#===========================#
+# A crude CLASS declaration #
+#===========================#
+MODE GRAPHDDD = STRUCT(
+  PROC(NOARG)GRAPHDDDMETHODOF method,
+  DDD look from, # camera  pos #
+  DDD look to,   # centre of object #
+  [3,3]GREAL transform, # calculated #
+  DDD relative look from,
+  INTERVAL contrast, # dim lines as they become more distant #
+  GREAL zoom
+);
+
+MODE GRAPHDDDMETHODOF = STRUCT(
+    PROC (#self,# DDD #look to#, DDD #look from#, GREAL #zoom#)REF GRAPHDDD init,
+    PROC (#self,# DDD #look from#)REF GRAPHDDD set look from,
+    PROC (#self,# DDDGEN #gen#,DDYIELD #yield 2d#)VOID from 3d to 2d gen
+);
+
+# Bind the methods to a Class Instance #
+PROC method of graph 3d = (REF GRAPHDDD self, NOARG skip)GRAPHDDDMETHODOF:(
+  init of graph 3d(self, #look to#, #look from#, #zoom#),
+  set look from of graph 3d(self, #look from#),
+  from 3d to 2d gen of graph 3d(self, #gen 3d#, #yield 2d#)
+);
+
+OP METHODOF = (GRAPHDDD graph)GRAPHDDDMETHODOF: (method OF graph)(~);
+
+# define the default values #
+OP INIT = (REF GRAPHDDD object)REF GRAPHDDD: init of graph 3d(object,#from=#(0,1,-100), #to=#(0.5,0.5,0.5), #zoom=#1);
+
+PROC init of graph 3d = (REF GRAPHDDD self, DDD look from, look to, GREAL zoom)REF GRAPHDDD: (
+  method OF self := method of graph 3d(self,#~#);
+  look to OF self := look to;
+  zoom OF self := zoom;
+  set look from of graph 3d(self, look from);
+
+# Objects at the forefront of the interval will appear brighter then those in the rear #
+  contrast OF self := (-max real, max real);
+  self
+);
+
+PROC set look from of graph 3d = (REF GRAPHDDD self, DDD look from)REF GRAPHDDD: (
+  look from OF self := look from; # the official bit #
+# Original look point basis #
+  MAT org = (# x=#(1,0,0), # y=#(0,1,0), # z=#(0,0,1));
+
+# Calculate the transformation matrix #
+  [3,3]GREAL new; INT x=1, y=2, z=3;
+
+# Assume the user is looking directly 'look from' at 'look to'  #
+  new[z,] := relative look from OF self 
+          := look to OF self - look from OF self;
+
+# Generate the new basis #
+  GREAL norm z = NORM new[z,];
+  new[z,]/:= norm z;
+
+  FOR i FROM x TO y DO
+    print((i,REPR org[i,],"-REPR new[z,]*(",REPR org[i,],"*",REPR new[z,],");", new line));
+    new[i,] := org[i,]-new[z,]*(org[i,] * new[z,])
+  OD;
+
+  IF NORM new[x,] = 0 ORF (NORM new[y,] = 0 ORF norm z = 0) THEN
+    IF NOT fix value error("new basis of projection confuses up and down") THEN  stop FI FI;
+
+# Normalise: #
+  FOR i FROM x TO y DO new[i,]:= new[i,]/NORM new[i,] OD;
+
+# build the actual matrix transformation #
+  transform OF self := INV new / norm z;
+  self
+);
+
+PROC from 3d to 2d gen of graph 3d = (REF GRAPHDDD self, DDDGEN in gen 3d, DDYIELD out yield 2d)VOID: (
+  print((REPR transform OF self, new line));
+# FOR DDD in 3d IN # in gen 3d(#) DO #
+##   (DDD in 3d)VOID: (
+       DDD out 3d = (in 3d - look from OF self) * (transform OF self);
+       REAL depth 3d = (UPB in 3d < 3 | 1 | out 3d[3]);
+# Worth dimming colour here maybe #
+       (TRUE OR with debug|print((REPR in 3d,"=>", REPR out 3d)));
+       (TRUE OR with debug|print(("=>", REPR (out 3d[1:2]/depth 3d),new line)));
+       out yield 2d(out 3d[1:2]*zoom OF self/depth 3d)
+# OD #))
+);
+
+
+SKIP

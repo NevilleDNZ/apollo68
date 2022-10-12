@@ -1,0 +1,254 @@
+# -*- coding: utf-8 -*- #
+
+MODE RENDEZVOUS = STRUCT(
+    STRING name,
+    POSITION postion,
+    TIME time
+);
+
+MODE MODULE = STRUCT(
+    STRING name,
+    LENGTH length,
+    DISTANCE diameter,
+    MASS mass,
+  #[QQQ]# ENGINE engine
+);
+
+MODE VECTHRUST = VECFORCE;
+VECTHRUST rear = UVEC VEC(0,0,1);
+
+MODE ENGINE = STRUCT(
+    STRING name,
+    MASS mass full, mass empty,
+    VECTHRUST thrust,
+    TIME burn time,
+    FUEL fuel
+);
+
+MODE FUEL = STRUCT(
+    STRING name,
+    DENSITY density, 
+            energy density
+);
+
+# Command/Service Modules: #
+  #Role: Earth and Lunar Orbit#
+  # Crew: 3; CDR, CM pilot, LM pilot #
+  # Total: 30,332 kg,  (66,871 lb)#
+
+ENGINE cm rcs x 12 := (
+  # Name: #"CM RCS (UDMH/N2O4)",
+  # Mass full: #SKIP,
+  # Mass empty: #SKIP,
+  # Thrust: #rear*409*n, #(92 lbf ea)#
+  # Burn time: #SKIP, # TODO #
+  # Fuel: #SKIP # TODO #
+);
+
+MODULE cm 103 command module := (
+  # Name: #"CM-103 command module",
+# Dimensions: #
+  # Length: #3.2*meters, #(36.2 ft)#
+  # Diameter: #3.9*meters, #(12.8 ft)#
+  # Volume: 6.17*meters**3,  (218 ft3)#
+# Mass: #
+  # Command module: #5 809*kg, #(12,807 lb)#
+# Rocket engines: #
+    cm rcs x 12
+);
+
+ENGINE sm rcs x 16 := (
+  # Name: #"SM RCS (MMH/N2O4) x 16",
+  # Mass full: #SKIP,
+  # Mass empty: #SKIP,
+# These are probably oriented differently to manuever the craft #
+  # Trust: #rear*445*n,   #(100 lbf ea)#
+  # Burn time: #SKIP, # TODO #
+  # Fuel: #SKIP # TODO #
+);
+
+ENGINE aerozine 50 n204 x 1 := (
+  # Name: #"Aerozine 50/N2O4 x 1",
+  # Mass full: #SKIP,
+  # Mass empty: #SKIP,
+  # Thrust: # rear*91 000*n,  #(20,500 lbf)#
+  # Burn time: #SKIP, # TODO #
+  # Fuel: #SKIP # TODO #
+);
+
+MODULE sm 103 service module := (
+  # Name:# "SM-103 service module",
+# Dimensions: #
+  # Length:#(11.03-3.2)*meters, #(36.2 ft)#
+  # Diameter:#3.9*meters, #(12.8 ft)#
+  # Volume: 6.17*meters**3,  (218 ft3)#
+# Mass: #
+  # Service module:#24 523*kg, #(54,064 lb)#
+# Rocket engines: # # Ignore FTM #
+  # (16, sm rcs), #
+# Service Propulsion System: #
+    (aerozine 50 n204 x 1)
+);
+
+FUEL rp 1 and liquid oxygen := SKIP;
+
+ENGINE f 1 engine x 5 := (
+  # Engines=#"5 x F-1 engines",
+  # Mass full:# SKIP,
+  # Mass empty:# SKIP,
+  # Thrust=#rear*33 400*k*n, #(7,500,000 lbf)#
+  # Burn time=#150*s,
+  # Fuel =# rp 1 and liquid oxygen
+);
+
+MODULE s ic first stage  := (
+  # Name=#"S-IC First Stage",
+  # Length=#42*meters, #(138 ft)#
+  # Diameter=#10*meters, #(33 ft)#
+  # Mass=#2 280 000*kg, #(5,030,000 lb)#
+# Rocket engines: #
+    f 1 engine x 5
+);
+
+FUEL lox lh2 = SKIP;
+
+ENGINE j 2 engine 376s x 5 := (
+  # Engines: #"5 x J-2 engine",
+  # Mass full: #SKIP,
+  # Mass empty: #SKIP,
+  # Thrust: #rear*5 115*k*n,
+  # Burn time: #367*s,
+  # Fuel: #lox lh2
+);
+
+MODULE s ii second stage := (
+  # Name: #"S-II second stage",
+  # Length: #24.9*meters, #(82 ft)#
+  # Diameter: #10*meters, #(33 ft)#
+  # Mass: #480 900*kg, #(1,060,000 lb)#
+  # Engines: #j 2 engine 376s x 5
+);
+
+ENGINE j 2 engine 475s x 1 := (
+  # Engines: #"1 x J-2 engine",
+  # Mass full: #SKIP,
+  # Mass empty: #SKIP,
+  # Thrust: #rear*1 001 *k*n,
+  # Burn time: #475 *s,
+  # Fuel: #lox lh2
+);
+
+MODULE s ivb third stage := (
+  # Name=#"S-IVB third stage",
+  # Length: #17.8*meters, #(58.4 ft)#
+  # Diameter: #6.6*meters, #(21.7 ft)#
+  # Mass: #119 900*kg, #(253,000 lb)#
+  # Engines: #j 2 engine 475s x 1
+);
+
+[5]MODULE apollo 8 modules := (
+    s ic first stage,
+    s ii second stage,
+    s ivb third stage,
+    cm 103 command module,
+    sm 103 service module
+);
+
+MODE CREW = STRUCT(
+    STRING position, name, summary,
+    MASS weight
+);
+
+[3]CREW apollo 8 crew := ( # from http://en.wikipedia.org/wiki/Apollo_8 #
+    ("Commander","Frank F. Borman","II Second and last spaceflight", 70*kg *est),
+    ("Command Module Pilot","James A. Lovell, Jr","Third spaceflight", 70*kg *est),
+    ("Lunar Module Pilot","William A. Anders","Only spaceflight", 70*kg *est)
+);
+
+
+RENDEZVOUS lc 39a launch := ( 
+    "LC 39A, Kennedy Space Center Florida",
+  # Position: #((28.608397*degrees, -80.604345*degrees), 10*meters),
+  # Launch time: #init time((1968,12,21,12,51,00))
+);
+
+RENDEZVOUS ytbd := ("Yet to be determined",SKIP,SKIP);
+
+RENDEZVOUS north pacific zone landing := (
+    "North Pacific Ocean", # 15:51:42, 27 December 1968 (UTC) #
+  # Position: #((dms(8,8,0#N#),dms(165,1,0#W#)), 0),
+  # Landing time: #init time((1968,12,27,15,51,42))
+);
+
+MODE MISSIONPHASE = STRUCT(
+    STRING name,
+    RENDEZVOUS objective
+);
+
+COMMENT
+http://www.lpi.usra.edu/lunar/missions/apollo/apollo_8/overview/
+EVENT;                 DATE & TIME (EST);       MISSION TIME
+Launch;                December 21 07:51:00 am; 00:00:00
+Earth orbit insertion;             08:32:35 am; 00:11:35
+Translunar injection;              10:41:37 am; 02:50:37
+Lunar orbit insertion; December 24 04:59:20 am; 69:08:20
+Transearth injection;  December 25 01:10:16 am; 89:19:16
+Splashdown;            December 27 10:51:42 am; 147:00:42
+END COMMENT
+
+CO
+http://history.nasa.gov/ap08fj/02earth_orbit_tli.htm
+Public Affairs Officer - "Jim Lovell has just now read us down what he
+saw on his instrumentation. He's shows an apogee of 102.6 [nautical
+miles, 190 km], a perigee of 96.8 [nautical miles, 179.3 km] and a
+cut-off velocity of 25,560 feet per second [7,790.7 m/s]. That's within
+a hundredth of a percentage point of what we are reading on our scales
+here in Houston. And now the crew has been advised, we have settled on
+an orbit of 103 [nautical miles, 191 km] apogee by 99 [nautical] miles
+[183 km] perigee. We were shooting for something a little close to 100
+nautical miles [185 km] circular."
+END CO
+
+[13]MISSIONPHASE apollo 8 mission phases := (
+# http://www.hq.nasa.gov/alsj/a410/A08_MissionReport.pdf #
+# http://upload.wikimedia.org/wikipedia/commons/5/5c/Apollo-8-mission-profile.png #
+#http://www.jsc.nasa.gov/history/mission_trans/AS08_CM.PDFI for earth orbit altitude# 
+    ("Launch", lc 39a launch),
+    ("Earth parking orbit", ytbd),
+    ("Translunar injection", ytbd),
+    ("Space craft S-IVB seperation", ytbd),
+    ("First midcourse correction (SPS/RCS)", ytbd),
+    ("Second mid course correction (RCS)", ytbd),
+    ("Lunar orbit insertion (SPS)", ytbd),
+    ("Lunar orbit circulation (SPS)", ytbd),
+    ("Transearth injection (SPS)", ytbd),
+    ("Third midcourse correction (RCS)", ytbd),
+    ("Command module/service module separation", ytbd),
+    ("Entry", ytbd),
+    ("Landing", north pacific zone landing)
+);
+
+MODE MISSION = STRUCT(
+    STRING name,
+    FLEX[0]CREW crew,
+    FLEX[0]MODULE modules,
+    FLEX[0]MISSIONPHASE phases,
+    FLEX[1]STRING description
+);
+
+OP REPR = (MISSION mission)STRING: REPR name OF mission;
+OP SHORTENREPR = (MISSION mission)STRING: name OF mission;
+
+MISSION apollo 8 mission := (
+  # Name: #"Apollo 8",
+  # Crew: #apollo 8 crew,
+  # Modules: #apollo 8 modules,
+  # Phases: #apollo 8 mission phases,
+  # description: #(
+      "Lunar orbits 	10",
+      "CSM time in lunar orbit 	20 h 10 m 13 s",
+      "Mission duration 	6 d 03 h 00 m 42 s"
+    )
+);
+
+SKIP

@@ -1,0 +1,56 @@
+# -*- coding: utf-8 -*- #
+
+# define some variables for tracking how often a floating point OP is done #
+MODE CREAL = REAL; # To indicate the variable operations are being counted #
+STRUCT(INT addition, substraction, multiplication, division,
+              int multiplication, int exponentiation,
+              iterations, function calls, differential calls) count;
+
+PROC init count = VOID: count := (0, 0, 0, 0, 0, 0, 0, 0, 0);
+FORMAT count repr = $"FP instruction count:"
+                                          " +:"g(-0)", -:"g(-0)", *:"g(-0)", /:"g(-0)", I*R:"g(-0)", R**I:"g(-0)
+                                          ", iterations:"g(-0)", f() calls:"g(-0)", f'() calls:"g(-0)l$;
+init count;
+PROC print count summary = VOID: printf((count repr, count, $l$));
+
+COMMENT
+# Overload/replace count operator with a counting operator #
+PROC count addition = (REAL a,b)REAL:(addition OF count +:=1;  a+b),
+          count substraction = (REAL a,b)REAL:(substraction OF count +:=1;  a-b),
+          count multiplication = (REAL a,b)REAL:(multiplication OF count +:=1;  a*b),
+          count int multiplication = (INT a, REAL b)REAL:(int multiplication OF count +:=1;  a*b),
+          count division = (REAL a, b)REAL:(division OF count +:=1;  a/b), # tend to be slower then "*" #
+          count int exponentiation = (REAL a, INT b)REAL:(
+# estimate how many multiplications are actually required #
+        multiplication OF count +:=
+            CASE 1+ABS b IN
+                # This sequence can be found at: http://oeis.org/A003313 #
+                0, 0, 1, 2, 2, 3, 3, 4, 3, 4, 4, 5, 4, 5, 5, 5, 4, 5, 5, 6, 5,
+                6, 6, 6, 5, 6, 6, 6, 6, 7, 6, 7, 5, 6, 6, 7, 6, 7, 7, 7, 6, 7,
+                7, 7, 7, 7, 7, 8, 6, 7, 7, 7, 7, 8, 7, 8, 7, 8, 8, 8, 7, 8, 8,
+                8, 6, 7, 7, 8, 7, 8, 8, 9, 7, 8, 8, 8, 8, 8, 8, 9, 7, 8, 8, 8,
+                8, 8, 8, 9, 8, 9, 8, 9, 8, 9, 9, 9, 7, 8, 8, 8, 8
+            OUT # estimate # ENTIER (2 * ln(b)) ESAC;
+        int exponentiation OF count +:= 1; a ** b
+    );
+
+# It may be worth implementing "count" wrappers for the comparison operators:
+    e.g. a < b, a > b, a >= b, a <= b etc as these may involve a partial substraction #
+END COMMENT
+BEGIN
+COMMENT
+# Overload/replace count operator with our counting operators #
+    OP (CREAL,CREAL)CREAL + =     count addition;
+    OP (CREAL,CREAL)CREAL - =     count substraction;
+    OP * = (CREAL a,b)CREAL:      count multiplication(a,b);
+    OP / = (CREAL a,b)CREAL:      count division(a,b);
+    OP * = (INT a,CREAL b)CREAL:  count int multiplication(a,b);
+    OP ** = (CREAL a,INT b)CREAL: count int exponentiation(a,b);
+    PROC count function calls = (FR f, REAL x)REAL: (function calls OF count +:= 1; f(x));
+    PROC count differential calls = (FR f, REAL x)REAL: (differential calls OF count +:= 1; f(x));
+
+END COMMENT
+    PROC count function calls = (FR f, REAL x)REAL: f(x);
+    PROC count differential calls = (FR f, REAL x)REAL: f(x);
+
+    SKIP # export names #

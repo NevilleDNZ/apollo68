@@ -1,0 +1,11 @@
+# -*- coding: utf-8 -*- #
+COMMENT PROIVIDES:
+    PROC VOID exception too many iterations, exception value error, ~;
+END COMMENT
+
+SKIP EXIT
+exception index error:
+exception value error:
+exception undefined:
+exception unimplemented:
+    stop

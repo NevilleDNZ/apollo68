@@ -1,0 +1,292 @@
+# -*- coding: utf-8 -*- #
+
+COMMENT
+define function type for nᵗʰ order differential equation:
+    MODE FTDNBYDT #ftdⁿy/dtⁿ# = F(t, (y, dy/dt, d²y/dt², d³y/dt³, .... dⁿ⁻ⁱy/dtⁿ⁻ⁱ));
+END COMMENT
+
+MODE DNYBYDTN = DYBYDT # also y, dy/dt, d²y/dt², d³y/dt³, d⁴y/dt⁴ ... #;
+
+# Note: DY, DDY... are VALUES/RESULTS of differentiation #
+MODE DDY=DNYBYDTNO, DDDY=DNYBYDTNO, DDDDY=DNYBYDTNO, DDDDDY=DNYBYDTNO, DDDDDDY=DNYBYDTNO, DDDDDDDY=DNYBYDTNO, #...# DNY=DNYBYDTNO; 
+MODE DY = DNYBYDTNO;
+COMMENT
+Note: TDNYBYDTN (dⁿy/dtⁿ) is typically a boundary value, eg 
+TDNYBYDTN = (t, (dⁿ⁻ⁱy/dtⁿ⁻ⁱ)[@n-1]) OR even
+                        (t, (d²y/dt², d³y/dt³, .... dⁿ⁻ⁱy/dtⁿ⁻ⁱ)[@2:n-1])
+    Or (for simple initial value problems):
+                        (t, (y, dy/dt, d²y/dt², d³y/dt³, .... dⁿ⁻ⁱy/dtⁿ⁻ⁱ)[@0:n-1])
+END COMMENT
+
+# Note: Currently assuming that each dⁿy/dtⁿ has an common order, i.e. the same order number! #
+MODE TDNYBYDTN = STRUCT(REAL t, DNYBYDTN dny by dtn);
+
+MODE # Note: FDY are FUNCTIONS of (t, y, dy/dt ... ) #
+    FDNY      #dⁿy/dtⁿ# = PROC(REAL #t#, FLEX[]DNY #dⁿy/dtⁿ#)DNYBYDTNO,
+ CO FDDY      #dy/dt  # = PROC(REAL #t#, DNYBYDTNO#y#)DNYBYDTNO, # Yonah's ambiguity? # CO
+    FDDY      #d²y/dt²# = PROC(REAL #t#, DNYBYDTNO#y#, DY #dy/dt#)DNYBYDTNO,
+    FDDDY     #d³y/dt³# = PROC(REAL #t#, DNYBYDTNO#y#, DY #dy/dt#, DY #d²y/dt²#)DNYBYDTNO,
+    FDDDDY    #d⁴y/dt⁴# = PROC(REAL #t#, DNYBYDTNO#y#, DY #dy/dt#, DDY #d²y/dt²#, DDDY #d³y/dt³#)DNYBYDTNO,
+    FDNYBYDTN #dⁿy/dtⁿ# = UNION(FY, FDY, FDDY, FDDDY, FDDDDY # ... #, FDNY);
+
+OP ORDER = (FDNYBYDTN ode)INT:
+    CASE ode IN 
+#    (FY ode): 0, # # QQQ: is this required? #
+        (FDNY ode): # UPB ode():# 
+            IF NOT fix unimplemented("ORDER Can only currently only handle ODE of Maximum Order FLEX") THEN stop FI,
+        (FDY ode): 1,
+        (FDDY ode): 2,
+        (FDDDY ode): 3,
+        (FDDDDY ode): 4
+    OUT
+        IF NOT fix unimplemented("ORDER Can only currently only handle ODE of Maximum Order 4") THEN stop FI
+    ESAC;
+
+# Note: this should really be the MAX of the order of each dⁿy/dtⁿ #
+OP ORDER = (IVPON ivp)INT: ORDER (f dny by dtn OF ivp);
+
+CO
+#============================================================================#
+# Define some routine for TRANsforming between Order-1 & Order-n ODE SOLVERs #
+#============================================================================#
+OP TRANODEONSOLVE = (ODEONSOLVETYNGEN ivp order_n)ODEOISOLVETYGEN: (
+    fix unimplemented("TRANODEONSOLVE");
+    SKIP  # TODO #
+);
+
+OP TRANODEOISSOLVE = (ODEOISOLVETYGEN ivp order_1)ODEONSOLVETYNGEN: (
+    fix unimplemented("TRANODEOISSOLVE");
+    SKIP  # TODO #
+);
+END CO
+
+#============================================================================#
+# Define some routine for TRANsforming between Order-n to/from Order-1 ODEs. #
+#============================================================================#
+COMMENT Example:
+Given:  d⁴y/dt⁴ = F(x, y, dy/dt, d²y/dt² d³y/dt³) 
+
+With initial condition: y(0) = g₀, y'(0) = g₁, y''(0) = g₂, y'''(0) = g₃
+
+Substitute: h₀ = y, h₁ = dy/dt, h₂ = d²y/dt², h₃ =d³y/dt³
+
+Is equivalent to:
+    h₀(0)=g₀
+    dh₀/dt=h₁, h₁(0)=g₁
+    dh₁/dt=h₂, h₂(0)=g₂
+    dh₂/dt=h₃, h₃(0)=g₃
+    dh₃/dt=f(t,h₀,h₁,h₂,h₃), h₃(0)=g₄
+
+END COMMENT
+
+#=========================================================================#
+# A routine to call f dny by dtn with the appropriate number of arguments #
+#=========================================================================#
+PROC call f dny by dtn = (FDNYBYDTN f dny by dtn, REAL t, FLEX[#0:#]DY dny by dtn)DNYBYDTNO: (
+  # INT dim = UPB dny by dtn[LWB dny by dtn] - LWB dny by dtn[LWB dny by dtn] + 1; #
+    INT dim = UPB dny by dtn - LWB dny by dtn + 1;
+    INT order = ORDER f dny by dtn;
+    IF order NE dim THEN # Note: Review this check! #
+        print("dny by dtn:"); print vec vec(dny by dtn); print(new line);
+        debug;
+        IF NOT fix value error(("Order of function 'f dny by dtn' (",order,")",
+                         "is not equal to DIM(",dim,") of arguments 'dny by dtn'")) THEN stop FI
+    FI;
+    IF LWB dny by dtn NE 0 THEN
+        debug;
+        IF NOT fix value error(("argument LWB dny by dtn =",LWB dny by dtn,"should be 0")) THEN stop FI
+    FI;
+    []DY y0 dy0 ddy0 etc = dny by dtn;
+
+CO
+#IF DEBUG #
+    FOR j FROM LWB y0 dy0 ddy0 etc TO UPB y0 dy0 ddy0 etc DO
+        putf yj dyj ddyj etc sub sup(stand out, y0 dy0 ddy0 etc[j], 0, j, sep)
+    OD;
+END CO
+
+    CASE f dny by dtn IN
+        (FDNY   f dny by dtn): f dny by dtn(t, dny by dtn),
+        (FDY    f dy by dt):   f dy by dt  (t, dny by dtn[0]),
+        (FDDY   f d2y by dt2): f d2y by dt2(t, dny by dtn[0], dny by dtn[1]),
+        (FDDDY  f d3y by dt3): f d3y by dt3(t, dny by dtn[0], dny by dtn[1], dny by dtn[2]),
+        (FDDDDY f d4y by dt4): f d4y by dt4(t, dny by dtn[0], dny by dtn[1], dny by dtn[2], dny by dtn[3])
+    OUT
+        IF NOT fix unimplemented("Can only currently only handle ODE of Maximum Order 4") THEN stop FI
+    ESAC
+);
+
+PROC f dh by dt ret dis vel acc etc= (REAL t, DNYBYDTNO in y, FDNYBYDTN f dny by dtn order_n)DNYBYDTNO: (
+COMMENT
+  Note: 'f dny by dtn order_n' = F(t,y,dy,ddy...) we want dh/dt = H(t,h).
+END COMMENT
+    INT order = ORDER f dny by dtn order_n;
+    [UPB in y]REAL out h0 h1 h2 h3 ftn;
+    INT upb h = UPB in y OVER order;
+
+    PROC in h = (INT j)DNYBYDTNO: in y[j*upb h+1: (j+1)*upb h];
+    PROC out dh by dt = (INT j)REF DNYBYDTNO: out h0 h1 h2 h3 ftn[j*upb h+1: (j+1)*upb h];
+
+    FOR i FROM lwb y TO order - 2 DO 
+        out dh by dt(i) := in h(i+1) 
+    OD; # dh₀/dt=h₁ etc #
+
+# dh₃/dt=f(t,h₀,h₁,h₂,h₃) #
+    out dh by dt(order - 1) := 
+        CASE f dny by dtn order_n IN
+            (FDNY   f dny by dtn): f dny by dtn(t, out h0 h1 h2 h3 ftn),
+            (FDY    f dy by dt):   f dy by dt  (t, in h(0)),
+            (FDDY   f d2y by dt2): f d2y by dt2(t, in h(0), in h(1)),
+            (FDDDY  f d3y by dt3): f d3y by dt3(t, in h(0), in h(1), in h(2)),
+            (FDDDDY f d4y by dt4): f d4y by dt4(t, in h(0), in h(1), in h(2), in h(3))
+        OUT
+            IF NOT fix unimplemented("Can only currently only handle ODE of Maximum Order 4, try FDNY") THEN stop FI
+        ESAC;
+# Substitute: h₀ = y, h₁ = dy/dt, h₂ = d²y/dt², h₃ =d³y/dt³ #
+    out h0 h1 h2 h3 ftn 
+);
+
+# the above routine returns (dis...,vel...,acc...), we need ((dis...),(vec...),(acc...)) #
+PROC f dh by dt = (REAL t, DNYBYDTNO in y, FDNYBYDTN f dny by dtn order_n)[]DNYBYDTNO: (
+    INT order = ORDER f dny by dtn order_n;
+    DNYBYDTNO dis vel acc etc = f dh by dt ret dis vel acc etc(t,in y, f dny by dtn order_n);
+    y to yn(dis vel acc etc, order)
+);
+
+# Convert from (l1,l2,l3,...v1,v2,v3...,a1,a2,a4... ) 
+          to   (l1,l2,l3,...),(v1,v2,v3...),(,a1,a2,a4...)... #
+PROC y to yn = (DNYBYDTNO dis vel acc etc, INT order)[]DNYBYDTNO: (
+    INT dim = UPB dis vel acc etc OVER order;
+    [lwb y:order-1][dim]SCAL out;
+    FOR i FROM lwb y TO order - 1 DO # split dis, vec, acc ... #
+        INT lwb=i*dim+1, upb=lwb+dim-1;
+        out[i]:=dis vel acc etc[lwb:upb]
+CO
+        ;putf yj dyj ddyj etc sub sup(stand out, out[i], 0, i, sep); printf($l$)
+CO
+    OD;
+    out
+);
+
+PROC trans genty to gentyn = (TYGEN gen ty, INT order, TYNYIELD yield)VOID:(
+  # FOR TY ty IN # gen ty( # ) DO ( #
+  ## (TY ty)VOID: (
+COMMENT
+        (TRUE OR with debug|printf(($"DB - t OF ty: "$,$g"; "$,t OF ty,$l$)));
+        (TRUE OR with debug|printf(($"DB - REPR y OF ty: "$,$g"; "$,REPR y OF ty,$l$)));
+        (TRUE OR with debug|printf(($"DB - dis - y OF tyn[0]: "$,$g"; "$,REPR (y OF tyn)[0],$l$)));
+        (TRUE OR with debug|printf(($"DB - vel - y OF tyn[1]: "$,$g"; "$,REPR (y OF tyn)[1],$l$)));
+END COMMENT
+        TYN tyn = (t OF ty, y to yn(y OF ty, order));
+        yield(tyn)
+    # OD #))
+    );
+
+# MODE IVPOI = STRUCT(INTERVAL t interval, DNYBYDTNO y0, FDY dy by dt); #
+#============================================#
+# Transform a Order-n ODE to and Order-1 ODE #
+#============================================#
+OP TRANIVPOI = (IVPON in ivp order_n)IVPOI: (
+    
+    INT order = ORDER f dny by dtn OF in ivp order_n;
+
+    IF LWB y0 dy0 ddy0 etc OF in ivp order_n NE 0 THEN
+        putf(stand error, ($g$,"Warning: LWB=",$g(-0)$,LWB y0 dy0 ddy0 etc OF in ivp order_n,
+                  $g$, "; y0 = 'y0 dy0 ddy0 etc'[1] and dy0/dt = 'y0 dy0 ddy0 etc'[2] etc",$l$))
+    FI; # ideally UPB y0 dy0 ddy0 etc OF in ivp order_n should be indexed from ZERO #
+
+    []DNYBYDTNO in y0 dy0 ddy0 etc = ( y0 dy0 ddy0 etc OF in ivp order_n)[@0]; # re position @0 so y0 dy0 ddy0 etc[0] IS y0 #
+
+    IF UPB in y0 dy0 ddy0 etc < 0 THEN
+        IF NOT fix value error("Warning: you have not provided and initial conditions! (UPB in y0 dy0 ddy0 etc < LWB)") THEN stop FI
+    FI;
+
+    INT dimension in y0 order_n = UPB(in y0 dy0 ddy0 etc)[0]; # assuming at least 1 Initial Value #
+
+    INT upb out g0 order_1 = order * dimension in y0 order_n;
+    STRUCT(INTERVAL t interval, [upb out g0 order_1]REAL y0, FDY f dy by dt) out ivp order_1;
+
+# transformed t interval: (no change)#
+    t interval OF out ivp order_1 := t interval OF in ivp order_n;
+
+# tranformed initial values y(0), dy/dt(0), d²y/dt²(0), d³y/dt³(0) ... #
+#   QQQ: Note y to yn can be used instead here #
+    PROC g0 = (INT j)REF RN: (y0 OF out ivp order_1)[j*dimension in y0 order_n+1:(j+1)*dimension in y0 order_n];
+    FOR j FROM lwb y TO order-1 DO 
+        g0(j) := in y0 dy0 ddy0 etc[j]
+    OD;
+
+# Set up Transform initial Order-n conditions to Order-1 #
+    (f dy by dt OF out ivp order_1) := f dh by dt ret dis vel acc etc(#t#,#y#,f dny by dtn OF in ivp order_n);
+    out ivp order_1
+);
+
+MODE ODEONSOLVEARGS = STRUCT(REAL step size, FTYDYNTOL f ty tol portal);
+
+# Solve: Initial value Order-N ODE #
+MODE IVPON = STRUCT(
+    INTERVAL t interval, 
+    FLEX[1:0]DNYBYDTNO y0 dy0 ddy0 etc, 
+    FDNYBYDTN f dny by dtn
+);
+
+# Warning: y0 = ' y0 dy0 ddy0 etc'[1] and dy by dt = ' y0 dy0 ddy0 etc'[2] etc #
+MODE IVPONPKG = STRUCT(IVPON ivp, INTERVAL y axis, STRING description);
+
+PROC putf ode ivp order n = (REF FILE file, STRING description, IVPON ivp)VOID: (
+    FORMAT sep = $l$;
+    putf(file, ($"IVP Order-"f(int repr)": "g$, ORDER ivp, description, $l$));
+    putf(file, ($"  t interval: "$, interval repr, t interval OF ivp, $l$));
+    []DNYBYDTNO y0 dy0 ddy0 etc = y0 dy0 ddy0 etc OF ivp;
+    FOR j FROM LWB y0 dy0 ddy0 etc TO UPB y0 dy0 ddy0 etc DO
+        putf yj dyj ddyj etc sub sup(file, y0 dy0 ddy0 etc[j], 0, j, sep)
+    OD;
+# Finally evaluate F(t,y,dy/dt ... ) at t₀ #
+    REAL t0 = lwb OF t interval OF ivp;
+    DNYBYDTNO dny0 by dtn = call f dny by dtn(f dny by dtn OF ivp, t0, y0 dy0 ddy0 etc OF ivp);
+    putf yj dyj ddyj etc sub sup(file, dny0 by dtn, 0, ORDER ivp, sep);
+    putf(file, $ll$)
+);
+
+PROC print ode ivp order n = (STRING description, IVPON ivp)VOID: putf ode ivp order n(stand out, description, ivp);
+
+# MODE ODEONSOLVEHINT = UNION(STEPSIZEOPT, YBOUNDOPT, VOID); #
+
+MODE ODEONSOLVETYNGEN = PROC (IVPON #ivp order_n#, ODEONSOLVEARGS #args#, TYNYIELD #yield#)VOID;
+
+
+#==========================================================#
+# Wrap the Order-1 ODE solver in a Order-n ODE solver      #
+#    This is actually done by converting O-n ODE to an O-1 #
+#    Then converting result to arrays of LOC,VEC,ACC etc   #
+#==========================================================#
+PROC wrap order_1 solver in order_n solver tyn gen = (
+    ODEOISOLVETYGEN ode solve ty gen, 
+    IVPON ivp order_n, 
+    ODEONSOLVEARGS args, 
+    TYNYIELD yield
+)VOID: (
+    IVPOI ivp order_1 = TRANIVPOI ivp order_n;
+    INT order = ORDER ivp order_n;
+    trans genty to gentyn(ode solve ty gen(ivp order_1, args,),ORDER ivp order_n,yield)
+);
+
+#======================================================#
+# Wrap the various order-1 solvers in a order-n solver #
+#======================================================#
+ODEONSOLVETYNGEN # define some actual order-n methods #
+    euler tyn gen = wrap order_1 solver in order_n solver tyn gen(euler ty gen,,,),
+    adams bashforth tyn gen = wrap order_1 solver in order_n solver tyn gen(adams bashforth ty gen,,,),
+    runga kutta 4th order tyn gen = wrap order_1 solver in order_n solver tyn gen(runga kutta 4th order ty gen,,,);
+
+MODE ODEONSOLVEPKG = STRUCT(ODEONSOLVETYNGEN method tyn gen, STRING short, description);
+
+[]ODEONSOLVEPKG ode order n solve list = (
+    (euler tyn gen, "EM ON", "Euler order n method"),
+    (wrap order_1 solver in order_n solver tyn gen(euler ty gen,,,), "EM", "Euler method"),
+    (wrap order_1 solver in order_n solver tyn gen(adams bashforth ty gen,,,), "ABM", "Adams Bashforth method"),
+    (wrap order_1 solver in order_n solver tyn gen(runga kutta 4th order ty gen,,,), "RK4", "4th-order Runga Kutta method"),
+    (runga kutta 4th order tyn gen, "RK4", "4th-order Runga Kutta method order-n")
+);
+
+SKIP # export names #

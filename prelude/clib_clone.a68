@@ -1,0 +1,34 @@
+# -*- coding: utf-8 -*- #
+
+INT # year # epoch = 1970;
+
+PROC leap year = (INT year)BOOL:
+  year MOD 4 = 0 AND year MOD 100 /= 0 OR year MOD 400 = 0;
+
+# QQQ: ignore leap seconds for now #
+MODE DATETIME = STRUCT(INT year, month, REAL day, hour, minute, second);
+
+FORMAT date time repr = $g(-0)"/"g(-0)"/"g(-0)" "g(-0)":"g(-0)":"g(-0,4)$;
+OP REPR = (DATETIME self)STRING: (
+    FILE f, STRING s; associate(f,s);
+    putf(f, (date time repr, self));
+    close(f);
+    s
+);
+
+PROC init time = (DATETIME datetime)REAL: ( # return seconds #
+
+    PRIO ENTIER = 7; # same as "/" and OVER #
+    OP ENTIER = (INT a,b)INT: ENTIER (a/b);
+
+    INT leap days since epoch = + (year OF datetime-epoch-(epoch-1972)) ENTIER 4
+                                - (year OF datetime-epoch-(epoch-2000)) ENTIER 100
+                                + (year OF datetime-epoch-(epoch-2000)) ENTIER 400;
+    REAL year days := 365*(year OF datetime-epoch) + leap days since epoch;
+    REAL month days := []INT(0,31,59,90,120,151,182,212,243,273,304,334,334)[month OF datetime];
+    
+    IF month OF datetime > 2 AND leap year(year OF datetime) THEN SKIP ELSE month days -:= 1 FI;
+    (((year days + month days + day OF datetime)*24+hour OF datetime)*60+minute OF datetime)*60+second OF datetime
+);
+
+SKIP # export names #

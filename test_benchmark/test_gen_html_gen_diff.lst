@@ -1,0 +1,13 @@
+3,4c3
+< algol68g-full: error: 1: ([] CHAR, [] CHAR, [] CHAR) cannot be coerced to FLEX [] BOOL in a strong-unit (detected in 
+< particular-program).
+---
+> algol68g-full: error: 1: ([] CHAR, [] CHAR, [] CHAR) cannot be coerced to FLEX [] BOOL in a strong-unit (detected in particular-program).
+7,8c6,7
+< algol68g-full: error: 1: ([] CHAR, [] CHAR, HIP) cannot be coerced to STRING and ([] CHAR, [] CHAR, [] CHAR) cannot be coerced to 
+< FLEX [] BOOL in a strong-unit (detected in particular-program).
+---
+> algol68g-full: error: 1: ([] CHAR, [] CHAR, HIP) cannot be coerced to STRING and ([] CHAR, [] CHAR, [] CHAR) cannot be coerced to FLEX [] BOOL in 
+> a strong-unit (detected in particular-program).
+Hint: try cp ./baseline/test_gen_html_gen_current.lst ./baseline/test_gen_html_gen_baseline.lst  OR vim test/test_gen_html_gen.a68
+

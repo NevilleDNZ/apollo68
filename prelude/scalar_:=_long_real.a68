@@ -1,0 +1,27 @@
+# -*- coding: utf-8 -*- #
+
+BEGIN # create a scope for scal & SCAL #
+
+MODE SCAL = LONG REAL;
+SCAL small scal = long small real, max scal = long max real; 
+INT scal width = long real width;
+
+PROC (SCAL)SCAL 
+    scal sin = long sin, scal cos = long cos, scal tan = long tan,
+    scal arc sin = long sin, scal arc cos = long cos, scal arc tan = long tan,
+    scal exp = long exp, scal ln = long ln, scal log = long log,
+    scal sqrt = long sqrt;
+
+FORMAT scal repr := $g(-0,scal width OVER 2)$;
+
+OP INITSCAL = (REAL r)SCAL: LENG r;
+OP INITSCAL = ([]REAL r)[]SCAL:
+  IF NOT fix unimplemented("LENG r[]") THEN stop FI;
+OP INITSCAL = (LONG REAL r)SCAL: r;
+OP INITSCAL = ([]LONG REAL r)[]SCAL: r;
+OP INITSCAL = (LONG LONG REAL r)SCAL: SHORTEN r;
+OP INITSCAL = ([]LONG LONG REAL r)[]SCAL:
+  IF NOT fix unimplemented("LENG LENG r[]") THEN stop FI;
+
+SKIP
+

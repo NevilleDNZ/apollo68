@@ -1,0 +1,73 @@
+# -*- coding: utf-8 -*- #
+
+REAL #l#e = #l#exp(1); # pi is already defined #
+
+#L# REAL #l# sqrt small real = #l# sqrt(#l# small real);
+#L# LONG REAL #l# long sqrt small real = #l# long sqrt(#l# long small real);
+
+PRIO ABOUT = 4;
+OP ABOUT = (SCAL a,b)BOOL: ABS ( a - b ) < sqrt small real;
+OP ABOUT = (SCAL a, INT b)BOOL: ABS ( a - b ) < sqrt small real;
+OP ABOUT = (INT a, SCAL b)BOOL: ABS ( a - b ) < sqrt small real;
+
+MODE #L#INTERVAL = STRUCT(#L#REAL lwb, upb);
+OP INSIDE = (#L#REAL value, #L#INTERVAL interval)BOOL:
+    lwb OF interval <= value ANDF value <= upb OF interval;
+PRIO ABOUTINSIDE = 8;
+OP ABOUTINSIDE = (#L#REAL value, #L#INTERVAL interval)BOOL:
+    lwb OF interval-sqrt small real <= value ANDF value <= upb OF interval+ sqrt small real;
+OP ABOUTINSIDE = (#L#LONG REAL value, #L#INTERVAL interval)BOOL:
+    lwb OF interval-long sqrt small real <= value ANDF value <= upb OF interval+ long sqrt small real;
+
+OP WIDTH = (#L#INTERVAL interval)#L#REAL: upb OF interval - lwb OF interval;
+OP INIT = (REF INTERVAL interval, []#L#REAL bound)REF INTERVAL: interval := (bound[1],bound[2]);
+
+FORMAT #l# interval repr = $"["f(real repr)" … "f(real repr)"]"$;
+
+MODE I = INT, R = SCAL;
+MODE FR = PROC(SCAL)SCAL; # a Function of a REAL numbers #
+
+# some useful unicode characters #
+[]UCHAR superscript = []UCHAR("⁰","¹","²","³","⁴","⁵","⁶","⁷","⁸","⁹")[@0];
+[]UCHAR subscript   = []UCHAR("₀","₁","₂","₃","₄","₅","₆","₇","₈","₉")[@0];
+
+OP REPRSUP = (INT i)STRING:
+    IF i < 0 THEN "-" + REPRSUP ABS i ELSE 
+        IF i > 10 THEN REPRSUP(i OVER 10) ELSE "" FI + superscript[i MOD 10]
+    FI;
+
+OP REPRSUB = (INT i)STRING:
+    IF i < 0 THEN "₋" + REPRSUB ABS i ELSE 
+        IF i > 10 THEN REPRSUB(i OVER 10) ELSE "" FI + subscript[i MOD 10]
+    FI;
+
+#==============================================#
+# MODE XY: basically for functions from R => R #
+#==============================================#
+# XY: basically for functions from R => R #
+MODE X = SCAL;
+MODE XY = STRUCT(X x, y);
+MODE XYYIELD = PROC(XY)VOID; MODE XYGEN = PROC(XYYIELD)VOID; 
+FORMAT xy repr = $"(x="f(real repr)", y="f(real repr)")"$;
+
+SCAL partial precision = small scal ** 0.9;
+XY upb tol = (scal sqrt(scal sqrt(max scal)), scal sqrt(scal sqrt(max scal))); # the biggest valid root #
+# printf(($"Required Tolerance: "$, xy repr, global xy tol, nl)); #
+
+MODE FXY = PROC(XY)XY; # A function from F(X,Y) to (X,Y) #
+
+# default absolute tolerence is half width #
+FXY f xy abstol = (XY xy)XY: (partial precision, partial precision);
+# default absolute tolerence is partial precision #
+FXY f xy reltol = (XY xy)XY: partial precision * ABS xy;
+
+OP ABS = (XY a)XY: (ABS x OF a, ABS x OF a);
+OP - = (XY a,b)XY: (x OF a-x OF b, y OF a-y OF b);
+OP * = (SCAL a, XY b)XY: (a*x OF b, a*y OF b);
+OP < = (XY a,b)BOOL: x OF a<x OF b ANDF y OF a<y OF b;
+# Todo: <= = /= >= > + / &c. #
+
+# set an upper limit an iterations based in the number of bits in a real #
+INT default upb iteration = 1-ROUND(log(small real)/log(2)); # OR ''bits width'' 1 bit per iteration #
+
+SKIP # export names #

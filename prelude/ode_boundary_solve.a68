@@ -1,0 +1,400 @@
+# -*- coding: utf-8 -*- #
+
+#========================#
+# Boundary Value Problem #
+#========================#
+MODE BVC  = TDNYBYDTN; # => (t,y[@0:]): Dirichlet or (t,dy/dt[@1:]) Neumann boundary condition #
+MODE BOUNDARYCONDITION = BVC;
+
+# some operator to force the Boundary conditions #
+PRIO BCDY = 1;
+OP BCDY = (INT order, TDNYBYDTN ty)TY: (t OF ty, (dny by dtn OF ty)[@order]);
+
+OP  DIRICHLET = ([]RN y)[]RN: y[@0],
+#    DIRICHLET = (RN y)RN: y[@0],#
+    DIRICHLET = (REAL y)RN: RN(y)[@0],
+    DIRICHLET = (INT y)RN: RN(y)[@0],
+    NEUMANN = ([]DY dy by dt)[]RN: dy by dt[@1],
+#    NEUMANN = (DY dy by dt)RN: dy by dt[@1], #
+    NEUMANN = (REAL dy by dt)RN: RN(dy by dt)[@1],
+    NEUMANN = (INT dy by dt)RN: RN(dy by dt)[@1];
+
+COMMENT Note: - a summary of useful modes -
+MODE RN = [~]REAL;
+MODE DYBYDT = RN # also y, dy/dt, d²y/dt², d³y/dt³, d⁴y/dt⁴ ... #;
+MODE DNYBYDTN = DYBYDT # also y, dy/dt, d²y/dt², d³y/dt³, d⁴y/dt⁴ ... #;
+MODE TDNYBYDTN = STRUCT(REAL t, DNYBYDTN dny by dtn);
+END COMMENT
+
+MODE BVP = STRUCT(
+    INTERVAL t interval, 
+    FLEX[0:-1]BOUNDARYCONDITION boundary,  
+    FDNYBYDTN f dny by dtn # => F(t, (y, dy/dt, d²y/dt², d³y/dt³, .... dⁿ⁻ⁱy/dtⁿ⁻ⁱ)) #
+);
+
+PROC putf ode bvp = (REF FILE file, STRING description, BVP bvp)VOID: (
+    FORMAT sep = $l$;
+    putf(file, ($"BVP Order-"f(int repr)": "g$, ORDER bvp, description, $l$));
+    putf(file, ($"  t interval: "$, interval repr, t interval OF bvp, $l$));
+    []BOUNDARYCONDITION boundary = boundary OF bvp;
+    FOR j FROM LWB boundary TO UPB boundary DO
+        printf(($"  Boundary #"g(0)": t"g" = "f(real repr)"; "$,j, subscript[j], t OF boundary[j]));
+        putf yj dyj ddyj etc sub sup(file, (dny by dtn OF boundary)[j], j, 0, sep)
+    OD;
+COMMENT we would need to guess this:
+# Finally evaluate F(t,y,dy/dt ... ) at t₀ #
+    REAL t0 = lwb OF t interval OF bvp;
+    RN dny0 by dtn = call dny by dtn(f dny by dtn OF bvp, t0,  boundary OF bvp);
+    putf y0 dy0 ddy0 etc j(file, dny0 by dtn, ORDER bvp);
+END COMMENT
+    putf(file, $l$)
+);
+
+PROC print ode bvp = (STRING description, BVP bvp)VOID: putf ode bvp(stand out, description, bvp);
+
+OP ORDER = (BVP ivp)INT: ORDER f dny by dtn OF ivp;
+
+MODE BVPPKG = STRUCT(BVP bvp, STRING description, INTERVAL y bounds);
+#================================================#
+# Now define how the ODEs are going to be solved #
+#================================================#
+MODE ODEBOUNDARYSOLVE = PROC(BVP #bvp#, TYYIELD #ty#)VOID;
+
+MODE ODEBOUNDARYSOLVEPKG = STRUCT(ODEBOUNDARYSOLVE method, STRING description);
+
+OP UPB = (INT n boundary, BVP bvp)INT: UPB dny by dtn OF (boundary OF bvp)[n boundary];
+OP LWB = (INT n boundary, BVP bvp)INT: LWB dny by dtn OF (boundary OF bvp)[n boundary];
+
+#==================================#
+# Solve using the shooting method. #
+#==================================#
+MODE SHOOTINGARGS = STRUCT(
+    ROOTFIND root find, # eg secant OR binary #
+    ODEONSOLVETYNGEN ode order_n solver ty gen, # eg euler's OR runga kutta #
+    FLEX[2]BOUNDARYCONDITION feasible boundary, 
+    REAL step size, 
+    INT upb iteration, 
+    FTYDYNTOL f ty tol portal
+);
+
+# In theory SHOOTINGARGS should be subclassed from ODEONSOLVEARGS #
+OP INIT = (REF SHOOTINGARGS new, ODEONSOLVEARGS ode order n args)REF SHOOTINGARGS: (
+CO # QQQ todo later #
+    step size OF new := step size OF ode order n args;
+    upb iteration OF new := upb iteration OF ode order n args;
+    f ty tol portal OF new := f ty tol portal OF ode order n args
+END CO
+    new
+);
+
+# MODE IVPOI = STRUCT(INTERVAL t interval, RN y0, FDNYBYDTN f dny by dtn); #
+# MODE IVPON = STRUCT(INTERVAL t interval, FLEX[1]RN y0 dy0 ddy0 etc, FDNYBYDTN f dny by dtn); #
+
+# For the moment we shall use just euler's method #
+#     Note: this should be de-globalised! #
+ODEONSOLVEARGS ode solver args := (0.01 # QQQ #, f crude tol portal # should be fn of arg #);
+ODEONSOLVETYNGEN ode solver tyn gen := euler tyn gen;
+
+# The REAL Schwerer Gustav weighed nearly 1,350 tonnes, and could fire
+           shells weighing seven tonnes to a range of 47 kilometers #
+
+# This routine simply fires shell as instructed, yielding the flight path the shells follow #
+PROC shooting method iteration = (INTERVAL t interval, 
+    RN y0, dy0 by dt,
+    FDNYBYDTN f dny by dtn, 
+    PROC(RN#yn#)REAL final distance from target
+) REAL: (
+# BEGIN DEBUGGING ONLY #
+    graph n line style -:= IF graph n line style <= 1 THEN 0 ELSE 1 FI;
+
+    graph line style := line styles[graph n line style];
+# END #
+    IVPON ivp order_n = (t interval, []RN(y0, dy0 by dt)[@0], f dny by dtn);
+    (with trace|print ode ivp order n("shooting method iteration",ivp on));
+# Note: we should be caching the final path (fdrom 'ode solver tyn gen')as a result for graphing #
+    TYNGEN solution curve tyn gen := ode solver tyn gen(ivp on, ode solver args, );
+# Graph the trial shot ... #
+    (add curve OF (METHODOF graph))(gen filter tyn to 2d(solution curve tyn gen,#n=#0,), (graph line colour,graph line style)); # GRAPH #
+# Do the trial shot... #
+    []RN yn value = y OF get tail tyn(solution curve tyn gen);
+    RN value = yn value[LWB yn value]; # QQQ ??? - ignoring velocity #
+    REAL miss margin = final distance from target(value);
+    (with trace|printf(($"Step "f(int repr)"; "$, graph n line style,
+            $"Colour:"g"; "$, name OF graph line colour,
+            $"Line style:"g"; "$, name OF graph line style,
+            $"Value:"f(real repr)"; "$, value,
+            $"miss margin:"f(real repr)"; "$, miss margin,
+            $l$)));
+    miss margin
+);
+
+# DY dny by dtn = y OF get tail tyn(solution ty gen(ivp, args,)); #
+
+PROC shooting ty gen = (BVP bvp, SHOOTINGARGS shooting args, TYNYIELD yield)VOID:(
+
+    graph n line style := UPB line styles; # Change the GRAPH graph line style #
+
+    FTYDYNTOL tol := f ty tol portal OF shooting args;
+
+    INT upb boundary := UPB boundary OF bvp;
+    IF upb boundary < 1 THEN
+#0: # IF NOT fix value error("no initial value or boundary conditions") THEN stop FI
+                # actually this should be trated as a trivial solution #
+
+
+    ELIF upb boundary = 1 THEN #(1): an initial value problem #
+#1: # # Note: y₀ = (dny by dtn OF boundary OF bvp)[0]!!! #
+        []BOUNDARYCONDITION all = boundary OF bvp;
+        # get the values of the first boundary, i.e. y, dy/dt, d²y/dt², d³y/dt³, d⁴y/dt⁴ ... #
+        []REAL #DNYBYDTN# first = dny by dtn OF all[LWB all]; 
+        IF LWB first NE 0 THEN # guess the coder forgot to index dⁿy/dtⁿ from 0, where y₀ = d⁰y/dt⁰ #
+            putf(stand error, ($g$,"Warning: y₀ is not the 0ᵗʰ element of dⁿy/dtⁿ, i.e. d⁰y/dt⁰"))
+        ELIF LWB first NE UPB first THEN
+            putf(stand error, ($g$,"Warning: we hve too many contraints, ignoring some"))
+        FI;
+        REAL y0 = first[LWB first];
+#1: # ode solver tyn gen((t interval OF bvp, y0, f dny by dtn OF bvp), # shooting # ode solver args, yield)
+
+
+    ELIF upb boundary > 2 # assuming boundaries are not repeated # THEN
+#3+: # IF NOT fix value error("3 or more boundary conditions are not currently supported") THEN stop FI
+
+    ELSE
+#2: a "simple" 2nd order boundary value problem #
+
+    # Actually: we really need to check that that ("ORDER bvp" - SUM WIDTH boundaries) = 2 ... #
+    #           If we did then we could then simply handle higher order BVPs #
+        INT number of boundries := 0;
+        FOR i FROM LWB boundary OF bvp TO UPB boundary OF bvp DO
+            number of boundries +:= i UPB bvp - i LWB bvp + 1
+        OD;
+        IF ORDER bvp-2 >= number of boundries THEN
+        # I'm guessing that we could solve this to produce a path function for 3 etc #
+        #     i.e. generating a multi dimensional surface #
+            IF NOT fix value error(sprintf(($"Inappropriate boundaries: order("g(0)") ≠ boundaries("g(0)")"$, ORDER bvp, number of boundries))) THEN stop FI
+        ELSE
+            IF UPB (boundary OF bvp) NE 2 THEN 
+            # We need to know in advance the Dimension of RN!! #
+                IF NOT fix unimplemented("Exceeding current maximum of 2 bountry value conditions") THEN stop FI
+            ELSE # "simple case" of 2 boundaries #
+
+                INT first = 1, second = 2;
+                INT y value = 0, differential = 1;
+                INT one dimensional = 1;
+                REAL y0, dy0 by dt; # Note: NOT n-dimensional yet #
+
+            IF t OF (boundary OF bvp)[first] NE lwb OF t interval OF bvp OR
+               t OF (boundary OF bvp)[second] NE upb OF t interval OF bvp ANDF
+                 NOT fix index error("2 boundary value constraints MUST equal t0..tn interval") THEN stop FI;
+ 
+            # Assuming that t0 OF boundary is the same as lwb OF t interval #
+                RN first boundary = dny by dtn OF (boundary OF bvp)[first];
+                RN second boundary = dny by dtn OF (boundary OF bvp)[second];
+            # These next two variable depend on the final condition #
+                PROC (RN) REAL difference from target;
+
+            # These next two depend on the final condition #
+                PROC dirichlet fort maxim gorki = (REAL unknown dy0 by dt)REAL: shooting method iteration(
+                   t interval OF bvp, y0, unknown dy0 by dt, f dny by dtn OF bvp,
+                   difference from target
+                );
+
+                PROC neumann fort maxim gorki = (REAL unknown y0)REAL: shooting method iteration(
+                   t interval OF bvp, unknown y0, dy0 by dt, f dny by dtn OF bvp,
+                   difference from target
+                );
+
+            # Now determin the initial condition #
+                PROC (REAL)REAL fort maxim gorki; # The Fort targeted by Schwerer Gustav #
+
+                IF first UPB bvp = y value # a y0 value # THEN # Dirichlet Boundary #
+                    y0 := first boundary[y value]#[one dimensional]#;
+                    fort maxim gorki := dirichlet fort maxim gorki
+                ELIF first UPB bvp = differential # a dy/dt value # THEN # Neumann Boundary #
+                    dy0 by dt := second boundary[differential]#[one dimensional]#;
+                    fort maxim gorki := neumann fort maxim gorki
+                ELIF NOT fix value error("Unknown initial boundary condition") THEN stop FI;
+
+                IF first UPB bvp NE second UPB bvp THEN
+                    (with trace|printf(($"Note: We have a 'Mixed' BVP"l$)))
+                ELIF first UPB bvp = y value THEN
+                    (with trace|printf(($"Note: We have a 'Dirichlet' BVP"l$)))
+                ELSE
+                    (with trace|printf(($"Note: We have a 'Neumann' BVP"l$)))
+                FI;
+
+                PROC dirichlet difference from target to yn = 
+                    (RN this yn, REAL target)REAL: (
+    (with debug|printf(($"DB - this yn,y value, target: "$,$f(real repr)"; "$,this yn,y value, target,$l$)));
+                        this yn[1 #QQQ?# ] - target
+                    );
+                PROC neumann difference from target to dyn by dt = 
+                    (RN this dyn by dt, REAL target)REAL: (
+    (with debug|printf(($"DB - this yn,y value, target: "$,$f(real repr)"; "$,this dyn by dt,y value, target,$l$)));
+                        this dyn by dt[2 #QQQ?#] - target
+                    );
+
+            # Now determin the final condition #
+                IF second UPB bvp = y value # a y0 value # THEN # Dirichlet Boundary #
+                    difference from target := dirichlet difference from target to yn(,second boundary[y value])
+                ELIF second UPB bvp = differential # a dy/dt value # THEN # Neumann Boundary #
+                    difference from target := neumann difference from target to dyn by dt(,second boundary[differential])
+                ELIF NOT fix value error("Unknown final boundary condition") THEN stop FI;
+
+            # secant method #
+                INTERVAL y initial guesses = (0.123,1.23);
+                SECANTARGS secant args = (y initial guesses, default upb iteration, f xy abstol);
+                ROOTFIND hit target = root find secant(, secant args#, no hints#);
+
+            # FINALLY SOLVE THE WHOLE DAMN THING #
+            # IIRC the Americans had a whole section calculating artillary their targetting #
+                REAL direct hit = y OF hit target(fort maxim gorki);
+            #(with trace|printf($"Note: Compare: found"f(real repr)" vs desired "f(real repr)l$, direct hit, target));#
+       
+                IF first UPB bvp = y value # a y0 value # THEN # Dirichlet Boundary #
+                    dy0 by dt := direct hit
+                ELIF first UPB bvp = differential # a dy/dt value # THEN # Neumann Boundary #
+                    y0 := direct hit
+                ELIF NOT fix value error("Unknown initial boundary condition") THEN stop FI;
+
+             # FINALLY FINALLY calculate (and yield) a simple IVP Order-n solution curve #
+                IVPON ivp order_n = (t interval OF bvp, []RN(y0, dy0 by dt)[@0], f dny by dtn OF bvp);
+    (with trace|print ode ivp order n("generate solution",ivp on));
+                step size OF ode solver args := step size OF shooting args;
+                ode solver tyn gen(ivp on, ode solver args, yield)
+            FI
+        FI
+    FI
+);
+
+MODE FDARGS = STRUCT(
+    REAL step size, 
+    INT upb iteration, 
+    FTYDYNTOL f ty tol portal
+);
+
+PROC average init ty list = (REF[]TY ty)RN: (
+  INT lwb = LWB y OF ty[LWB ty], upb = UPB y OF ty[LWB ty];
+  INT num steps = UPB ty-LWB ty;
+  REAL t :=   t OF ty[LWB ty];
+  REAL dt = ( t OF ty[UPB ty] - t)/ num steps;
+  [lwb:upb]REAL y :=   y OF ty[LWB ty];
+  [       ]REAL average y = ( y OF ty[UPB ty] + y)/ 2.0;
+  [       ]REAL dy = ( y OF ty[UPB ty] - y)/ num steps;
+  
+  FOR i FROM LWB ty + 1 TO UPB ty - 1 DO 
+    t +:= dt;
+    y +:= dy;
+    ty[i] := (t, average y)
+  OD;
+  dy / dt # Return the gradient of the interpolated line #
+);
+
+PROC interpolate init ty list = (REF[]TY ty)RN: (
+  INT lwb = LWB y OF ty[LWB ty], upb = UPB y OF ty[LWB ty];
+  INT num steps = WIDTH ((LUB ty)[1]);
+  REAL t :=   t OF ty[LWB ty];
+  REAL dt = ( t OF ty[UPB ty] - t)/ num steps;
+  [lwb:upb]REAL y :=   y OF ty[LWB ty];
+  [       ]REAL dy = ( y OF ty[UPB ty] - y)/ num steps;
+  
+  FOR i FROM LWB ty + 1 TO UPB ty - 1 DO 
+    t +:= dt;
+    y +:= dy;
+    ty[i] := (t, y)
+  OD;
+  dy / dt # Return the gradient of the interpolated line #
+);
+
+PROC finite difference ty list = (BVP bvp, FDARGS fd args)[]TY:(
+    INT num steps = ROUND(WIDTH t interval OF bvp / step size OF fd args);
+    INT first = 1, second = 2; # visual aids #
+    INT y value = 0, differential = 1;
+
+    INT dim space = 1; # Assume it is 1 dimensional only, TODO calculate #
+
+    [1:num steps-1, 1:num steps-1]R u; mat init scal(u, 0);
+    [1:num steps-1]R alfa ddy1 to ddynm1 beta; vec init scal(alfa ddy1 to ddynm1 beta, 0);
+    [0:num steps]STRUCT(REAL t, [dim space]REAL y) out ty;
+
+# some ""common" aliases of out ty ... #
+    REF[]REAL t = t OF out ty;
+    REF[]RN y = y OF out ty;
+    REF TY ty0 = out ty[LWB out ty], tyn = out ty[UPB out ty];
+    REF REAL t0 = t OF ty0, tn =  t OF tyn;
+    REF RN    y0 = y OF ty0, yn =  y OF tyn;
+
+# some useful aliases of zero-th and n-th elements... #
+    REF DDY alfa = alfa ddy1 to ddynm1 beta[LWB alfa ddy1 to ddynm1 beta],
+            beta = alfa ddy1 to ddynm1 beta[UPB alfa ddy1 to ddynm1 beta];
+
+    # Assign t0 and tn some actual values #
+    t0 := lwb OF t interval OF bvp;
+    tn := upb OF t interval OF bvp;
+
+    FDNYBYDTN f = f dny by dtn OF bvp;
+    REAL h = (tn - t0) / num steps;
+
+# Assume DIRICHLET boundaries ONLY.. ELSE will throw a Bound Error #
+    y0 := (dny by dtn OF (boundary OF bvp)[first])[y value];
+    yn := (dny by dtn OF (boundary OF bvp)[second])[y value];
+
+# linearly fill initial values of t and y₁, y₂, y₃ ... etc #
+    DNYBYDTN dy0 by dt = #interpolate# average init ty list(out ty); # init out ty #
+    DNYBYDTN dyn by dt = dy0 by dt; # Initially assume dy₀/dt and dyₙ/dt are the same. #
+
+    PROC d2y by dt2 = (REAL t, RN y, dy by dt)RN: 
+      call dny by dtn(f, t, DIRICHLET []RN(y, dy0 by dt));
+
+    mat init band(u, []REAL(1,-2,1)[@0]);
+
+  # define an alias for the values y(t(1)) to y(t(n-1)) #
+    REF[]RN y insiders =  y OF out ty[1:num steps -1];
+
+# TODO: Need to implement a covergence test based on 'f tol portal' #
+    [dim space]SCAL dy by dt := dy0 by dt;
+    graph n line style := UPB line styles;
+    FOR iteration TO UPB line styles DO
+# BEGIN DEBUGGING ONLY #
+      graph n line style := UPB line styles - iteration + 1;
+      graph line style := line styles[graph n line style];
+# END #
+      FOR i FROM LWB alfa ddy1 to ddynm1 beta TO UPB alfa ddy1 to ddynm1 beta DO
+        alfa ddy1 to ddynm1 beta[i] := h*h * d2y by dt2(t[i], y[i], dy by dt)[dim space]
+      OD;
+
+  # alfa := y''(t0) - y(t0)*h; & beta := y''(tn) - y(tn)*h; #
+      alfa -:= y0; beta -:= yn;
+
+  # Note: This inversion only need to be done once as the array is constant! #
+  #       Indeed, UL or QR methods can be set up at the start #
+      VEC vec = u UNDER alfa ddy1 to ddynm1 beta;
+      FOR i FROM LWB vec TO UPB vec DO y insiders[i] := vec[i] OD;
+      printf(($"Iteration "f(int repr)": "$, iteration));
+      FOR sample FROM LWB y OF out ty TO UPB y OF out ty DO
+        print((REPR y OF out ty[sample],"; "))
+      OD;
+      printf($l$);
+# Note: Could implement Robinson extrapolation here to speed up
+        convergence and stabi, second iteration maybe?  #
+     (add curve OF (METHODOF graph)) (array ty gen 2d(out ty,), (graph line colour,graph line style)); # GRAPH #
+     (with trace|printf(($"Step "f(int repr)"; "$, graph n line style,
+            $"Colour:"g"; "$, name OF graph line colour,
+            $"Line style:"g"; "$, name OF graph line style,
+            $"Value:"f(real repr)"; "$, yn,
+            #$"miss margin:"f(real repr)"; "$, miss margin,#
+            $l$)))
+    OD;
+
+    out ty # EXIT #
+);
+
+
+# Method of lines, Band matrix method... #
+PROC finite difference ty gen = (BVP bvp, FDARGS fd args, TYYIELD yield)VOID:(
+# This method does not lend itself to path generation - retro fit #
+    []TY solution = finite difference ty list(bvp, fd args);
+    FOR i FROM LWB solution TO UPB solution DO yield(solution[i]) OD
+);
+
+SKIP # export names #

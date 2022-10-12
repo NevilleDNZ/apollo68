@@ -1,0 +1,14 @@
+# -*- coding: utf-8 -*- #
+
+BEGIN
+
+MODE REAL = SCAL;
+REAL small real = scal small real, real width = scal width, max = max scal;
+
+PROC (SCAL)SCAL 
+    sin = scal sin, cos = scal cos, tan = scal tan,
+    arc sin = scal sin, arc cos = scal cos, arc tan = scal tan,
+    exp = scal exp, ln = scal ln, log = scal log,
+    sqrt = scal sqrt;
+
+SKIP

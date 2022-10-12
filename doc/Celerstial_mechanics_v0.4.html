@@ -1,0 +1,1254 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title></title>
+	<meta name="generator" content="LibreOffice 6.4.7.2 (Linux)"/>
+	<meta name="author" content="Neville Dempsey"/>
+	<meta name="created" content="2012-11-06T00:00:00.018053100"/>
+	<meta name="changed" content="2022-10-12T21:12:45.972728348"/>
+	<style type="text/css">
+		@page { size: 21.01cm 29.69cm; margin-left: 2.01cm; margin-right: 2.01cm; margin-top: 2.54cm; margin-bottom: 1.27cm }
+		p { margin-bottom: 0cm; background: transparent; line-height: 115%; background: transparent }
+		h2 { margin-top: 0.35cm; margin-bottom: 0.2cm; background: transparent; background: transparent; page-break-after: avoid }
+		h2.western { font-family: "Liberation Sans", sans-serif; font-size: 14pt; font-style: italic; font-weight: bold }
+		h2.cjk { font-family: "Noto Serif CJK SC"; font-size: 14pt; font-style: italic; font-weight: bold }
+		h2.ctl { font-family: "Lohit Devanagari"; font-size: 14pt; font-style: italic; font-weight: bold }
+		h3 { margin-top: 0.25cm; margin-bottom: 0.2cm; background: transparent; background: transparent; page-break-after: avoid }
+		h3.western { font-family: "Liberation Sans", sans-serif; font-size: 14pt; font-weight: bold }
+		h3.cjk { font-family: "Noto Serif CJK SC"; font-size: 14pt; font-weight: bold }
+		h3.ctl { font-family: "Lohit Devanagari"; font-size: 14pt; font-weight: bold }
+		pre { background: transparent; background: transparent }
+		pre.western { font-family: "Liberation Mono", monospace; font-size: 10pt }
+		pre.cjk { font-family: "DejaVu Sans", monospace; font-size: 10pt }
+		pre.ctl { font-family: "Liberation Mono", monospace; font-size: 10pt }
+		p.sdfootnote { margin-left: 0.51cm; text-indent: -0.51cm; background: transparent; font-size: 10pt; line-height: 100%; background: transparent }
+		h1 { margin-bottom: 0.21cm; background: transparent; background: transparent; page-break-after: avoid }
+		h1.western { font-family: "Liberation Serif", serif; font-size: 24pt; font-weight: bold }
+		h1.cjk { font-family: "Noto Serif CJK SC"; font-size: 24pt; font-weight: bold }
+		h1.ctl { font-family: "Lohit Devanagari"; font-size: 24pt; font-weight: bold }
+		a:link { color: #000080; so-language: zxx; text-decoration: underline }
+		a:visited { color: #800000; so-language: zxx; text-decoration: underline }
+		a.sdfootnoteanc { font-size: 57% }
+	</style>
+</head>
+<body lang="en-US" link="#000080" vlink="#800000" dir="ltr"><p align="center" style="margin-top: 0.42cm; margin-bottom: 0.21cm; background: transparent; line-height: 100%; page-break-after: avoid">
+<font face="Liberation Sans, sans-serif"><font size="6" style="font-size: 28pt"><b>Celestial
+Mechanics</b></font></font></p>
+<p align="center" style="margin-top: 0.42cm; margin-bottom: 0.21cm; background: transparent; line-height: 100%; page-break-after: avoid">
+<font face="Liberation Sans, sans-serif"><font size="6" style="font-size: 28pt"><b><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt"><i>The
+Apollo </i></font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt"><i>8,
+t</i></font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt"><i>he
+1st </i></font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt"><i>manned
+</i></font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt"><i>spacecraft
+to orbit the Moon.</i></font></font></b></font></font></p>
+<p align="center" style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">October
+2022 - Neville Dempsey</font></font></p>
+<p align="justify" style="text-indent: 0.76cm; margin-bottom: 0.51cm">
+<font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">In
+December 1968 the Apollo 8 Spacecraft was the second of the manned
+missions</font></font> <font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">of
+Project</font></font> <font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Apollo,
+and the 1</font></font><sup><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">st</font></font></sup>
+<font face="DejaVu Serif Condensed, serif">Apollo spacecraft </font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">to
+be put in orbit around the Moon. This software</font></font> <font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">project
+showcases</font></font> <font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">various
+Numerical Methods used for solving</font></font> <font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">various</font></font>
+<font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">gravitational
+problems, and so also can</font></font> <font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">calculate
+the path of any celestial body, including a spacecraft. </font></font>
+</p>
+<p align="justify" style="text-indent: 0.76cm; margin-bottom: 0.51cm">
+<font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">The
+problem is principally a Second Order differential equation of the
+form : </font></font>
+</p>
+<p align="center" style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Sans Light, sans-serif"><font size="4" style="font-size: 16pt"><i><b>m
+. d²r/d²t = G . Mm/r²</b></i></font></font></p>
+<p align="justify" style="text-indent: 0.76cm; margin-bottom: 0.51cm">
+<font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Where
+G is the Universal Gravitational Constant, M &amp; m are the masses
+of two different objects, and r is the distance between two objects.</font></font></p>
+<p align="justify" style="text-indent: 0.76cm; margin-bottom: 0.51cm">
+<font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Four
+different ODE solving techniques (“Euler's”, “Adams-Bashforth's”,
+“Runga-Kutta 4th order” and “Velocity Verlet”) are tested for
+stability and accuracy of various orbits of the Sun, Earth &amp; Moon
+system. </font></font>
+</p>
+<p align="justify" style="text-indent: 0.76cm; margin-bottom: 0.51cm">
+<font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">At
+the same time (and to add to the authenticity) a 3GL language of the
+era (called ALGOL 68) will be used to develop a celestial mechanics
+software platform. Adopting a 3GL will highlight the issues arising
+when a real-time celestial body is used within a real rocket
+navigation &amp; guidance system. Indeed such an Algol system was
+deployed in the Soviet Buran Spacecraft landing system. In this case,
+the unmanned Buran Spacecraft landed just meters from the desired
+touchdown.</font></font></p>
+<h2 class="western" style="text-indent: 0.76cm"><font face="DejaVu Serif Condensed, serif"><font size="4" style="font-size: 16pt">1
+Introduction</font></font></h2>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">The
+actual Apollo 8 mission followed several stages, including Launch; on
+December 21 1968 07:51:00 am, Earth orbit insertion, Trans-lunar
+injection; Lunar orbit insertion; Trans-Earth injection, and finally
+splashdown; </font></font>
+</p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">The
+initial idea was to use real data from the actual launch to get the
+rocket into orbit, then once in orbit calculate a trajectory to leave
+Earth orbit, sling shoot off the Moon, and reenter Earth orbit.
+However, before this can be achieved, a working Celestial model must
+be available. </font></font>
+</p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Indeed
+getting the initial values for a Celestial Model, especially for
+December 21 1968 would have been another project. To simplify testing
+of this “proof of concept” Celestial model I will use circular
+orbits, in only the X&amp;Y plane, starting with a Y value for all
+Celestial Bodies &amp; Crafts of <b>zero</b>.</font></font></p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Other
+issues include consideration regarding</font></font> <font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">the
+complexity of providing this platform to NASA staff. Issues arise
+such as:</font></font></p>
+<ul>
+	<li><p style="margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Accuracy
+	of calculations versus accuracy of measurement using the technology
+	available:</font></font></p>
+	<ul>
+		<li><p style="margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">All
+		stages of flight would have these issues, some more so than others.</font></font></p>
+		<ul>
+			<li><p style="margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">eg.
+			Launch phase: Atmospheric conditions. </font></font>
+			</p>
+			<ul>
+				<li><p style="margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Rocket
+				booster performance and air resistance</font></font></p>
+				<li><p style="margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Rocket
+				guidance.</font></font></p>
+			</ul>
+			<li><p style="margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Earth
+			Orbit injection</font></font></p>
+			<ul>
+				<li><p style="margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">position/orientation
+				accuracy and</font></font></p>
+				<li><p style="margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">rocket
+				thrust/orientation.</font></font></p>
+			</ul>
+		</ul>
+	</ul>
+	<li><p style="margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Software
+	complexity for generating the</font></font></p>
+	<ul>
+		<li><p style="margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Each
+		phase has different parameters, but a large commonality.</font></font></p>
+		<li><p style="margin-bottom: 0.5cm"><a name="firstHeading"></a><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Disparate
+		Units of measure (c.f. </font></font>Mars Climate Orbiter) 
+		</p>
+	</ul>
+</ul>
+<h2 class="western" style="text-indent: 0.76cm"><font face="DejaVu Serif Condensed, serif"><font size="4" style="font-size: 16pt">2
+Aims </font></font>
+</h2>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Demonstrate
+that the basic ODE model works with Sun, Earth &amp; Moon systems
+orbiting each other for one solar year. This provides a crude check
+as - in a simple model - both conservations of energy and mass apply.
+</font></font>
+</p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">The
+model is a 2</font></font><sup><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">nd</font></font></sup><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">-Or</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">der
+ODE and </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">the
+</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">&quot;Euler
+method&quot;, &quot;Adams-Bashforth method&quot;, “Runga-Kutta 4th
+Order </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">method</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">”
+and “Velocity Verlet” methods are compared.</font></font></p>
+<h2 class="western" style="text-indent: 0.76cm"><font face="DejaVu Serif Condensed, serif"><font size="4" style="font-size: 16pt">3
+Scope </font></font>
+</h2>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">The
+are many phases that the</font></font> <font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Apollo8
+flight follows: Launch, Earth parking orbit, Trans-lunar injection,
+Spacecraft S-IVB separation, First mid-course correction (SPS/RCS),
+Second mid-course correction (RCS), Lunar orbit insertion (SPS),
+Lunar orbit circulation (SPS), Trans-Earth injection (SPS), Third
+mid-course correction (RCS), Command module/service module
+separation, Entry, Landing.</font></font></p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">I
+am simply going to model the Apollo 8 Command module “parked” in
+Earth orbit. And use this to review the accuracy of the various ODE
+methods.</font></font></p>
+<h2 class="western" style="text-indent: 0.76cm"><font face="DejaVu Serif Condensed, serif"><font size="4" style="font-size: 16pt">4
+Assumptions </font></font>
+</h2>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">We
+will assume that the Sun, Earth, and the Moon are in the same plane,
+the X-Y plane. This simplifies the calculation by making the boundary
+1-dimensional. (Later this may make a simple position to calculate
+the appropriate trajectory to leave Earth Orbit to the Moon).</font></font></p>
+<ul>
+	<li><p style="margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Initial
+	conditions/velocities are calculated based on the assumption that
+	Earth is in an orbit of exactly a circle and exactly one mean solar
+	year.</font></font></p>
+	<li><p style="margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Similarly,
+	the Moon is assumed to orbit in a circle in exactly a “sidereal
+	month” <font face="DejaVu Sans Mono, monospace">(27.321661 days)</font></font></font></p>
+</ul>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">We
+will assume there</font></font> <font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">are
+negligible effects</font></font> <font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">from
+other forces. The</font></font> <font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">forces
+excluded from the calculations include:</font></font></p>
+<ul>
+	<li><p style="margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Solar
+	wind</font></font></p>
+	<li><p style="margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Light
+	Pressure</font></font></p>
+	<li><p style="margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Magnetic
+	fields.</font></font></p>
+	<li><p style="margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Gravitational
+	effects from other celestial bodies.</font></font></p>
+	<li><p style="margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Special
+	and General Relativity.</font></font></p>
+</ul>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><br/>
+<br/>
+
+</p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Given
+that it is a distraction from testing the numerical methods, I also</font></font>
+<font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">elected
+</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt"><b>not</b></font></font>
+<font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">to
+use NASA's orbital elements to place the Earth and Moon in true
+3-dimensional (near elliptic) orbits</font></font></p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">This
+has the benefit that one can test that the orbits of a simple 2-body
+system (eg. Sun and Earth) do indeed follow circular orbits, and use
+this to calibrate/validate the Numerical Method for creating the
+Celestial Model.</font></font></p>
+<h2 class="western" style="text-indent: 0.76cm"><font face="DejaVu Serif Condensed, serif"><font size="4" style="font-size: 16pt">5
+Theory</font></font></h2>
+<p style="text-indent: 0.76cm; margin-bottom: 0.5cm"><br/>
+<br/>
+
+</p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm; font-weight: normal">
+<font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">The
+gravitational attraction of any two bodies is governed by </font>Newton's
+law of universal gravitation:</font></p>
+<p align="center" style="text-indent: 0.76cm; margin-bottom: 0.51cm"><span style="font-variant: normal"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt"><span style="font-style: normal"><b>Gravitation
+Force = Fᵢ</b></span></font></font></span> <span style="font-variant: normal"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt"><span style="font-style: normal"><b>=
+Fⱼ</b></span></font></font></span> <span style="font-variant: normal"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt"><span style="font-style: normal"><b>=
+G m</b></span></font></font></span><span style="font-variant: normal"><font face="DejaVu Serif Condensed, serif"><span style="font-style: normal"><b>ᵢ
+mⱼ / r</b></span></font></span><span style="font-variant: normal"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt"><span style="font-style: normal"><b>²</b></span></font></font></span>
+</p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Where:</font></font></p>
+<ul>
+	<li><p style="margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt"><i>F</i></font>
+	<font size="3" style="font-size: 12pt">is the force between the
+	masses, </font></font>
+	</p>
+	<li><p style="margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><i>G</i>
+	is the gravitation constant: 6.674×10⁻<font size="3" style="font-size: 12pt">¹¹N
+	m² kg⁻²</font></font></p>
+	<li><p style="margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><i>m</i><sub><font size="3" style="font-size: 12pt"><i>ᵢ</i></font></sub>
+	is the first mass, </font>
+	</p>
+	<li><p style="margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><i>m</i><sub><font size="3" style="font-size: 12pt"><i>ⱼ
+	</i></font></sub>is the second mass, and </font>
+	</p>
+	<li><p style="margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><i>r</i>
+	is the distance between the centers of the masses. </font>
+	</p>
+</ul>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><br/>
+<br/>
+
+</p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif">The
+actual acceleration of a particular object is proportional to its
+mass and the sum of the gravitation pull of objects around it. In
+essence, it is governed by ”Newton's laws of motion,”
+specifically:</font></p>
+<p align="center" style="text-indent: 0.76cm; margin-bottom: 0.51cm; font-weight: normal">
+<font face="DejaVu Sans Mono, monospace"><font size="4" style="font-size: 16pt">F<span style="font-variant: normal"><span style="font-style: normal">ᵢ</span></span>
+= m<span style="font-variant: normal"><span style="font-style: normal">ᵢ.</span></span>a<span style="font-variant: normal"><span style="font-style: normal">ᵢ
+</span></span></font></font>
+</p>
+<p align="left" style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif">Where:</font></p>
+<ul>
+	<li><p align="left" style="margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><span style="font-weight: normal">F</span></font><span style="font-variant: normal"><font face="DejaVu Serif Condensed, serif"><span style="font-style: normal"><span style="font-weight: normal">ᵢ
+	is the force being acted on the object</span></span></font></span></p>
+	<li><p align="left" style="margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><span style="font-weight: normal">m</span></font><span style="font-variant: normal"><font face="DejaVu Serif Condensed, serif"><span style="font-style: normal"><span style="font-weight: normal">ᵢ</span></span></font></span>
+	<font face="DejaVu Serif Condensed, serif"><span style="font-weight: normal">is
+	the mass of the object</span></font></p>
+	<li><p align="left" style="margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><span style="font-weight: normal">a</span></font><span style="font-variant: normal"><font face="DejaVu Serif Condensed, serif"><span style="font-style: normal"><span style="font-weight: normal">ᵢ
+	is the resulting acceleration of the object</span></span></font></span></p>
+</ul>
+<p align="left" style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif">Hence
+by summing the forces with we get:</font></p>
+<p align="center" style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Sans Light, sans-serif"><font size="4" style="font-size: 16pt"><b><span style="font-variant: normal"><span style="font-style: normal">aᵢ
+= Σⱼ G mⱼ / r</span></span><span style="font-variant: normal"><sub><span style="font-style: normal">ⱼi</span></sub></span><span style="font-variant: normal"><span style="font-style: normal">²
+</span></span></b></font></font>
+</p>
+<p align="left" style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt"><span style="font-variant: normal"><span style="font-style: normal"><span style="font-weight: normal">Where
+</span></span></span><span style="font-variant: normal"><font face="DejaVu Sans Light, sans-serif"><font size="4" style="font-size: 16pt"><span style="font-style: normal"><b>aᵢ</b></span></font></font></span><span style="font-variant: normal">
+</span><span style="font-variant: normal"><span style="font-style: normal"><span style="font-weight: normal">is
+the acceleration, and </span></span></span><span style="font-variant: normal"><font face="DejaVu Sans Light, sans-serif"><font size="4" style="font-size: 16pt"><span style="font-style: normal"><b>mⱼ</b></span></font></font></span><span style="font-variant: normal">
+</span><span style="font-variant: normal"><span style="font-style: normal"><span style="font-weight: normal">are
+the other masses involved. And </span></span></span><span style="font-variant: normal"><font face="DejaVu Sans Light, sans-serif"><font size="4" style="font-size: 16pt"><span style="font-style: normal"><b>r</b></span></font></font></span><span style="font-variant: normal"><sub><font face="DejaVu Sans Light, sans-serif"><font size="4" style="font-size: 16pt"><span style="font-style: normal"><b>ⱼi
+</b></span></font></font></sub></span><span style="font-variant: normal"><span style="font-style: normal"><span style="font-weight: normal">is
+the distance between any two masses.</span></span></span></font></font></p>
+<pre class="western" style="text-indent: 0.76cm; margin-bottom: 0.51cm; text-align: center"><span style="font-variant: normal"><font face="DejaVu Sans Light, sans-serif"><font size="4" style="font-size: 16pt"><span style="font-style: normal"><b>F</b></span></font></font></span><span style="font-variant: normal"><sub><font face="DejaVu Sans Light, sans-serif"><font size="4" style="font-size: 16pt"><span style="font-style: normal"><b>g</b></span></font></font></sub></span><span style="font-variant: normal"> </span><span style="font-variant: normal"><font face="DejaVu Sans Light, sans-serif"><font size="4" style="font-size: 16pt"><span style="font-style: normal"><b>= G × m</b></span></font></font></span><span style="font-variant: normal"><sub><font face="DejaVu Sans Light, sans-serif"><font size="4" style="font-size: 16pt"><span style="font-style: normal"><b>i</b></span></font></font></sub></span><span style="font-variant: normal"> </span><span style="font-variant: normal"><font face="DejaVu Sans Light, sans-serif"><font size="4" style="font-size: 16pt"><span style="font-style: normal"><b>× m</b></span></font></font></span><span style="font-variant: normal"><sub><font face="DejaVu Sans Light, sans-serif"><font size="4" style="font-size: 16pt"><span style="font-style: normal"><b>j</b></span></font></font></sub></span><span style="font-variant: normal"> </span><span style="font-variant: normal"><font face="DejaVu Sans Light, sans-serif"><font size="4" style="font-size: 16pt"><span style="font-style: normal"><b>× r</b></span></font></font></span><span style="font-variant: normal"><sup><font face="DejaVu Sans Light, sans-serif"><font size="4" style="font-size: 16pt"><span style="font-style: normal"><b>-2  </b></span></font></font></sup></span><span style="font-variant: normal"><font face="Liberation Serif, serif"><font size="4" style="font-size: 16pt"><span style="font-style: normal"><span style="font-weight: normal">- - - {Eqn: </span></span></font></font></span><span style="font-variant: normal"><font face="DejaVu Sans Light, sans-serif"><font size="4" style="font-size: 16pt"><span style="font-style: normal"><b>F</b></span></font></font></span><span style="font-variant: normal"><sub><font face="DejaVu Sans Light, sans-serif"><font size="4" style="font-size: 16pt"><span style="font-style: normal"><b>g</b></span></font></font></sub></span><span style="font-variant: normal"><font face="Liberation Serif, serif"><font size="4" style="font-size: 16pt"><span style="font-style: normal"><span style="font-weight: normal">}</span></span></font></font></span>
+∴ <span style="font-variant: normal"><font face="DejaVu Sans Light, sans-serif"><font size="4" style="font-size: 16pt"><span style="font-style: normal"><b>F</b></span></font></font></span><span style="font-variant: normal"><sub><font face="DejaVu Sans Light, sans-serif"><font size="4" style="font-size: 16pt"><span style="font-style: normal"><b>i</b></span></font></font></sub></span><span style="font-variant: normal"> </span><span style="font-variant: normal"><font face="DejaVu Sans Light, sans-serif"><font size="4" style="font-size: 16pt"><span style="font-style: normal"><b>= m</b></span></font></font></span><span style="font-variant: normal"><sub><font face="DejaVu Sans Light, sans-serif"><font size="4" style="font-size: 16pt"><span style="font-style: normal"><b>i</b></span></font></font></sub></span><span style="font-variant: normal"> </span><span style="font-variant: normal"><font face="DejaVu Sans Light, sans-serif"><font size="4" style="font-size: 16pt"><span style="font-style: normal"><b>× a</b></span></font></font></span><span style="font-variant: normal"><sub><font face="DejaVu Sans Light, sans-serif"><font size="4" style="font-size: 16pt"><span style="font-style: normal"><b>i </b></span></font></font></sub></span><span style="font-variant: normal">   </span><span style="font-variant: normal"><font face="Liberation Serif, serif"><font size="4" style="font-size: 16pt"><span style="font-style: normal"><span style="font-weight: normal">- - - {Eqn: </span></span></font></font></span><span style="font-variant: normal"><font face="DejaVu Sans Light, sans-serif"><font size="4" style="font-size: 16pt"><span style="font-style: normal"><b>F</b></span></font></font></span><span style="font-variant: normal"><sub><font face="DejaVu Sans Light, sans-serif"><font size="4" style="font-size: 16pt"><span style="font-style: normal"><b>i</b></span></font></font></sub></span><span style="font-variant: normal"><font face="Liberation Serif, serif"><font size="4" style="font-size: 16pt"><span style="font-style: normal"><span style="font-weight: normal">}</span></span></font></font></span>
+ ∴ <span style="font-variant: normal"><font face="DejaVu Sans Light, sans-serif"><font size="4" style="font-size: 16pt"><span style="font-style: normal"><b>a</b></span></font></font></span><span style="font-variant: normal"><sub><font face="DejaVu Sans Light, sans-serif"><font size="4" style="font-size: 16pt"><span style="font-style: normal"><b>i  </b></span></font></font></sub></span><span style="font-variant: normal"><font face="DejaVu Sans Light, sans-serif"><font size="4" style="font-size: 16pt"><span style="font-style: normal"><b>= G × m</b></span></font></font></span><span style="font-variant: normal"><sub><font face="DejaVu Sans Light, sans-serif"><font size="4" style="font-size: 16pt"><span style="font-style: normal"><b>i</b></span></font></font></sub></span><span style="font-variant: normal"> </span><span style="font-variant: normal"><font face="DejaVu Sans Light, sans-serif"><font size="4" style="font-size: 16pt"><span style="font-style: normal"><b>× m</b></span></font></font></span><span style="font-variant: normal"><sub><font face="DejaVu Sans Light, sans-serif"><font size="4" style="font-size: 16pt"><span style="font-style: normal"><b>j </b></span></font></font></sub></span><span style="font-variant: normal"><font face="DejaVu Sans Light, sans-serif"><font size="4" style="font-size: 16pt"><span style="font-style: normal"><b>× r</b></span></font></font></span><span style="font-variant: normal"><sup><font face="DejaVu Sans Light, sans-serif"><font size="4" style="font-size: 16pt"><span style="font-style: normal"><b>-2</b></span></font></font></sup></span><span style="font-variant: normal"><font face="DejaVu Sans Light, sans-serif"><font size="4" style="font-size: 16pt"><span style="font-style: normal"><b>× m</b></span></font></font></span><span style="font-variant: normal"><sub><font face="DejaVu Sans Light, sans-serif"><font size="4" style="font-size: 16pt"><span style="font-style: normal"><b>i</b></span></font></font></sub></span><span style="font-variant: normal"><sup><font face="DejaVu Sans Light, sans-serif"><font size="4" style="font-size: 16pt"><span style="font-style: normal"><b>-1</b></span></font></font></sup></span>
+<font face="DejaVu Sans Light, sans-serif"><font size="4" style="font-size: 16pt"><font face="Liberation Serif, serif"><span style="font-weight: normal">Or simply: </span></font><b>a</b><sub><b>ij </b></sub><b>= G × m</b><sub><b>j </b></sub><b>× r</b><sub><b>ij</b></sub><sup><b>-2</b></sup><sup> </sup> <font face="Liberation Serif, serif"><span style="font-weight: normal">- - - {Eqn: a</span></font><sub><font face="Liberation Serif, serif"><span style="font-weight: normal">ij</span></font></sub><font face="Liberation Serif, serif"><span style="font-weight: normal">}</span></font></font></font>
+<font face="DejaVu Sans Light, sans-serif"><font size="4" style="font-size: 16pt"><font face="Liberation Serif, serif"><span style="font-weight: normal">Or for all bodies: </span></font><b>a</b><sub><b>i </b></sub><b>= Σ</b><sub><b>j</b></sub> <b>G × m</b><sub><b>j </b></sub><b>× r</b><sub><b>ij</b></sub><sup><b>-2 </b></sup> <font face="Liberation Serif, serif"><span style="font-weight: normal">- - - {Eqn: a</span></font><sub><font face="Liberation Serif, serif"><span style="font-weight: normal">i</span></font></sub><font face="Liberation Serif, serif"><span style="font-weight: normal">}</span></font></font></font></pre><p align="justify" style="text-indent: 0.76cm; margin-bottom: 0.51cm; font-weight: normal">
+<font face="Liberation Serif, serif">In code – and in a 3+ body
+system - we need to sum the vector acceleration components of other
+objects in the system, this becomes:</font></p>
+<pre class="western" style="text-indent: 0.76cm">    <b>FOR</b> i <b>TO</b> upb objects <b>DO</b>
+      distance i := get distance(i);
+      <b>FOR</b> j <b>FROM</b> i + 1 <b>TO</b> upb objects <b>DO</b>
+        separation := distance i - ref distance(j);
+        <b>REAL</b> radius = NORM separation; 
+        <b>REAL</b> radius squared = radius*radius;
+        VEC unit vector from i to j = separation / radius;
+
+        <b>REAL</b> g over radius squared = mksa gravitational constant / 
+                                                    radius squared;
+        ref acceleration(i) +:= (mass <b>OF</b> master)[j] * 
+                  g over radius squared * -unit vector from i to j;
+        ref acceleration(j) +:= (mass <b>OF</b> master)[i] * 
+                  g over radius squared * +unit vector from i to j
+      <b>OD</b>
+    <b>OD</b>;
+# At this point the acceleration is returned ... #</pre><p align="justify" style="text-indent: 0.76cm; margin-bottom: 0.51cm">
+<font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">On
+“average” Earth travels in its orbit as follows:</font></font></p>
+<ul>
+	<li><p align="justify" style="margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Mean
+	orbit radius of Earth = 150x10⁶ km</font></font></p>
+	<li><p align="justify" style="margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Mean
+	orbit period Earth = 365.2421897 days<a class="sdfootnoteanc" name="sdfootnote1anc" href="#sdfootnote1sym"><sup>1</sup></a></font></font></p>
+</ul>
+<p align="justify" style="text-indent: 0.76cm; margin-bottom: 0.51cm">
+<font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">We
+can use this information to calculate an orbit that </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt"><b>should</b></font></font>
+<font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">result
+in an</font></font> <font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">orbital
+period of exactly one mean solar year. The important equation here is
+the equation used to calculate the altitude (or period (λ) of orbit
+to “inject” a spacecraft (or a celestial body for that matter),
+into a stable circular orbit of a 2-body system:</font></font></p>
+<pre class="western" style="text-indent: 0.76cm; margin-bottom: 0.51cm; text-align: center"><span style="font-variant: normal"><font face="DejaVu Sans Light, sans-serif"><font size="4" style="font-size: 16pt"><span style="font-style: normal"><b>λ</b></span></font></font></span><span style="font-variant: normal"> </span><span style="font-variant: normal"><font face="DejaVu Sans Light, sans-serif"><font size="4" style="font-size: 16pt"><span style="font-style: normal"><b>= 2π x √[ r</b></span></font></font></span><span style="font-variant: normal"><sub><font face="DejaVu Sans Light, sans-serif"><font size="4" style="font-size: 16pt"><span style="font-style: normal"><b>ij</b></span></font></font></sub></span><span style="font-variant: normal"><sup><font face="DejaVu Sans Light, sans-serif"><font size="4" style="font-size: 16pt"><span style="font-style: normal"><b>3</b></span></font></font></sup></span> <span style="font-variant: normal"><font face="DejaVu Sans Light, sans-serif"><font size="4" style="font-size: 16pt"><span style="font-style: normal"><b>/ (G × (m</b></span></font></font></span><span style="font-variant: normal"><sub><font face="DejaVu Sans Light, sans-serif"><font size="4" style="font-size: 16pt"><span style="font-style: normal"><b>i</b></span></font></font></sub></span> <span style="font-variant: normal"><font face="DejaVu Sans Light, sans-serif"><font size="4" style="font-size: 16pt"><span style="font-style: normal"><b>+ m</b></span></font></font></span><span style="font-variant: normal"><sub><font face="DejaVu Sans Light, sans-serif"><font size="4" style="font-size: 16pt"><span style="font-style: normal"><b>j</b></span></font></font></sub></span><span style="font-variant: normal"><font face="DejaVu Sans Light, sans-serif"><font size="4" style="font-size: 16pt"><span style="font-style: normal"><b>)) ]</b></span></font></font></span>  <span style="font-variant: normal"><font face="Liberation Serif, serif"><font size="4" style="font-size: 16pt"><span style="font-style: normal"><span style="font-weight: normal">{Eqn: λ}</span></span></font></font></span>
+<font face="DejaVu Sans Light, sans-serif"><font size="4" style="font-size: 16pt"><b>v</b><span style="font-variant: normal"><sub><span style="font-style: normal"><b>i</b></span></sub></span> <b>= 2π r</b><span style="font-variant: normal"><sub><span style="font-style: normal"><b>i</b></span></sub></span> <b>/ λ  </b><font face="Liberation Serif, serif"><span style="font-weight: normal">{Eqn: velocity}</span></font></font></font>
+<font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">This translates to this simple piece of code:</font></font>
+(injection radius := (mksa gravitational constant * 
+(mass <b>OF</b> mean <b>OF</b> parent <b>OF</b> self + mass <b>OF</b> mean <b>OF</b> self)* 
+(orbit period <b>OF</b> mean <b>OF</b> self/2/<i>pi</i>)**2) ** (1/3)</pre><p align="justify" style="text-indent: 0.76cm; margin-bottom: 0.51cm">
+<font face="DejaVu Serif Condensed, serif">This gives us the
+following initial conditions:</font></p>
+<pre class="western" style="text-indent: 0.76cm"><font size="2" style="font-size: 10pt">IIVP Order-2: solar system: </font>
+  <font size="2" style="font-size: 10pt"><span lang="en-US">t interval: [ 0.0 …  3.15569252522e7] (in seconds)</span></font>
+  <font size="2" style="font-size: 10pt"><span lang="en-US">y₀    =    (             0.0, 0.0, 1.4960146948e11, 0.0, </span></font>
+               <font size="2" style="font-size: 10pt"><span lang="en-US">1.4981582442e11, 0.0, 1.4960803223e11, 0.0) </span></font>
+  <font size="2" style="font-size: 10pt"><span lang="en-US">dy₀/dt  =  ( 0.0,             0.0, 0.0, 2.97866078294e4, </span></font>
+               <font size="2" style="font-size: 10pt"><span lang="en-US">0.0, 3.03571562823e4, 0.0, 3.29307012406e4)</span></font>
+
+<font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><span lang="en-US"><font face="DejaVu Serif Condensed, serif">Calculated initial conditions {using </font><span style="font-variant: normal"><span style="font-style: normal"><span style="font-weight: normal">Eqn: </span></span></span><span style="font-variant: normal"><font face="DejaVu Sans Light, sans-serif"><span style="font-style: normal"><b>a</b></span></font></span><span style="font-variant: normal"><sub><font face="DejaVu Sans Light, sans-serif"><span style="font-style: normal"><b>i</b></span></font></sub></span>}:</span></font></font>
+  <font size="2" style="font-size: 10pt"><span lang="en-US">d²y₀/dt²  =  ( 3.1171634677e-9, 0.0,-5.8239912075e-3, 0.0,</span></font>
+                 <font size="2" style="font-size: 10pt"><span lang="en-US">-7.3256607239e-3, 0.0,-1.51209423294e0, 0.0) </span></font>
+
+<font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">Note that the figure (near or about) 1.4960146948 x 10^11 appears in these equations many times.  This figure is “meters” and is near to one “Astronomical Unit” (1 Astronomical Unit = 149 597 871 kilometers), being the rough distance of the Earth to the Sun.  The deviation of 72,123,406 km was necessary to put the Earth into a circular orbit with a period (λ) equal to one average solar year.</span></font></font>
+
+<font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">The next step was to convert this Order 1 ODE:</span></font></font>
+
+<font size="2" style="font-size: 10pt"><span lang="en-US">IIVP Order-1: solar system:   </span></font>
+  <font size="2" style="font-size: 10pt"><span lang="en-US">y₀ = ( 0.0, 0.0,             1.4960146948e11, 0.0,</span></font>
+         <font size="2" style="font-size: 10pt"><span lang="en-US">1.4981582442e11, 0.0, 1.4960803223e11, 0.0,</span></font>
+           <font size="2" style="font-size: 10pt"><span lang="en-US">0.0, 0.0,             0.0,   2.97866078294e4,</span></font>
+         <font size="2" style="font-size: 10pt"><span lang="en-US">0.0, 3.03571562823e4, 0.0, 3.29307012406e4)</span></font>
+<font size="2" style="font-size: 10pt"><span lang="en-US">t interval: [ 0.0 …  3.15569252522e7] seconds (initially 1 year)</span></font>
+
+<font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">Calculated initial conditions {using <span style="font-variant: normal"><span style="font-style: normal"><span style="font-weight: normal">Eqn: </span></span></span><span style="font-variant: normal"><font face="DejaVu Sans Light, sans-serif"><span style="font-style: normal"><b>a</b></span></font></span><span style="font-variant: normal"><sub><font face="DejaVu Sans Light, sans-serif"><span style="font-style: normal"><b>i</b></span></font></sub></span>} in this Order 1 ODE are:</span></font></font>
+  <font size="2" style="font-size: 11pt"><span lang="en-US">dy</span></font>₀<font size="2" style="font-size: 10pt"><span lang="en-US">/dt = (0.0, 0.0,                0.0, 2.97866078294e4,</span></font>
+            <font size="2" style="font-size: 10pt"><span lang="en-US">0.0, 3.03571562823e4,    0.0, 3.29307012406e4,</span></font>
+           <font size="2" style="font-size: 10pt"><span lang="en-US">3.1171634677 e-9, 0.0,  -5.8239912075e-3,0.0,</span></font>
+            <font size="2" style="font-size: 10pt"><span lang="en-US">-7.3256607239e-3, 0.0,   -1.51209423294e0, 0.0) </span></font>
+
+<font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">Note that “Appendix D” contains an extract of code that automates this conversion from an Order-N ODE to an Order-1 ODE.</span></font></font>
+
+<font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">Using these initial conditions we can calculate the Initial total momentum f the entire system of:</span></font></font>
+ <font face="DejaVu Sans Mono, monospace"><font size="3" style="font-size: 12pt"><span lang="en-US">( 0.0, 3.1189084735e28 ) kg m/s</span></font></font>
+
+<font face="DejaVu Serif Condensed, serif"><font size="2" style="font-size: 11pt"><span lang="en-US">and the initial energy of this</span></font></font> <font face="DejaVu Serif Condensed, serif"><font size="2" style="font-size: 11pt"><span lang="en-US">entire planetary system is</span></font></font> <font face="DejaVu Sans Mono, monospace"><font size="3" style="font-size: 12pt"><span lang="en-US">4.6514481452e32 Joules.</span></font></font></pre><h3 class="western" style="text-indent: 0.76cm">
+<font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">5.1
+Base Case 1: One mean year Earth orbit of the Sun with 2 tiny
+satellites.</font></font></h3>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">This
+case establishes that the basic model is working, and in such a
+simple model we use a point-sized Earth, and a point-sized Sun and
+both momentum and energy should be preserved throughout. Initial
+conditions will be set up so that (according to Newtons Law's of
+motion details above) the Earth should follow a circular orbit.</font></font></p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">This
+base case is useful because having only 2 tiny satellites</font></font>
+<font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">means
+“Newtons Law's” allows</font></font> <font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">us
+to calculate the expected Sun-Earth path of this “2-bodied”
+system. The 2 tiny satellites have next to no effect. And the
+expected outcome is that the Orbit radius will be constant (about one
+Astronomical Unit), and Earth should arrive back to its</font></font>
+<font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">original
+position in space following a perfectly</font></font> <font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">circular
+path.</font></font></p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">The
+position in space will be about* </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">1.5</span></font></font><span lang="en-US">×</span><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">10¹¹</span></font></font>
+<font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">meters
+directly along the X-Axis from the Sun. Which (initially) will be on
+the origin. (* See actual calculation</span></font></font> <font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt"><span lang="en-US">above)</span></font></font></p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">This
+base case is a good chance to compare the “Euler”,
+“Adams-Bashforth”, “Runga-Kutta 4th order” and “Velocity
+Verlet” methods, and fine-tune the step size required to achieve a
+good result.</font></font></p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">And
+the accuracy of the result is measured by returning (according to
+Newton's Laws) to the original starting point and comparing the
+difference in the result.</font></font></p>
+<h3 class="western" style="text-indent: 0.76cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">5.2
+Base Case 2: Sidereal month with full-sized Moon, Earth, and Sun</font></font></h3>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">A
+sidereal month is approximately 27.321661 days<a class="sdfootnoteanc" name="sdfootnote2anc" href="#sdfootnote2sym"><sup>2</sup></a>.
+</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">This
+value provides a</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
+useful </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">check</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
+</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">that</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
+the simulated Moon </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">is
+orbiting </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">reasonabl</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">y</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">.
+In particular</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">,</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
+</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">check</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
+</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">the
+computed </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt"><i>sidereal
+month</i></font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
+</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">is
+</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">reasonably
+</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">close
+to the actual Moon’s </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">“sidereal
+</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">month</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">”.</font></font></p>
+<h2 class="western" style="text-indent: 0.76cm"><font face="DejaVu Serif Condensed, serif"><font size="4" style="font-size: 16pt">6
+Program Reports</font></font></h2>
+<h2 class="western" style="text-indent: 0.76cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Case
+1 - 1 Hours Step size With and Without Moon.</font></font></h2>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><img src="Celerstial_mechanics_v0.1_html_m1211d673.gif" name="graphics1" align="bottom" width="576" height="432" border="0"/>
+
+</p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">If
+you compare the </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Earth’s
+</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">final
+position after 52 weeks, Euler's method - both with a Moon and
+without a Moon - returns Earth </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">to
+</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">a
+point at 152.5 Million km from the Sun. This is an error of 3000km.
+This </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">may
+appear</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
+strange, that after 52 weeks the result with and without the Moon is
+the same. Note also actual </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">orbital
+radius</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
+within the 52 week</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">s</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
+differs greatly.</font></font></p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">The
+next strange behavior is that all methods appear to roughly reach
+their same flawed destination. It would be worth investigating if
+this is caused by some mathematical cancellation occurring within the
+ODE Solver method on the return orbit.</font></font></p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Another
+strange observation is that the Runga-Kutta Method and the Verlet
+Method appear to follow about the same path. Maybe this is because
+the Verlet Method is a Gravitationaly/Spatially “Optimised”
+version of the same Runga-Kutta Method. (It would be worth comparing
+the CPU/FPU consumption during these two different runs).</font></font></p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">We
+can see in the results that Energy is not being conserved. This is a
+big problem that should be addressed in future models. (Maybe using a
+more implicit method, or using least squares on each step to force
+the conservation of Energy and Momentum. Or maybe it is an error in
+my coding...)</font></font></p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Following
+are some comparative figures for a simple Two Body Earth/Sun system
+presenting Energy change after 1 year (step size 1hr):</font></font></p>
+<ul>
+	<li><p style="margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Adams_Bashforth:
+	Energy: -48.58YJ </font></font>
+	</p>
+	<li><p style="margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Euler
+	Energy: -485168YJ</font></font></p>
+	<li><p style="margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Runga_Kutta:
+	Energy: -970306YJ</font></font></p>
+	<li><p style="margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Velocity_Verlet:
+	Energy: -485379YJ</font></font></p>
+</ul>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Similar
+results and discrepancies apply to momentum.</font></font></p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Ideally,
+the method used would mathematically guarantee that Energy and
+Momentum are being conserved.</font></font></p>
+<h3 class="western" style="text-indent: 0.76cm">Sample results:
+Without Moon:</h3>
+<p style="text-indent: 0.76cm; margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="1" style="font-size: 8pt">==&gt;
+m_Adams_Bashforth_r_1year_short_10TM.lst &lt;== </font></font>
+</p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="1" style="font-size: 8pt">Time:
+52.18week, Distance to sun:149601.5Mm, Energy: -48.58YJ,
+Momentum(-3.50477e2, 5.93736e2)Pgm/s </font></font>
+</p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="1" style="font-size: 8pt">Sun
+loc:(-1.49601e5, 1.7646e-2)Mm; rv:( 0.0, 0.0)kph;
+av:(-4.5534e-2,-3.86034e5)kph; os: 0.0kph; or: 0.0Mm; </font></font>
+</p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="1" style="font-size: 8pt">Earthloc:(
+0.0, 0.0)Mm; rv:( 1.2648e-2, 1.07232e5)kph; av:( 0.0, 0.0)kph; os:
+1.07232e5kph; or: 1.49601e5Mm; </font></font>
+</p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="1" style="font-size: 8pt">==&gt;
+m_Euler_r_1year_short_10TM.lst &lt;== </font></font>
+</p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="1" style="font-size: 8pt">Time:
+52.18week, Distance to sun:149769.8Mm, Energy: -485168YJ,
+Momentum(-5.77519e2, 3.38650e2)Pgm/s </font></font>
+</p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="1" style="font-size: 8pt">Sun
+loc:(-1.49768e5, 7.93514e2)Mm; rv:( 0.0, 0.0)kph;
+av:(-2.04402e3,-3.85812e5)kph; os: 0.0kph; or: 0.0Mm; </font></font>
+</p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="1" style="font-size: 8pt">Earthloc:(
+0.0, 0.0)Mm; rv:( 5.67782e2, 1.07170e5)kph; av:( 0.0, 0.0)kph; os:
+1.07171e5kph; or: 1.49770e5Mm; </font></font>
+</p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="1" style="font-size: 8pt">==&gt;
+m_Runga_Kutta_4th_order_r_1year_short_10TM.lst &lt;== </font></font>
+</p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="1" style="font-size: 8pt">Time:
+52.17week, Distance to sun:149938.2Mm, Energy: -970306YJ, Momentum(
+1.06309e2, 1.31941e2)Pgm/s </font></font>
+</p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="1" style="font-size: 8pt">Sun
+loc:(-1.49928e5, 1.74746e3)Mm; rv:( 0.0, 0.0)kph;
+av:(-4.49331e3,-3.85574e5)kph; os: 0.0kph; or: 0.0Mm; </font></font>
+</p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="1" style="font-size: 8pt">Earthloc:(
+0.0, 0.0)Mm; rv:( 1.24814e3, 1.07104e5)kph; av:( 0.0, 0.0)kph; os:
+1.07111e5kph; or: 1.49938e5Mm; </font></font>
+</p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="1" style="font-size: 8pt">==&gt;
+m_Velocity_Verlet_r_1year_short_10TM.lst &lt;== </font></font>
+</p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="1" style="font-size: 8pt">Time:
+52.18week, Distance to sun:149769.9Mm, Energy: -485379YJ,
+Momentum(-1.44345e2,-7.38872e2)Pgm/s </font></font>
+</p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="1" style="font-size: 8pt">Sun
+loc:(-1.49768e5, 7.93594e2)Mm; rv:( 0.0, 0.0)kph;
+av:(-2.04418e3,-3.85812e5)kph; os: 0.0kph; or: 0.0Mm; </font></font>
+</p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="1" style="font-size: 8pt">Earthloc:(
+0.0, 0.0)Mm; rv:( 5.67827e2, 1.07170e5)kph; av:( 0.0, 0.0)kph; os:
+1.07171e5kph; or: 1.49770e5Mm; </font></font>
+</p>
+<h3 class="western" style="text-indent: 0.76cm">With Moon:</h3>
+<p style="text-indent: 0.76cm; margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="1" style="font-size: 8pt">==&gt;
+m_Adams_Bashforth_r_1year_short.lst &lt;== </font></font>
+</p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="1" style="font-size: 8pt">Time:
+52.18week, Distance to sun:149631.3Mm, Energy: -505.87YJ, Momentum(
+4.46470e2,-1.84718e2)Pgm/s </font></font>
+</p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="1" style="font-size: 8pt">Sun
+loc:(-1.49575e5, 4.10318e3)Mm; rv:( 0, 0)kph;
+av:(-1.06234e4,-3.86938e5)kph; os: 0kph; or: 0Mm; </font></font>
+</p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="1" style="font-size: 8pt">Earthloc:(
+0, 0)Mm; rv:( 2.95096e3, 1.07483e5)kph; av:( 0, 0)kph; os:
+1.07523e5kph; or: 1.49631e5Mm; </font></font>
+</p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="1" style="font-size: 8pt">==&gt;
+m_Euler_r_1year_short.lst &lt;== </font></font>
+</p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="1" style="font-size: 8pt">Time:
+52.18week, Distance to sun:149771.7Mm, Energy: -523006YJ,
+Momentum(-1.61525e2,-2.24300e2)Pgm/s </font></font>
+</p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="1" style="font-size: 8pt">Sun
+loc:(-1.49692e5, 4.88020e3)Mm; rv:( 0, 0)kph;
+av:(-1.22312e4,-3.85812e5)kph; os: 0kph; or: 0Mm; </font></font>
+</p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="1" style="font-size: 8pt">Earthloc:(
+0, 0)Mm; rv:( 3.39756e3, 1.07170e5)kph; av:( 0, 0)kph; os:
+1.07224e5kph; or: 1.49772e5Mm; </font></font>
+</p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="1" style="font-size: 8pt">==&gt;
+m_Runga_Kutta_4th_order_r_1year_short.lst &lt;== </font></font>
+</p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="1" style="font-size: 8pt">Time:
+52.17week, Distance to sun:149965.3Mm, Energy:-1041358YJ,
+Momentum(-5.25533e1,-1.36339e2)Pgm/s </font></font>
+</p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="1" style="font-size: 8pt">Sun
+loc:(-1.49851e5, 5.84239e3)Mm; rv:( 0, 0)kph;
+av:(-1.48738e4,-3.86389e5)kph; os: 0kph; or: 0Mm; </font></font>
+</p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="1" style="font-size: 8pt">Earthloc:(
+0, 0)Mm; rv:( 4.13162e3, 1.07330e5)kph; av:( 0, 0)kph; os:
+1.07410e5kph; or: 1.49965e5Mm; </font></font>
+</p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="1" style="font-size: 8pt">==&gt;
+m_Velocity_Verlet_r_1year_short.lst &lt;== </font></font>
+</p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="1" style="font-size: 8pt">Time:
+52.18week, Distance to sun:149771.9Mm, Energy: -524388YJ, Momentum(
+1.48881e2, 7.34474e2)Pgm/s </font></font>
+</p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="1" style="font-size: 8pt">Sun
+loc:(-1.49692e5, 4.88028e3)Mm; rv:( 0, 0)kph;
+av:(-1.22318e4,-3.85812e5)kph; os: 0kph; or: 0Mm; </font></font>
+</p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="1" style="font-size: 8pt">Earthloc:(
+0, 0)Mm; rv:( 3.39771e3, 1.07170e5)kph; av:( 0, 0)kph; os:
+1.07224e5kph; or: 1.49772e5Mm; </font></font>
+</p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="1" style="font-size: 8pt">==&gt;
+m_Velocity_Verlet_r_1year_short.lst &lt;== </font></font>
+</p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="1" style="font-size: 8pt">Time:
+52.18week, Distance to sun:149771.9Mm, Energy: -524388YJ, Momentum(
+1.48881e2, 7.34474e2)Pgm/s </font></font>
+</p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="1" style="font-size: 8pt">Sun
+loc:(-1.49692e5, 4.88028e3)Mm; rv:( 0.0, 0.0)kph;
+av:(-1.22318e4,-3.85812e5)kph; os: 0.0kph; or: 0.0Mm; </font></font>
+</p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="1" style="font-size: 8pt">Earthloc:(
+0.0, 0.0)Mm; rv:( 3.39771e3, 1.07170e5)kph; av:( 0.0, 0.0)kph; os:
+1.07224e5kph; or: 1.49772e5Mm</font></font></p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><br/>
+<br/>
+
+</p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">The
+key point </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">is,</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
+the Adams-Bashforth appears to return the best results. Both with a
+Moon and without </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Moon.</font></font></p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">It
+would be worth trying some higher-order Adams-Bashforth </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">m</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">ethod</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">s</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">,
+to fin</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">e-</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">tune
+which give</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">s</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
+the fastest results </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">while</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
+still returning the required accuracy.</font></font></p>
+<h3 class="western">6.1 Results for a 450 Second step size</h3>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><img src="Celerstial_mechanics_v0.1_html_m7ead7dda.gif" name="graphics2" align="bottom" width="576" height="432" border="0"/>
+
+</p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><br/>
+<br/>
+
+</p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Again
+all methods result </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">in</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
+the original position in space after 1 year.</font></font></p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Again
+Velocity Verlet and Runga-Kutta appear to be producing the same
+result. (Need to review CPU/FPO usage to see if one is faster)</font></font></p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Notice
+that the Adam Bashford Method returns the best result. But all
+methods improve with the shortened step size to 450 seconds.</font></font></p>
+<h3 class="western" style="text-indent: 0.76cm"><br/>
+<br/>
+
+</h3>
+<h3 class="western" style="text-indent: 0.76cm; page-break-before: always">
+<font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">6.2
+Case 2 Study of objects orbiting Earth.</font></font></h3>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Now
+we turn ourselves to calculations involving the orbits around Earth.
+Here is a graph of the altitude of the simulated Apollo 8 Command
+Module.</font></font></p>
+<h3 class="western" style="text-indent: 0.76cm"><img src="Celerstial_mechanics_v0.1_html_52861cc4.gif" name="graphics3" align="bottom" width="576" height="432" border="0"/>
+
+</h3>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">It
+appears that the Euler method is overly influenced by the presence of
+the Moon as the spacecraft. Note that (from </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">equation</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
+λ) we get an Apollo 8 orbit period of about 3.6 hours, hence every
+3.6 hours the spacecraft travels between the Earth and the Moon. and
+experiences a lesser force toward Earth.</font></font></p>
+<ul>
+	<li><p style="margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Euler
+	method with a step size of 10s gains 3-4000 km over 24 hours. Based
+	on this model Apollo 8 can get to the Moon without using any fuel.
+	If we reduce the step size we visually get an idea that the method
+	is insufficient as we get a massive correction/convergence to a more
+	realistic orbit. From inspection, we may be able to reduce the step
+	size to milliseconds to achieve a usable result.</font></font></p>
+	<li><p style="margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Runga_Kutta
+	&amp; Velocity_Verlet: Again these appear to be producing the same
+	result. I speculate that the Implicit RK method may produce a better
+	result. But given that “time” in all the equations is symmetric
+	in forward and reverse I believe there would be no improvement. (It
+	is an idea that could be checked)</font></font></p>
+	<li><p style="margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Velocity
+	Verlet </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">mimics</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
+	Runga-Kutta</font></font></p>
+	<li><p style="margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Adams_Bashforth:
+	Energy: Again, a better overall result.</font></font></p>
+</ul>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><br/>
+<br/>
+
+</p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">One
+can get hints as to how much the step size needs to be reduced to get
+the desired result but review the apparent convergence in the graph
+above</font></font></p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Indeed
+“Richardson Extrapolation” might be available to get better
+results for some of the methods, especially Euler's. </font></font>
+</p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Applying
+Richardson Extrapolation may simply recreate one of the other
+methods. Indeed i</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">t</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
+is likely that Velocity Verlet is a mathematics phantom of the
+Runga-Kutta 4</font></font><sup><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">th</font></font></sup>
+<font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Order
+Method.</font></font></p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Notice
+that only the Adams-Bashforth model come</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">s</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
+even close to a stable orbit. </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Below</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
+is a graph </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">that</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
+zooms into just the Adams-Bashforth results.</font></font></p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><img src="Celerstial_mechanics_v0.1_html_7786bd70.gif" name="graphics4" align="bottom" width="576" height="432" border="0"/>
+
+</p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">D</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">ecreasing
+the step size from 10s to 1 s improves the tolerance of the result</font></font></p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">It
+is interesting to notice that with different step sizes the
+oscillation of the spacecraft becomes in opposition. The
+Adams-Bashforth method is of Order-2, needing 2 initial values (one
+time step apart). The algorithm in the current ALGOL 68 code Euler's
+method to get the second step required by the Adams-Bashforth model.
+We see from the previous graphs/results that Euler's method does
+introduce errors of its own. This may explain why the Adams-Bashforth
+model (for 1s and 10s) generates 1 different (but mostly stable)
+orbit.</font></font></p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">It
+would be worth deriving a better way to launch </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">the
+Ode </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">(</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">by
+</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">calculat</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">ing</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
+the second initial value) for the Adams-Bashforth model. This </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">initial
+</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">error
+</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">is
+then propagated to subsequent</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
+steps.</font></font></p>
+<h3 class="western" style="text-indent: 0.76cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">7.1
+Comparison of the Methods</font></font></h3>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">In
+</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">all</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
+case</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">s,</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
+the Adams-Bashforth performed better th</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">a</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">n
+the other methods. The Adams-Bashforth is part of a family of methods
+and this suggests that we should investigate these.</font></font></p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Note
+that no study was made of the “CPU/FPU” cost of these methods.
+Maybe this is reasonable as CPUs today are so fast.</font></font></p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Similarly,
+there is no study of the truncation error, a faster CPU may not
+provide any additional accuracy, </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">and
+</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">a
+smaller step size </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">might</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
+make things worse.</font></font></p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">However,
+based on the accuracy of the results, the Adams-Bashforth method
+seems very effective.</font></font></p>
+<h2 class="western" style="text-indent: 0.76cm"><font face="DejaVu Serif Condensed, serif"><font size="4" style="font-size: 16pt">8
+Lessons Learned</font></font></h2>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">The
+Adams-Bashforth method appears to work the best. Worth considering
+others in the family.</font></font></p>
+<p align="justify" style="text-indent: 0.76cm; margin-bottom: 0.51cm">
+<font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">During
+the development of the 3GL “platform” to model Celestial Bodies,
+and manage spacecraft in flight I quickly realized that there are
+numerous other factors that come into account. Such as the accuracy
+of telemetry results, actual initial conditions, Earth and Solar
+space conditions, etc. The writing of this software demonstrated to
+me how quickly the task of writing such software can grow.</font></font></p>
+<ul>
+	<li><p align="justify" style="margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Unit
+	of measure becomes a problem - One problem I has was one part of the
+	program required kg, whereas the import data was unit-less, and
+	effectively in US pound mass. This had a significant but subtle
+	effect on the orbit of the Moon. Essentially the Moon was put into a
+	very asymmetric elliptic orbit.</font></font></p>
+</ul>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif">Software
+complexity was an issue, even when I tried to use some modern Object
+oriented Techniques, Here is an extract of the “mainline” of the
+program. Notice that the entire mission is kicked off with a run, a
+parameter to set the ODE Solver method, and another parameter to
+define which report is required.</font></p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.5cm"><font face="DejaVu Sans Mono, monospace"><font size="2" style="font-size: 10pt"><b>PR
+include &quot;prelude/universe.a68&quot; PR</b></font></font><font face="DejaVu Sans Mono, monospace"><font size="2" style="font-size: 10pt">;</font></font></p>
+<pre class="western" style="text-indent: 0.76cm"><font face="DejaVu Sans Mono, monospace"><font size="2" style="font-size: 10pt"><b>PR include &quot;prelude/apollo_8_mission.a68&quot; PR</b>;</font></font>
+<b>PR include &quot;prelude/sun_earth_moon.a68&quot; PR</b>;
+<b>PR include &quot;prelude/apollo_flight_charactersitics.a68&quot; PR</b>;
+<b>#PR include &quot;prelude/apollo_8_mission.a68&quot; PR;#</b>
+    <b>REF</b> UNIVERSE mission = INIT <b>LOC</b> UNIVERSE;
+    (genesis <b>OF</b>(METHODOF mission))(
+        sun earth moon apollo8cm,
+        apollo 8 mission,
+        init time((1968,12,21,12,51,00))
+    );
+    <i>print</i>((&quot;System:&quot;,SHORTENREPR mission, <i>new line</i>));
+    p<i>rint</i> positions(&quot;Initial position&quot;);
+    (run <b>OF</b> (METHODOF mission))(<b>#solver#</b> opt n solver,<b>#report#</b> opt n report);
+    <i><b>print</b></i> <b>positions(&quot;Final position&quot;)</b></pre><p style="text-indent: 0.76cm; margin-bottom: 0.5cm">
+<font face="DejaVu Serif Condensed, serif"><span style="font-weight: normal">The
+actual intermediate results for the duration were yielded by a
+procedure </span></font><font face="DejaVu Sans Mono, monospace"><span style="font-weight: normal">solver
+tyn gen</span></font><font face="DejaVu Serif Condensed, serif"><span style="font-weight: normal">,
+this is useful for allowing the programmer to terminate a flight of
+the Craft/Body i</span></font><font face="DejaVu Serif Condensed, serif"><span style="font-weight: normal">f
+it is</span></font><font face="DejaVu Serif Condensed, serif"><span style="font-weight: normal">
+heading in the wrong direction. I was going to use this to do trial
+Earth-Moon injections for Apollo 8. </span></font><font face="DejaVu Serif Condensed, serif"><span style="font-weight: normal">R</span></font><font face="DejaVu Serif Condensed, serif"><span style="font-weight: normal">un
+a trial in a different trajectory, until something goes “close”
+(or crashes into) the Moon, then use the secant method to fine-tune
+the answer and get a “perfect launch trajectory”.</span></font></p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.5cm"><br/>
+<br/>
+
+</p>
+<pre class="western" style="text-indent: 0.76cm">    TIME last time, last report;
+  <b># FOR (TYN tyn) IN #</b> solver tyn gen(solar system, args <b># ) DO (#</b>,
+  <b>##</b>    (TYN tyn)<b>VOID</b>: (
+        <b># update master &amp; update celestial bodies OF self #</b>
+        (dva <b>OF</b> master)[dis] := 
+        (y <b>OF</b> tyn)[dis]; (dva <b>OF</b> master)[vel] := 
+               (y <b>OF</b> tyn)[vel];
+        last time := t <b>OF</b> tyn;
+        <b>IF</b> t <b>OF</b> tyn &gt;= report period number * report period <b>THEN</b>
+            last report := t <b>OF</b> tyn;
+            report period number +:= 1;
+            <i>print</i> position report(self, t <b>OF</b> tyn, ref pnt)
+        <b>FI</b>
+  <font face="DejaVu Sans Mono, monospace"><b># OD #</b></font><font face="DejaVu Sans Mono, monospace">));</font>
+
+<font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Note: Throughout the program, “SI Units of measure” were used, indeed whenever a variable was declared, it was declared with a “SI Unit” type.  Eg. above is a declaration:</font></font>
+  “<font face="DejaVu Sans Mono, monospace"><font size="2" style="font-size: 10pt">TIME last time, last report;”</font></font>
+
+<font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">The unit’s type of measure </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">is</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt"> thus </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">both </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">define</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">d </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">and documented, and all inputs are scaled to MKS.  </font></font>
+<font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Similarly, </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">on</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt"> output, the </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">actual </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">value can be converted using </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">desired</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt"> factors:</font></font>
+  <font face="DejaVu Sans Mono, monospace"><font size="2" style="font-size: 10pt">print((last time/hours,”hr”, last report/hours,”hr”, new line))</font></font>
+
+<font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">This approach could have saved the “Mars Climate Orbiter” and </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">can</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt"> be formali</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">z</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">e</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">d</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt"> in most programming languages.</font></font></pre><h2 class="western" style="text-indent: 0.76cm">
+<font face="DejaVu Serif Condensed, serif"><font size="4" style="font-size: 16pt">9
+Conclusion</font></font></h2>
+<p style="text-indent: 0.25cm; margin-bottom: 0.25cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Velocity
+Verlet code/algorithm needs to be reviewed to determine why it mimics
+Runga-Kutta so closely.</font></font></p>
+<p style="text-indent: 0.25cm; margin-bottom: 0.25cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Energy
+conservation is violated by all the methods. This technique can be
+good and bad:</font></font></p>
+<ul>
+	<li><p style="margin-bottom: 0.25cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Bad,
+	as </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">the</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
+	model </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">ideally</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
+	need to </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">obey</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
+	</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">the</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
+	laws of physics.</font></font></p>
+	<li><p style="margin-bottom: 0.25cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Good,
+	as the difference can be seen as an example of the overall error in
+	the result. The trick would be to relate this discrepancy to desired
+	final accuracy in the position of the Spacecraft.</font></font></p>
+</ul>
+<p align="justify" style="text-indent: 0.25cm; margin-bottom: 0.25cm">
+<font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">During
+the development of the 3GL “platform” to model Celestial Bodies,
+and manage spacecraft in flight (on a day-to-day basis), numerous
+(many many) other factors come into account. Such as the accuracy of
+telemetry results, actual initial conditions, Earth and Solar space
+conditions, etc. The writing of this software demonstrated to me how
+quickly the task of writing such software can grow. </font></font>
+</p>
+<p style="text-indent: 0.25cm; margin-bottom: 0.25cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">In
+all cases, the Adams-Bashforth performed better than other methods.
+The Adams-Bashforth is part of a family of methods. It would be worth
+reviewing some other similar methods.</font></font></p>
+<p align="justify" style="text-indent: 0.25cm; margin-bottom: 0.25cm">
+<font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">It
+would be worth deriving a better way to launch (calculate the second
+sample value) for the Adams-Bashforth model.</font></font></p>
+<h2 class="western" style="text-indent: 0.76cm; page-break-before: always">
+<font face="DejaVu Serif Condensed, serif"><font size="4" style="font-size: 16pt">12
+References</font></font></h2>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm">See end notes
+and footnotes.</p>
+<h2 class="western" style="text-indent: 0.76cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Appendix
+A – Euler method</font></font></h2>
+<pre class="western" style="text-indent: 0.76cm">    <b>F</b><font face="DejaVu Sans Condensed, sans-serif"><font size="2" style="font-size: 10pt"><b>OR</b></font></font> <font face="DejaVu Sans Condensed, sans-serif"><font size="2" style="font-size: 10pt">n </font></font><font face="DejaVu Sans Condensed, sans-serif"><font size="2" style="font-size: 10pt"><b>TO</b></font></font> <font face="DejaVu Sans Condensed, sans-serif"><font size="2" style="font-size: 10pt">num steps </font></font><font face="DejaVu Sans Condensed, sans-serif"><font size="2" style="font-size: 10pt"><b>DO</b></font></font>
+            <font face="DejaVu Sans Condensed, sans-serif"><font size="2" style="font-size: 10pt">dy by dt := (f dy by dt </font></font><font face="DejaVu Sans Condensed, sans-serif"><font size="2" style="font-size: 10pt"><b>OF</b></font></font> <font face="DejaVu Sans Condensed, sans-serif"><font size="2" style="font-size: 10pt">ivp)(t,y);</font></font>
+            <font face="DejaVu Sans Condensed, sans-serif"><font size="2" style="font-size: 10pt"><b>y +:= dy by dt * dt;</b></font></font>
+            <font face="DejaVu Sans Condensed, sans-serif"><font size="2" style="font-size: 10pt">t +:= dt;</font></font>
+            <font face="DejaVu Sans Condensed, sans-serif"><font size="2" style="font-size: 10pt">yield((t,y)) </font></font><font face="DejaVu Sans Condensed, sans-serif"><font size="2" style="font-size: 10pt"><b>#yield(ty[@1])#</b></font></font>
+        <font face="DejaVu Sans Condensed, sans-serif"><font size="2" style="font-size: 10pt"><b>OD</b></font></font></pre><h2 class="western" style="text-indent: 0.76cm">
+<font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Appendix
+D – Adams_Bashforth method</font></font></h2>
+<pre class="western" style="text-indent: 0.76cm"><b># Use the Euler method to determine the step #</b>
+<b># nb: A better choice can be made using Newton Raphsons method #</b>
+    dy by dt[0] := (f dy by dt <b>OF</b> ivp)(t[0],y[0]);
+    y[1] := y[0] + dy by dt[0]*dt;
+    t[1] := t[0] + dt;
+    yield((t[1],y[1])); 
+ 
+    <b>FOR</b> num step <b>FROM</b> order <b>TO</b> num steps <b>DO</b>
+<b># Create a window of width &quot;0:order-1&quot; of previous values that autowraps #</b>
+        <b>INT</b> n  = num step <b>MOD</b> order;
+        <b>INT</b> n1 = (n + 1)  <b>MOD</b> order;
+        <b>INT</b> n2 =  n<b>#+ 2)  MOD order#</b>; 
+        dy by dt[n1] := (f dy by dt <b>OF</b> ivp)(t[n1], y[n1]);
+        y[n2] := y[n1] + (3/2*dy by dt[n1] - 1/2*dy by dt[n])*dt;
+        t[n2] := t[n1] + dt;
+        yield((t[n2],y[n2])) 
+    <b>OD</b></pre><h2 class="western" style="text-indent: 0.76cm">
+<font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Appendix
+C – Runga-Kutta Order 4 method</font></font></h2>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm">t := lwb <b>OF</b>
+t interval <b>OF</b> ivp;</p>
+<pre class="western" style="text-indent: 0.76cm">    y := y0 <b>OF</b> ivp;
+ 
+    yield((t,y)); 
+ 
+    [order]Y k;
+ 
+    <b>PROC</b> (R,RN)RN dy by dt = f dy by dt <b>OF</b> ivp;
+ 
+    <b>FOR</b> num step <b>FROM</b> order <b>TO</b> num steps <b>DO</b>
+        k[1] := dt * dy by dt(t, y);
+        k[2] := dt * dy by dt(t + half dt, y + 1/2*k[1]);
+        k[3] := dt * dy by dt(t + half dt, y + 1/2*k[2]);
+        k[4] := dt * dy by dt(t + dt,      y +     k[3]);
+        y +:= 1/6*(k[1] + 2*k[2] + 2*k[3] + k[4]);
+        t +:= dt;
+        yield((t,y)) 
+    <b>OD</b>
+ </pre><p style="text-indent: 0.76cm; margin-bottom: 0.51cm">
+<br/>
+<br/>
+
+</p>
+<h2 class="western" style="text-indent: 0.76cm">Appendix D –
+Velocity Verlet method</h2>
+<pre class="western" style="text-indent: 0.76cm">  <font face="DejaVu Sans Mono, monospace"><b># setup initial conditions...#</b></font>
+    <font face="DejaVu Sans Mono, monospace">t </font><font face="DejaVu Sans Mono, monospace"><b>OF</b></font> <font face="DejaVu Sans Mono, monospace">this := lwb </font><font face="DejaVu Sans Mono, monospace"><b>OF</b></font> <font face="DejaVu Sans Mono, monospace">t interval </font><font face="DejaVu Sans Mono, monospace"><b>OF</b></font> <font face="DejaVu Sans Mono, monospace">ivp;</font>
+    <font face="DejaVu Sans Mono, monospace">(y </font><font face="DejaVu Sans Mono, monospace"><b>OF</b></font> <font face="DejaVu Sans Mono, monospace">this)[nx] := (dis0 vel0 acc0 etc </font><font face="DejaVu Sans Mono, monospace"><b>OF</b></font> <font face="DejaVu Sans Mono, monospace">ivp)[nx];</font>
+    <font face="DejaVu Sans Mono, monospace"><font size="2" style="font-size: 10pt">(y </font></font><font face="DejaVu Sans Mono, monospace"><font size="2" style="font-size: 10pt"><b>OF</b></font></font> <font face="DejaVu Sans Mono, monospace"><font size="2" style="font-size: 10pt">this)[nv] := (dis0 vel0 acc0 etc </font></font><font face="DejaVu Sans Mono, monospace"><font size="2" style="font-size: 10pt"><b>OF</b></font></font> <font face="DejaVu Sans Mono, monospace"><font size="2" style="font-size: 10pt">ivp)[nv];</font></font>
+ 
+  <font face="DejaVu Sans Mono, monospace"><font size="2" style="font-size: 10pt"><b># now generate the results... #</b></font></font>
+    <font face="DejaVu Sans Mono, monospace"><font size="2" style="font-size: 10pt"><b>FOR</b></font></font> <font face="DejaVu Sans Mono, monospace"><font size="2" style="font-size: 10pt">i </font></font><font face="DejaVu Sans Mono, monospace"><font size="2" style="font-size: 10pt"><b>TO</b></font></font> <font face="DejaVu Sans Mono, monospace"><font size="2" style="font-size: 10pt">num steps </font></font><font face="DejaVu Sans Mono, monospace"><font size="2" style="font-size: 10pt"><b>DO</b></font></font>
+        <font face="DejaVu Sans Mono, monospace"><font size="2" style="font-size: 10pt">this a := f a(t,x,v);</font></font>
+        <font face="DejaVu Sans Mono, monospace"><font size="2" style="font-size: 10pt">next x := x + v*dt + 1/2*dt**2*this a;</font></font>
+        <font face="DejaVu Sans Mono, monospace"><font size="2" style="font-size: 10pt">next a := f a(t+dt,x,v);</font></font>
+        <font face="DejaVu Sans Mono, monospace"><font size="2" style="font-size: 10pt">next v := v + (this a + next a)/2*dt;</font></font>
+        <font face="DejaVu Sans Mono, monospace"><font size="2" style="font-size: 10pt">t +:= dt;</font></font>
+        <font face="DejaVu Sans Mono, monospace"><font size="2" style="font-size: 10pt">t </font></font><font face="DejaVu Sans Mono, monospace"><font size="2" style="font-size: 10pt"><b>OF</b></font></font> <font face="DejaVu Sans Mono, monospace"><font size="2" style="font-size: 10pt">this:=t; (y </font></font><font face="DejaVu Sans Mono, monospace"><font size="2" style="font-size: 10pt"><b>OF</b></font></font> <font face="DejaVu Sans Mono, monospace"><font size="2" style="font-size: 10pt">this)[nx] := next x; (y </font></font><font face="DejaVu Sans Mono, monospace"><font size="2" style="font-size: 10pt"><b>OF</b></font></font> <font face="DejaVu Sans Mono, monospace"><font size="2" style="font-size: 10pt">this)[nv] := next v;</font></font>
+        <font face="DejaVu Sans Mono, monospace"><font size="2" style="font-size: 10pt">yield(this)</font></font>
+    <font face="DejaVu Sans Mono, monospace"><font size="2" style="font-size: 10pt"><b>OD</b></font></font></pre><h2 class="western" style="text-indent: 0.76cm">
+<font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Appendix
+E – Algol68 Coding (ODE Order-N to Order-1 Conversion)</font></font></h2>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">This
+following routine is used to convert the 2</font></font><sup><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">nd</font></font></sup>
+<font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Order
+Gravitational ODE into a 1</font></font><sup><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">st</font></font></sup>
+<font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Order
+ODE.</font></font></p>
+<pre class="western"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Note: 'f dny by dtn on' = F(t,y,dy,ddy...) we want dh/dt = H(t,h).</font></font>
+<b>PROC</b> f dh by dt ret dis vel acc etc = 
+    (<b>REAL</b> t, Y in y, FDNYBYDTN f dny by dtn on)Y: (
+COMMENT
+  Note: 'f dny by dtn on' = F(t,y,dy,ddy...) we want dh/dt = H(t,h).
+<b>END</b> COMMENT
+    <b>INT</b> order = ORDER f dny by dtn on;
+    [<b>UPB</b> in y]<b>REAL</b> out h0 h1 h2 h3 ftn;
+    <b>INT</b> upb h = <b>UPB</b> in y <b>OVER</b> order;
+ 
+    <b>PROC</b> in h = (<b>INT</b> j)Y: in y[j*upb h+1: (j+1)*upb h];
+    <b>PROC</b> out dh by dt = (<b>INT</b> j)<b>REF</b> Y: 
+         out h0 h1 h2 h3 ftn[j*upb h+1: (j+1)*upb h];
+ 
+    <b>FOR</b> i <b>FROM</b> 0 <b>TO</b> order - 2 <b>DO</b> 
+        out dh by dt(i) := in h(i+1) 
+    <b>OD</b>; <b># dh₀/dt=h₁ etc #</b>
+ 
+  <b># dh₃/dt=f(t,h₀,h₁,h₂,h₃) := #</b>
+    out dh by dt(order - 1) := 
+        <b>CASE</b> f dny by dtn on <b>IN</b>
+          (FDY    f dy by dt):in
+          (FDDY   f d2y by dt2):f d2y by dt2(t,in h(0),in h(1)),
+          (FDDDY  f d3y by dt3):f d3y by dt3(t,in h(0),in h(1),in h(2)),
+          (FDDDDY f d4y by dt4):f d4y by dt4(t,in h(0),in h(1),in h(2),in h(3))
+        <b>OUT</b>            <b>IF</b> <b>NOT</b> fix unimplemented(&quot;Can only currently only handle ODE of Maximum Order 4&quot;) <b>THEN</b> stop <b>FI</b>
+        <b>ESAC</b>;
+<b># Substitute: h₀ = y, h₁ = dy/dt, h₂ = d²y/dt², h₃ =d³y/dt³ #</b>
+    out h0 h1 h2 h3 ftn # returned #
+);</pre><h1 class="western" style="margin-top: 0cm; margin-bottom: 0cm">
+Sample Output:</h1>
+<pre class="western"><font size="2" style="font-size: 10pt"><b>Parameter orbit period OF mean OF apollo8cm: +3.64307227890746e  +0 hours </b></font>
+<font size="2" style="font-size: 10pt"><b>System:((Sun  ,Earth,Moon ,Ap8CM),Apollo 8,-3.23537400000e7,)</b></font>
+<font size="1" style="font-size: 7pt">Initial position:</font>
+  <font size="1" style="font-size: 7pt">S:(&quot;Sun  &quot;,&quot;☉&quot;,( 1.9891000000e30,( 0.00.0, 0.00.0),( 0.00.0, 0.00.0)))</font>
+  <font size="1" style="font-size: 7pt">E:(&quot;Earth&quot;,&quot;⊕&quot;,( 9.7220000000e23,( 1.4960146948e11, 0.00.0),( 0.00.0, 2.97866078294e4)))</font>
+  <font size="1" style="font-size: 7pt">M:(&quot;Moon &quot;,&quot;☾&quot;,( 7.3476730900e22,( 1.4981582442e11, 0.00.0),( 0.00.0, 3.03571562823e4)))</font>
+  <font size="1" style="font-size: 7pt">8:(&quot;Ap8CM&quot;,&quot;8&quot;,( 5.80900000000e3,( 1.4960803223e11, 0.00.0),( 0.00.0, 3.29307012406e4)))</font>
+<font size="1" style="font-size: 8pt"><b>Parameter: step size = .1250; hours</b></font>
+<font size="1" style="font-size: 8pt"><b>Parameter: report period =  3.90309442857e0; week</b></font>
+<font size="1" style="font-size: 8pt"><b>Parameter: mission stop time =  5.21774557741e1; week</b></font>
+<font size="1" style="font-size: 7pt">IVP Order-2: solar system:</font>
+  <font size="1" style="font-size: 7pt">t interval: [ 0.00.0 …  3.15569252522e7]</font>
+  <font size="1" style="font-size: 7pt">y₀ = ( 0.00.0, 0.00.0, 1.4960146948e11, 0.00.0, 1.4981582442e11, 0.00.0, 1.4960803223e11, 0.00.0)</font>
+  <font size="1" style="font-size: 7pt">dy₀/dt = ( 0.00.0, 0.00.0, 0.00.0, 2.97866078294e4, 0.00.0, 3.03571562823e4, 0.00.0, 3.29307012406e4)</font>
+  <font size="1" style="font-size: 7pt">d²y₀/dt² = ( 3.1171634677e-9, 0.00.0,-5.8239912075e-3, 0.00.0,-7.3256607239e-3, 0.00.0,-1.51209423294e0, 0.00.0)</font>
+
+
+<font size="2" style="font-size: 10pt"><b>Reference point: Earth</b></font>
+<font size="1" style="font-size: 7pt">Initial momentum:( 0.00.0, 3.1189084735e28), Initial energy: 4.6514481452e32</font>
+<font size="1" style="font-size: 7pt">IVP order-1: Adams-Bashforth</font>
+  <font size="1" style="font-size: 7pt">t interval: [ 0.00.0 …  3.15569252522e7]</font>
+  <font size="1" style="font-size: 7pt">y₀ = ( 0.00.0, 0.00.0, 1.4960146948e11, 0.00.0, 1.4981582442e11, 0.00.0, 1.4960803223e11, 0.00.0, 0.00.0, 0.00.0, 0.00.0, 2.97866078294e4, 0.00.0, 3.03571562823e4, 0.00.0, 3.29307012406e4)</font>
+  <font size="1" style="font-size: 7pt">dy₀/dt = ( 0.00.0, 0.00.0, 0.00.0, 2.97866078294e4, 0.00.0, 3.03571562823e4, 0.00.0, 3.29307012406e4, 3.1171634677e-9, 0.00.0,-5.8239912075e-3, 0.00.0,-7.3256607239e-3, 0.00.0,-1.51209423294e0, 0.00.0)</font>
+
+
+<font size="1" style="font-size: 8pt"><b>Time:    0.00week, Distance to sun:149601.5Mm, Energy:    0.00YJ, Momentum( 0.00.0, 0.00.0)Pgm/s</b></font>
+<font size="1" style="font-size: 7pt">Sun  loc:(-1.49601469475e5, 0.00.0)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:( 0.00.0, 0.00.0)kph; abs vel:( 0.00.0,-3.86034437469e5)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 0.00.0kph; orbit radius: 0.00.0Mm; </font>
+<font size="1" style="font-size: 7pt">Earthloc:( 0.00.0, 0.00.0)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:( 0.00.0, 1.07231788186e5)kph; abs vel:( 0.00.0, 0.00.0)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 1.07231788186e5kph; orbit radius: 1.49601469475e5Mm; </font>
+<font size="1" style="font-size: 7pt">Moon loc:( 2.14354943925e2, 0.00.0)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:( 0.00.0, 2.05397443044e3)kph; abs vel:( 0.00.0, 7.39430794960e3)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 2.05397443044e3kph; orbit radius: 2.14354943925e2Mm; </font>
+<font size="1" style="font-size: 7pt">Ap8CMloc:( 6.56275000000e0, 0.00.0)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:( 0.00.0, 1.13187362802e4)kph; abs vel:( 0.00.0, 4.07474506088e4)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 1.13187362802e4kph; orbit radius: 6.56275000000e0Mm; </font>
+<font size="1" style="font-size: 7pt"><b>Time:    3.90week, Distance to sun:149648.1Mm, Energy: -280983YJ, Momentum( 2.87246675828e1, 8.79609302221e0)Pgm/s</b></font>
+<font size="1" style="font-size: 7pt">Sun  loc:(-1.33383660702e5,-6.78479657914e4)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:( 0.00.0, 0.00.0)kph; abs vel:( 1.74724243833e5,-3.44148806655e5)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 0.00.0kph; orbit radius: 0.00.0Mm; </font>
+<font size="1" style="font-size: 7pt">Earthloc:( 0.00.0, 0.00.0)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:(-4.85345121758e4, 9.55968907374e4)kph; abs vel:( 0.00.0, 0.00.0)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 1.07211773564e5kph; orbit radius: 1.49648078519e5Mm; </font>
+<font size="1" style="font-size: 7pt">Moon loc:( 2.14426589829e2, 1.08321484805e1)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:(-1.20310936391e2, 2.04405313678e3)kph; abs vel:(-4.33119371007e2, 7.35859129242e3)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 2.04759076659e3kph; orbit radius: 2.14700018320e2Mm; </font>
+<font size="1" style="font-size: 7pt">Ap8CMloc:(-1.62526053140e1,-2.79384464218e1)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:( 2.86494893061e3,-1.55550002980e3)kph; abs vel:( 1.03138161502e4,-5.59980010727e3)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 3.25998661311e3kph; orbit radius: 3.23218806377e1Mm; </font>
+<font size="1" style="font-size: 7pt"><b>Time:    7.81week, Distance to sun:149777.8Mm, Energy:-1061701YJ, Momentum( 5.33261695204e1, 1.18747255800e2)Pgm/s</b></font>
+<font size="1" style="font-size: 7pt">Sun  loc:(-8.82694289406e4,-1.21003688736e5)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:( 0.00.0, 0.00.0)kph; abs vel:( 3.11346137942e5,-2.27765132547e5)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 0.00.0kph; orbit radius: 0.00.0Mm; </font>
+<font size="1" style="font-size: 7pt">Earthloc:( 0.00.0, 0.00.0)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:(-8.64850383173e4, 6.32680923742e4)kph; abs vel:( 0.00.0, 0.00.0)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 1.07156490076e5kph; orbit radius: 1.49777784645e5Mm; </font>
+<font size="1" style="font-size: 7pt">Moon loc:( 2.14348728012e2, 2.22825864121e1)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:(-2.32895892261e2, 2.01927574305e3)kph; abs vel:(-8.38425212138e2, 7.26939267498e3)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 2.03266205334e3kph; orbit radius: 2.15503807060e2Mm; </font>
+<font size="1" style="font-size: 7pt">Ap8CMloc:(-2.41944496953e1, 4.46437518626e1)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:(-3.02032820892e3, 9.80092222035e2)kph; abs vel:(-1.08731815521e4, 3.52833199932e3)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 3.17536820751e3kph; orbit radius: 5.07783022208e1Mm; </font>
+<font size="1" style="font-size: 7pt"><b>Time:   11.71week, Distance to sun:149962.5Mm, Energy:-2170309YJ, Momentum( 2.26224345184e2, 5.27765581332e1)Pgm/s</b></font>
+<font size="1" style="font-size: 7pt">Sun  loc:(-2.40727840987e4,-1.48017769771e5)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:( 0.00.0, 0.00.0)kph; abs vel:( 3.80386930515e5,-6.24889838532e4)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 0.00.0kph; orbit radius: 0.00.0Mm; </font>
+<font size="1" style="font-size: 7pt">Earthloc:( 0.00.0, 0.00.0)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:(-1.05663036254e5, 1.73580510703e4)kph; abs vel:( 0.00.0, 0.00.0)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 1.07079312509e5kph; orbit radius: 1.49962525660e5Mm; </font>
+<font size="1" style="font-size: 7pt">Moon loc:( 2.13470106502e2, 3.44860168336e1)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:(-3.35795479831e2, 1.99086064989e3)kph; abs vel:(-1.20886372739e3, 7.16709833961e3)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 2.01898111223e3kph; orbit radius: 2.16237766653e2Mm; </font>
+<font size="1" style="font-size: 7pt">Ap8CMloc:( 1.45063445506e1, 6.20453997251e1)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:(-1.07348819672e3, 3.32196276160e3)kph; abs vel:(-3.86455750818e3, 1.19590659418e4)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 3.49110491076e3kph; orbit radius: 6.37186445184e1Mm; </font>
+<font size="1" style="font-size: 7pt"><b>Time:   15.61week, Distance to sun:150162.6Mm, Energy:-3365345YJ, Momentum( 2.00660715208e2,-1.27543348822e2)Pgm/s</b></font>
+<font size="1" style="font-size: 7pt">Sun  loc:( 4.53072652486e4,-1.43164401868e5)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:( 0.00.0, 0.00.0)kph; abs vel:( 3.67414596070e5, 1.15690282839e5)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 0.00.0kph; orbit radius: 0.00.0Mm; </font>
+<font size="1" style="font-size: 7pt">Earthloc:( 0.00.0, 0.00.0)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:(-1.02059610019e5,-3.21361896774e4)kph; abs vel:( 0.00.0, 0.00.0)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 1.06999526561e5kph; orbit radius: 1.50162559403e5Mm; </font>
+<font size="1" style="font-size: 7pt">Moon loc:( 2.11328345680e2, 4.67424270769e1)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:(-4.31754609216e2, 1.96854446430e3)kph; abs vel:(-1.55431659318e3, 7.08676007147e3)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 2.01533603910e3kph; orbit radius: 2.16435958604e2Mm; </font>
+<font size="1" style="font-size: 7pt">Ap8CMloc:( 1.12506503756e3, 1.08114388996e3)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:( 4.84850469592e3, 5.00205234032e3)kph; abs vel:( 1.74546169053e4, 1.80073884252e4)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 6.96624184203e3kph; orbit radius: 1.56033440311e3Mm; </font>
+<font size="1" style="font-size: 7pt"><b>Time:   19.52week, Distance to sun:150335.2Mm, Energy:-4390819YJ, Momentum( 2.36120004147e2,-2.63882790666e2)Pgm/s</b></font>
+<font size="1" style="font-size: 7pt">Sun  loc:( 1.04992834474e5,-1.07597352935e5)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:( 0.00.0, 0.00.0)kph; abs vel:( 2.75780854678e5, 2.68605799730e5)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 0.00.0kph; orbit radius: 0.00.0Mm; </font>
+<font size="1" style="font-size: 7pt">Earthloc:( 0.00.0, 0.00.0)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:(-7.66057929661e4,-7.46127221472e4)kph; abs vel:( 0.00.0, 0.00.0)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 1.06936924503e5kph; orbit radius: 1.50335244203e5Mm; </font>
+<font size="1" style="font-size: 7pt">Moon loc:( 2.07820292252e2, 5.88346220108e1)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:(-5.33568461650e2, 1.95225332843e3)kph; abs vel:(-1.92084646194e3, 7.02811198235e3)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 2.02385482721e3kph; orbit radius: 2.15987931651e2Mm; </font>
+<font size="1" style="font-size: 7pt">Ap8CMloc:( 3.94639979293e3, 4.27822531357e3)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:( 3.52845638582e3, 4.79760519760e3)kph; abs vel:( 1.27024429889e4, 1.72713787114e4)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 5.95541938898e3kph; orbit radius: 5.82041950028e3Mm; </font>
+<font size="1" style="font-size: 7pt"><b>Time:   23.42week, Distance to sun:150444.0Mm, Energy:-5029441YJ, Momentum( 2.91782846603e2,-2.15504279044e2)Pgm/s</b></font>
+<font size="1" style="font-size: 7pt">Sun  loc:( 1.42234994447e5,-4.90163420629e4)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:( 0.00.0, 0.00.0)kph; abs vel:( 1.25452456876e5, 3.63847591307e5)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 0.00.0kph; orbit radius: 0.00.0Mm; </font>
+<font size="1" style="font-size: 7pt">Earthloc:( 0.00.0, 0.00.0)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:(-3.48479046877e4,-1.01068775363e5)kph; abs vel:( 0.00.0, 0.00.0)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 1.06907781824e5kph; orbit radius: 1.50443994345e5Mm; </font>
+<font size="1" style="font-size: 7pt">Moon loc:( 2.03476568761e2, 7.00346715176e1)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:(-6.43421949941e2, 1.93468133312e3)kph; abs vel:(-2.31631901979e3, 6.96485279924e3)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 2.03886823174e3kph; orbit radius: 2.15191935837e2Mm; </font>
+<font size="1" style="font-size: 7pt">Ap8CMloc:( 5.92391584477e3, 6.68029194898e3)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:( 2.85871543425e3, 2.39678336597e3)kph; abs vel:( 1.02913755633e4, 8.62842011750e3)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 3.73052602691e3kph; orbit radius: 8.92855416401e3Mm; </font>
+<font size="1" style="font-size: 7pt"><b>Time:   27.32week, Distance to sun:150465.9Mm, Energy:-5147442YJ, Momentum( 3.08206887224e2, 2.11106232533e2)Pgm/s</b></font>
+<font size="1" style="font-size: 7pt">Sun  loc:( 1.49126904381e5, 2.00291642309e4)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:( 0.00.0, 0.00.0)kph; abs vel:(-5.14949171690e4, 3.81452328182e5)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 0.00.0kph; orbit radius: 0.00.0Mm; </font>
+<font size="1" style="font-size: 7pt">Earthloc:( 0.00.0, 0.00.0)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:( 1.43041436580e4,-1.05958980051e5)kph; abs vel:( 0.00.0, 0.00.0)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 1.06920128971e5kph; orbit radius: 1.50465946413e5Mm; </font>
+<font size="1" style="font-size: 7pt">Moon loc:( 1.98924704927e2, 8.03867407205e1)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:(-7.58793205476e2, 1.90529288691e3)kph; abs vel:(-2.73165553972e3, 6.85905439286e3)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 2.05083107875e3kph; orbit radius: 2.14553178289e2Mm; </font>
+<font size="1" style="font-size: 7pt">Ap8CMloc:( 8.78424044054e3, 7.06596931361e3)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:( 6.80576442113e3,-6.28843504369e2)kph; abs vel:( 2.45007519161e4,-2.26383661573e3)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 6.83475482435e3kph; orbit radius: 1.12734556573e4Mm; </font>
+<font size="1" style="font-size: 7pt"><b>Time:   31.22week, Distance to sun:150396.6Mm, Energy:-4720392YJ, Momentum( 3.05526917346e2,-1.53931627889e2)Pgm/s</b></font>
+<font size="1" style="font-size: 7pt">Sun  loc:( 1.24216216881e5, 8.47907241355e4)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:( 0.00.0, 0.00.0)kph; abs vel:(-2.17549612264e5, 3.17764123510e5)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 0.00.0kph; orbit radius: 0.00.0Mm; </font>
+<font size="1" style="font-size: 7pt">Earthloc:( 0.00.0, 0.00.0)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:( 6.04304478511e4,-8.82678120861e4)kph; abs vel:( 0.00.0, 0.00.0)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 1.06972172447e5kph; orbit radius: 1.50396593830e5Mm; </font>
+<font size="1" style="font-size: 7pt">Moon loc:( 1.94610434702e2, 9.01493365709e1)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:(-8.69398811010e2, 1.85895127445e3)kph; abs vel:(-3.12983571964e3, 6.69222458802e3)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 2.05220713705e3kph; orbit radius: 2.14476395389e2Mm; </font>
+<font size="1" style="font-size: 7pt">Ap8CMloc:( 1.61961369088e4, 7.01181057004e3)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:( 1.62778908973e4, 2.48482966469e3)kph; abs vel:( 5.86004072302e4, 8.94538679289e3)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 1.64664540969e4kph; orbit radius: 1.76488055754e4Mm; </font>
+<font size="1" style="font-size: 7pt"><b>Time:   35.13week, Distance to sun:150250.6Mm, Energy:-3837390YJ, Momentum( 2.51513473379e2,-2.77076930200e2)Pgm/s</b></font>
+<font size="1" style="font-size: 7pt">Sun  loc:( 7.27750867407e4, 1.31449741717e5)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:( 0.00.0, 0.00.0)kph; abs vel:(-3.37498091812e5, 1.86067311836e5)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 0.00.0kph; orbit radius: 0.00.0Mm; </font>
+<font size="1" style="font-size: 7pt">Earthloc:( 0.00.0, 0.00.0)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:( 9.37494699477e4,-5.16853643988e4)kph; abs vel:( 0.00.0, 0.00.0)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 1.07052977579e5kph; orbit radius: 1.50250616796e5Mm; </font>
+<font size="1" style="font-size: 7pt">Moon loc:( 1.90154011344e2, 1.00365855337e2)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:(-9.71577758638e2, 1.79609603218e3)kph; abs vel:(-3.49767993110e3, 6.46594571587e3)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 2.04203924985e3kph; orbit radius: 2.15015936497e2Mm; </font>
+<font size="1" style="font-size: 7pt">Ap8CMloc:( 2.97049271619e4, 1.31551061409e4)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:( 2.30852540409e4, 1.89111337182e4)kph; abs vel:( 8.31069145474e4, 6.80800813855e4)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 2.98422507972e4kph; orbit radius: 3.24875286114e4Mm; </font>
+<font size="1" style="font-size: 7pt"><b>Time:   39.03week, Distance to sun:150059.0Mm, Energy:-2684450YJ, Momentum( 2.89446627099e2,-2.15504279044e2)Pgm/s</b></font>
+<font size="1" style="font-size: 7pt">Sun  loc:( 5.75511443541e3, 1.49948579229e5)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:( 0.00.0, 0.00.0)kph; abs vel:(-3.85462722746e5, 1.41109944779e4)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 0.00.0kph; orbit radius: 0.00.0Mm; </font>
+<font size="1" style="font-size: 7pt">Earthloc:( 0.00.0, 0.00.0)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:( 1.07072978541e5,-3.91972068829e3)kph; abs vel:( 0.00.0, 0.00.0)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 1.07144700960e5kph; orbit radius: 1.50058980920e5Mm; </font>
+<font size="1" style="font-size: 7pt">Moon loc:( 1.85086107047e2, 1.11027704274e2)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:(-1.06056990849e3, 1.72701883735e3)kph; abs vel:(-3.81805167058e3, 6.21726781445e3)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 2.02667278941e3kph; orbit radius: 2.15833311002e2Mm; </font>
+<font size="1" style="font-size: 7pt">Ap8CMloc:( 4.24257198849e4, 3.36509828065e4)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:( 1.13488208090e4, 4.37420100098e4)kph; abs vel:( 4.08557549123e4, 1.57471236035e5)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 4.51902552931e4kph; orbit radius: 5.41509958504e4Mm; </font>
+<font size="1" style="font-size: 7pt"><b>Time:   42.93week, Distance to sun:149862.5Mm, Energy:-1507425YJ, Momentum( 4.73339875170e2,-1.97912093000e2)Pgm/s</b></font>
+<font size="1" style="font-size: 7pt">Sun  loc:(-6.24897182010e4, 1.36212365233e5)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:( 0.00.0, 0.00.0)kph; abs vel:(-3.50638496717e5,-1.61428157627e5)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 0.00.0kph; orbit radius: 0.00.0Mm; </font>
+<font size="1" style="font-size: 7pt">Earthloc:( 0.00.0, 0.00.0)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:( 9.73995824214e4, 4.48411548964e4)kph; abs vel:( 0.00.0, 0.00.0)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 1.07225966204e5kph; orbit radius: 1.49862514737e5Mm; </font>
+<font size="1" style="font-size: 7pt">Moon loc:( 1.78856643935e2, 1.21821260585e2)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:(-1.14142564506e3, 1.66172625474e3)kph; abs vel:(-4.10913232222e3, 5.98221451705e3)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 2.01598279975e3kph; orbit radius: 2.16402676994e2Mm; </font>
+<font size="1" style="font-size: 7pt">Ap8CMloc:( 3.94232392942e4, 6.72572349731e4)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:(-2.33963375943e4, 5.45530703772e4)kph; abs vel:(-8.42268153396e4, 1.96391053358e5)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 5.93584543297e4kph; orbit radius: 7.79597809942e4Mm; </font>
+<font size="1" style="font-size: 7pt"><b>Time:   46.84week, Distance to sun:149703.3Mm, Energy: -561017YJ, Momentum( 4.23311986919e2,-1.31941395333e2)Pgm/s</b></font>
+<font size="1" style="font-size: 7pt">Sun  loc:(-1.17231823672e5, 9.31009368455e4)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:( 0.00.0, 0.00.0)kph; abs vel:(-2.40008358449e5,-3.02559448076e5)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 0.00.0kph; orbit radius: 0.00.0Mm; </font>
+<font size="1" style="font-size: 7pt">Earthloc:( 0.00.0, 0.00.0)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:( 6.66689884581e4, 8.40442911322e4)kph; abs vel:( 0.00.0, 0.00.0)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 1.07276264355e5kph; orbit radius: 1.49703323019e5Mm; </font>
+<font size="1" style="font-size: 7pt">Moon loc:( 1.71507265799e2, 1.31868151849e2)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:(-1.22134030040e3, 1.60535522104e3)kph; abs vel:(-4.39682508146e3, 5.77927879574e3)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 2.01713596842e3kph; orbit radius: 2.16342209691e2Mm; </font>
+<font size="1" style="font-size: 7pt">Ap8CMloc:( 1.13542023019e4, 9.80932059369e4)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:(-6.03320088813e4, 3.46629402738e4)kph; abs vel:(-2.17195231973e5, 1.24786584986e5)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 6.95806778069e4kph; orbit radius: 9.87481390250e4Mm; </font>
+<font size="1" style="font-size: 7pt"><b>Time:   50.74week, Distance to sun:149615.6Mm, Energy:-52211.1YJ, Momentum( 4.41110234348e2,-1.89115999977e2)Pgm/s</b></font>
+<font size="1" style="font-size: 7pt">Sun  loc:(-1.46609261430e5, 2.98423360919e4)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:( 0.00.0, 0.00.0)kph; abs vel:(-7.71884102776e4,-3.78422364225e5)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 0.00.0kph; orbit radius: 0.00.0Mm; </font>
+<font size="1" style="font-size: 7pt">Earthloc:( 0.00.0, 0.00.0)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:( 2.14412250771e4, 1.05117323396e5)kph; abs vel:( 0.00.0, 0.00.0)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 1.07281768305e5kph; orbit radius: 1.49615642766e5Mm; </font>
+<font size="1" style="font-size: 7pt">Moon loc:( 1.63197538758e2, 1.41006436421e2)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:(-1.31047331655e3, 1.54979095195e3)kph; abs vel:(-4.71770393957e3, 5.57924742702e3)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 2.02957934265e3kph; orbit radius: 2.15676266123e2Mm; </font>
+<font size="1" style="font-size: 7pt">Ap8CMloc:(-3.46075639713e4, 1.07814854976e5)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:(-7.52464419004e4,-6.57307955173e3)kph; abs vel:(-2.70887190841e5,-2.36630863862e4)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 7.55329887762e4kph; orbit radius: 1.13233062476e5Mm; </font>
+<font size="1" style="font-size: 7pt">Final position:</font>
+<font size="1" style="font-size: 7pt"><b>Time:   52.18week, Distance to sun:149631.3Mm, Energy: -505.87YJ, Momentum( 4.46470326730e2,-1.84717953466e2)Pgm/s</b></font>
+<font size="1" style="font-size: 7pt">Sun  loc:(-1.49575077462e5, 4.10317795651e3)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:( 0.00.0, 0.00.0)kph; abs vel:(-1.06234465246e4,-3.86937697259e5)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 0.00.0kph; orbit radius: 0.00.0Mm; </font>
+<font size="1" style="font-size: 7pt">Earthloc:( 0.00.0, 0.00.0)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:( 2.95095736795e3, 1.07482693683e5)kph; abs vel:( 0.00.0, 0.00.0)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 1.07523195594e5kph; orbit radius: 1.49631346539e5Mm; </font>
+<font size="1" style="font-size: 7pt">Moon loc:(-2.08017237495e2, 2.40846757441e1)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:(-2.22402225739e2,-2.08944079751e3)kph; abs vel:(-8.00648012659e2,-7.52198687105e3)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 2.10124382125e3kph; orbit radius: 2.09406883126e2Mm; </font>
+<font size="1" style="font-size: 7pt">Ap8CMloc:(-5.26420081109e4, 1.04220625529e5)Mm; </font>
+        <font size="1" style="font-size: 7pt">rel vel:(-7.33669267219e4,-2.30679257001e4)kph; abs vel:(-2.64120936199e5,-8.30445325203e4)kph; </font>
+        <font size="1" style="font-size: 7pt">orbit speed: 7.69079653399e4kph; orbit radius: 1.16760951536e5Mm; </font>
+<font size="2" style="font-size: 10pt"><b>Final position:</b></font>
+  <font size="1" style="font-size: 7pt">S:(&quot;Sun  &quot;,&quot;☉&quot;,( 1.9891000000e30,( 2.94766530638e1, 4.96968440018e5),(-4.2864227421e-4, 5.8762678213e-6)))</font>
+  <font size="1" style="font-size: 7pt">E:(&quot;Earth&quot;,&quot;⊕&quot;,( 9.7220000000e23,( 1.4957507749e11,-4.10268098807e9),( 8.19709951345e2, 2.98563038067e4)))</font>
+  <font size="1" style="font-size: 7pt">M:(&quot;Moon &quot;,&quot;☾&quot;,( 7.3476730900e22,( 1.4936706025e11,-4.07859631233e9),( 7.57931555306e2, 2.92759035852e4)))</font>
+  <font size="1" style="font-size: 7pt">8:(&quot;Ap8CM&quot;,&quot;8&quot;,( 5.80900000000e3,( 9.6933069380e10, 1.0011794454e11),(-1.95599919159e4, 2.34485466678e4)))</font></pre><h2 class="western" style="margin-top: 0cm; margin-bottom: 0cm">
+<br/>
+
+</h2>
+<p style="margin-bottom: 0.5cm"><br/>
+<br/>
+
+</p>
+<div id="sdfootnote1"><p align="justify" style="margin-bottom: 0.51cm">
+	<a class="sdfootnotesym" name="sdfootnote1sym" href="#sdfootnote1anc">1</a><a href="http://asa.usno.navy.mil/SecM/Glossary.html#solar-time-mean"><font face="DejaVu Serif Condensed, serif"><font size="1" style="font-size: 7pt"><i>Astronomical
+	Almanac Online.</i></font></font></a> <font face="DejaVu Serif Condensed, serif"><font size="1" style="font-size: 7pt">(2011)
+	Her Majesty's Nautical Almanac Office and the United States Naval
+	Observatory. Glossary s.v. solar time.</font></font></p>
+</div>
+<div id="sdfootnote2"><p class="sdfootnote" style="margin-bottom: 0.5cm">
+	<a class="sdfootnotesym" name="sdfootnote2sym" href="#sdfootnote2anc">2</a>International
+	Celestial Reference System (ICRS)
+	http://aa.usno.navy.mil/faq/docs/ICRS_doc.php</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+# -*- coding: utf-8 -*- #
+
+# The following is the tol weighted at t & y #
+#   e.g. estimated error[i] <  tol y(t,y)[i] ∀ i #
+
+# Note: the following OPerators are required to avoid the Yoneda ambiguity #
+MODE YTOLOPT = STRUCT(Y tol);
+OP YTOL = (Y in)YTOLOPT:(YTOLOPT out; tol OF out := in; out);
+
+# Note: the following OPerators are required to avoid the Yoneda ambiguity #
+MODE KNOWENTDNYBYDTNOPT = STRUCT(TY knowen ty);
+OP KNOWENTY = (TY in)KNOWENTDNYBYDTNOPT:(KNOWENTDNYBYDTNOPT out; knowen ty OF out := in; out);
+
+MODE FIRSTDIFFERENTIALOPT = STRUCT(FR first differential);
+OP FIRSTDIFFERENTIAL = (FR in)FIRSTDIFFERENTIALOPT:(FIRSTDIFFERENTIALOPT out; first differential OF out := in; out);
+
+MODE SECONDDIFFERENTIALOPT = STRUCT(FR second differential);
+OP SECONDDIFFERENTIAL = (FR in)SECONDDIFFERENTIALOPT:(SECONDDIFFERENTIALOPT out; second differential OF out := in; out);
+
+MODE THIRDDIFFERENTIALOPT = STRUCT(FR third differential);
+OP THIRDDIFFERENTIAL = (FR in)THIRDDIFFERENTIALOPT:(THIRDDIFFERENTIALOPT out; third differential OF out := in; out);
+
+MODE INITIALDNYBYDTNOPT = STRUCT(R initial y); # an initial estimate of y₀ #
+OP INITIALY = (R in)INITIALDNYBYDTNOPT:(INITIALDNYBYDTNOPT out; initial y OF out := in; out);
+
+MODE INITIALTDNYBYDTNOPT = STRUCT(R initial ty); # an initial estimate of (t₀,dy₀/dt) #
+OP INITIALTY = (R in)INITIALTDNYBYDTNOPT:(INITIALTDNYBYDTNOPT out; initial ty OF out := in; out);
+
+MODE INITIALDYBYDTOPT = STRUCT(R initial dy by dt); # an initial estimate of dy₀/dt #
+OP INITIALDYBYDT = (R in)INITIALDYBYDTOPT:(INITIALDYBYDTOPT out; initial dy by dt OF out := in; out);
+
+MODE INITIALTDYBYDTOPT = STRUCT(R initial t dy by dt); # an initial estimate of (t₀,dy₀/dt) #
+OP INITIALTDYBYDT = (R in)INITIALTDYBYDTOPT:(INITIALTDYBYDTOPT out; initial t dy by dt OF out := in; out);
+
+MODE VECHINT = UNION(YTOLOPT, KNOWENTDNYBYDTNOPT, FIRSTDIFFERENTIALOPT,
+    SECONDDIFFERENTIALOPT, THIRDDIFFERENTIALOPT, INITIALDNYBYDTNOPT, INITIALTDNYBYDTNOPT,
+    INITIALDYBYDTOPT, INITIALTDYBYDTOPT);
+
+MODE ANYHINT = UNION(MATHHINT, VECHINT);
+[0]ANYHINT no hints;
+
+SKIP # export names #

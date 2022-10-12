@@ -1,0 +1,22 @@
+# -*- coding: utf-8 -*- #
+
+#====================================================================#
+# some general house keeping variable to add in assessing the methods#
+#====================================================================#
+BOOL enable = TRUE,  disable = FALSE;
+BOOL enabled = TRUE, disabled = FALSE; # aliases #
+
+CO bug: lines marked with #bug991231# can be removed when Bug is Fixed CO
+BOOL bug12h30 = TRUE;  # T MAT doesn't work, c.f. bugfix12h30_transpose_mat.a68 #
+BOOL bug12s13 = FALSE;  # VEC +:= VEC doesn't work, c.f. bugfix12s13_vec_slice_op_assign_val.a68 #
+
+CO extention: lines marked with #ext991231# are using an language extension CO
+BOOL ext12h02 = TRUE;  # TRNSP: transpose operator is an extension #
+
+# turn tracing on or off #
+BOOL with trace := FALSE; # this can be set CONST OR VARIABLE #
+
+CO with debug: lines marked with #with trace# can me removed after with debuging CO
+BOOL with debug := FALSE; # this can be set CONST OR VARIABLE #
+
+SKIP # export names #

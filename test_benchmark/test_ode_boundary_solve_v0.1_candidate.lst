@@ -1,0 +1,8 @@
+161           ODEBOUNDARYSOLVE x = shooting ty gen(,shooting args,);
+                                   1                                
+algol68g-full: error: 1: PROC (BVP, TYNYIELD) VOID cannot be coerced to ODEBOUNDARYSOLVE in a strong-unit (detected in closed-clause starting at 
+"(" in line 106).
+164               ODEBOUNDARYSOLVEPKG(shooting ty gen(,shooting args,),"shooting method")
+                                     1                                                   
+algol68g-full: error: 1: PROC (BVP, TYNYIELD) VOID cannot be coerced to ODEBOUNDARYSOLVE in a strong-enclosed-clause (detected in closed-clause 
+starting at "(" in line 163).

@@ -1,0 +1,160 @@
+# -*- coding: utf-8 -*- #
+
+CO
+REQUIRES SCAL
+END CO
+
+# Prepartory declarations #
+PRIO MAX = 7, MIN =7;
+
+OP MAX = (INT m,n)INT: 
+    IF m>n THEN m ELSE n FI;
+
+OP MIN = (INT m,n)INT: 
+    IF m<n THEN m ELSE n FI;
+
+INT maxdex = 1 # max int OVER 2#,
+INT mindex = -maxdex;
+
+LOC INT maxgendex := maxdex,
+                mingendex := mindex;
+
+PROC setgendex = (INT lower, upper)VOID: SKIP # TODO #;
+PROC genallowance = (BOOL yes)VOID: SKIP # TODO #;
+
+# MODE SCAL = ... #
+OP WIDEN = (INT n)SCAL: n; # redefinable #
+
+#MODE COSCAL = STRUCT(SCAL re, im); #
+OP WIDEN = (SCAL x)SCAL: x; # redefinable #
+
+PRIO =: = 1;
+OP =: = (REF INT m,n)REF INT:
+    ( INT mn=n; n:=m; m:=mn );
+OP =: = (REF SCAL m,n)REF SCAL:
+    ( SCAL mn=n; n:=m; m:=mn );
+OP =: = (REF COSCAL m,n)REF COSCAL:
+    ( COSCAL mn=n; n:=m; m:=mn );
+
+# LEVEL 0 #
+MODE INTARRAY = [mindex:maxdex]INT;
+MODE ARRAYV = [mindex:maxdex]SCAL;
+MODE ARRAYM = [mindex:maxdex,mindex:maxdex]SCAL;
+
+# LEVEL 1 #
+MODE INDEX = REF INTARRAY # REF[]INT #;
+MODE VEC = REF ARRAYV     # REF[]SCAL #;
+MODE MAT = REF ARRAYM     # REF[,]SCAL #;
+# VEC zerovec = HEAP[maxdex:mindex]SCAL; #
+# MAT zeromat = HEAP[maxdex:mindex,maxdex:mindex]SCAL; #
+
+# Page: 146 #
+PRIO ? = 9,
+          ! = 9,
+          // = 5,
+          FITSIN = 5,
+          SPAN = 8,
+          MEET = 8,
+          INSPAN = 8,
+          SUBSCR = 8, # + monadic #
+      # SQUARE = 10, #  
+      # ZERO = 10, #  
+          EQU = 4,
+          COMPAT = 5,
+          SEARCH = 4,
+          INTO = 2,
+          IDENTY = 2, # + monadoic #
+          =:= = 1,
+COMMENT
+          DIAG = 6,
+          COL = 8,
+          ROW = 8,
+END COMMENT
+      # COPYTRANSP = 10 #
+          COPYDIAG = 8, # + monadic #
+          COPTYCOL = 8, # + monadic #
+          COPTYROW = 8, # + monadic #
+          TRIMS = 8, # + monadic TRIM #
+      # SIGMA = 10, monadic #
+      # SIGMAABS = 10, monadic #
+      # MAX = 10, monadic #
+      # MIN = 10, monadic #
+      # ABSMAX = 10, monadic #
+      # ABSMIN = 10, monadic #
+          +< = 1,
+          -< = 1,
+          *< = 1,
+          /< = 1,
+      # NEG = 10, monadic #
+          *> = 1,
+          /> = 1,
+      # Also: +, -, +:=, -:= #
+          <> = 7,
+          >< = 7,
+          O = 8,
+      # TRNSPMUL = 10 monadic #
+      # TMULRNSP = 10 monadic #
+          ** = 8,
+          DERIV = 7, # + monadic #
+      # PLUSAB = 6, #
+          MINAB = 6;
+
+# Page: 181 #
+PROC genintarray = (INT lwb, upb)INDEX: SKIP;
+
+# Page: 183 #
+OP COPY = (INDEX p)INDEX: SKIP;
+
+# Page: 185 #
+OP SIZE = (VEC u)INT: SKIP;
+
+# Page: 186 #
+OP ZERO = (VEC u)BOOL: SKIP;
+
+# Page: 188 #
+# PRIO INTO = 2; #
+OP INTO = (INT n, VEC u)VEC: SKIP;
+
+# 6.6 Page: 190 #
+OP =: = (VEC u,v)VEC: SKIP;
+
+# 6.7 Page: 191 #
+OP TTRNSP = (MAT a)MAT: SKIP;
+
+# 6.8 Page: 192 #
+OP COPY = (MAT m)MAT: SKIP;
+
+OP COPYTRNSP = (MAT a)MAT: COPY TTRNSP a;
+
+# 6.9 Page: 193 #
+# PRIO TRIMS = 8; #
+OP TRIMS = (SCAL eps, REF VEC u)REF VEC: SKIP;
+
+# 6.10 Page: 194 #
+OP SIGMA = (VEC u)SCAL: SKIP;
+
+# 6.11 Page: 196 #
+OP MAX = (REF INT index, VEC u)SCAL: SKIP;
+
+# 6.12 Page: 200 #
+OP +< = (INDEX p, INT k)INDEX: SKIP;
+
+# 6.13 Page: 202 #
+OP *< = (VEC u, INT n)VEC: SKIP;
+
+# 6.14 Page: 205 #
+OP + = (VEC u,v)VEC: SKIP;
+
+# 6.15 Page 206 #
+OP +:=  = (REF VEC u, VEC v)REF VEC: SKIP;
+
+# 6.16 Page 207 #
+OP * = (INT n, VEC u)VEC: SKIP;
+
+# 6.17 Page 208 # 
+OP * = (VEC u,v)SCAL: SKIP;
+
+# 6.18 Page 209 #
+OP * = (MAT a, VEC u)VEC: SKIP;
+
+SKIP # export names #

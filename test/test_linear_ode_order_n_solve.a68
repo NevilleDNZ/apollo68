@@ -1,0 +1,292 @@
+#!/usr/bin/algol68g-full --script #
+# -*- coding: utf-8 -*- #
+PR no-warning PR
+
+PR include "prelude/scalar_:=_real.a68" PR;
+PR include "prelude/with_trace_and_with_debug.a68" PR;
+with trace := with debug := TRUE;
+PR include "prelude/errata.a68" PR;
+PR include "prelude/exception.a68" PR;
+
+CO REQUIRED BY matrix CO
+    PR include "prelude/math_errata.a68" PR;
+PR include "prelude/matrix.a68" PR;
+
+CO REQUIRED BY graph_2d CO
+    FORMAT greal repr = $g(-0,2)$;
+    MODE GREAL= REAL; # single precision #
+    PR include "prelude/classes.a68" PR;
+PR include "prelude/graph_2d.a68" PR;
+STRING test plot dir = "test_plot/";
+INT num of step size = 6; # was 5 #
+
+CO REQUIRED BY ode_solve CO
+    FORMAT r repr = real repr;
+    FORMAT rn repr = vec repr;
+    #FORMAT ty repr = $"t="f(r repr)" y="f(rn repr)$;#
+    # PR include "prelude/math_hints.a68" PR; #
+PR include "prelude/ode_order_1_solve.a68" PR;
+PR include "prelude/linear_ode_order_n_solve.a68" PR;
+
+# Note: [1]DNYBYDTN is dⁱy/dtⁱ or simply dy/dt, whereas 
+                [0]DNYBYDTN is d⁰y/dt⁰ or simply y -- no differentiation…
+                [-1]DNYBYDTN is d⁻ⁱy/dt⁻ⁱ so… -1 would be integration! #
+
+CO
+MODE IVPON = STRUCT(INTERVAL t interval, FLEX[1]DNYBYDTNO y0 dy0 ddy0 etc, FDNYBYDTN f dny by dtn);
+MODE IVPONPKG = STRUCT(IVPON ivp, INTERVAL y axis, STRING description);
+CO
+
+# Pendulum initial conditions #
+REAL m=1, s=1, g = 9.81 * m /s/s, pend l = 1*m, pend y0=0.1 * m, pend dy0 = 0;
+
+# IMPORTANT NOTE: the "Order" of dⁿy/dtⁿ is IMPLIED by the number of boundary conditions!!! #
+[]IVPONPKG test case list = (
+#   t0,tn,y0,DNYBYDTN(t,y)                                             ⌊,⌈y, "Description" #
+    #IVPON:#(
+        (#x:#(0,1),
+        []DNYBYDTNO( #y(0):#e**3, #dy/dt(0):#-54.6771157582462)[@0],  
+        #d²y/dt²:#(REAL t, DNYBYDTNO y, DY dy by dt)DNYBYDTNO: 3*y-2*dy by dt
+    ),
+        #y:#(0,25), "y''=3y-2y', y(0)=e**3, y'(0)=1"),
+
+    ((#x:#(0,1),[]VEC(#y(0):#1)[@0], #dy/dt:#(REAL t, DNYBYDTNO y)DNYBYDTNO:2*(t+1)*y[1]), (0,10),"dy/dt = 2(t+1)y, y(0)=1"),
+    ((#x:#(0,1),[]VEC(#y(0):#1)[@0], #dy/dt:#(REAL t, DNYBYDTNO y)DNYBYDTNO:1 / y[1]**2 ), (0,2), "dy/dt = y**-2, y(0)=1"),
+    ((#x:#(0,1),[]VEC(#y(0):#1)[@0], #dy/dt:#(REAL t, DNYBYDTNO y)DNYBYDTNO:t + y       ), (0,3), "dy/dt = t+y, y(0)=1")
+    COMMENT suspect!,
+CO cf. https://en.wikipedia.org/wiki/Pendulum_(mathematics)#Simple_gravity_pendulum CO
+
+CO FDNYBYDTN dⁿy/dtⁿ = UNION(FY, FDY, FDDY, FDDDY, FDDDDY # ... #, FDNY); CO
+   
+    (
+        #IVPON:#(
+            # t: # (0, 3), # initial t and UPB of t #
+            []DNYBYDTNO(#y(0):#RN(pend y0), #dy/dt(0):#RN(pend dy0))[@0], 
+            # d²y/dt²: #(REAL t, DNYBYDTNO y, DY dy by dt)RN: RN(-g/pend l*sin(y[1]))
+        ), 
+        (-0.2,+0.2), "d²y/dt² = - g div l*sin(y) … Pendulum - o2"
+    ),
+    (
+        #IVPON:# ( 
+            # INTERVAL t interval:# 
+                (0, 3), 
+            # DNYBYDTNO y0 dy0 ddy0 ... d(n-1)y0:# 
+                DNYBYDTNO( #y(0):#pend y0 ,# dy/dt(0):#pend dy0 )[@0], 
+            # f dny by dtn OR d²y/dt²:# 
+                (REAL t, DY dy)DNYBYDTNO: DNYBYDTNO(-g/pend l*dy[0], dy[1])[@0]
+                # or (( 0        , 1)
+                      (-g/l {sin}, 0)) x Dy[0]^T #
+        ), 
+        (-0.2,+0.2), "(dy/dt,d²y/dt²) ≈ [ (0,1) , (-g div l*{sin},0) ] * (y,dy/dt)^T … Pendulum - order_1"
+    ) END COMMENT
+);
+
+# Actual solutions #
+[]FUNCTIONPKG test case solution list =(
+    ((REAL t)DNYBYDTNO: (e**(3-3*t)*(4*e**(4*t)-1+e**4))/(3+e**4),   "y(t) = (e**(3-3*t)*(4*e**(4*t)-1+e**4))/(3+e**4)"),
+    ((REAL t)DNYBYDTNO: 1/2*(t**2+2),   "y(t) = 1 over 2(t^2+2)"),
+    ((REAL t)DNYBYDTNO: e**(t*(t+2)),   "y(t) = e^(t(t+2))"),
+    ((REAL t)DNYBYDTNO: (3*t+1)**(1/3), "y(t) = (3x+1)^(1 by 3)"),
+    ((REAL t)DNYBYDTNO: -t+2*e**t-1,    "y(t) = -t+2 e^t-1") COMMENT,
+    ((REAL t)DNYBYDTNO: (pend y0*cos(sqrt(g/pend l)*t) #, y0*sin(sqrt(g/l)*t)#),
+        "y(t) = y0 * cos(sqrt(g/l)*t) … Simplified Pendulum - o2"),
+    ((REAL t)DNYBYDTNO: (pend y0*cos(sqrt(g/pend l)*t), pend y0*sin(sqrt(g/pend l)*t)),
+        "y(t) = y0 * cos(sqrt(g/l)*t) … Simplified Pendulum - order_1") END COMMENT
+);
+
+# normalised Linear ODE: (1-D, order n)#
+# f₀(t)y + f₁(t)dy/dt + f₂(t)d²y/dt² + ⋯ + f₍ₙ₋₁₎(t)dⁿy/dtⁿ + b(t) = 0 #
+
+# Linear ODE (vector Dim:m, Order:a,b,c,...,n):
+  dᵃy₁/dtᵃ = f₀(t)y₁ + f₁(t)dy₁/dt + f₂(t)d²y₁/dt² + ⋯ + f₍ₙ₋₁₎(t)d⁽ᵃ-¹⁾y₁/dt⁽ᵃ-¹⁾
+  dᵇy₂/dtᵇ = f₀(t)y₂ + f₁(t)dy₂/dt + f₂(t)d²y₂/dt² + ⋯ + ⋯ + f₍ₙ₋₁₎(t)d⁽ᵇ-¹⁾y₂/dt⁽ᵇ-¹⁾
+  dᶜy₃/dtᶜ = f₀(t)y₃ + f₁(t)dy₃/dt + f₂(t)d²y₃/dt² + ⋯ + ⋯ + ⋯ + f₍ₙ₋₁₎(t)d⁽ᶜ-¹⁾y₃/dt⁽ᶜ-¹⁾
+         ⋮
+  dⁿyₘ/dtⁿ = f₀(t)yₘ + f₁(t)dyₘ/dt + f₂(t)d²yₘ/dt² + ⋯ + ⋯ + ⋯ + ⋯ + f₍ₙ₋₁₎(t)d⁽ⁿ-¹⁾yₘ/dt⁽ⁿ-¹⁾
+
+ Normalised Linear ODE (vector Dim:m, Order:n): 
+  dⁿy₁/dtⁿ = f₀(t)y₁ + f₁(t)dy₁/dt + f₂(t)d²y₁/dt² + ⋯ + f₍ₙ₋₁₎(t)d⁽ⁿ-¹⁾y₁/dt⁽ⁿ-¹⁾
+  dⁿy₂/dtⁿ = f₀(t)y₂ + f₁(t)dy₂/dt + f₂(t)d²y₂/dt² + ⋯ + f₍ₙ₋₁₎(t)d⁽ⁿ-¹⁾y₂/dt⁽ⁿ-¹⁾
+  dⁿy₃/dtⁿ = f₀(t)y₃ + f₁(t)dy₃/dt + f₂(t)d²y₃/dt² + ⋯ + f₍ₙ₋₁₎(t)d⁽ⁿ-¹⁾y₃/dt⁽ⁿ-¹⁾
+           ⋮
+  dⁿyₘ/dtⁿ = f₀(t)yₘ + f₁(t)dyₘ/dt + f₂(t)d²yₘ/dt² + ⋯ + f₍ₙ₋₁₎(t)d⁽ⁿ-¹⁾yₘ/dt⁽ⁿ-¹⁾
+
+Let: Vector 𝕪 = ( y₁, y₂, y₃, ⋯, yₘ ) ¢ a Vector of Scalar from ₁ to ₘ ¢
+
+With Initial Conditions:
+
+Let: Vector 𝕪₀ = ( y₁(t₀),  y₂(t₀),  y₂(t₀), ⋯, yₘ(t₀) ) ¢ a Vector of Scalar values from ₁ to ₘ ¢
+
+Key-point: ₘ is not necessarily equal to ⁿ
+  - ₘ is the dimension of the problem vector space.
+  - ⁿ is the Order of the Differential Equation.
+
+[A] Using Vector "𝕪" we get same Order:n vector differential function dⁿ𝕪/dtⁿ as:
+  dⁿ𝕪/dtⁿ  = f₀(t)𝕪  + f₁(t)d𝕪/dt  + f₂(t)d²𝕪/dt²  + ⋯ + f₍ₙ₋₁₎(t)d⁽ⁿ-¹⁾𝕪/dt⁽ⁿ-¹⁾
+
+
+Now we with this above Order:n Linear ODE (𝕪 is Dim:n) we need to convert to Order:1: 
+
+Using [A] we can get an Order:1 linear ordinary differential equation as follows.
+
+Stack up the known equations as follows:
+  d𝕪/dt           = Org +    d𝕪/dt
+  d²𝕪/dt²         = Org +    Org +    d²𝕪/dt²
+  d³𝕪/dt³         = Org +    Org +    Org +    d³𝕪/dt³
+                     ⋮       ⋮        ⋮               ⋱
+  d⁽ⁿ-²⁾𝕪/dt⁽ⁿ-²⁾ = Org +    Org +    Org +    ⋯ + Org + ⋯ + d⁽ⁿ-²⁾𝕪/dt⁽ⁿ-²⁾
+  d⁽ⁿ-¹⁾𝕪/dt⁽ⁿ-¹⁾ = Org +    Org +    Org +    ⋯ + Org + ⋯ + Org + d⁽ⁿ-¹⁾𝕪/dt⁽ⁿ-¹⁾
+  dⁿ𝕪/dtⁿ         = f₀(t)𝕪 + f₁(t)d𝕪/dt + f₂(t)d²𝕪/dt² + ⋯ + f₍ₙ₋₁₎(t)d⁽ⁿ-¹⁾𝕪/dt⁽ⁿ-¹⁾
+
+Represent this in matrix form:
+let A(t) = ((  Org,    1s,   Org,   Org,      ⋯,    Org,       Org,      Org),
+            (  Org,   Org,    1s,   Org,      ⋯,    Org,       Org,      Org),
+            (  Org,   Org,   Org,    1s,      ⋯,    Org,       Org,      Org),
+                 ⋮     ⋮     ⋮      ⋮      ⋱      ⋮         ⋮         ⋮
+            (  Org,   Org,   Org,   Org,      ⋯,     1s,       Org,      Org),
+            (  Org,   Org,   Org,   Org,      ⋯,    Org,        1s,      Org),
+            (  Org,   Org,   Org,   Org,      ⋯,    Org,       Org,       1s),
+            (f₀(t), f₁(t), f₂(t), f₃(t),   ⋯, f₍ₙ₋₃₎(t), f₍ₙ₋₂₎(t), f₍ₙ₋₁₎(t)) )
+
+Define: Matrix 𝕐(𝕪) = ( 𝕪, d𝕪/dt, d²𝕪/dt², ⋯, d⁽ⁿ-¹⁾𝕪/dt⁽ⁿ-¹⁾ )
+  ¢ a Vector of Vector of differentials from ⁰ to ⁽ⁿ-¹⁾¢
+
+We get: d𝕐(𝕪)/dt = A(𝕪) × (𝕪, d𝕪/dt, d²𝕪/dt² ⋯, d⁽ⁿ-¹⁾𝕪/dt⁽ⁿ-¹⁾, dⁿ𝕪/dtⁿ)ᵀ
+                = A(𝕪) × 𝕐(𝕪)ᵀ
+
+So we now have a Order:1 Linear Ordinary Differential equation to solve.
+#
+
+PR include "prelude/curve.a68" PR;
+
+PROC f crude tol portal = (TY ty)DNYBYDTNO: ABS y OF ty * 10 + 10; # some big number #
+
+PROC(REAL)DY actual = function OF test case solution list[1];
+
+r5_1: (
+    print(("Phase 1:",68*"-", new line));
+
+    PROC plot solutions = (ODEONSOLVEPKG solve, IVPONPKG ivp pkg, FUNCTIONPKG test case solution)DNYBYDTNO: (
+        ### return calculated solution ###
+        REF GRAPHDD graph := INIT LOC GRAPHDD;
+
+        IVPON ivp = ivp OF ivp pkg;
+
+        STRING title, sub title;
+
+        prefix OF graph := test plot dir;
+        title OF graph := title := "Solution of "+description OF ivp pkg+" (Actual(dashed) vs Calculated)";
+        type OF window OF graph := "gif"; # or gif, ps, T, pnm etc #
+        sub title OF graph := sub title := "Using: "+description OF solve;
+        printf(($gl$,title, sub title));
+
+        interval OF axis OF graph := (t interval OF ivp, y axis OF ivp pkg);
+
+        ODEONSOLVETYNGEN solution tyn gen = method tyn gen OF solve;
+
+        printf($l"*** KEY: (step size vs colour)"l$);
+        (begin curve OF (METHODOF graph))(~);
+        FOR k FROM 0 TO num of step size-1 DO
+            REAL step size = 0.2 / 2 ** k;
+    (with debug|printf(($"DB - k: "$,$f(int repr)"; "$,k)));
+    (with debug|printf(($"DB - step: "$,$f(real repr)"; "$,step size,$l$)));
+      
+            ODEONSOLVEARGS args = (step size, f crude tol portal);
+            #POINT#DDGEN curve = gen filter tyn to 2d(solution tyn gen(ivp, args,),lwb y,);
+            (with debug|print gen 2d table(title+"+"+sub title+":",curve));
+            (add curve OF (METHODOF graph))(curve, rainbow[k+1]);
+            printf(($"**** "g(-8,6)" = "gl$, step size, (name OF rainbow[k + 1])))
+        OD;
+        INT num samples = 20;
+        #POINT#DDGEN actual solution gen = gen function curve(function OF test case solution, t interval OF ivp, num samples, );
+        (add curve OF (METHODOF graph))(actual solution gen, (black, dotted));
+        (end curve OF (METHODOF graph))(~);
+        SKIP # some how need to snatch the solution at the end of the t interval #
+    );
+
+    FOR n test TO UPB test case list DO
+        IF FALSE AND n test = UPB test case list THEN # specific tests #
+            debug
+        FI;
+        IF TRUE OR n test = 2 THEN # specific tests #
+            IVPONPKG test case = test case list[n test];
+            print ode ivp order n(description OF test case, ivp OF test case);
+            printf(($"* Test case "g(-0)" "gl$, n test, description OF test case));
+            DNYBYDTNO actual solution = (function OF test case solution list[n test])(upb OF t interval OF ivp OF test case);
+            printf(($"*** actual solution: "g$, REPR actual solution,$l$));
+            FOR n solve TO UPB ode order n solve list DO
+                ODEONSOLVEPKG solve := ode order n solve list[n solve];
+                printf(($"** Test solver "g(-0)" "gl$, n solve, description OF solve));
+                DNYBYDTNO calculated solution = plot solutions(solve, test case, test case solution list[n test]);
+            # Currently calculated solution is only returned as SKIP #
+                (FALSE|printf(($"*** calculated solution: ("$,$n(UPB calculated solution)(g)$, calculated solution,$")"l$)))
+            OD
+        FI
+    OD
+);
+
+r5_1 analyse errors: (
+
+    print(("*Phase 2:",68*"-", new line));
+# define the bounds of the 'log error' vs 'log step size' graph #
+    INTERVAL log step sizes = (ENTIER(log(0.2 / 2**5)), 1 + ENTIER(log(0.2 / 2**0)));
+    INTERVAL log error = (-real width OVER 2, 1);
+
+    PROC gen step size = (REALYIELD yield)VOID:
+        FOR k FROM 0 TO num of step size-1 DO yield(0.2 / 2**k) OD;
+
+    PROC gen error vs stepsize = (ODEONSOLVEPKG solve, IVPON ivp, RN actual solution, RNYIELD yield)VOID: (
+
+        ODEONSOLVETYNGEN solution tyn gen = method tyn gen OF solve;
+        # FOR INT step size IN # gen step size(#DO)#
+        ##   (REAL step size)VOID:(
+                      ODEONSOLVEARGS args = (step size, f crude tol portal);
+                      DY dny by dtn = (y OF get tail tyn(solution tyn gen(ivp, args,)))[lwb y];
+        # recall: The first entry in dⁿy/dtⁿ is actually y #
+                      print((REPR dny by dtn, new line));
+                      DNYBYDTNO y = dny by dtn[:UPB actual solution];
+                      yield((log(step size), log(ABS(y - actual solution)[1]))) # NB: ignoring y[2] … #
+        # OD #))
+
+    );
+
+    PROC plot error vs step size = (IVPONPKG ivp pkg, FUNCTIONPKG test case solution)VOID:(
+        IVPON ivp = ivp OF ivp pkg;
+        REF GRAPHDD graph := INIT LOC GRAPHDD;
+
+        prefix OF graph := test plot dir;
+        title OF graph := "Solution of "+description OF ivp pkg;
+        sub title OF graph := "(log error vs log step size for the various ODE solvers)";
+
+        type OF window OF graph := "gif"; # or gif, ps, T, pnm etc #
+        #sub title OF graph := "Using: "+description OF solve;#
+
+        interval OF axis OF graph := (log step sizes # vs #, log error);
+        label OF axis OF graph := ("log step sizes" # vs #, "log error");
+
+        RN actual solution = (function OF test case solution)(upb OF t interval OF ivp);
+
+        (begin curve OF (METHODOF graph))(~);
+
+        printf($l"*** Key: (method vs colour)"l$);
+        FOR n solve TO #1 + 0 * QQQ#UPB ode order n solve list DO
+            ODEONSOLVEPKG solve := ode order n solve list[n solve];
+            printf(($"*      "g(-0)" "g":"l$, n solve, description OF solve));
+            RNGEN gen error curve = gen error vs stepsize(solve, ivp, actual solution,);
+            (add curve OF (METHODOF graph))(gen error curve, rainbow[n solve]);
+            printf(($g": "gl$, description OF solve, (name OF rainbow[n solve])))
+        OD;
+
+        (end curve OF (METHODOF graph))(~)
+    );
+
+# first compare 'error' to 'step size' of individual methods #
+    FOR n test TO #1 + 0 * QQQ#UPB test case list DO
+        IVPONPKG test case = test case list[n test];
+        printf(($"** Test case "g(-0)" "gl$, n test, description OF test case));
+        plot error vs step size(test case, test case solution list[n test])
+    OD
+
+);
+PR include "postlude/exception.a68" PR;
+PR include "postlude/scalar_=:_real.a68" PR

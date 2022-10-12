@@ -1,0 +1,381 @@
+# -*- coding: utf-8 -*- #
+
+CO
+    REQUIRES:
+        FORMAT scal repr := real repr;
+        MODE SCAL = REAL;
+        SCAL near min scal := min real**0.99;
+CO
+
+INT default lwb = 1;
+INT lwb vec:=default lwb, upb vec:=0;
+MODE VEC = [lwb vec:upb vec]SCAL;
+MODE VECYIELD = PROC(VEC)VOID;
+MODE VECGEN = PROC(VECYIELD)VOID;
+
+INT lwb mat:=1, upb mat:=0;
+MODE MAT = [lwb mat:upb mat,lwb vec:upb vec]SCAL;
+MODE MATYIELD = PROC(MAT)VOID;
+MODE MATGEN = PROC(MATYIELD)VOID;
+
+MODE VECVEC = [lwb mat:upb mat,lwb vec:upb vec]SCAL;
+MODE VECVECYIELD = PROC(VECVEC)VOID;
+MODE VECVECGEN = PROC(VECVECYIELD)VOID;
+
+INT lwb ten:=1, upb ten:=0;
+MODE TEN = [lwb ten:upb ten,lwb mat:upb mat,lwb vec:upb vec]SCAL;
+MODE TENYIELD = PROC(TEN)VOID;
+MODE TENGEN = PROC(TENYIELD)VOID;
+
+OP INITREAL = (REAL r)REAL: r;
+OP INITREAL = ([]REAL r)[]REAL: r;
+OP INITREAL = (LONG REAL r)REAL: SHORTEN r;
+OP INITREAL = ([]LONG REAL r)[]REAL: 
+  IF NOT fix unimplemented("SHORTEN r[]") THEN stop FI;
+OP INITREAL = (LONG LONG REAL r)REAL: SHORTEN SHORTEN r;
+OP INITREAL = ([]LONG LONG REAL r)[]REAL: 
+  IF NOT fix unimplemented("SHORTEN SHORTEN r[]") THEN stop FI;
+
+MODE RN = VEC;
+MODE RNYIELD = PROC(RN)VOID; MODE RNGEN = PROC(RNYIELD)VOID;
+#================================================#
+# MODE TY: basically for functions from R => RN  #
+#================================================#
+INT lwb y = 0;
+MODE DNYBYDTNO = [lwb y:lwb y-1]REAL; # traditionally LWB y is zero #
+MODE FY = PROC(R #t#, DNYBYDTNO #y# )DNYBYDTNO;
+MODE TY = STRUCT(R t, DNYBYDTNO y);
+OP LUB = ([]TY ty)BOUNDS: INTINTERVAL(LWB ty, UPB ty); # (L)ower and (U)per (B)ound #
+MODE FTY = PROC(TY)TY;
+MODE TYYIELD = PROC(TY)VOID; MODE TYGEN = PROC(TYYIELD)VOID;
+
+# yields an array of arrays: eg (distance,velocity,acceleration...) #
+#           to reflect the initial conditions of an order-n ODE #
+MODE TYN = STRUCT(R t, [0]DNYBYDTNO y);
+MODE TYNYIELD = PROC(TYN)VOID; MODE TYNGEN = PROC(TYNYIELD)VOID;
+FORMAT ty repr = $"(t="f(scal repr)", y="f(vec repr)")"$;
+
+INT tab left := 0, tab width := 4, sub width := 1;
+FORMAT tab := $n(tab left)x$ #, nl := $l$#;
+
+FORMAT vec lwb repr = $"[@"f(int repr)"]"$;
+FORMAT vec lub repr = $"["f(int repr)":"f(int repr)"]"$;
+
+BOOL mimic matlab := NOT TRUE;
+# vec io routines: #
+# FORMAT vec repr := $f(sub)n(upb vec - lwb vec)( f(scal repr)f(sep) )f(scal repr)f(bus)$; #
+FORMAT vec sub := sub, vec sep := sep, vec bus := bus;
+    IF mimic matlab THEN vec sub :=$"["$; vec sep :=$","$;vec bus := $"]"$ FI;
+FORMAT vec repr := $f(vec sub)n(upb vec - lwb vec)( f(scal repr)f(vec sep) )f(scal repr)f(vec bus)$;
+
+PROC put vec = (REF FILE file, VEC vec)VOID: (
+    lwb vec := LWB vec; upb vec := UPB vec;
+    putf(file, (vec repr, vec));
+    IF lwb vec NE 1 THEN 
+      putf(file, (vec lwb repr, LWB vec))
+    FI
+);
+
+PROC print vec = (VEC vec)VOID: put vec(standout, vec);
+
+PROC get vec = (REF FILE file, REF VEC vec)VOID: (
+    lwb vec := LWB vec; upb vec := UPB vec;
+    getf(file,(vec repr, vec))
+);
+
+PROC read vec = (REF VEC vec)VOID: get vec(stand in, vec);
+
+# mat io routines: #
+# FORMAT mat repr := $f(sub)n(upb mat - lwb mat)(f(vec repr) f(sep)f(nl)f(tab))f(vec repr)f(bus)$, #
+FORMAT mat sub := sub, mat sep := sep, mat bus := bus;
+    IF mimic mat lab THEN mat sub :=$"["$;mat sep :=$";"$;mat bus :=$"]"$ FI;
+FORMAT mat repr := $f(mat sub)n(upb mat - lwb mat)(f(vec repr) f(mat sep)f(nl)f(tab))f(vec repr)f(mat bus)$,
+       mat lwb repr := $"[@"f(int repr)1(",@"f(int repr))"]"$;
+FORMAT mat lub repr = $"["f(int repr)":"f(int repr)1(","f(int repr)":"f(int repr)"]")$;
+
+INT upb upb ten = 3;
+FORMAT ten repr := $f(sub)n(upb ten - lwb ten)(f(mat repr) f(sep)f(nl)f(tab))f(mat repr)f(bus)$,
+       ten lwb repr := $"[@"f(int repr)n(upb upb ten-1)(",@"f(int repr))"]"$;
+FORMAT ten lub repr = $"["f(int repr)":"f(int repr)n(upb upb ten-1)(","f(int repr)":"f(int repr)"]")$;
+
+PROC put mat = (REF FILE file, MAT mat)VOID: (
+    lwb mat := 1 LWB mat; upb mat := 1 UPB mat;
+    lwb vec := 2 LWB mat; upb vec := 2 UPB mat;
+    tab left +:= tab width+sub width;
+    putf(file, (mat repr, mat));
+    IF lwb mat NE 1 THEN 
+      putf(file, (mat lwb repr, lwb OF (LUB mat)))
+    FI;
+    tab left -:= tab width+sub width
+);
+
+PROC print mat = (MAT mat)VOID: put mat(standout, mat);
+
+PROC put vec vec = (REF FILE file, []VEC mat)VOID: (
+    lwb mat := LWB mat; upb mat := UPB mat;
+    lwb vec := LWB mat[LWB mat]; upb vec := UPB mat[LWB mat];
+    tab left +:= tab width+sub width;
+    putf(file, (mat repr, mat));
+    IF TRUE OR lwb mat NE 1 THEN 
+        # putf(file, (mat lwb repr, lwb OF (LUB mat))); #
+        putf(file, (mat lub repr, (LUB mat)))
+    FI;
+    tab left -:= tab width+sub width
+);
+
+PROC print vec vec = ([]VEC mat)VOID: put vec vec(standout, mat);
+
+PROC get mat = (REF FILE file, REF MAT mat)VOID: (
+    lwb mat := 1 LWB mat; upb mat := 1 UPB mat;
+    lwb vec := 2 LWB mat; upb vec := 2 UPB mat;
+    tab left +:= tab width+sub width;
+    getf(file,(mat repr, mat));
+    tab left -:= tab width+sub width
+);
+
+PROC read mat = (REF MAT mat)VOID: get mat(standin, mat);
+
+PROC put mat list = (REF FILE file, []UNIONMAT mat vec)VOID: (
+    INT org tab width = tab width;
+    FOR i TO UPB mat vec DO
+        CASE mat vec[i] IN
+            (CHAR c): ( put(file, c); tab width := 1 ),
+            (STRING s): ( put(file, s); tab width := UPB s ),
+            (MAT mat): put mat(file, mat),
+            (VEC vec): put vec(file, vec),
+            (PROC(REF FILE)VOID proc): put(file, proc)
+        OUT
+            putf(file, ($g$, mat vec[i]))
+        ESAC
+    OD;
+    put(file, new line);
+    tab width := org tab width
+);
+
+MODE UNIONMAT = UNION(SIMPLEOUT, VEC, MAT, PROC(REF FILE)VOID);
+
+PROC print mat list = ([]UNIONMAT mat vec)VOID: put mat list(stand out, mat vec);
+
+CO
+PRIO 
+    <> = 7, # Inner Product #
+    >< = 7; # Outer product #
+
+OP <> = (VEC a, b)VEC: MAT(a)*b;
+OP >< = (VEC a, b)VEC: a*MAT(b);
+END CO
+
+# Cross-Product - 3D only #
+PRIO >< = 7;
+OP >< = (VEC a, b)VEC: (a[2]*b[3] - a[3]*b[2], a[3]*b[1] - a[1]*b[3], a[1]*b[2] - a[2]*b[1]);
+# TODO: Add bounds check #
+
+
+# the followng are equivalent to C's sput finctions #
+# TODO: OP REPR = ? #
+OP REPR = (VEC vec)STRING: (
+    FILE f; STRING s; associate(f,s);
+    put vec(f,vec);
+    close(f);
+    s
+);
+
+OP REPR = (MAT mat)STRING: (
+    FILE f; STRING s; associate(f,s);
+    put mat(f,mat);
+    close(f);
+    s
+);
+
+OP REPR = ([]UNIONMAT mat vec)STRING: (
+    FILE f; STRING s; associate(f,s);
+    put mat list(f,mat vec);
+    close(f);
+    s
+);
+
+OP REPR = ([]VEC vec)STRING: (
+    FILE f; STRING s; associate(f,s);
+    put vec vec(f,vec);
+    close(f);
+    s
+);
+
+PR include "prelude/bugfix12h30_transpose_mat.a68" PR;
+PR include "prelude/bugfix12s13_vec_slice_op_assign_val.a68" PR;
+
+# OP * = (SCAL scal, VEC vec)VEC: vec * scal; # #  QQQ 12n08 removed #
+
+PRIO // = 7; # an alternate (slower) form of MATrix division #
+OP // = (VEC v, MAT m)VEC: v * INV m;
+
+# From the official a68g.pdf documentation:
+    PROC lu solve = ([, ] REAL a, lu, [] INT p, [] REAL b) [] REAL
+        These routines solve the equation A · x = b and apply an iterative improvement to x,
+        using the LU decomposition of a into lu, p as calculated by lu decomp.
+#
+
+# given "A * x = b, define "A \ A * x = A \ b" operator #
+PRIO LUUNDER = 7;
+OP LUUNDER = (MAT a, MAT b)MAT:( # matrix division using LU decomposition #
+    # b / a = x OR x * a = b #
+    [UPB a]INT p ;
+    INT sign;
+    [,]SCAL lu = INITSCAL lu decomp(a, p, sign);
+    [UPB b, 2 UPB b]SCAL out;
+# Now apply the LU form to the entire input matrix b #
+    FOR col TO 2 UPB b DO out[,col] := INITSCAL lu solve(a, lu, p, b[,col]) OD;
+    out
+);
+
+# From the official a68g.pdf documentation:
+    PROC qr decomp = ([, ] REAL a, REF [] REAL t) [, ] REAL
+    PROC qr solve ([, ] REAL a, [] REAL t, [] REAL b) [] REAL
+        This routine solves the square system A · x = b using the QR
+        decomposition of A into a, t computed by qr decomp. The least-squares
+        solution for rectangular equations can be found using qr ls solve.
+#
+
+# given "A * x = b, define "A \ A * x = A \ b" operator #
+PRIO UNDER = 7;
+OP UNDER = (MAT a, MAT b)MAT:( # matrix division using LU decomposition #
+    # b / a = x OR x * a = b #
+    [UPB a]SCAL t ;
+    INT sign;
+    [,]SCAL qr = INITSCAL qr decomp(a, t);
+    [UPB b, 2 UPB b]SCAL out;
+# Now apply the LU form to the entire input matrix b #
+    FOR col TO 2 UPB b DO out[,col] := INITSCAL qr solve(qr, t, b[,col]) OD;
+    out
+);
+
+OP UNDER = (MAT m, VEC v)VEC:
+# Notice that the v is silently transposed to a column vector #
+    (m UNDER T MAT(v))[,1];
+
+# matrix division using UNDER operator #
+OP / = (MAT b, MAT a)MAT: T a UNDER b;
+
+# matrix division using UNDER operator #
+OP / = (VEC v, MAT m)VEC: (T MAT(v)/m)[,1];
+
+PRIO TRANVEC = 1;
+OP TRANVEC = (INT upb, SCAL const)VEC: (
+    [upb]SCAL out;
+    FOR i TO upb DO out[i]:= const OD;
+    out
+);
+
+OP IDENTITY = (INT n)MAT: (
+    [n,n]SCAL out;
+    out[1,] := n TRANVEC INITSCAL 0.0;
+    FOR i TO UPB out DO out[i,] := out[1,] OD;
+    DIAG out := n TRANVEC INITSCAL 1.0;
+    out
+);
+
+# OPerators to swap the values of two objects #
+PRIO =:= = 1;
+OP =:= = (REF VEC u, v)VOID:
+    FOR i TO UPB u DO SCAL scal=u[i]; u[i]:=v[i]; v[i]:=scal OD;
+
+OP =:= = (REF MAT u, v)VOID:
+    FOR i TO UPB u DO u[i,]=:=v[i,] OD;
+
+OP SCALREFS = (REF VEC vec)[]REF SCAL: (
+    [LWB vec: UPB vec]REF SCAL out;
+    FOR i FROM LWB vec TO UPB vec DO out[i]:=vec[i] OD;
+    out
+);
+
+OP REFVECS = (REF MAT mat)[]REF VEC: (
+# Create an array of REF SCAL pointers to the SCAL elements in a VEC #
+    [LWB mat: UPB mat]REF VEC out;
+    FOR i FROM LWB mat TO UPB mat DO out[i]:=mat[i,] OD;
+    out
+);
+
+PRIO REFVECS = 8; # Same as LWB/UPB(?) #
+OP REFVECS = (INT dim, REF MAT mat)[]REF VEC: (
+# Create an array of REF VEC pointers to the rows/columns in a MAT #
+    [dim LWB mat: dim UPB mat]REF VEC out;
+    CASE dim IN
+        FOR i FROM dim LWB mat TO dim UPB mat DO out[i]:=mat[i,] OD,
+        FOR i FROM dim LWB mat TO dim UPB mat DO out[i]:=mat[,i] OD
+    OUT
+        fix value error("dim > 2 for MAT")
+    ESAC;
+    out
+);
+
+PRIO MATREFS = 8; # Same as LWB/UPB(?) #
+OP MATREFS = (INT dim, REF TEN ten)[]REF MAT:
+# Create an array of REF MAT pointers to the rows/columns in a TEN #
+    IF fix unimplemented("Create an array of REF MAT to the rows/columns in a TEN")
+    THEN SKIP FI;
+
+PROC vec init scal = (REF VEC vec, SCAL init)REF VEC: (
+    FOR i FROM LWB vec TO UPB vec DO vec[i]:=init OD;
+    vec
+);
+
+PROC mat init scal = (REF MAT mat, SCAL init)REF MAT: (
+    IF LWB mat <= UPB mat THEN
+        vec init scal(mat[LWB mat,], init);
+        FOR i FROM LWB mat+1 TO UPB mat DO
+            mat[i,]:=mat[LWB mat,]
+        OD
+    FI;
+    mat
+);
+    
+PROC ten init scal = (REF TEN ten, SCAL init)REF TEN: (
+    IF LWB ten <= UPB ten THEN
+        mat init scal(ten[LWB ten,,], init);
+        FOR i FROM LWB ten+1 TO UPB ten DO
+            ten[i,,]:=ten[LWB ten,,]
+        OD
+    FI;
+    ten
+);
+    
+PROC mat init band = (REF MAT mat, VEC band)REF MAT: (
+  # band the A matrix #
+    FOR i FROM LWB band-1 TO UPB band-1 DO
+        REAL val = band[i+1];
+        FOR d FROM 0 TO UPB mat-i DO
+            IF d   >=   LWB mat AND d   <=   UPB mat AND 
+               d+i >= 2 LWB mat AND d+i <= 2 UPB mat THEN
+                mat[d,d+i]:=val
+            FI
+        OD
+    OD;
+    mat
+); 
+
+OP INIT = (REF VEC lhs, SCAL scal)REF VEC: vec init scal(lhs, scal);
+OP INIT = (REF MAT lhs, SCAL scal)REF MAT: mat init scal(lhs, scal);
+OP INIT = (REF TEN lhs, SCAL scal)REF TEN: ten init scal(lhs, scal);
+
+# define some ":=" routines for casting from [][]SCAL to [,]SCAL and visa versa #
+OP INIT = (REF[][]SCAL lhs, MAT rhs)REF[][]SCAL: (
+    FOR i FROM UPB lhs TO UPB lhs DO lhs[i] := rhs[i,] OD;
+    lhs
+);
+
+OP INIT = (REF MAT lhs, [][]SCAL rhs)REF MAT: (
+    FOR i FROM UPB lhs TO UPB lhs DO lhs[i,] := rhs[i] OD;
+    lhs
+);
+
+#IF is algol68g THEN#
+MODE LONGSCAL = LONG REAL, LONGVEC = [0]LONGSCAL, LONGMAT = [0,0]LONGSCAL;
+OP * = (LONGMAT a,b)LONGMAT:
+    IF NOT fix unimplemented("OP * = (LONGMAT a,b)LONGMAT") THEN stop FI;
+OP * = (LONGVEC vec, LONGSCAL scal)LONGVEC:
+    IF NOT fix unimplemented("OP * = (LONGSCAL scal, LONGVEC vec)LONGVEC") THEN stop FI;
+OP INV = (LONGMAT mat)LONGMAT:
+    IF NOT fix unimplemented("OP INV = (LONGMAT mat)LONGMAT") THEN stop FI;
+#FI#
+
+SKIP # export names #

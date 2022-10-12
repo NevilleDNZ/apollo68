@@ -1,0 +1,101 @@
+# -*- coding: utf-8 -*- #
+
+MODE BOOK = FLEX[0]PAGE;
+MODE PAGE = FLEX[0]LINE;
+MODE LINE = STRING;
+
+MODE REFNEWIO = REF PROC(REF FILE)VOID;
+
+MODE LINEIO = UNION(CHAR, STRING, REFNEWIO);
+
+COMMENT REQUIRES:
+    MODE CHARYIELD = PROC(CHAR)VOID;
+    MODE CHARGEN = PROC(CHARYIELD)VOID;
+END COMMENT
+
+MODE LINEIOYIELD = PROC(LINEIO)VOID;
+MODE LINEIOGEN = PROC(LINEIOYIELD)VOID;
+
+CO PROC new page = (REF FILE f)VOID: put(f, term page); # missing in a68g # CO
+
+CHAR term page = REPR 12, term line = REPR 10, term chars = REPR 9;
+PROC(REF FILE)VOID next page := new page, next line := new line, next field := space;
+
+PROC gen line reparse = (LINEIOGEN gen uline, LINEIOYIELD yield)VOID:
+# FOR LINEIO uline IN # gen uline(#) DO #
+##   (LINEIO uline)VOID: (
+        CASE uline IN
+        (REFNEWIO proc): yield(proc),
+        (STRING string): (
+            STRING buf := "";
+            PROC yield buf = (REFNEWIO next)VOID: (
+                IF UPB buf NE 0 THEN yield(buf); buf := "" FI; yield(next)
+            );
+            FOR i TO UPB string DO
+                CHAR char = string[i];
+                IF   char = term page  THEN yield buf(next page)
+                ELIF char = term line  THEN yield buf(next line)
+                ELIF char = term chars THEN yield buf(next field)
+                ELSE buf +:= char FI
+            OD;
+            IF UPB buf > 0 THEN yield(buf) FI
+        )
+        OUT VOID(fix value error("gen line reparse")); stop
+        ESAC
+    )
+# OD # )
+;
+
+PROC gen line = (BOOK book, LINEIOYIELD yield)VOID: (
+    FOR page TO UPB book DO
+        FOR line TO UPB book[page] DO
+            # XXX: ignore tabs for the moment #
+              yield(book[page][line]); yield(next line)
+        OD;
+        yield(next page)
+    OD
+);
+
+OP INIT = (REF BOOK out book, BOOK in book)REF BOOK: (
+
+    REAL expand = 1.4;
+
+    INT est upb := 64;
+    STRING line := "";
+
+    INT upb page := 0; FLEX[est upb]LINE page;
+    INT upb book := 0; FLEX[est upb]PAGE book;
+
+    INT marked = 0, unmarked = 1;
+    INT page state := unmarked, line state := unmarked;
+
+    PROC flush line = VOID: (             page[upb page+:=1] := line; line := "" );
+    PROC flush page = VOID: ( flush line; book[upb book+:=1] := page[:upb page-line state]; upb page := 0 );
+    PROC flush book = VOID: ( flush page );
+
+# FOR LINEIO uline IN # gen line reparse(gen line(in book,) #) DO #,
+##   (LINEIO uline)VOID: (
+            CASE uline IN
+            (REFNEWIO proc):
+                IF proc IS next page THEN
+                    flush page; page state:=unmarked
+                ELIF proc IS next line THEN
+                    flush line; page state:=marked; line state:=unmarked
+                ELIF proc IS next field THEN
+                    line +:= term line; page state:=line state:=marked
+                FI,
+            (CHAR s): ( line +:= s; page state:=line state:=marked ),
+            (STRING s): ( line +:= s; page state:=line state:=marked )
+            OUT VOID(fix value error("gen line")); stop
+            ESAC
+        )
+    #OD #);
+    finally:
+        flush book;
+    out book := book[:upb book-page state ]
+);
+
+
+OP TRANBOOK = (STRING s)BOOK: LOC BOOK INIT BOOK(s);
+
+SKIP # export names #

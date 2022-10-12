@@ -1,0 +1,193 @@
+# -*- coding: utf-8 -*- #
+
+# Standard prefixes for the SI units of measure #
+REAL yotta=1e 24,#Y=yotta,#septillion=yotta, #quadrillion=yotta,#
+    zetta= 1e 21,#Z=zetta,#sextillion=zetta, trilliard=zetta,
+    exa  = 1e 18,#E=exa,  #quintillion=exa, #trillion=exa,#
+    peta = 1e 15,#P=peta, ##quadrillion=peta,# billiard=peta,
+    tera = 1e 12,#T=tera, ##trillion=tera, billion=tera,#
+    giga = 1e  9,#G=giga, ##billion=giga, #milliard=giga,
+    mega = 1e  6,#M=mega, #million=mega,
+    kilo = 1e  3, k=kilo,  thousand=kilo,
+    hecto= 1e  2, h=hecto,
+#    deca=  1e  1, da=deca, #
+    one = 1,
+    deci=  1e -1, d=deci,  tenth = deci,
+    centi= 1e -2, c=centi, hundredth = centi,
+    milli= 1e -3,#m=milli,#thousandth=milli, # remove m because it is ambigious #
+    micro= 1e -6, u#μ#=micro, millionth=micro,
+    nano=  1e -9, n=nano,  #billionth=nano,# milliardth=nano,
+    pico=  1e-12, p=pico,  #trillionth=pico, billionth=pico,#
+    femto= 1e-15, f=femto, #quadrillionth=femto, #billiardth=femto,
+    atto=  1e-18, a=atto,  quintillionth=atto, #trillionth=atto,#
+    zepto= 1e-21, z=zepto, sextillionth=zepto, trilliardth=zepto,
+    yocto= 1e-24, y=yocto, septillionth=yocto#, quadrillionth=yocto#;
+
+
+# Actual prefix operators! #
+OP  YT = (REAL x)REAL: yotta*x,
+    Z = (REAL x)REAL: zetta*x,
+    E = (REAL x)REAL: exa*x,
+    P = (REAL x)REAL: peta*x,
+    T = (REAL x)REAL: tera*x,
+    G = (REAL x)REAL: giga*x,
+    M = (REAL x)REAL: mega*x;
+
+
+#=======================================================================#
+# The following SI units are included largely for documentation purposes
+  so the souce code clearly defines which units are being used #
+#=======================================================================#
+MODE SIUNITS = STRUCT(STRING name, symbol, unicode, quantity, typical symbol);
+[]SIUNITS si units = (
+    ("metre",   "m",  "",  "length","l" # (lowercase L)#),
+    ("kilogram","kg", "㎏","mass","m"),
+    ("second",  "s",  "",  "time","t"),
+    ("ampere",  "A",  "",  "electric current","I"), # (capital i)"#
+    ("kelvin",  "K",  "",  "thermodynamic temperature","T"),
+    ("candela", "cd", "㏅","luminous intensity","Iv"), # (capital i with lowercase non-italicized v subscript)#
+    ("mole",    "mol","㏖","amount of substance","n")
+);
+
+MODE LENGTH = REAL, MASS = REAL, TIME = REAL, CURRENT = REAL, 
+    TEMPARTURE = REAL, LUMINOUSITY = REAL, AMOUNT = REAL;
+
+MODE # aka # DISTANCE = LENGTH;
+
+LENGTH meter = 1#, m = 1#; # remove m because it is ambigious #
+MASS kilogram = 1, kg = kilogram, gram = kg/k;
+TIME second = 1, s = second;
+CURRENT ampere = 1#, a = 1#, amp = ampere;
+TEMPARTURE kelvin = 1#, k = 1#;
+LUMINOUSITY candela = 1, cd = candela;
+AMOUNT mole = 6.0221417930e23, mol = mole;
+
+INT upb universe = 3-1; # only 2 dimension for simplicity #
+OP UVEC = (VEC vec)VEC: vec[:upb universe];
+
+MODE SPEED = REAL; # A scalar value #
+MODE VECUNIT = [upb universe]PHYSICALUNIT;
+MODE VECDISTANCE = VECUNIT , VECVELOCITY=VECUNIT; # in upb universe dimensions #
+MODE VECMASS = VECUNIT, VECACCELERATION = VECUNIT, VECFORCE = VECUNIT;
+MODE VECANY = VECUNIT;
+
+# Named units derived from SI base units #
+MODE DERIVEDSIUNITS = STRUCT(
+    STRING name, symbol, unicode, expression in terms of other units,
+         expression in terms of si base units, quantity);
+
+[]DERIVEDSIUNITS derived so units = (
+    ("hertz",      "Hz", "㎐","1/s","s⁻¹","frequency"),
+    ("radian",     "rad","㎭","m/m","dimensionless","angle"),
+    ("steradian",  "sr", "㏛","m²/m²","dimensionless","solid angle"),
+    ("newton",     "N",  "",  "kg⋅m/s² or kg⋅m⋅s⁻²","","force, weight"),
+    ("pascal",     "Pa", "㎩","N/m²","kg⋅m⁻¹⋅s⁻²","pressure, stress"),
+    ("joule",      "J",  "",  "N⋅m = C⋅V = W⋅s","kg⋅m²⋅s⁻²","energy, work, heat"),
+    ("watt",       "W",  "",  "J/s = V⋅A","kg⋅m²⋅s⁻³","power, radiant flux"),
+    ("coulomb",    "C",  "",  "s⋅A", "s⋅A","electric charge or quantity of electricity"),
+    ("volt",       "V",  "",  "W/A = J/C","kg⋅m²⋅s⁻³⋅A⁻¹","voltage, electrical potential difference, electromotive force"),
+    ("farad",      "F",  "",  "C/V", "kg⁻¹⋅m⁻²⋅s⁴⋅A²","electric capacitance"),
+    ("ohm",        "Ω",  "",  "V/A", "kg⋅m²⋅s⁻³⋅A⁻²","electric resistance, impedance, reactance"),
+    ("siemens",    "S",  "",  "1/Ω = A/V","kg⁻¹⋅m⁻²⋅s³ ⋅A²","electrical conductance"),
+    ("weber",      "Wb", "㏝","J/A", "kg⋅m²⋅s⁻²⋅A⁻¹","magnetic flux"),
+    ("tesla",      "T",  "",  "V⋅s/m² = Wb/m² = N/(A⋅m)kg⋅s⁻²⋅A⁻¹","","magnetic field strength, magnetic flux density"),
+    ("henry",      "H",  "",  "V⋅s/A = Wb/A","kg⋅m²⋅s⁻²⋅A⁻²","inductance"),
+    ("deg Celsius","°C", "℃", "K","K","temperature relative to 273.15 K"),
+    ("lumen",      "lm", "㏐","cd⋅sr","cd","luminous flux"),
+    ("lux",        "lx", "㏓","lm/m²","m⁻²⋅cd","illuminance"),
+    ("becquerel",  "Bq", "㏃","1/s",  "s⁻¹","radioactivity (decays per unit time)"),
+    ("gray",       "Gy", "㏉","J/kg", "m²⋅s⁻²","absorbed dose (of ionizing radiation)"),
+    ("sievert",    "Sv", "㏜","J/kg", "m²⋅s⁻²","equivalent dose (of ionizing radiation)"),
+    ("katal",      "kat","",  "mol/s","s⁻¹⋅mol","catalytic activity")
+);
+# The following derived units are included largely for documentation purposes
+    so the souce code clearly defines which units are being used #
+#=======================================================================#
+MODE FREQUENCY=REAL, ANGLE=REAL, SOLIDANGLE=REAL, FORCE=REAL,
+     PRESSURE=REAL, ENERGY=REAL, POWER=REAL, CHARGE=REAL, VOLTAGE=REAL,
+     CAPACITANCE=REAL, RESISTANCE=REAL, CONDUCTANCE=REAL, FLUX=REAL,
+     MAGNETICFIELDSTRENGTH=REAL, INDUCTANCE=REAL, LUMINOUSFLUX=REAL,
+     ILLUMINANCELUX=REAL, DECAYRATE=REAL, ABSORBEDDOSE=REAL,
+     EQUIVALENTDOSE=REAL, CATALYTICACTIVITY=REAL;
+
+ANGLE degree = pi/180, degrees = degree;
+ANGLE coor minute = degree / 60; # coor: as per lat/long #
+ANGLE coor second = coor minute / 60; # coor: as per lat/long #
+PROC dms = (ANGLE d,m,s)ANGLE: (d + 60 * (m + 60 * s))*degrees;
+PROC hms = (ANGLE h,m,s)ANGLE: (d + 60 * (m + 60 * s))*second;
+
+# BACKTO: an operator to convert an SI unit back to some other unit base #
+OP BACKTO = (REAL value, desired unit)REAL: value / desired unit;
+PRIO BACKTO = 1; # i.e. very low priority, last thing that is done #
+
+FREQUENCY hertz = 1/s, hz = hertz;
+ANGLE radian = meter/meter, rad = radian;
+SOLIDANGLE steradian = meter**2/meter**2, sr = steradian;
+FORCE newton = kg*meter/s**2 #or kg*m⋅s**-2##, n = newton#;
+PRESSURE pascal = newton/meter**2, pa = pascal;
+ENERGY joule = newton*meter# = c*v = w*s#, j = joule;
+POWER watt = j/s# = v*a#, w = watt;
+CHARGE coulomb = s*ampere#, c = coulomb#;
+VOLTAGE volt = w/ampere# = j/c#, v = volt;
+CAPACITANCE farad = coulomb/v#, f = farad#;
+RESISTANCE ohm = v/ampere#, Ω = ohm#;
+CONDUCTANCE siemens = #1/Ω = #ampere/v#, s = siemens#;
+FLUX weber = j/ampere, wb = weber;
+MAGNETICFIELDSTRENGTH tesla = v*s/meter**2# = wb/m**2 = n/ a*m kg*s⁻**2*a⁻¹#, t = tesla;
+INDUCTANCE henry = v*s/ampere# = wb/a##, h = henry#;
+TEMPARTURE # relative to 273.15 k# deg c = 1*kelvin #, °c = deg celsius#;
+LUMINOUSFLUX lumen = cd*sr, lm = lumen;
+ILLUMINANCELUX lux = lm/meter**2, lx = lux;
+DECAYRATE becquerel = 1/s, bq = becquerel;
+ABSORBEDDOSE gray = j/kg, gy = gray;
+EQUIVALENTDOSE sievert = j/kg, sv = sievert;
+CATALYTICACTIVITY katal = mol/s, kat = katal;
+
+
+# Some more common scaled units #
+REAL min = 60 * s, hour = 60 * min, day = 24* hour, 
+# Dimensionless:#  kb=1024#㎅#,  #mb=kb*1000 ㎆,# gb=kb*1000000#㎇#,
+           kib=1024#㎅#,  mib=kib*1024#㎆#, gib=mib*1024#㎇#, ph=10e14 #㏗#,
+# Distance:# fm=f*meter#㎙#, nm=n*meter#㎚#, um=u*meter#㎛#, mm=milli*meter#㎜#, 
+           dm = d * meter, meters = meter,
+           cm=c*meter#㎝#,  km=k*meter#㎞& ㏎#, au=149 597 871*km#㍳#, 
+           pc=3.08567758e16*meter#㍶#,  in=2.54*cm #㏌#, mil=in/100#㏕#,
+# Area:# mm2=mm**2#㎟#, cm2=cm**2#㎠#, dm2=dm**2#㍸#, m2=milli**2#㎡#, 
+           ha=(100*meter)**2#㏊#, km2=km**2#㎢#,
+# Volume:#  ul=u*l#㎕#, mm3=mm**3#㎣#, ml=milli*l#㎖#, cm3=c*meter#㎤#,
+           cc=cm**3#㏄#, dm3=dm**3#㍹#, dl=d*l#㎗#, m3=milli**3#㎥#, 
+           l=dm3#ℓ#, km3=km**3#㎦#, kl=k*l#㎘#, us gal = 3.78541 * l#㏿#,
+# Mass:# ug=u*gram#㎍#, mg=milli*gram#㎎#, da=d*amp#㍲ ~ ㍺#,
+# Pressure:#  bar=100*k*pa#㍴#, #mb=milli*bar ㏔,# hpa=h*pa#㍱#, kpa=k*pa#㎪#,
+# Time:# ps=p*s#㎰#, ns=n*s#㎱#, us=u*s#㎲#, ms=milli*s#㎳ ~ ㏂/㏘#,
+# Frequeny:# khz=k*hz#㎑#, mhz=Mhz#㎒#, gkz=Ghz#㎓#, thz=Thz#㎔#,
+# Potential:# pv=p*v#㎴#, nv=n*v#㎵#, uv=u*v#㎶#,  mv=milli*v#㎷#,
+           mega pa=Mpa#㎫#, gpa=Gpa#㎬#, hg=760/101.3*kpa #㋌#, kv=k*v#㎸#,  
+           mega volt=Mv#㎹, ov=o*v ㍵#, v per m=v/meter#㏞#, ev=1.60217646e-19*j #㋎#,
+####################################################################
+# Current:# #pa=p*amp ㎀,# na=n*amp#㎁#, ua=u*amp#㎂#, ma=milli*amp#㎃#, 
+           ka=k*amp#㎄#, a per m = amp/meter #㏟#,
+# Impedance related:# pf=p*f#㎊#, nf=n*f#㎋#, uf=u*f#㎌#, kohm=k*ohm#㏀#,
+           mohm=Mohm#㏁& ℧#,
+# Power:#  pw=p*w#㎺#, nw=n*w#㎻#, uw=u*w#㎼#, mw=milli*w#㎽#,
+           kw=k*w#㎾#,  mega w=Mw#㎿#, hp=745.699872*w #㏋# # & ㏈#,
+# Heat and Energy:# cal=4.184*j#㎈#, kcal=k*cal#㎉#, deg f=7/5*deg c#℉#, 
+           erg = 100*n*j #㋍#, kk = k/(cm) #㏍#,
+# Speed:# m per s=meter/s#㎧#, m per s sq=meter/s*s#㎨#, kph=km/hour, kt=1.852 * kph#㏏~ ㏚#,
+# Radio Activity and light# rad per s = rad/s#㎮#, rad per s2 =rad/(s**2)#㎯#, c per kg=~ #㏆#;
+
+# Various aliases: (A.K.A.) #
+MODE DIMENSIONLESS = REAL; # used for dimensionless results #
+MODE PHYSICALUNIT = REAL; # used for miscellanious intermediate results #
+MODE DENSITY = PHYSICALUNIT;
+MODE HEIGHT = LENGTH, ELEVATION = LENGTH, ALTITUDE = LENGTH, # WIDTH = LENGTH; #
+MODE AREA = PHYSICALUNIT, VOLUME = PHYSICALUNIT;
+MODE DRAG = FORCE, THRUST = FORCE;
+MODE VECMOMENTUM = VECUNIT; # kg * meter #
+MODE VECANGULARMOMENTUM = VECUNIT; # kg * meter**2 / seconds #
+
+# Aviation related units #
+MODE COORDINATE = STRUCT(ANGLE lat, long);
+MODE POSITION = STRUCT(COORDINATE coordinate, ALTITUDE altitude);
+
+SKIP # export names #

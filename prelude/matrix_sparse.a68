@@ -1,0 +1,174 @@
+# -*- coding: utf-8 -*- #
+
+PROC xmat init band = (REF MAT mat, VEC band)REF MAT: (
+  # band the A matrix #
+    FOR i FROM LWB band-1 TO UPB band-1 DO
+        REAL val = band[i+1];
+        FOR d FROM 0 TO UPB mat-i DO
+            IF d   >=   LWB mat AND d   <=   UPB mat AND 
+               d+i >= 2 LWB mat AND d+i <= 2 UPB mat THEN
+                mat[d,d+i]:=val
+            FI
+        OD
+    OD;
+    mat
+);
+
+CO
+PROC sp mat init band = (REF SPMAT mat, VEC band)REF MAT: (
+  # band the A matrix #
+    FOR i FROM LWB band-1 TO UPB band-1 DO
+        REAL val = band[i+1];
+        FOR d FROM 0 TO UPB mat-i DO
+        OD
+    OD;
+    mat
+);
+END CO
+
+MODE SPVEC = FLEX[0]SCAL,
+     SPMAT = FLEX[0]SPVEC,
+     SPTEN = [0]SPMAT;
+
+PRIO MIN = 3 # same as AND #, MAX = 3 # same are OR #,
+     MINLWB = 3, MINUPB = 3,
+     MAXLWB = 2, MAXUPB = 2,
+     FITSIN = 5; # Same as LT <= #
+
+OP  MIN = (INT a,b)INT: IF a < b THEN a ELSE b FI,
+    MAX = (INT a,b)INT: IF a > b THEN a ELSE b FI,
+    MINLWB = (SPVEC a,b)INT: LWB a MIN LWB b,
+    MINUPB = (SPVEC a,b)INT: UPB a MIN UPB b,
+    MAXLWB = (SPVEC a,b)INT: LWB a MAX LWB b,
+    MAXUPB = (SPVEC a,b)INT: UPB a MAX UPB b,
+    MINLWB = (SPMAT a,b)INT: LWB a MIN LWB b,
+    MINUPB = (SPMAT a,b)INT: UPB a MIN UPB b,
+    MAXLWB = (SPMAT a,b)INT: LWB a MAX LWB b,
+    MAXUPB = (SPMAT a,b)INT: UPB a MAX UPB b,
+    MINLWB = (SPTEN a,b)INT: LWB a MIN LWB b,
+    MINUPB = (SPTEN a,b)INT: UPB a MIN UPB b,
+    MAXLWB = (SPTEN a,b)INT: LWB a MAX LWB b,
+    MAXUPB = (SPTEN a,b)INT: UPB a MAX UPB b,
+    FITSIN = (SPVEC a,b)BOOL: LWB a >= LWB b AND UPB a < UPB b,
+    FITSIN = (SPMAT a,b)BOOL: LWB a >= LWB b AND UPB a < UPB b,
+    FITSIN = (SPTEN a,b)BOOL: LWB a >= LWB b AND UPB a < UPB b;
+
+CO
+OP +:= = (REF SPVEC a, SPVEC b)REF SPVEC:
+  IF b FITSIN a THEN # inplace add #
+    FOR i FROM a MAXLWB b TO a MINUPB b DO a[i] +:= b[i] OD; 
+# optimisation: remove "0.0" from head and tail #
+    a
+  ELSE # make a bigger a #
+    a := a + b 
+  FI;
+CO
+
+OP + = (SPVEC a, b)SPVEC: (
+  [a MINLWB b: a MAXUPB b]SCAL out;  
+  out INIT 0.0;
+  FOR i FROM a MAXLWB b TO a MINUPB b DO out[i] := a[i]+b[i] OD; 
+# optimisation: remove "0.0" from head and tail #
+  out
+);
+
+OP +:= = (REF SPMAT a, SPMAT b)REF SPMAT:
+  IF b FITSIN a THEN # inplace add #
+    FOR i FROM a MAXLWB b TO a MINUPB b DO a[i] := a[i] + b[i] OD; 
+# optimisation: remove "0.0" from head and tail #
+    a
+  ELSE # make a bigger a #
+    a := a + b 
+  FI;
+
+OP INIT = (REF SPVEC lhs, SCAL init)REF SPVEC:
+  IF init = 0 THEN
+    lhs := LOC[0]SCAL
+  ELSE
+    FOR i FROM LWB lhs TO UPB lhs DO lhs[i] := init OD; 
+    lhs
+  FI;
+
+OP INIT = (REF SPMAT lhs, SCAL init)REF SPMAT:  (
+    FOR i FROM LWB lhs TO UPB lhs DO 
+      lhs[i] := init
+    OD;
+    lhs
+  );
+
+OP INIT = (REF SPTEN lhs, SCAL init)REF SPTEN: 
+  (FOR i FROM LWB lhs TO UPB lhs DO lhs[i] INIT init OD; lhs);
+
+OP INIT = (REF SPVEC lhs, VEC rhs)REF SPVEC:  (
+  INTINTERVAL lub = (LUB rhs)[1];
+  lhs := rhs[lwb OF lub:upb OF lub@lwb OF lub]
+);
+
+OP INIT = (REF SPMAT lhs, MAT rhs)REF SPMAT: (
+  INTINTERVAL lub = (LUB rhs)[1];
+  lhs := LOC FLEX[lwb OF lub: upb OF lub]VEC;
+  FOR i FROM LWB lhs TO UPB lhs DO
+    lhs[i] := rhs[lwb OF lub:upb OF lub@lwb OF lub,i]
+  OD;
+  lhs
+);
+
+OP INIT = (REF SPTEN lhs, MAT rhs)REF SPTEN:  SKIP;
+
+OP + = (SPMAT a, b)SPMAT: (
+  FLEX[a MINLWB b: a MAXUPB b]SPVEC out;  
+  out INIT 0.0;
+  FOR i FROM a MAXLWB b TO a MINUPB b DO out[i] := a[i]+b[i] OD; 
+# optimisation: remove "0.0" from head and tail #
+  out
+);
+
+OP SPLUB = (VEC vec)INTINTERVAL: (
+  INT lwb, upb;
+  FOR i FROM LWB vec TO UPB vec DO
+    IF vec[i] NE 0 THEN lwb := i; find upb FI
+  OD;
+# else: #
+  lwb := UPB vec + 1;
+find upb:
+  FOR i FROM UPB vec BY -1 TO lwb vec+1 DO
+    IF vec[i] NE 0 THEN lwb := i; found upb FI
+  OD;
+# else: #
+  upb := lwb - 1;
+found upb:
+  (lwb,upb)
+);
+
+OP REFTRIM = (REF SPVEC vec)REF SPVEC: (
+  INTINTERVAL vec bounds = SPLUB vec;
+  vec := vec[lwb OF vec bounds:upb OF vec bounds][@lwb OF vec bounds]
+);
+
+OP SPLUB = (REF SPMAT mat)INTINTERVAL: (
+  INT lwb, upb;
+  FOR i FROM LWB mat TO UPB mat DO
+    IF LWB mat[i] > UPB mat[i] THEN lwb := i; find upb FI
+  OD;
+# else: #
+  lwb := UPB mat + 1;
+find upb:
+  FOR i FROM UPB mat BY -1 TO lwb mat+1 DO
+    IF LWB mat[i] > UPB mat[i] THEN lwb := i; found upb FI
+  OD;
+# else: #
+  upb := lwb - 1;
+found upb:
+  (lwb,upb)
+);
+
+OP REFTRIM = (REF SPMAT mat)REF SPMAT: (
+  INTINTERVAL mat bounds = SPLUB mat;
+  mat := mat[lwb OF mat bounds:upb OF mat bounds][@lwb OF mat bounds]
+);
+
+PROC put sp vec = (REF FILE file, SPVEC vec)VOID: (
+  put vec(file, vec)
+);
+
+SKIP # export names #

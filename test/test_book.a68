@@ -1,0 +1,94 @@
+#!/usr/bin/algol68g-full --script #
+# -*- coding: utf-8 -*- #
+PR no-warning PR
+
+PR include "prelude/with_trace_and_with_debug.a68" PR;
+PR include "prelude/errata.a68" PR;
+PR include "prelude/exception.a68" PR;
+PR include "prelude/book.a68" PR;
+
+FILE file; STRING string book;
+associate(file, string book);
+
+put(file, (
+    "P1 Cover", new line, new page,
+    new page,
+    "P3 Title @l1", new line,
+    "Paragraph 1 @l2", new line,
+    "Paragraph 2 @l3", new line, new line,
+    "Paragraph 3 @l5", new line,
+    "Paragraph 4 @l6", new line, new page,
+    "P4 Paragraph 5", new line, "Paragraph 6", new line, new page,
+    new page,
+    "P6 Paragraph 7", new line, new page,
+    new page,
+    new line, new line, new page,
+    new page,
+    new line, "P10. @l2", new line, new page,
+    "P11", new line, new page,
+    "P12"
+));
+CO
+put(file, (new page, new line,"X", new page));
+CO
+print(("{",string book,"}", new line));
+
+test1:(disable|
+    print(string book)
+);
+
+test2:(NOT enable|
+    INT nr := 0;
+    BOOK book := string book;
+
+# FOR LINEIO uline IN # gen line reparse(gen line(book,)#) DO (#,
+##   (LINEIO uline)VOID: (
+            nr +:= 1;
+        CASE uline IN
+            (STRING line): ( printf(($"["g(-0)"]"$,nr)); print(line) ),
+            (REFNEWIO proc): ( printf(($"{"g(-0)"}"$,nr)); print(proc) )
+        ESAC
+# OD #))
+);
+
+test3:(enable|
+    BOOK book; book INIT BOOK(string book);
+    print((UPB book, new line));
+    FOR page TO UPB book DO
+        printf(($g":"g(-0)$, "P", page, $l$));
+        FOR line TO UPB book[page] DO
+            printf(($"  "$,$g":"g(-0)", "$, "p", page, "l", line, $g$,"P=",book[page][line], $l$))
+        OD
+    OD
+COMMENT expected output:
+P:1
+  p:1, l:1, P=P1 Cover
+P:2
+P:3
+  p:3, l:1, P=P3 Title @l1
+  p:3, l:2, P=Paragraph 1 @l2
+  p:3, l:3, P=Paragraph 2 @l3
+  p:3, l:4, P=
+  p:3, l:5, P=Paragraph 3 @l5
+  p:3, l:6, P=Paragraph 4 @l6
+P:4
+  p:4, l:1, P=P4 Paragraph 5
+  p:4, l:2, P=Paragraph 6
+P:5
+P:6
+  p:6, l:1, P=P6 Paragraph 7
+P:7
+P:8
+  p:8, l:1, P=
+  p:8, l:2, P=
+P:9
+P:10
+  p:10, l:1, P=
+  p:10, l:2, P=P10. @l2
+P:11
+  p:11, l:1, P=P11
+P:12
+  p:12, l:1, P=P12
+END COMMENT
+);
+PR include "postlude/exception.a68" PR

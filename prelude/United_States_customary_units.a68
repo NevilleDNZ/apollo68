@@ -1,0 +1,8 @@
+# -*- coding: utf-8 -*- #
+
+DISTANCE inch = 2.54 *cm, foot = 12*inch,
+         inches = inch,    feet = foot;
+
+TIME days = day, hours = hour, minutes = min, minute = min;
+
+SKIP # export names #
