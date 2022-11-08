@@ -6,7 +6,7 @@
 	<meta name="generator" content="LibreOffice 6.4.7.2 (Linux)"/>
 	<meta name="author" content="Neville Dempsey"/>
 	<meta name="created" content="2012-11-06T00:00:00.018053100"/>
-	<meta name="changed" content="2022-10-12T21:12:45.972728348"/>
+	<meta name="changed" content="2022-11-08T20:17:23.877372988"/>
 	<style type="text/css">
 		@page { size: 21.01cm 29.69cm; margin-left: 2.01cm; margin-right: 2.01cm; margin-top: 2.54cm; margin-bottom: 1.27cm }
 		p { margin-bottom: 0cm; background: transparent; line-height: 115%; background: transparent }
@@ -32,16 +32,12 @@
 		a.sdfootnoteanc { font-size: 57% }
 	</style>
 </head>
-<body lang="en-US" link="#000080" vlink="#800000" dir="ltr"><p align="center" style="margin-top: 0.42cm; margin-bottom: 0.21cm; background: transparent; line-height: 100%; page-break-after: avoid">
+<body lang="en-US" link="#000080" vlink="#800000" dir="ltr"><p align="center" style="margin-top: 0.42cm; margin-bottom: 0.21cm; line-height: 100%; background: transparent; page-break-after: avoid">
 <font face="Liberation Sans, sans-serif"><font size="6" style="font-size: 28pt"><b>Celestial
 Mechanics</b></font></font></p>
-<p align="center" style="margin-top: 0.42cm; margin-bottom: 0.21cm; background: transparent; line-height: 100%; page-break-after: avoid">
+<p align="center" style="margin-top: 0.42cm; margin-bottom: 0.21cm; line-height: 100%; background: transparent; page-break-after: avoid">
 <font face="Liberation Sans, sans-serif"><font size="6" style="font-size: 28pt"><b><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt"><i>The
-Apollo </i></font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt"><i>8,
-t</i></font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt"><i>he
-1st </i></font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt"><i>manned
-</i></font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt"><i>spacecraft
-to orbit the Moon.</i></font></font></b></font></font></p>
+Apollo 8, the 1st manned spacecraft to orbit the Moon.</i></font></font></b></font></font></p>
 <p align="center" style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">October
 2022 - Neville Dempsey</font></font></p>
 <p align="justify" style="text-indent: 0.76cm; margin-bottom: 0.51cm">
@@ -64,7 +60,7 @@ problem is principally a Second Order differential equation of the
 form : </font></font>
 </p>
 <p align="center" style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Sans Light, sans-serif"><font size="4" style="font-size: 16pt"><i><b>m
-. d²r/d²t = G . Mm/r²</b></i></font></font></p>
+. d²r/dt²= G . Mm/r²</b></i></font></font></p>
 <p align="justify" style="text-indent: 0.76cm; margin-bottom: 0.51cm">
 <font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Where
 G is the Universal Gravitational Constant, M &amp; m are the masses
@@ -158,12 +154,10 @@ as - in a simple model - both conservations of energy and mass apply.
 </font></font>
 </p>
 <p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">The
-model is a 2</font></font><sup><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">nd</font></font></sup><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">-Or</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">der
-ODE and </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">the
-</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">&quot;Euler
-method&quot;, &quot;Adams-Bashforth method&quot;, “Runga-Kutta 4th
-Order </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">method</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">”
-and “Velocity Verlet” methods are compared.</font></font></p>
+model is a 2</font></font><sup><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">nd</font></font></sup><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">-Order
+ODE and the &quot;Euler method&quot;, &quot;Adams-Bashforth method&quot;,
+“Runga-Kutta 4th Order method</font></font>” <font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">and
+“Velocity Verlet” methods are compared.</font></font></p>
 <h2 class="western" style="text-indent: 0.76cm"><font face="DejaVu Serif Condensed, serif"><font size="4" style="font-size: 16pt">3
 Scope </font></font>
 </h2>
@@ -424,43 +418,32 @@ difference in the result.</font></font></p>
 Base Case 2: Sidereal month with full-sized Moon, Earth, and Sun</font></font></h3>
 <p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">A
 sidereal month is approximately 27.321661 days<a class="sdfootnoteanc" name="sdfootnote2anc" href="#sdfootnote2sym"><sup>2</sup></a>.
-</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">This
-value provides a</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
-useful </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">check</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
-</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">that</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
-the simulated Moon </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">is
-orbiting </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">reasonabl</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">y</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">.
-In particular</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">,</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
-</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">check</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
-</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">the
+This value provides a</font></font> <font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">useful
+check</font></font> <font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">that</font></font>
+<font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">the
+simulated Moon is orbiting reasonably. In particular,</font></font>
+<font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">check</font></font>
+<font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">the
 computed </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt"><i>sidereal
-month</i></font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
-</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">is
-</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">reasonably
-</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">close
-to the actual Moon’s </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">“sidereal
-</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">month</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">”.</font></font></p>
+month</i></font></font> <font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">is
+reasonably close to the actual Moon’s </font></font>“<font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">sidereal
+month</font></font>”<font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">.</font></font></p>
 <h2 class="western" style="text-indent: 0.76cm"><font face="DejaVu Serif Condensed, serif"><font size="4" style="font-size: 16pt">6
 Program Reports</font></font></h2>
 <h2 class="western" style="text-indent: 0.76cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Case
 1 - 1 Hours Step size With and Without Moon.</font></font></h2>
-<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><img src="Celerstial_mechanics_v0.1_html_m1211d673.gif" name="graphics1" align="bottom" width="576" height="432" border="0"/>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><img src="Celestial_mechanics_v0.1_html_m1211d673.gif" name="graphics1" align="bottom" width="576" height="432" border="0"/>
 
 </p>
 <p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">If
-you compare the </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Earth’s
-</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">final
-position after 52 weeks, Euler's method - both with a Moon and
-without a Moon - returns Earth </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">to
-</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">a
+you compare the Earth’s final position after 52 weeks, Euler's
+method - both with a Moon and without a Moon - returns Earth to a
 point at 152.5 Million km from the Sun. This is an error of 3000km.
-This </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">may
-appear</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
-strange, that after 52 weeks the result with and without the Moon is
-the same. Note also actual </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">orbital
-radius</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
-within the 52 week</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">s</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
-differs greatly.</font></font></p>
+This may appear</font></font> <font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">strange,
+that after 52 weeks the result with and without the Moon is the same.
+Note also actual orbital radius</font></font> <font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">within
+the 52 weeks</font></font> <font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">differs
+greatly.</font></font></p>
 <p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">The
 next strange behavior is that all methods appear to roughly reach
 their same flawed destination. It would be worth investigating if
@@ -639,17 +622,16 @@ av:(-1.22318e4,-3.85812e5)kph; os: 0.0kph; or: 0.0Mm; </font></font>
 
 </p>
 <p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">The
-key point </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">is,</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
-the Adams-Bashforth appears to return the best results. Both with a
-Moon and without </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Moon.</font></font></p>
+key point is,</font></font> <font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">the
+Adams-Bashforth appears to return the best results. Both with a Moon
+and without Moon.</font></font></p>
 <p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">It
-would be worth trying some higher-order Adams-Bashforth </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">m</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">ethod</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">s</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">,
-to fin</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">e-</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">tune
-which give</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">s</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
-the fastest results </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">while</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
-still returning the required accuracy.</font></font></p>
+would be worth trying some higher-order Adams-Bashforth methods, to
+fine-tune which gives</font></font> <font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">the
+fastest results while</font></font> <font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">still
+returning the required accuracy.</font></font></p>
 <h3 class="western">6.1 Results for a 450 Second step size</h3>
-<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><img src="Celerstial_mechanics_v0.1_html_m7ead7dda.gif" name="graphics2" align="bottom" width="576" height="432" border="0"/>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><img src="Celestial_mechanics_v0.1_html_m7ead7dda.gif" name="graphics2" align="bottom" width="576" height="432" border="0"/>
 
 </p>
 <p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><br/>
@@ -657,8 +639,8 @@ still returning the required accuracy.</font></font></p>
 
 </p>
 <p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Again
-all methods result </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">in</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
-the original position in space after 1 year.</font></font></p>
+all methods result in</font></font> <font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">the
+original position in space after 1 year.</font></font></p>
 <p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Again
 Velocity Verlet and Runga-Kutta appear to be producing the same
 result. (Need to review CPU/FPO usage to see if one is faster)</font></font></p>
@@ -676,14 +658,14 @@ Case 2 Study of objects orbiting Earth.</font></font></h3>
 we turn ourselves to calculations involving the orbits around Earth.
 Here is a graph of the altitude of the simulated Apollo 8 Command
 Module.</font></font></p>
-<h3 class="western" style="text-indent: 0.76cm"><img src="Celerstial_mechanics_v0.1_html_52861cc4.gif" name="graphics3" align="bottom" width="576" height="432" border="0"/>
+<h3 class="western" style="text-indent: 0.76cm"><img src="Celestial_mechanics_v0.1_html_52861cc4.gif" name="graphics3" align="bottom" width="576" height="432" border="0"/>
 
 </h3>
 <p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">It
 appears that the Euler method is overly influenced by the presence of
-the Moon as the spacecraft. Note that (from </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">equation</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
-λ) we get an Apollo 8 orbit period of about 3.6 hours, hence every
-3.6 hours the spacecraft travels between the Earth and the Moon. and
+the Moon as the spacecraft. Note that (from equation</font></font> <font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">λ)
+we get an Apollo 8 orbit period of about 3.6 hours, hence every 3.6
+hours the spacecraft travels between the Earth and the Moon. and
 experiences a lesser force toward Earth.</font></font></p>
 <ul>
 	<li><p style="margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Euler
@@ -700,8 +682,7 @@ experiences a lesser force toward Earth.</font></font></p>
 	in forward and reverse I believe there would be no improvement. (It
 	is an idea that could be checked)</font></font></p>
 	<li><p style="margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Velocity
-	Verlet </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">mimics</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
-	Runga-Kutta</font></font></p>
+	Verlet mimics</font></font> <font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Runga-Kutta</font></font></p>
 	<li><p style="margin-bottom: 0.5cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Adams_Bashforth:
 	Energy: Again, a better overall result.</font></font></p>
 </ul>
@@ -719,20 +700,20 @@ results for some of the methods, especially Euler's. </font></font>
 </p>
 <p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Applying
 Richardson Extrapolation may simply recreate one of the other
-methods. Indeed i</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">t</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
-is likely that Velocity Verlet is a mathematics phantom of the
+methods. Indeed it</font></font> <font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">is
+likely that Velocity Verlet is a mathematics phantom of the
 Runga-Kutta 4</font></font><sup><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">th</font></font></sup>
 <font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Order
 Method.</font></font></p>
 <p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Notice
-that only the Adams-Bashforth model come</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">s</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
-even close to a stable orbit. </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Below</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
-is a graph </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">that</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
-zooms into just the Adams-Bashforth results.</font></font></p>
-<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><img src="Celerstial_mechanics_v0.1_html_7786bd70.gif" name="graphics4" align="bottom" width="576" height="432" border="0"/>
+that only the Adams-Bashforth model comes</font></font> <font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">even
+close to a stable orbit. Below</font></font> <font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">is
+a graph that</font></font> <font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">zooms
+into just the Adams-Bashforth results.</font></font></p>
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><img src="Celestial_mechanics_v0.1_html_7786bd70.gif" name="graphics4" align="bottom" width="576" height="432" border="0"/>
 
 </p>
-<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">D</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">ecreasing
+<p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Decreasing
 the step size from 10s to 1 s improves the tolerance of the result</font></font></p>
 <p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">It
 is interesting to notice that with different step sizes the
@@ -745,31 +726,26 @@ introduce errors of its own. This may explain why the Adams-Bashforth
 model (for 1s and 10s) generates 1 different (but mostly stable)
 orbit.</font></font></p>
 <p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">It
-would be worth deriving a better way to launch </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">the
-Ode </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">(</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">by
-</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">calculat</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">ing</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
-the second initial value) for the Adams-Bashforth model. This </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">initial
-</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">error
-</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">is
-then propagated to subsequent</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
-steps.</font></font></p>
+would be worth deriving a better way to launch the Ode (by
+calculating</font></font> <font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">the
+second initial value) for the Adams-Bashforth model. This initial
+error is then propagated to subsequent</font></font> <font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">steps.</font></font></p>
 <h3 class="western" style="text-indent: 0.76cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">7.1
 Comparison of the Methods</font></font></h3>
 <p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">In
-</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">all</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
-case</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">s,</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
-the Adams-Bashforth performed better th</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">a</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">n
-the other methods. The Adams-Bashforth is part of a family of methods
-and this suggests that we should investigate these.</font></font></p>
+all</font></font> <font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">cases,</font></font>
+<font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">the
+Adams-Bashforth performed better than the other methods. The
+Adams-Bashforth is part of a family of methods and this suggests that
+we should investigate these.</font></font></p>
 <p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Note
 that no study was made of the “CPU/FPU” cost of these methods.
 Maybe this is reasonable as CPUs today are so fast.</font></font></p>
 <p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Similarly,
 there is no study of the truncation error, a faster CPU may not
-provide any additional accuracy, </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">and
-</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">a
-smaller step size </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">might</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
-make things worse.</font></font></p>
+provide any additional accuracy, and a smaller step size might</font></font>
+<font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">make
+things worse.</font></font></p>
 <p style="text-indent: 0.76cm; margin-bottom: 0.51cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">However,
 based on the accuracy of the results, the Adams-Bashforth method
 seems very effective.</font></font></p>
@@ -821,13 +797,12 @@ actual intermediate results for the duration were yielded by a
 procedure </span></font><font face="DejaVu Sans Mono, monospace"><span style="font-weight: normal">solver
 tyn gen</span></font><font face="DejaVu Serif Condensed, serif"><span style="font-weight: normal">,
 this is useful for allowing the programmer to terminate a flight of
-the Craft/Body i</span></font><font face="DejaVu Serif Condensed, serif"><span style="font-weight: normal">f
-it is</span></font><font face="DejaVu Serif Condensed, serif"><span style="font-weight: normal">
-heading in the wrong direction. I was going to use this to do trial
-Earth-Moon injections for Apollo 8. </span></font><font face="DejaVu Serif Condensed, serif"><span style="font-weight: normal">R</span></font><font face="DejaVu Serif Condensed, serif"><span style="font-weight: normal">un
-a trial in a different trajectory, until something goes “close”
-(or crashes into) the Moon, then use the secant method to fine-tune
-the answer and get a “perfect launch trajectory”.</span></font></p>
+the Craft/Body if it is</span></font> <font face="DejaVu Serif Condensed, serif"><span style="font-weight: normal">heading
+in the wrong direction. I was going to use this to do trial
+Earth-Moon injections for Apollo 8. Run a trial in a different
+trajectory, until something goes “close” (or crashes into) the
+Moon, then use the secant method to fine-tune the answer and get a
+“perfect launch trajectory”.</span></font></p>
 <p style="text-indent: 0.76cm; margin-bottom: 0.5cm"><br/>
 <br/>
 
@@ -850,11 +825,11 @@ the answer and get a “perfect launch trajectory”.</span></font></p>
 <font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Note: Throughout the program, “SI Units of measure” were used, indeed whenever a variable was declared, it was declared with a “SI Unit” type.  Eg. above is a declaration:</font></font>
   “<font face="DejaVu Sans Mono, monospace"><font size="2" style="font-size: 10pt">TIME last time, last report;”</font></font>
 
-<font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">The unit’s type of measure </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">is</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt"> thus </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">both </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">define</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">d </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">and documented, and all inputs are scaled to MKS.  </font></font>
-<font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Similarly, </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">on</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt"> output, the </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">actual </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">value can be converted using </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">desired</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt"> factors:</font></font>
+<font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">The unit’s type of measure is</font></font> <font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">thus both defined and documented, and all inputs are scaled to MKS.  </font></font>
+<font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Similarly, on</font></font> <font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">output, the actual value can be converted using desired</font></font> <font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">factors:</font></font>
   <font face="DejaVu Sans Mono, monospace"><font size="2" style="font-size: 10pt">print((last time/hours,”hr”, last report/hours,”hr”, new line))</font></font>
 
-<font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">This approach could have saved the “Mars Climate Orbiter” and </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">can</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt"> be formali</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">z</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">e</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">d</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt"> in most programming languages.</font></font></pre><h2 class="western" style="text-indent: 0.76cm">
+<font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">This approach could have saved the “Mars Climate Orbiter” and can</font></font> <font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">be formalized</font></font> <font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">in most programming languages.</font></font></pre><h2 class="western" style="text-indent: 0.76cm">
 <font face="DejaVu Serif Condensed, serif"><font size="4" style="font-size: 16pt">9
 Conclusion</font></font></h2>
 <p style="text-indent: 0.25cm; margin-bottom: 0.25cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Velocity
@@ -865,11 +840,11 @@ conservation is violated by all the methods. This technique can be
 good and bad:</font></font></p>
 <ul>
 	<li><p style="margin-bottom: 0.25cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Bad,
-	as </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">the</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
-	model </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">ideally</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
-	need to </font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">obey</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
-	</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">the</font></font><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">
-	laws of physics.</font></font></p>
+	as the</font></font> <font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">model
+	ideally</font></font> <font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">need
+	to obey</font></font> <font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">the</font></font>
+	<font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">laws
+	of physics.</font></font></p>
 	<li><p style="margin-bottom: 0.25cm"><font face="DejaVu Serif Condensed, serif"><font size="3" style="font-size: 12pt">Good,
 	as the difference can be seen as an example of the overall error in
 	the result. The trick would be to relate this discrepancy to desired
